@@ -9,7 +9,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 
 http_app.get('*', function(request, response) {
-	response.redirect('https://edgarmagdaleno.me' + request.url);
+	
 });
 
 app.get('/', function(req, res) {  
