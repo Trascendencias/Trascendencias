@@ -9,8 +9,8 @@ app.set('views', path.join(__dirname, '/public'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-app.get('*', function(request, response) {
-	response.redirect('https://162.243.142.57' + request.url);
+http_app.get('*', function(request, response) {
+	response.redirect('https://trascendencias.org' + request.url);
 });
 
 app.get('/', function(request, response) {
