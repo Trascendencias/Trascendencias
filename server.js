@@ -17,5 +17,12 @@ app.get('/', function(request, response) {
 	response.render('home');
 });
 
-https.createServer(app).listen(443);
+let ssl_path = "/etc/letsencrypt/live/trascendencias.org/";
+let server_options = {
+	ca: fs.readFileSync(ssl_path + 'chain.pem'),
+	key: fs.readFileSync(ssl_path + 'privkey.pem'),
+	cert: fs.readFileSync(ssl_path + 'cert.pem')
+};
+
+https.createServer(server_options, app).listen(443);
 http.createServer(http_app).listen(80);
