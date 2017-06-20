@@ -3,17 +3,18 @@ const http = require('http');
 const http_app = express();
 const https = require('https');
 const app = express();
+const path = require('path');
 
-app.engine('.html', require('ejs').__express);
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, '/public'));
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-http_app.get('*', function(request, response) {
-	
+app.get('*', function(request, response) {
+	response.redirect('https://162.243.142.57' + request.url);
 });
 
-app.get('/', function(req, res) {  
-	res.render('index', { title: 'The index page!' })
+app.get('/', function(request, response) {
+	response.render('home');
 });
 
 https.createServer(app).listen(443);
