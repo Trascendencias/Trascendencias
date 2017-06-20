@@ -14,8 +14,8 @@ http_app.get('*', function(request, response) {
 	response.redirect('https://trascendencias.org' + request.url);
 });
 
-app.get('/', function(request, response) {
-	response.render('home');
+app.get('*', function(request, response) {
+	response.render(request.url);
 });
 
 let ssl_path = "/etc/letsencrypt/live/trascendencias.org/";
