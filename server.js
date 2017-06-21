@@ -14,6 +14,12 @@ http_app.get('*', function(request, response) {
 	response.redirect('https://trascendencias.org' + request.url);
 });
 
+app.get('/favico.ico' , function(req , res){
+	res.status(400).send({
+		message: "No favicon yet."
+	});
+});
+
 app.get('*', function(request, response) {
 	response.render(request.url.substring(1));
 });
