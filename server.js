@@ -23,7 +23,7 @@ http_app.get('*', function(request, response) {
 
 app.get('*', function(request, response) {
 	let request_path = request.url.substring(1);
-	if(fs.existsSync(request_path)) {
+	if(fs.existsSync(request_path + '.html')) {
 		return response.render(request_path);
 	}
 
