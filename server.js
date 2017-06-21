@@ -14,14 +14,14 @@ http_app.get('*', function(request, response) {
 	response.redirect('https://trascendencias.org' + request.url);
 });
 
+app.get('*', function(request, response) {
+	response.render(request.url.substring(1));
+});
+
 app.get('/favico.ico' , function(req , res){
 	res.status(400).send({
 		message: "No favicon yet."
 	});
-});
-
-app.get('*', function(request, response) {
-	response.render(request.url.substring(1));
 });
 
 let ssl_path = "/etc/letsencrypt/live/trascendencias.org/";
