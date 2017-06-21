@@ -27,7 +27,7 @@ http_app.get('*', function(request, response) {
 app.get('*', function(request, response) {
 	let request_path = __dirname + '/public/' + request.url + '.html';
 	if(fs.existsSync(request_path)) {
-		return 	response.sendFile(__dirname + '/public/' + request.url + '.html');
+		return 	response.sendFile(request_path);
 	}
 
 	return response.status(404).send('File not found.');
