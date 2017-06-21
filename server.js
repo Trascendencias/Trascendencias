@@ -22,6 +22,10 @@ app.get('*', function(request, response) {
 	return response.render(request_path);
 });
 
+app.get('/img/*', function(request, response) {
+	return response.send('img' + request.url);
+});
+
 let ssl_path = '/etc/letsencrypt/live/trascendencias.org/';
 let server_options = {
 	ca: fs.readFileSync(ssl_path + 'chain.pem'),
