@@ -7,8 +7,7 @@ const app = express();
 const path = require('path');
 const favicon = require('serve-favicon');
 
-app.set('views', path.join(__dirname, '/public'));
-app.set('img', path.join(__dirname, '/public/img'));
+app.use(express.static('public'))
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(favicon(__dirname + '/resources/favicon.ico'));
@@ -22,12 +21,7 @@ http_app.get('*', function(request, response) {
 });
 
 app.get('*', function(request, response) {
-	let request_path = request.url.substring(1);
-	if(fs.existsSync(request_path + '.html')) {
-		return response.render(request_path);
-	}
-
-	response.status(404).send('File not found');
+	response.sendFile(request.url);
 });
 
 let ssl_path = '/etc/letsencrypt/live/trascendencias.org/';
