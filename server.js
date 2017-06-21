@@ -13,7 +13,7 @@ app.set('view engine', 'html');
 app.use(favicon(__dirname + '/resources/favicon.ico'));
 
 app.get('/img/*', function(request, response) {
-	return response.send(request.url);
+	return response.sendFile(request.url);
 });
 
 http_app.get('*', function(request, response) {
@@ -21,7 +21,7 @@ http_app.get('*', function(request, response) {
 });
 
 app.get('*', function(request, response) {
-	response.sendFile('public/' + request.url + '.html');
+	response.sendFile(__dirname + 'public/' + request.url + '.html');
 });
 
 let ssl_path = '/etc/letsencrypt/live/trascendencias.org/';
