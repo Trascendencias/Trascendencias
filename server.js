@@ -23,6 +23,7 @@ app.get('*', function(request, response) {
 });
 
 app.get('/img/*', function(request, response) {
+	console.log("hola!");
 	return response.send('img' + request.url);
 });
 
