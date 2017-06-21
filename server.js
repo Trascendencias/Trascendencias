@@ -15,16 +15,16 @@ http_app.get('*', function(request, response) {
 });
 
 app.get('*', function(request, response) {
+	if(request.url == '/favicon.ico') {
+		return response.status(400).send({
+			message: "No favicon yet."
+		});
+	}
+	
 	response.render(request.url.substring(1));
 });
 
-app.get('/favicon.ico' , function(req , res){
-	res.status(400).send({
-		message: "No favicon yet."
-	});
-});
-
-let ssl_path = "/etc/letsencrypt/live/trascendencias.org/";
+let ssl_path = '/etc/letsencrypt/live/trascendencias.org/';
 let server_options = {
 	ca: fs.readFileSync(ssl_path + 'chain.pem'),
 	key: fs.readFileSync(ssl_path + 'privkey.pem'),
