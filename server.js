@@ -18,7 +18,7 @@ app.get('*', function(request, response) {
 	response.render(request.url.substring(1));
 });
 
-app.get('/favico.ico' , function(req , res){
+app.get('/favicon.ico' , function(req , res){
 	res.status(400).send({
 		message: "No favicon yet."
 	});
