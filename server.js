@@ -13,6 +13,12 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(favicon(__dirname + '/resources/favicon.ico'));
 
+app.get('/img/*', function(request, response) {
+	console.log('img' + request.url);
+	return response.send('img' + request.url);
+});
+
+
 http_app.get('*', function(request, response) {
 	response.redirect('https://trascendencias.org' + request.url);
 });
@@ -20,11 +26,6 @@ http_app.get('*', function(request, response) {
 app.get('*', function(request, response) {
 	let request_path = request.url.substring(1);
 	return response.render(request_path);
-});
-
-app.get('/img/*', function(request, response) {
-	console.log("hola!");
-	return response.send('img' + request.url);
 });
 
 let ssl_path = '/etc/letsencrypt/live/trascendencias.org/';
