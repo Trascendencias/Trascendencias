@@ -12,6 +12,10 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(favicon(__dirname + '/resources/favicon.ico'));
 
+app.get('/resources/*', function(request, response) {
+	return response.sendFile(request.url);
+});
+
 app.get('/img/*', function(request, response) {
 	return response.sendFile(request.url);
 });
