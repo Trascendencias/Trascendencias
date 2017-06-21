@@ -7,6 +7,7 @@ const app = express();
 const path = require('path');
 const favicon = require('serve-favicon');
 
+// test comment
 app.use(express.static(path.join(__dirname, 'public')));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
