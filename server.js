@@ -14,10 +14,9 @@ app.set('view engine', 'html');
 app.use(favicon(__dirname + '/resources/favicon.ico'));
 
 app.get('/img/*', function(request, response) {
-	console.log('img' + request.url);
-	return response.send('img' + request.url);
+	console.log(request.url);
+	return response.send(request.url);
 });
-
 
 http_app.get('*', function(request, response) {
 	response.redirect('https://trascendencias.org' + request.url);
