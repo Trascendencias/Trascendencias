@@ -5,22 +5,18 @@ const http_app = express();
 const https = require('https');
 const app = express();
 const path = require('path');
+const favicon = require('serve-favicon');
 
 app.set('views', path.join(__dirname, '/public'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+app.use(favicon(__dirname + '/resources/favicon.ico'));
 
 http_app.get('*', function(request, response) {
 	response.redirect('https://trascendencias.org' + request.url);
 });
 
-app.get('*', function(request, response) {
-	if(request.url == '/favicon.ico') {
-		return response.status(400).send({
-			message: "No favicon yet."
-		});
-	}
-	
+app.get('*', function(request, response) {	
 	response.render(request.url.substring(1));
 });
 
