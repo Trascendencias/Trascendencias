@@ -25,7 +25,12 @@ http_app.get('*', function(request, response) {
 });
 
 app.get('*', function(request, response) {
-	response.sendFile(__dirname + '/public/' + request.url + '.html');
+	let request_path = __dirname + '/public/' + request.url + '.html';
+	if(fs.exitsSync(request_path)) {
+		return 	response.sendFile(__dirname + '/public/' + request.url + '.html');
+	}
+
+	return response.status(404).send('File not found.');
 });
 
 let ssl_path = '/etc/letsencrypt/live/trascendencias.org/';
