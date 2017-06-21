@@ -8,6 +8,7 @@ const path = require('path');
 const favicon = require('serve-favicon');
 
 app.set('views', path.join(__dirname, '/public'));
+app.set('img', path.join(__dirname, '/public/img'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(favicon(__dirname + '/resources/favicon.ico'));
