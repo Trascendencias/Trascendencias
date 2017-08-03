@@ -7,12 +7,13 @@ database_management.register = {
 };
 
 database_management.list = function(database_connection, request, response) {
-	let list = [];
+	let docs = [];
 	database_connection.collection(request.params.collection).find().forEach(function(doc) {
-		list.push(doc.name);
+		docs.push(doc);
 	},
 	function(err) {
-		response.render('list', { list: list });
+		console.log(docs);
+		response.render('list', { list: docs });
 	});
 }
 
