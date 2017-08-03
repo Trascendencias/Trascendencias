@@ -1,17 +1,14 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var participant_schema = mongoose.Schema({
+	package: String,
+	name: String,
+	email: String,
 	local: {
-		name: String,
-		email: String,
 		password: String,
-		package: String
 	},
 	facebook: {
-		name: String,
-		email: String,
 		id: String,
-		package: String
 	}
 });
 

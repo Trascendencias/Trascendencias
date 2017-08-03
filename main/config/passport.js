@@ -78,14 +78,14 @@ module.exports = function(passport) {
 	    				return done(err);
 	    			}
 	    			else if(searched_participant) {
-	    				return done(null, user);
+	    				return done(null, searched_participant);
 	    			}
 	    			else {
 	    				var new_participant = new participant();
 	    				new_participant.facebook.id = profile.id;
-	    				new_participant.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-	    				new_participant.facebook.email = profile.emails[0].value;
-	    				new_participant.facebook.package = 'Ninguno';
+	    				new_participant.name = profile.name.givenName + ' ' + profile.name.familyName;
+	    				new_participant.email = profile.emails[0].value;
+	    				new_participant.package = 'Ninguno';
 
 	    				new_participant.save(function(err){
 	    					if(err) {
