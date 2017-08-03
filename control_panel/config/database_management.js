@@ -6,19 +6,20 @@ database_management.register = {
 	}
 };
 
-database_management.list = {
-	participant: function(db, request, response) {
-		var participants = [];
+database_management.list = function(database_connection, request, response) {
+	let list = [];
+	database_connection.collection(request.params.collection).find().forEach(function(doc) {
+		list.push(doc.name);
+	},
+	function(err) {
+		response.render('list', { list: list });
+	});
+}
 
-		db.connection.collection('participants').find().forEach(function(participant) {
-			participants.push(participant.facebook.name);
-		}, function(err) {
-			response.render('list-' + request.params.name, {list: participants});
-		});
-	},
-	conference: function(db, request, response) {
-		response.render('list-' + request.params.name, {list: ['Not implemented yet.']});
-	},
+database_management.look = function(database_connection, request, response) {
+	database_connection.collection(request.params.collection).findOne({ name: request.params.document }, function(err, doc) {
+		response.render('look', { doc: doc });
+	});
 }
 
 module.exports = database_management;

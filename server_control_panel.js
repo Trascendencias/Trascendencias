@@ -30,22 +30,26 @@ app.get('/', function(request, response) {
 	response.render('index');
 });
 
-app.get('/register/:name', function(request, response) {
-	response.sendFile(__dirname + '/control_panel/pages/register-' + request.params.name + '.html');
+app.get('/register/:collection', function(request, response) {
+	response.render('register-' + request.params.collection);
 });
 
-app.get('/list/:name', function(request, response) {
-	database_management.list[request.params.name](mongoose, request, response);
-});
-
-app.post('/register/:name', form(form.field('title').trim()), function(request, response) {
-	database_management.register[request.params.name](request.form);
+app.post('/register/:collection', function(request, response) {
+	database_management.register[request.params.collection](request.form);
 	response.redirect('/');
 });
 
-app.get('/:name', function(request, response) {
-	if(fs.existsSync(__dirname + '/control_panel/pages/' + request.params.name + '.html')) {
-		return response.sendFile(__dirname + '/control_panel/pages/' + request.params.name + '.html');
+app.get('/list/:collection', function(request, response) {
+	database_management.list(mongoose, request, response);
+});
+
+app.get('/look/:collection/:document', function(request, response) {
+	database_management.look(mongoose, request, response);
+});
+
+app.get('/:file', function(request, response) {
+	if(fs.existsSync(__dirname + '/control_panel/pages/' + request.params.file + '.html')) {
+		return response.render(request.params.file);
 	}
 
 	response.status(404).send('File not found.');

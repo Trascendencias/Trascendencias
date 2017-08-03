@@ -92,7 +92,7 @@
 				<table>
 					<tr>
 						<td class="nombre-usuario">
-							<h1> NOMBRE USUARIO </h1> 
+							<h1> <%= user.name %> </h1> 
 						</td>
 						<td>
 							<button onclick="location.href = '/logout'""> Salir </button>
@@ -100,8 +100,8 @@
 					</tr>
 					<tr>
 						<td>
-							<h2> Paquete Elegido </h2>
-							<h3> Saldo: 0.00 </h3>
+							<h2> Paquete Elegido: <%= user.package %> </h2>
+							<h3> Restante: <%= user.debt %> pesos </h3>
 						</td>
 						<td>
 							<button class="second"> Cambiar </button>

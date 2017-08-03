@@ -22,19 +22,25 @@ module.exports = function(passport) {
 	},
 	function(req, email, password, done){
 		process.nextTick(function(){
-			User.findOne({'local.username': email}, function(err, user){
-				if(err)
+			participant.findOne({ 'local.username': email }, function(err, searched_participant) {
+				if(err) {
 					return done(err);
-				if(user){
+				}
+				else if(searched_participant) {
 					return done(null, false, req.flash('signupMessage', 'That email already taken'));
-				} else {
-					var newUser = new User();
-					newUser.local.username = email;
-					newUser.local.password = newUser.generateHash(password);
+				}
+				else {
+					var new_participant = new participant();
+					new_participant.email = email;
+					new_participant.local.password = new_participant.generateHash(password);
+					new_participant.debt = 0;
+					new_participant.package = 'Ninguno';
 
-					newUser.save(function(err){
-						if(err)
+					new_participant.save(function(err) {
+						if(err) {
 							throw err;
+						}
+
 						return done(null, newUser);
 					})
 				}
@@ -49,55 +55,58 @@ module.exports = function(passport) {
 			passReqToCallback: true
 		},
 		function(req, email, password, done){
-			process.nextTick(function(){
-				User.findOne({ 'local.username': email}, function(err, user){
-					if(err)
+			process.nextTick(function() {
+				participant.findOne({ 'local.username': email}, function(err, searched_participant) {
+					if(err) {
 						return done(err);
-					if(!user)
+					}
+					else if(!searched_participant) {
 						return done(null, false, req.flash('loginMessage', 'No User found'));
-					if(!user.validPassword(password)){
+					}
+					else if(!searched_participant.validPassword(password)) {
 						return done(null, false, req.flash('loginMessage', 'invalid password'));
 					}
-					return done(null, user);
 
+					return done(null, searched_participant);
 				});
 			});
 		}
 	));
 
 	passport.use(new facebook_strategy({
-	    clientID: facebook_config.app_id,
-	    clientSecret: facebook_config.secret,
-	    callbackURL: facebook_config.callback,
-	    profileFields: ['id', 'emails', 'name']
+		clientID: facebook_config.app_id,
+		clientSecret: facebook_config.secret,
+		callbackURL: facebook_config.callback,
+		profileFields: ['id', 'emails', 'name']
 	  },
-	  function(accessToken, refreshToken, profile, done) {
+	  function(access_token, refresh_token, profile, done) {
 			process.nextTick(function(){
-	    		participant.findOne({'facebook.id': profile.id}, function(err, searched_participant){
-	    			if(err) {
-	    				return done(err);
-	    			}
-	    			else if(searched_participant) {
-	    				return done(null, searched_participant);
-	    			}
-	    			else {
-	    				var new_participant = new participant();
-	    				new_participant.facebook.id = profile.id;
-	    				new_participant.name = profile.name.givenName + ' ' + profile.name.familyName;
-	    				new_participant.email = profile.emails[0].value;
-	    				new_participant.package = 'Ninguno';
+				participant.findOne({ 'facebook.id': profile.id }, function(err, searched_participant) {
+					if(err) {
+						return done(err);
+					}
+					else if(searched_participant) {
+						return done(null, searched_participant);
+					}
+					else {
+						let new_participant = new participant();
+						new_participant.facebook.id = profile.id;
+						new_participant.name = profile.name.givenName + ' ' + profile.name.familyName;
+						new_participant.email = profile.emails[0].value;
+						new_participant.package = 'Ninguno';
+						new_participant.debt = 0;
 
-	    				new_participant.save(function(err){
-	    					if(err) {
-	    						throw err;
-	    					}
+						new_participant.save(function(err){
+							if(err) {
+								throw err;
+							}
 
-	    					return done(null, new_participant);
-	    				});
-	    			}
-	    		});
-	    	});
-	    }
+							return done(null, new_participant);
+						});
+					}
+				});
+			});
+		}
 
 	));
 

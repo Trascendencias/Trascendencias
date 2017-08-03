@@ -1,4 +1,3 @@
-var user = require('../models/participant');
 var form = require('express-form');
 
 module.exports = function(http_app, app, fs, passport) {
@@ -7,17 +6,28 @@ module.exports = function(http_app, app, fs, passport) {
 	});
 
 	app.get('/control', function(req, res) {
-		res.redirect('http://trascendencias.org:8080');
+		res.redirect('https://trascendencias.org:8443');
 	});
+
+	app.post('/signup', passport.authenticate('local-signup', {
+		successRedirect : '/',
+		failureRedirect : '/signup',
+		failureFlash : true
+	}));
 
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
 	});
 
-	app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
+	app.get('/auth/facebook', passport.authenticate('facebook', {
+		scope: ['email']
+	}));
 
-	app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/' }));
+	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+		successRedirect: '/',
+		failureRedirect: '/'
+	}));
 
 	app.post('/registro-terminado', 
 		form(
@@ -39,10 +49,14 @@ module.exports = function(http_app, app, fs, passport) {
 
 	app.get('/', function(request, response) {
 		if(request.isAuthenticated()) {
-			return response.render('index', {user: request.user});
+			return response.render('index', {
+				user: request.user
+			});
 		}
 
-		response.render('index', {user: request.user});
+		response.render('index', {
+			user: request.user
+		});
 	});
 
 	app.get('/:name', function(request, response) {

@@ -4,6 +4,7 @@ var participant_schema = mongoose.Schema({
 	package: String,
 	name: String,
 	email: String,
+	debt: Number,
 	local: {
 		password: String,
 	},
