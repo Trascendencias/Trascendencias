@@ -7,20 +7,22 @@ var app = express();
 var ssl = require('./ssl_config');
 var form = require('express-form');
 var body_parser = require('body-parser');
-var mongoose = require('./main/config/database');
-var database_management = require('./control_panel/config/database_management');
+var favicon = require('serve-favicon');
+var database_connection = require('./database/connection');
+var database_management = require('./database/management');
 
 form.configure({
 	passThrough: true
 });
 
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-app.set('views', __dirname + '/control_panel/pages');
+app.use(favicon(__dirname + '/favicon.ico'));
+app.use('/resources', express.static(__dirname + '/control_panel/resources'));
 app.use(body_parser.urlencoded({
 	extended: true
 }));
-app.use('/resources', express.static(__dirname + '/control_panel/resources'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/control_panel/pages');
 
 http_app.get('*', function(request, response) {
 	response.redirect('https://trascendencias.org:8443' + request.url);
@@ -40,11 +42,11 @@ app.post('/register/:collection', function(request, response) {
 });
 
 app.get('/list/:collection', function(request, response) {
-	database_management.list(mongoose, request, response);
+	database_management.list(database_connection, request, response);
 });
 
 app.get('/look/:collection/:document', function(request, response) {
-	database_management.look(mongoose, request, response);
+	database_management.look(database_connection, request, response);
 });
 
 app.get('/:file', function(request, response) {

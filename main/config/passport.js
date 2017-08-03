@@ -1,7 +1,7 @@
 var local_strategy = require('passport-local').Strategy;
 var facebook_strategy = require('passport-facebook').Strategy;
 
-var participant = require('../models/participant');
+var participant = require('../../database/models/participant');
 var facebook_config = require('./facebook.js');
 
 module.exports = function(passport) {
@@ -78,37 +78,33 @@ module.exports = function(passport) {
 		clientSecret: facebook_config.secret,
 		callbackURL: facebook_config.callback,
 		profileFields: ['id', 'emails', 'name']
-	  },
-	  function(access_token, refresh_token, profile, done) {
-			process.nextTick(function(){
-				participant.findOne({ 'facebook.id': profile.id }, function(err, searched_participant) {
-					if(err) {
-						return done(err);
-					}
-					else if(searched_participant) {
-						return done(null, searched_participant);
-					}
-					else {
-						let new_participant = new participant();
-						new_participant.facebook.id = profile.id;
-						new_participant.name = profile.name.givenName + ' ' + profile.name.familyName;
-						new_participant.email = profile.emails[0].value;
-						new_participant.package = 'Ninguno';
-						new_participant.debt = 0;
+	},
+	function(access_token, refresh_token, profile, done) {
+		process.nextTick(function(){
+			participant.findOne({ 'facebook.id': profile.id }, function(err, searched_participant) {
+				if(err) {
+					return done(err);
+				}
+				else if(searched_participant) {
+					return done(null, searched_participant);
+				}
+				else {
+					let new_participant = new participant();
+					new_participant.facebook.id = profile.id;
+					new_participant.name = profile.name.givenName + ' ' + profile.name.familyName;
+					new_participant.email = profile.emails[0].value;
+					new_participant.package = 'Ninguno';
+					new_participant.debt = 0;
 
-						new_participant.save(function(err){
-							if(err) {
-								throw err;
-							}
+					new_participant.save(function(err) {
+						if(err) {
+							throw err;
+						}
 
-							return done(null, new_participant);
-						});
-					}
-				});
+						return done(null, new_participant);
+					});
+				}
 			});
-		}
-
-	));
-
-
+		});
+	}));
 };

@@ -10,11 +10,11 @@ var body_parser = require('body-parser');
 var session = require('express-session');
 var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
+var mongoose_connection = require('./database/connection');
 
-var mongoose_connection = require('./main/config/database');
 require('./main/config/passport')(passport);
 
-app.use(favicon(__dirname + '/main/resources/favicon.ico'));
+app.use(favicon(__dirname + '/favicon.ico'));
 app.use('/resources', express.static(__dirname + '/main/resources'));
 app.use(body_parser.urlencoded({
 	extended: true
