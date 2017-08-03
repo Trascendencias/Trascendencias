@@ -1,0 +1,122 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- tag para hacerlo escalable -->
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="resources/style.css">
+
+<div class="menu">
+	<a href="index">
+		<img class="logo" src="resources/logo.svg">
+	</a>
+	<img class="menu-btn" src="resources/ico_menu.svg" onclick="activate(this);">
+	<div class="menu-wrap">
+		<center><ul>
+			<li>
+				<button onclick="location.href='index'">
+					<img src="resources/ico_inicio.svg">
+					Inicio
+				</button>
+			</li>
+			<li>
+				<button onclick="location.href='informacion'">
+					<img src="resources/ico_informacion.svg">
+					Información
+				</button>
+			</li>
+			<li>
+				<button onclick="location.href='contenido'">
+					<img src="resources/ico_contenido.svg">
+					Contenido
+				</button>
+			</li>
+			<li>
+				<button onclick="location.href='ventas'">
+					<img src="resources/ico_venta.svg">
+					Venta
+				</button>
+			</li>
+			<li>
+				<button onclick="location.href='inicio-blog'">
+					<img src="resources/ico_blog.svg">
+					Blog
+				</button>
+			</li>
+			<li>
+				<button onclick="location.href='mapa'">
+					<img src="resources/ico_mapa.svg">
+					Mapa
+				</button>
+			</li>
+			<li>
+				<button onclick="location.href='horario'">
+					<img src="resources/ico_horario.svg">
+					Horario
+				</button>
+			</li>
+			<li>
+				<button onclick="location.href='preguntas-frecuentes'">
+					<img src="resources/ico_ayuda.svg">
+					Ayuda
+				</button>
+			</li>
+
+		</ul></center>
+
+
+		<div class="redes-sociales">
+			<a href="#">
+				<img src="resources/ico_twitter.svg">
+			</a>
+			<a href="#">
+				<img src="resources/ico_youtube.svg">
+			</a>
+			<a href="#">
+				<img src="resources/ico_facebook.svg">
+			</a>
+		</div>
+
+
+		<div class="usuario">
+
+		<% if(user == undefined) { %>
+		<button class="iniciar-sesion" onclick="activate(this)"> Iniciar Sesión </button>
+			<div class="usuario-info iniciar-sesion">
+				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="nombre" required>
+				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="contrasena" required>
+				<p class="error"> *Datos incorrectos </p>
+				<a href="/auth/facebook" style='color: white;'>Login with Facebook</a>
+				<button class="second"> Iniciar Sesion </button>
+			</div>
+		<% } else { %>
+		<img src="resources/user_example.png" class="persona1">
+			<div class="usuario-info loggedIn">
+
+				<table>
+					<tr>
+						<td class="nombre-usuario">
+							<h1> NOMBRE USUARIO </h1> 
+						</td>
+						<td>
+							<button onclick="location.href = '/logout'""> Salir </button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h2> Paquete Elegido </h2>
+							<h3> Saldo: 0.00 </h3>
+						</td>
+						<td>
+							<button class="second"> Cambiar </button>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<% } %>
+		</div>
+	</div>
+
+</div>
+<script>
+	function activate(elem){
+		if(elem.classList.contains('active')) elem.classList.remove('active'); 
+		else elem.classList.add('active'); 
+	}
+</script>

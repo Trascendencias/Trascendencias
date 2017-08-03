@@ -1,0 +1,344 @@
+<html>
+<head>
+	<meta name=”description” content=”#!DESCRIPCION-BLOG”>
+	
+	<!---FACEBOOK OPTIMIZATION -->
+	<meta property="og:url" content="#!URL" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="#!TITLE" />
+	<meta property="og:image" content="#!IMG" />
+	
+	<!---SEO OPTIMIZATION -->
+	<title> #!TITLE </title>
+	<meta name="description" content="#!DESCRIPTION">
+	<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+	<meta name="author" content="#!AUTOR">
+
+	<!--- INCLUIR DOCUMENTOS -->
+	<% include menu.html %>
+	<div class="menuspacer"></div>
+
+	<!--- Pa que agarren los acentos -->
+	<meta charset="UTF-8">
+
+	<!-- tag para hacerlo escalable -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+	<!--- Pa que agarre el Styleshit los acentos -->
+	<link rel="stylesheet" type="text/css" href="resources/style.css">
+</head>
+
+<body>
+		<!--- INDICADOR DE PAGINA -->
+		<div class="pageLocation cmen">
+			<h5 id="pageLocation"> Contenido </h5>
+		</div> 
+
+
+			<!--- ESTE SLIDER MUESTRA LOS TEASER DE CONFERENCIAS, TALLERES, VISITAS Y EVENTOS SOCIALES -->
+			<div class="slider" style="margin-top: -10px;">
+			
+				<div class="slides" id="slides" style="width: calc(100vw * 5);">
+				<!-- PUES AQUI SE PONE EL WHILE PA QUE AGREGUE TODAS LAS IMAGENES -->
+					<div class="slide" style="background: url('resources/slider1.jpg') center center; left: calc(100vw * 0);">
+						<div class="slide-textholder">
+							<h1 class="cwhite"> MEJOR SIMPOSIO DEL NOROESTE </h1> <!-- Titulo del Teaser Banner -->
+							<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. <!-- Descripción del Teaser Banner -->
+								<button onclick="location.href='ventas'"> ¡QUIERO ASISTIR! </button> <!-- BOTON DE ACCION -->
+							</p>
+						</div>
+					</div>
+				<!-- PUES AQUI SE ACABA LO DEL WHILE -->
+					<div class="slide" style="background: url('resources/slider2.jpg') center center; left: calc(100vw * 1);">
+						<div class="slide-textholder">
+							<h1 class="cwhite"> MEJOR SIMPOSIO DEL NOROESTE </h1> <!-- Titulo del Teaser Banner -->
+							<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. <!-- Descripción del Teaser Banner -->
+								<button onclick="location.href='ventas'"> ¡QUIERO ASISTIR! </button> <!-- BOTON DE ACCION -->
+							</p>
+						</div>
+					</div>
+					<div class="slide" style="background: url('resources/slider3.jpg') center center; left: calc(100vw * 2);">
+						<div class="slide-textholder">
+							<h1 class="cwhite"> MEJOR SIMPOSIO DEL NOROESTE </h1> <!-- Titulo del Teaser Banner -->
+							<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. <!-- Descripción del Teaser Banner -->
+								<button onclick="location.href='ventas'"> ¡QUIERO ASISTIR! </button> <!-- BOTON DE ACCION -->
+							</p>
+						</div>
+					</div>
+					<div class="slide" style="background: url('resources/slider4.jpg') center center; left: calc(100vw * 3);">
+						<div class="slide-textholder">
+							<h1 class="cwhite"> MEJOR SIMPOSIO DEL NOROESTE </h1> <!-- Titulo del Teaser Banner -->
+							<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. <!-- Descripción del Teaser Banner -->
+								<button onclick="location.href='ventas'"> ¡QUIERO ASISTIR! </button> <!-- BOTON DE ACCION -->
+							</p>
+						</div>
+					</div>
+					<div class="slide" style="background: url('resources/slider5.jpg') center center; left: calc(100vw * 4);"></div>
+				</div>
+
+				<button class="left-arrow" onclick="leftSlider()"> ➜ </button>
+				<button class="right-arrow" onclick="rightSlider()"> ➜ </button>
+			</div>
+			<!-- SLIDER EN GRANDE -->
+			<div id="biggerImage" > 
+				<img src="resources/slider1.jpg" id="biggerImg">
+			</div>
+
+
+
+	<div class="dropContent" >
+		<div class="h4holder" id="#conferencias">
+			<h4> Conferencias </h4>
+		</div>
+			<button class="btn" onclick="activate(this)"> + </button>
+
+		<div class="droppedContent">
+			<br><br>
+		
+						<!--- AQUI VA EL WHILE --> 
+						<div class="cardconf">
+							<div class="staff2">
+								<br>
+								<img src="resources/user_example.png" class="persona2">
+								<h3> Nombre de Conferencista </h3>
+								<p><i> Por qué es este wey tan vergas </i></p>
+							</div><br>
+								
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+						</div>
+						<!--- AQUI SE ACABA LO QUE VA EN WHILE -->
+
+						<!--- EJEMPLOS -->
+						<div class="cardconf">
+							<div class="staff2">
+								<br>
+								<img src="resources/user_example.png" class="persona2">
+								<h3> Nombre de Conferencista </h3>
+								<p><i> Por qué es este wey tan vergas </i></p>
+							</div><br>
+								
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+						</div>
+						<div class="cardconf">
+							<div class="staff2">
+								<br>
+								<img src="resources/user_example.png" class="persona2">
+								<h3> Nombre de Conferencista </h3>
+								<p><i> Por qué es este wey tan vergas </i></p>
+							</div><br>
+								
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+						</div>
+						<div class="cardconf">
+							<div class="staff2">
+								<br>
+								<img src="resources/user_example.png" class="persona2">
+								<h3> Nombre de Conferencista </h3>
+								<p><i> Por qué es este wey tan vergas </i></p>
+							</div><br>
+								
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+						</div>
+						<!--- </EJEMPLOS> -->
+		
+		</div>
+	</div>
+
+	<div class="dropContent" >
+		<div class="h4holder">
+			<h4 id="#talleres"> Talleres </h4>
+		</div>
+		<button class="btn" onclick="activate(this)"> + </button>
+		<div class="droppedContent">
+					<br><br>
+						
+						<!--- AQUI VA EL WHILE --> 
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+						<!--- AQUI SE ACABA LO QUE VA EN WHILE --> 
+						<!--- EJEMPLOS -->
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+						
+		</div>
+	</div>
+
+	<div class="dropContent">
+		<div class="h4holder">
+			<h4 id="#visitas"> Visitas </h4>
+		</div>
+		<button class="btn" onclick="activate(this)"> + </button>
+		<div class="droppedContent">
+			<br><br>
+						
+						<!--- AQUI VA EL WHILE --> 
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+						<!--- AQUI SE ACABA LO QUE VA EN WHILE --> 
+						<!--- EJEMPLOS -->
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+							<div class="card" onclick="location.href='consulta'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+			
+		</div>
+	</div>
+
+	<div class="dropContent" >
+		<div class="h4holder">
+			<h4 id="#eventsSociales"> Eventos Sociales </h4>
+		</div>
+		<button class="btn" onclick="activate(this)"> + </button>
+		<div class="droppedContent">
+			<br><br>
+						
+						<!--- AQUI VA EL WHILE --> 
+							<div class="card" onclick="location.href='evento-social'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+						<!--- AQUI SE ACABA LO QUE VA EN WHILE --> 
+						<!--- EJEMPLOS -->
+							<div class="card" onclick="location.href='evento-social'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+							<div class="card" onclick="location.href='evento-social'">
+								<img src="resources/image_example.png">
+								<h3> Nombre Conferencia </h3>
+								<p> De qué se trata éste bella conferencia </p>
+							</div>
+		</div>
+	</div>
+
+	<div class="dropContent" >
+		<div class="h4holder">
+			<h4> Puntos de Venta </h4>
+		</div>
+		<button class="btn" onclick="activate(this)"> + </button>
+		<div class="droppedContent">
+							
+							<!--- AQUI VA EL WHILE --> 
+							<div class="staff2">		
+								<h3> Punto de Venta UABC </h3>
+								<p> 13/SEP de 8:30 - 13:00hrs </p>
+							</div>
+							<!--- AQUI SE ACABA EL WHILE -->
+							<!--- EJEMPLOS -->
+							<div class="staff2">		
+								<h3> Punto de Venta UABC </h3>
+								<p> 13/SEP de 8:30 - 13:00hrs </p>
+							</div>
+							<div class="staff2">		
+								<h3> Punto de Venta UABC </h3>
+								<p> 13/SEP de 8:30 - 13:00hrs </p>
+							</div>
+		</div>
+	</div>
+
+</body>
+
+	<% include footer.html %>
+
+
+	<script >
+		
+		function activate(elem){	
+		if(elem.classList.contains('active')) elem.classList.remove('active'); 
+		else elem.classList.add('active'); 
+		}
+
+
+
+		var currentSlide = 0; //El slide en el que está menos 1
+		var slides = document.getElementById("slides");
+		var beforeSlide = 4;
+		var afterSlide = 1;
+		function rightSlider(){
+			if(currentSlide == 4){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
+				currentSlide = 0; 
+				slides.style.left = "0px"; 
+			}
+			else {
+				currentSlide++; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")";
+			}
+		}
+		function leftSlider(){				
+				if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
+					slides.style.left = "calc(-100vw * 4)"; 
+					currentSlide = 4;}
+				else { 
+					currentSlide--; 
+					slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
+				}
+			}
+			
+		//SlideShow en Gigante
+		document.getElementById("slides").onclick = function(){  show(currentSlide) };
+		document.getElementById("biggerImage").onclick = function(){ document.getElementById("biggerImage").style.display = "none"; }
+		function show(slideNumber){
+			document.getElementById("biggerImg").src = "resources/slider" +  (slideNumber + 1) + ".jpg"; 
+			//aquí nomás se cambia a que sea la imagen de la base de datos que corresponda con el numero de la imagen y sha :D
+			document.getElementById("biggerImage").style.display = "block";
+		}
+	</script>
+</html>

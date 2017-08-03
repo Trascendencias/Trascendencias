@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="4875.388 712.322 40.725 67.278">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #071d25;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        font-size: 12px;
+        font-family: Impact;
+      }
+    </style>
+  </defs>
+  <g id="ico_map_edificio" transform="translate(4455)">
+    <path id="Path_43" data-name="Path 43" class="cls-1" d="M40.724,20.4A20.362,20.362,0,1,0,0,20.4C0,31.652,20.4,67.278,20.4,67.278S40.724,31.586,40.724,20.4Z" transform="translate(420.388 712.322)"/>
+    <text id="CECE" class="cls-2" transform="translate(428.275 737.993)"><tspan x="0" y="0">CECE</tspan></text>
+    <g id="Group_24" data-name="Group 24" transform="translate(429.195 745.828)">
+      <path id="Path_44" data-name="Path 44" class="cls-3" d="M36.344,50.6a12.242,12.242,0,0,1-4.834,4.7,13.776,13.776,0,0,1-6.688,1.722A13.967,13.967,0,0,1,18.134,55.3,12.68,12.68,0,0,1,13.3,50.6a19.783,19.783,0,0,0,5.43,3.443,15.856,15.856,0,0,0,6.092,1.192,16.354,16.354,0,0,0,6.092-1.192A19.783,19.783,0,0,0,36.344,50.6Z" transform="translate(-13.3 -50.6)"/>
+    </g>
+  </g>
+</svg>

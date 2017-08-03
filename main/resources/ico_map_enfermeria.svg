@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="4485 1021.041 41.5 68.559">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e83895;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="ico_map_enfermeria" transform="translate(4455)">
+    <path id="Path_49" data-name="Path 49" class="cls-1" d="M41.5,20.784a20.75,20.75,0,1,0-41.5,0C0,32.255,20.784,68.559,20.784,68.559S41.5,32.188,41.5,20.784Z" transform="translate(30 1021.041)"/>
+    <circle id="Ellipse_12" data-name="Ellipse 12" class="cls-2" cx="15.453" cy="15.453" r="15.453" transform="translate(35.331 1024.819)"/>
+    <rect id="Rectangle_29" data-name="Rectangle 29" class="cls-1" width="17.747" height="4.319" transform="translate(41.876 1038.315)"/>
+    <rect id="Rectangle_30" data-name="Rectangle 30" class="cls-1" width="17.747" height="4.319" transform="translate(52.872 1031.55) rotate(90)"/>
+    <g id="Group_30" data-name="Group 30" transform="translate(38.975 1055.185)">
+      <path id="Path_50" data-name="Path 50" class="cls-2" d="M36.783,50.6a12.475,12.475,0,0,1-4.926,4.791,14.039,14.039,0,0,1-6.815,1.754,14.233,14.233,0,0,1-6.815-1.754A12.921,12.921,0,0,1,13.3,50.6a20.16,20.16,0,0,0,5.533,3.509,16.158,16.158,0,0,0,6.208,1.215,16.665,16.665,0,0,0,6.208-1.215A20.16,20.16,0,0,0,36.783,50.6Z" transform="translate(-13.3 -50.6)"/>
+    </g>
+  </g>
+</svg>

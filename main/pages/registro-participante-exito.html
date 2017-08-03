@@ -1,0 +1,83 @@
+<html> 
+
+	<head>
+		<meta name=”description” content=”#!DESCRIPCION-BLOG”>
+		
+		<!---FACEBOOK OPTIMIZATION -->
+		<meta property="og:url" content="#!URL" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="#!TITLE" />
+		<meta property="og:image" content="#!IMG" />
+		
+		<!---SEO OPTIMIZATION -->
+		<title> #!TITLE </title>
+		<meta name="description" content="#!DESCRIPTION">
+		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+		<meta name="author" content="#!AUTOR">
+
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<% include menu.html %>
+		<div class="menuspacer"></div>
+
+		<!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	</head>
+
+
+	<body>
+	<div class="pageLocation cmen">
+		<h5 id="pageLocation"> ¡Felicidades! </h5>
+	</div> 
+
+	<div class="registro">
+		<center>
+			<h1 class="cmenta"> ¡Felicidades! </h1>
+			<p> <b> ¡Ya casi eres parte de Trascendencias! </b> </p>
+
+			<p> <i> Tu código de registro es: </i></p>
+			<h6 class="cmenta"> <%= code %> </h6> 
+
+			<p> <i> Tu saldo es de: </i></p>
+			<h6 class="cmenta"> -$750 </h6>
+		</center>
+
+		<h2> Para completar tu registro </h2>
+		<ul> 
+			<li> Acude a cualquier puesto de Trascendencias </li>
+			<li> Da tu nombre o código de registro </li>
+			<li> Abona $50 pesos o más para apartar tu precio y lugar en Trascendencias </li>
+			<li> Termina de pagar antes del 11 de Octubre para elegir tu taller y visita </li>
+			<li> ¡Y ya serás participante de trascendencias! </li>
+		</ul>
+
+		<h2> Próximos puestos de venta </h2> 
+			<div class="staff2">
+					<h3> UABC Mexicali </h3>
+					<p> <i> 19/Sep • 8am a 9pm • Explanada Bonita </i> </p>
+				<br>
+					<h3> UABC Mexicali </h3>
+					<p> <i> 19/Sep • 8am a 9pm • Explanada Bonita </i> </p>
+				<br>
+					<h3> UABC Mexicali </h3>
+					<p> <i> 19/Sep • 8am a 9pm • Explanada Bonita </i> </p>
+			</div>
+
+	</div>
+
+
+
+		<script>
+
+	function activate(elem){
+		if(elem.classList.contains('active')) elem.classList.remove('active'); 
+		else elem.classList.add('active'); 
+	}
+		</script>
+	</body>
+</html>

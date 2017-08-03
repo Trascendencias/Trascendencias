@@ -1,0 +1,137 @@
+<html> 
+
+	<head>
+		
+		<!---FACEBOOK OPTIMIZATION -->
+		<meta property="og:url" content="#!URL" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="#!TITLE" />
+		<meta property="og:image" content="#!IMG" />
+		
+		<!---SEO OPTIMIZATION -->
+		<title> #!TITLE </title>
+		<meta name="description" content="#!DESCRIPTION">
+		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+		<meta name="author" content="#!AUTOR">
+
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR MENU -->
+		<% include menu.html %>
+		<div class="menuspacer"></div>
+
+		<!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	</head>
+
+
+	<body>
+	<div class="pageLocation cmen">
+		<h5 id="pageLocation"> Paquetes </h5>
+	</div> 
+
+
+
+
+<!--- ESTE SLIDER MUESTRA LAS FOTOS 1 DE TODOS LOS PAQUETES, NO LAS MUESTRA EN GRANDE, SOLO ES UNA ESPECIE DE RESUMEN -->
+		<div class="slider" style="margin-top: -10px;">
+		
+			<div class="slides" id="slides" style="width: calc(100vw * 5);">
+			<!-- PUES AQUI SE PONE EL WHILE PA QUE AGREGUE TODAS LAS IMAGENES -->
+				<div class="slide" style="background: url('resources/slider1.jpg') center center; left: calc(100vw * 0);"></div>
+			<!-- PUES AQUI SE ACABA LO DEL WHILE -->
+				<div class="slide" style="background: url('resources/slider2.jpg') center center; left: calc(100vw * 1);"></div>
+				<div class="slide" style="background: url('resources/slider3.jpg') center center; left: calc(100vw * 2);"></div>
+				<div class="slide" style="background: url('resources/slider4.jpg') center center; left: calc(100vw * 3);"></div>
+				<div class="slide" style="background: url('resources/slider5.jpg') center center; left: calc(100vw * 4);"></div>
+			</div>
+
+			<button class="left-arrow" onclick="leftSlider()"> ➜ </button>
+			<button class="right-arrow" onclick="rightSlider()"> ➜ </button>
+			
+			<!-- SLIDER EN GRANDE -->
+			<div id="biggerImage" > 
+				<img src="resources/slider1.jpg" id="biggerImg">
+			</div>
+		</div>
+
+<br><br>
+
+
+
+
+		<div class="card-holder">
+								<div class="card" onclick="location.href='registro-online'">
+									<img src="resources/image_example.png">
+									<h3> Nombre Conferencia </h3>
+									<p> De qué se trata éste bella conferencia </p>
+									<button class="buy"> COMPRAR </button>
+								</div>
+								<div class="card" onclick="location.href='registro-online'">
+									<img src="resources/image_example.png">
+									<h3> Nombre Conferencia </h3>
+									<p> De qué se trata éste bella conferencia </p>
+									<button class="buy"> COMPRAR</button>
+								</div>
+								<div class="card" onclick="location.href='registro-online'">
+									<img src="resources/image_example.png">
+									<h3> Nombre Conferencia </h3>
+									<p> De qué se trata éste bella conferencia </p>
+									<button class="buy"> COMPRAR</button>
+								</div>
+								<div class="card" onclick="location.href='registro-online'">
+									<img src="resources/image_example.png">
+									<h3> Nombre Conferencia </h3>
+									<p> De qué se trata éste bella conferencia </p>
+									<button class="buy"> COMPRAR</button>
+								</div>
+								<div class="card" onclick="location.href='registro-online'">
+									<img src="resources/image_example.png">
+									<h3> Nombre Conferencia </h3>
+									<p> De qué se trata éste bella conferencia </p>
+									<button class="buy"> COMPRAR</button>
+								</div>
+	</div>
+
+</body>
+
+<% include footer.html %>
+
+<script>
+	
+	function activate(elem){
+		if(elem.classList.contains('active')) elem.classList.remove('active'); 
+		else elem.classList.add('active'); 
+	}
+		
+		var currentSlide = 0; //El slide en el que está menos 1
+		var slides = document.getElementById("slides");
+		var beforeSlide = 4;
+		var afterSlide = 1;
+		function rightSlider(){
+			if(currentSlide == 4){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
+				currentSlide = 0; 
+				slides.style.left = "0px"; 
+			}
+			else {
+				currentSlide++; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")";
+			}
+		}
+		function leftSlider(){
+			if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
+				slides.style.left = "calc(-100vw * 4)"; 
+				currentSlide = 4;}
+			else { 
+				currentSlide--; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
+			}
+		}	
+		</script>
+	</body>
+</html>
+
