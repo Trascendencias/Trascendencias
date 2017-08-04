@@ -57,5 +57,5 @@ module.exports = {
 	conference: mongoose.model('conferences', schemas.conference),
 	participant: mongoose.model('participants', schemas.participant),
 	social_event: mongoose.model('social_events', schemas.social_event),
-	sale_point: mongoose.models('sale_points', schemas.sale_point)
+	sale_point: mongoose.model('sale_points', schemas.sale_point)
 };
