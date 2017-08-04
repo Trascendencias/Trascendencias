@@ -9,7 +9,6 @@ var form = require('express-form');
 var body_parser = require('body-parser');
 var favicon = require('serve-favicon');
 var database_connection = require('./database/connection');
-var database_management = require('./database/management');
 
 form.configure({
 	passThrough: true
@@ -37,16 +36,16 @@ app.get('/register/:collection', function(request, response) {
 });
 
 app.post('/register/:collection', function(request, response) {
-	database_management.register[request.params.collection](request.form);
+	database_connection.register[request.params.collection](request.form);
 	response.redirect('/');
 });
 
 app.get('/list/:collection', function(request, response) {
-	database_management.list(database_connection, request, response);
+	database_connection.list(request, response);
 });
 
 app.get('/look/:collection/:document', function(request, response) {
-	database_management.look(database_connection, request, response);
+	database_connection.look(request, response);
 });
 
 app.get('/:file', function(request, response) {

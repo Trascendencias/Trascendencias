@@ -1,7 +1,7 @@
 var local_strategy = require('passport-local').Strategy;
 var facebook_strategy = require('passport-facebook').Strategy;
 
-var participant = require('../../database/models/participant');
+var participant = require('../../database/models').participant;
 var facebook_config = require('./facebook.js');
 
 module.exports = function(passport) {
@@ -80,7 +80,7 @@ module.exports = function(passport) {
 		profileFields: ['id', 'emails', 'name']
 	},
 	function(access_token, refresh_token, profile, done) {
-		process.nextTick(function(){
+		process.nextTick(function() {
 			participant.findOne({ 'facebook.id': profile.id }, function(err, searched_participant) {
 				if(err) {
 					return done(err);

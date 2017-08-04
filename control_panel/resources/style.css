@@ -51,7 +51,7 @@ h5 {
 }
 h6 {
 	font-size: 18pt;
-	color: #1D5E89;
+	color: #F45D42;
 	font-weight: lighter;
 	line-height: 1;
 	margin: 0px;
@@ -72,6 +72,7 @@ p.white {
 }
 a {
 	text-decoration: none;
+	color: #071D25;
 }
 hr {
 	border: 1px solid #CCC;
@@ -81,7 +82,7 @@ hr.white {
     border-color: white;
 }
 button{
-	background-color: #42C7F4;
+	background-color: #425DF4;
 	border: 0;
 	border-radius: 100px;
 	color: white;
@@ -94,6 +95,10 @@ button:hover {
 	box-shadow: 0px 1px 20px #42C7F4;
 	text-shadow: 0px 1px 10px white;
 	transition: box-shadow 1s, text-shadow .5s;
+}
+.menu button:hover {
+	box-shadow: 0px 1px 20px #425DF4	;
+
 }
 button.second{
 	border-radius: 3px;
@@ -110,7 +115,7 @@ button.third{
     color: #CCC;
     display: block;
 }
-div.body {
+div.body, div.lista {
 	display: block;
 	margin: 0 auto;
 	width: 90vw;
@@ -217,6 +222,29 @@ button.codigo-grupo{
     right: 10px;
     margin-top: -50px;
 }
+/* LISTAS */
+
+div.lista button.nuevo {
+	position: absolute;
+	right: 0px;
+}
+button.enlistado {
+	background-color: rgba(0,0,0,0);
+	color: #999 ;
+	padding: 5px 0px;
+	margin: 5px 0px;
+    display: block;
+}
+button.enlistado:hover{
+	box-shadow: 0 0 0 0 rgba(0,0,0,0);
+}
+#search {
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	margin-top: 10px;
+
+}
+
 
 /* MENU */
 	.menu {
@@ -225,7 +253,7 @@ button.codigo-grupo{
 		top: 0px;
 		width: 100vw;
 		height: 60px;
-		background-color: #42C7F4;
+		background-color: #425DF4;
 		z-index: 1;
 		box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
         font-weight: lighter;
@@ -247,13 +275,14 @@ button.codigo-grupo{
 		margin: 7px;
 		width: auto;
         border-radius: 100px;
+        cursor: pointer;
 	}
     div.drop {
         display: none;
         position: fixed; 
         top: 60px;
         z-index: -1;
-        background-color: #42C7F4;
+        background-color: #425DF4;
         box-shadow: 0px px 10px rgba(0,0,0,.3);
 
     }
@@ -291,6 +320,13 @@ button.codigo-grupo{
     .menu hr {
         border: 1px solid rgba(255,255,255,.5);
     }
+    button.nuevo-trasce {
+    	background-color: #FF0000;
+    }
+    button.admin {
+    	border: none;
+    }
+
 @media only screen and (max-width: 420px) {
     .menu .user {
 		float: left;
@@ -303,7 +339,7 @@ button.codigo-grupo{
 	}
     .menu button {
         font-size: 9pt;
-        margin: 8.5px;
+        margin: 5px;
         padding: 0;
         margin-top: 10px;
         
@@ -327,3 +363,28 @@ button.codigo-grupo{
         padding: 5px 15px ;
     }
 }
+
+/* CONSULTA STAFF */
+img.staff-pic {
+	width: 150px;
+	border-radius: 100px;
+}
+
+/* ACCIONES */
+div.accion {
+	border: 1px solid #CCC;
+	padding: 10px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+.accion h3, .accion p{
+	display: inline;
+	line-height: 1.5;
+}
+.dineromas {
+	color: #218425;
+}
+.dineromenos {
+	color: #B41C0F;
+}
+

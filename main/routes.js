@@ -61,7 +61,7 @@ module.exports = function(http_app, app, fs, passport) {
 
 	app.get('/:name', function(request, response) {
 		if(fs.existsSync(__dirname + '/pages/' + request.params.name + '.html')) {
-			return response.render(request.params.name);
+			return response.render(request.params.name, { user: request.user });
 		}
 
 		response.status(404).send('File not found.');

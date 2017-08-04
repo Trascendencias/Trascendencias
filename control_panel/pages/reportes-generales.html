@@ -1,0 +1,92 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+<% include partials/menu.html %> 
+
+		
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="../resources/style.css">
+	
+    </head>
+<body>
+	<style> 
+		h3, p {
+			display: inline;
+		}
+		a.año {
+			font-size: 30px;
+		}
+	</style>
+		
+        <div class="body">
+		<br>
+		<center><h6><b> Reportes Generales </b></h6> </center>
+		<h3> Participantes Totales:</h3>  <p id="participantes"> error..</p><br>
+		<h3> Dinero Total:</h3>  <p>$<span id="dinero-total"> error.. </span></p><br>
+		<h3> Dinero Recibido Total:</h3> <p>$<span id="recibido"> error.. </span></p><br>
+		<h3> Gastos Totales:</h3>  <p>$<span id="gastos"> error.. </span></p><br>
+		<h3> Adeudos de Participantes:</h3>  <p>$<span id="dinero-adeudos"> error.. </span></p><br>
+		<h3> Dinero de Patrocinadores:</h3>  <p>$<span id="patrocinadores"> error.. </span></p><br>
+		<h3> Camisetas Totales:</h3>  <p> XS:<span id="tallaxs"> error.. </span>, S:<span id="tallas"> error.. </span>, M: <span id="tallam"> error.. </span>, L:<span id="tallal"> error.. </span> , XL:<span id="tallaxl"> error.. </span> </p><br>
+		<h3> Participantes Liquidados:</h3>  <p id="liquidados"> error.. </p><br>
+		<h3> Participantes con Adeudo:</h3>  <p id="con-adeudos"> error.. </p><br>
+
+		<h2> Reportes Anuales </h2> 
+		<a class="año" href="2016.html"> 2016 </a><br>
+		<a class="año" href="2017.html"> 2017 </a>
+	
+		</div>
+
+</body>
+		
+		<script>
+             //INCLUIR DOCUMENTOS
+            var participantes = 456;
+            var dinerototal = 123; //EL DINERO QUE SE TIENE ACTUALMENTE
+            var dinerorecibido = 123; //TODO EL DINERO SIN RESTAR LOS GASTOS
+            var gastos = 123;
+            var dineroadeudos = 123;
+            var patrocinadores = 123;
+            var tallaxs = 123;
+            var tallas = 123;
+            var tallam = 123;
+            var tallal = 123;
+            var tallaxl = 123;
+            var liquidados = 123; //PARTICIPANTES QUE YA TERMINARON DE PAGAR SU PAQUETE
+            var conadeudo = 123; //Participantes que deben dinero de su paquete
+
+            document.getElementById("participantes").innerHTML = participantes;
+            document.getElementById("dinero-total").innerHTML = dinerototal;
+            document.getElementById("recibido").innerHTML = dinerorecibido;
+            document.getElementById("gastos").innerHTML = gastos;
+            document.getElementById("dinero-adeudos").innerHTML = dineroadeudos;
+            document.getElementById("patrocinadores").innerHTML = patrocinadores;
+            document.getElementById("tallas").innerHTML = tallas;
+            document.getElementById("tallam").innerHTML = tallam;
+            document.getElementById("tallal").innerHTML = tallal;
+            document.getElementById("tallaxs").innerHTML = tallaxs;
+            document.getElementById("tallaxl").innerHTML = tallaxl;
+            document.getElementById("liquidados").innerHTML = liquidados;
+            document.getElementById("con-adeudos").innerHTML = conadeudo;
+
+
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+		</script>
+</html>

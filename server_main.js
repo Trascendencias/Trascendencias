@@ -10,9 +10,9 @@ var body_parser = require('body-parser');
 var session = require('express-session');
 var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
-var mongoose_connection = require('./database/connection');
+var database_connection = require('./database/connection');
 
-require('./main/config/passport')(passport);
+require('./main/auth/passport')(passport);
 
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use('/resources', express.static(__dirname + '/main/resources'));
@@ -23,7 +23,7 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true,
 	secret: 'super_secret_string',
-	store: new mongo_store({ mongooseConnection: mongoose_connection })
+	store: new mongo_store({ mongooseConnection: database_connection })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -32,7 +32,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/main/pages');
 
-require('./main/config/routes.js')(http_app, app, fs, passport);
+require('./main/routes.js')(http_app, app, fs, passport);
 
 var ssl = require('./ssl_config');
 https.createServer({

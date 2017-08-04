@@ -1,0 +1,77 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+ <% include partials/menu.html %>
+        
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="../resources/style.css">
+    
+    </head>
+    <style>
+        h3, p, button.nuevo {
+            display: inline;
+        }
+    </style>
+<body> 
+
+        <div class="body"> 
+        <br>
+        <center><h6> Registrar Gasto </h6></center>
+        <br><br>
+       
+        <form action="gasto.html" id="forma-registro">
+                 <!-- COSTO Paquetes -->
+                <p class="title"> Cantidad: </p>
+                <input type=number name="gasto" class="numero" value="1" >
+                <p class="error"> *Debe llenar esta información </p>
+                <br><br><br>
+                 <textarea name="resumen" id="resumen" required> Razones... </textarea>
+                <p class="error"> *Debe llenar esta información </p>
+                <br>
+                
+                <center>
+                    <button type="button" class="submit" style="display:inline;" onClick="validate()"> Siguiente </button>  
+                    <button type="button" class="third" style="display:inline;" onClick="window.history.back();"> Cancelar </button>
+                </center>
+        </form>
+        <hr>
+        </div>
+
+        </div>
+
+</body>
+        
+        <script>
+
+            function validate(){
+                var alert = confirm('Estás a punto de registrar un gasto. Ésta acción no puede eliminarse, ¿seguro que desea proseguir?');
+                if (alert) {
+                    document.getElementById("forma-registro").submit();
+                } else {
+                    // Do nothing!
+                }
+            }
+
+
+             //INCLUIR DOCUMENTOS
+
+            function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+                if(elem.classList.contains('active')) elem.classList.remove('active'); 
+                else elem.classList.add('active'); 
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+        </script>
+</html>
