@@ -35,8 +35,7 @@ app.get('/register/:collection', function(request, response) {
 	response.render('register-' + request.params.collection);
 });
 
-app.post('/register/:collection', function(request, response) {
-	console.log("hola! :)");
+app.post('/register/:collection', form(), function(request, response) {
 	database_connection.register[request.params.collection](request.form);
 	response.redirect('/');
 });

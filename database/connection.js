@@ -6,7 +6,19 @@ var models = require('./models');
 
 connection.register = {
 	conference: function(parameters) {
-		
+		let conference_model = models.conference;
+
+		let new_conference = new conference_model();
+		new_conference.name = parameters.name;
+
+		new_conference.save(function(err) {
+			if(err) {
+				throw err;
+			}
+		})
+	},
+	expense: function(parameters) {
+		console.log(JSON.stringify(parameters));
 	}
 };
 
