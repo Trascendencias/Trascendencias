@@ -8,17 +8,35 @@ var ssl = require('./ssl_config');
 var form = require('express-form');
 var body_parser = require('body-parser');
 var favicon = require('serve-favicon');
+var session = require('express-session');
+var mongo_store = require('connect-mongo')(session);
+var passport = require('passport');
 var database_connection = require('./database/connection');
 
 form.configure({
 	passThrough: true
 });
+app.use(session({
+	resave: true,
+	saveUninitialized: true,
+	secret: 'super_secret_string',
+	store: new mongo_store({ mongooseConnection: database_connection })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use('/resources', express.static(__dirname + '/control_panel/resources'));
 app.use(body_parser.urlencoded({
 	extended: true
 }));
+app.use(function (req, res, next) {
+	if(!req.isAuthenticated()) {
+		return res.render('login');
+	}
+
+	next();
+})
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/control_panel/pages');
@@ -31,20 +49,25 @@ app.get('/', function(request, response) {
 	response.render('index');
 });
 
-app.get('/register/:collection', function(request, response) {
+app.get('/login', function(req, res) {
+	res.send('hola!');	
+});
+
+app.get('/register-:collection', function(request, response) {
 	response.render('register-' + request.params.collection);
 });
 
-app.post('/register/:collection', form(), function(request, response) {
+app.post('/register-:collection', form(), function(request, response) {
+	console.log("Register " + request.params.collection + ":");
 	database_connection.register[request.params.collection](request.form);
 	response.redirect('/');
 });
 
-app.get('/list/:collection', function(request, response) {
+app.get('/list-:collection', function(request, response) {
 	database_connection.list(request, response);
 });
 
-app.get('/look/:collection/:document', function(request, response) {
+app.get('/look-:collection/:document', function(request, response) {
 	database_connection.look(request, response);
 });
 

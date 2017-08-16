@@ -1,0 +1,37 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style">
+	
+    </head>
+<body>
+	<style>
+    div.body {
+        margin-top: 20vh;
+    }
+    </style>	
+        <div class="body" style="width: 300px;">
+            <center>
+            <h6> <b> Login </b> </h6>
+            <br><br><br>
+            <form method="post" action="login " style="width: 300px;">
+                <input style="width: 300px;" maxlength="50" onblur="if (this.value == '') { this.value = 'Usuario'; }"  onfocus="if(this.value == 'Usuario') { this.value = ''; }" type="text" value="Usuario" name="usuario" required>
+                <p class="error"> *Debe llenar esta información </p>
+                <input style="width: 300px;" maxlength="50" onblur="if (this.value == '') { this.value = 'Usuario'; }"  onfocus="if(this.value == 'Usuario') { this.value = ''; }" type="password" value="Usuario" name="contrasena" required>
+                <p class="error"> *Debe llenar esta información </p>
+           
+            </center>
+            <button style="float:right"> Iniciar Sesión </button>
+             </form>
+		</div>
+
+</body>
+
+</html>

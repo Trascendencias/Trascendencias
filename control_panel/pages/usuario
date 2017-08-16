@@ -1,0 +1,116 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+        <!--- <% include partials/menu  %> -->
+
+        <!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style">
+    
+    </head>
+
+<body>
+        
+        <div class="body">
+        <br>
+        <center> <button onclick="location.href='lista?q=staff'"> Staff </button> 
+        <button onclick="location.href='cambiar-contrasena '"> Cambiar Contraseña </button></center>
+
+        <div class="spacer"></div>
+        <center>
+        <img src="resources/user_example.png" class="staff-pic">
+        </center>
+        <br>
+        <h3> Nombre Nombre Apellido </h3>
+        <p> <i> Puesto en Trasce</i></p>
+        <hr>
+        <p> Carrera, 2do Semestre </p>
+        <p> (686) 123 45 67 </p>
+        <p> email@correo.com </p>
+        
+     
+        <hr>
+
+        
+
+
+
+        <h3> Historial de Acciones </h3>   
+        <!-- RECIBIO DINERO -->
+        <div class="accion">
+            <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
+            <p> De patrocinador <i> Zapatos Lujosos </i> </p>
+        </div>
+        <!-- REGRESO DINERO -->     
+        <div class="accion">
+            <h3 class="dineromenos"> -$450 </h3><p> 13/SEP/17 22:45h</p> <br>
+            <p> A participante <i> Emiliano Zapata </i> </p>
+        </div>
+        <!-- CREO -->
+        <div class="accion">
+            <h3> Creó </h3><p> 13/SEP/2017 22:45h</p> <br>
+            <p>Blog: <i> 10 maneras de suprimir la cruda </i> </p>
+        </div>
+
+        <div class="accion">
+            <h3> Eliminó </h3><p> 13/SEP/17 22:46h</p> <br>
+            <p>Conferencia: <i> Odio al mundo, a ti también </i> </p>
+        </div>
+        <div class="accion">
+            <h3> Editó </h3><p> 13/SEP/2017 22:47h</p> <br>
+            <p>Participante <i> Pito Parado </i> </p>
+        </div>
+
+        <!-- EDITO -->
+
+        <!-- ELIMINO -->
+
+
+        
+        
+
+
+        </div>
+
+</body>
+        
+        <script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+            w3.includeHTML(); //INCLUIR DOCUMENTOS
+
+            document.getElementById("contador").innerHTML += 456;
+            document.getElementById("titulo").innerHTML += titulo;
+            
+            function buscar(busqueda){
+                var enlistados = document.getElementsByClassName("enlistado");
+                var C = 0;
+                while(C < enlistados.length){
+                    if(enlistados[C].innerHTML.indexOf(busqueda, 0) > 0 || enlistados[C].value.indexOf(busqueda, 0) > -1) { enlistados[C].style.display = "block"; }
+                    else{ enlistados[C].style.display = "none"; }
+                    C++;
+                }
+                return "true";
+            
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+        </script>
+</html>

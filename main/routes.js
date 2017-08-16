@@ -1,5 +1,9 @@
 var form = require('express-form');
 
+form.configure({
+	passThrough: true
+});
+
 module.exports = function(http_app, app, fs, passport) {
 	http_app.get('*', function(request, response) {
 		response.redirect('https://trascendencias.org' + request.url);
@@ -9,10 +13,21 @@ module.exports = function(http_app, app, fs, passport) {
 		res.redirect('https://trascendencias.org:8443');
 	});
 
-	app.post('/signup', passport.authenticate('local-signup', {
+	app.get('/signup', function(req, res) {
+		res.render('registro-participante', {
+			user: req.user,
+			message: req.flash('message')
+		});
+	});
+
+	app.post('/signup', form(), passport.authenticate('signup', {
 		successRedirect : '/',
-		failureRedirect : '/signup',
-		failureFlash : true
+		failureRedirect : '/signup'
+	}));
+
+	app.post('/login', form(), passport.authenticate('login', {
+		successRedirect : '/',
+		failureRedirect : '/'
 	}));
 
 	app.get('/logout', function(req, res) {
@@ -48,15 +63,7 @@ module.exports = function(http_app, app, fs, passport) {
 	);
 
 	app.get('/', function(request, response) {
-		if(request.isAuthenticated()) {
-			return response.render('index', {
-				user: request.user
-			});
-		}
-
-		response.render('index', {
-			user: request.user
-		});
+		response.render('index', { user: request.user });
 	});
 
 	app.get('/:name', function(request, response) {

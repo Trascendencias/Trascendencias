@@ -1,0 +1,107 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+<!--- <% include partials/menu  %> -->
+
+        <!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style">
+    
+    </head>
+<body>
+        
+        <div class="body">
+        	<center><h6><b> Consulta Staff </b></h6> </center>
+        <br>
+        <center>
+        <div class="spacer"></div>
+        <img src="resources/user_example.png" class="staff-pic">
+        </center>
+        <br>
+        <h3> Nombre Nombre Apellido </h3>
+        <p> <i> Puesto en Trasce</i></p>
+        <hr>
+        <p> Carrera, 2do Semestre </p>
+        <p> (686) 123 45 67 </p>
+        <p> email@correo.com </p>
+        <hr> 
+        <center>
+            <form action="tel:6861234567"><button type="submit">llamar</button></form>
+        </center>
+
+        <!-- EDITO -->
+
+        <!-- ELIMINO -->
+
+
+        
+        
+
+
+        </div>
+
+</body>
+        
+        <script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+        //AQUI PONES EL VALOR DE Q
+        var titulo; var nuevolnk; var accionlnk;
+        titulo = "Miembros"; nuevolnk = "registro-staff "; accionlnk = "consulta-staff ";
+
+
+
+        function nuevo(){
+            location.href = nuevolnk;
+        }
+
+
+
+            w3.includeHTML(); //INCLUIR DOCUMENTOS
+
+            document.getElementById("contador").innerHTML += 456;
+            document.getElementById("titulo").innerHTML += titulo;
+            
+            function buscar(busqueda){
+                var enlistados = document.getElementsByClassName("enlistado");
+                var C = 0;
+                while(C < enlistados.length){
+                    if(enlistados[C].innerHTML.indexOf(busqueda, 0) > 0 || enlistados[C].value.indexOf(busqueda, 0) > -1) { enlistados[C].style.display = "block"; }
+                    else{ enlistados[C].style.display = "none"; }
+                    C++;
+                }
+                return "true";
+            
+            }
+
+            function masvideo(){
+                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('videos').innerHTML += videoinput;
+                videocount++;
+            }
+            function masfoto(){
+                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('fotos').innerHTML += fotosinput;
+                fotoscount++;
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+        </script>
+</html>

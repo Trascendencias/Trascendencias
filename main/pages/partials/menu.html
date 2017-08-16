@@ -78,14 +78,16 @@
 
 		<% if(user == undefined) { %>
 		<button class="iniciar-sesion" onclick="activate(this)"> Iniciar Sesión </button>
-			<div class="usuario-info iniciar-sesion">
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="nombre" required>
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="contrasena" required>
+		<div class="usuario-info iniciar-sesion">
+			<form action="/login" method="post" id="login">
+				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="name" required><br>
+				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="password" required>
 				<p class="error"> *Datos incorrectos </p>
-				<a href="/registro-participante" style='color: white;'>Registrar</a><br>
-				<a href="/auth/facebook" style='color: white;'>Registrar with Facebook</a>
-				<button class="second"> Iniciar Sesion </button>
-			</div>
+			</form>
+			<button type="submit" form="login">Iniciar Sesion</button>
+			<button><a href="/signup" style='color: white;'>Registrar</a></button>
+			<button><a href="/auth/facebook" style='color: white;'>Registrar with Facebook</a></button>
+		</div>
 		<% } else { %>
 		<img src="resources/user_example.png" class="persona1">
 			<div class="usuario-info loggedIn">

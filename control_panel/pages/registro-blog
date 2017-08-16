@@ -1,0 +1,108 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+	    <div w3-include-html="menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style">
+	
+    </head>
+<body>
+		
+        <div class="body">
+		<br>
+		<center><h6><b> Registro de Blog </b></h6> </center>
+			
+			<form class="registro" id="forma-registro" method="get" action="registro "> <br><br>
+               
+                <!--- TIPO DE REGISTRO --> 
+                <input type="hidden" name="registrado" value="blog">
+                
+				<!-- NOMBRE/TITULO TODOS-->
+				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="title" required>
+				<p class="error"> *Debe llenar esta información </p>
+            
+                <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
+                <p class="title"> Fotos </p><br><br><br>
+                <div id="fotos">
+                <input type="file" width="150px" name="foto1" value="fileupload" id="image" style="display: inline;">
+                <p class="error"> *Debe llenar esta información </p>
+                </div>
+                <center><button class="third" onclick="masfoto()" type="button"> Agregar Foto </button></center>
+                
+                <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
+                <div id="videos">
+                <p class="title"> URL en Youtube de videos </p><br><br><br>
+                <input maxlength="50" onblur="if (this.value == '') { this.value = 'URL Video 1'; }"  onfocus="if(this.value == 'URL Video 1') { this.value = ''; }" type="text" value="URL Video 1" name="video1" class="video" required>
+                <p class="error"> *Debe llenar esta información </p>
+                </div>
+                <center><button class="third" onclick="masvideo()" type="button"> Agregar Video </button></center>
+                
+                <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
+                <textarea name="resumen" id="resumen" required> Resumen... </textarea>
+                <p class="error"> *Debe llenar esta información </p>
+                
+                <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
+                <textarea name="descripcion" class="large-text" required> Descripción... </textarea>
+                <p class="error"> *Debe llenar esta información </p>
+                <!-- POSICION Preguntas Frecuentes -->
+
+                <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
+                <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
+                <input type=number name="teaser-index" class="numero goright" value="1">
+                <div class="spacer"></div>
+                <hr>
+				<button type="button" class="submit" onclick="validate()"> Siguiente </button>
+                <button type="button" class="third" onclick="location.href='../'"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+			
+			</form>
+		</div>
+
+</body>
+		
+		<script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+            w3.includeHTML(); //INCLUIR DOCUMENTOS
+            var videocount = 2;
+            var fotoscount = 2;
+
+            function validate(){
+                document.getElementById("forma-registro").submit();
+            }
+            
+            function masvideo(){
+                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('videos').innerHTML += videoinput;
+                videocount++;
+            }
+            function masfoto(){
+                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('fotos').innerHTML += fotosinput;
+                fotoscount++;
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+		</script>
+</html>

@@ -10,6 +10,7 @@ var body_parser = require('body-parser');
 var session = require('express-session');
 var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
+var flash = require('connect-flash');
 var database_connection = require('./database/connection');
 
 require('./main/auth/passport')(passport);
@@ -25,6 +26,7 @@ app.use(session({
 	secret: 'super_secret_string',
 	store: new mongo_store({ mongooseConnection: database_connection })
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

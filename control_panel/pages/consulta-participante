@@ -1,0 +1,113 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+	    <div w3-include-html="menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style">
+	
+    </head>
+<body>
+	
+        <div class="body">
+        <center><h6><b> Consulta Participante </b></h6> </center>
+		<br>
+<button onclick="editar();"> Editar </button> <button onclick="eliminar();"> Eliminar </button>		
+				<div class="consulta">	
+		        <br><br>
+				<!-- NOMBRE/TITULO TODOS-->
+				<h3> Nombre: <p><i> Jesús de la Rocha Ramirez </i></p> </h3><br>
+
+				<!--- TIPO DE REGISTRO --> 
+				<h3> Registrado Por: <p><i> Internet </i></p> </h3><br>
+
+                <!-- TALLA Participantes -->
+		        <h3> Talla de camiseta: <p><i> XXL </i></p> </h3><br>
+
+                <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
+                <h3> Teléfono: <p><i> (686) 123 45 67 </i></p> </h3><br>
+
+				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
+				<h3> Correo: <p><i> correo@email.com </i></p> </h3><br>
+
+				<!-- INSTITUCION DE PROCEDENCIA Participante-->
+				<h3> Institución: <p><i> UABC de Tamaulipas </i></p> </h3><br>
+
+				<!-- CIUDAD Participante-->
+				<h3> Ciudad: <p><i> Tamaulipas </i></p> </h3><br>
+
+                <!-- CODIGO DE GRUPO -->
+		        <h3> Codigo de Grupo: <p><i> XHDERBEZ </i></p> </h3><br>
+
+                <!-- ALERGIAS Participante-->
+		        <h3> Alergias: <p><i> Reguetón </i></p> </h3><br>
+
+                <!-- PAQUETE ELEGIDO Participante -->
+        		<h3> Paquete Elegido: <p><i> Individual </i></p> </h3><br>
+
+                <!-- SALDO Participante, Patrocinadores-->
+                <h3> Saldo: <i><p id="saldo"> </p> </i></h3><br>
+
+                <h3> Liquidado el: <i><p> 13/SEP/17 22:45h</p> </i></h3><br>
+                </div>
+
+
+                
+                <hr> 
+ 
+                <h3> Historial de Pagos </h3><div class="spacer"></div>
+                
+                <div class="accion">
+	           		 <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
+	           		 <p> Recibido por: <i> Miembro Staff </i> </p>
+        		</div>
+
+        		<div class="accion">
+	           		 <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
+	           		 <p> Recibido por: <i> Miembro Staff </i> </p>
+        		</div>
+
+        		<div class="accion">
+	           		 <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
+	           		 <p> Recibido por: <i> Miembro Staff </i> </p>
+        		</div>
+
+
+        </div>
+
+</body>
+		
+		<script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+            w3.includeHTML(); //INCLUIR DOCUMENTOS
+            var code = "XHDERBEZ";
+            var saldo = -450; //AQUI VA EL SALDO
+            if(saldo>=0){ document.getElementById("saldo").className += "dineromas"; document.getElementById("saldo").innerHTML= "$" + saldo; }
+            else { document.getElementById("saldo").className += "dineromenos"; document.getElementById("saldo").innerHTML= "$" + saldo; }
+           
+            function editar(){
+            	location.href="editar-participante?code=" + code;
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+		</script>
+</html>

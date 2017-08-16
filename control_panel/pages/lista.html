@@ -1,0 +1,113 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+       <% include partials/menu.html %>
+
+        <!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="menu"></div>
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style">
+    
+    </head>
+    <style>
+        h3, p, button.nuevo {
+            display: inline;
+        }
+    </style>
+<body>
+        
+        <div class="lista">
+        <br>
+        <h3> <span id="titulo"> </span>:  <p id="contador">  </p><button id="nuevo" class="nuevo" onclick="nuevo()"> + Nuevo </button></h3>
+
+        <input id="search" onblur="if (this.value == '') { this.value = 'Buscar...'; }"  onfocus="if(this.value == 'Buscar...') { this.value = ''; }" type="text" value="Buscar..." onkeyup="buscar(this.value)">
+        
+        <form id="accion-lista">
+        
+        <!--- AQUI ES EL WHILE -->
+        <button class='enlistado' name='codigo' value='xxx'> Francisco Arturo Peña </button>
+        <button class='enlistado' name='codigo' value='xxx'> Diana Laura Martinez Garcia </button>
+        <button class='enlistado' name='codigo' value='xxx'> Jesús Ismael Villegas </button>
+        <button class='enlistado' name='codigo' value='xxx'> Foráneo Alexis Córdova </button>
+
+        </form>
+        </div>
+
+</body>
+        <script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+        //AQUI PONES EL VALOR DE Q
+        var q = window.location.href;
+        q = q.split('=')[1];
+        var titulo; var nuevolnk; var accionlnk;
+        if(q == "participante"){ titulo = "Participantes"; nuevolnk = "registro-participante "; accionlnk = "consulta-participante "; }
+        if(q == "conferencia"){ titulo = "Conferencias"; nuevolnk = "registro-conferencia "; accionlnk = "consulta-conferencia "; }
+        if(q == "taller"){ titulo = "Talleres"; nuevolnk = "registro-taller "; accionlnk = "consulta-taller "; }
+        if(q == "visita"){ titulo = "Visitas"; nuevolnk = "registro-visita "; accionlnk = "consulta-visita "; }
+        if(q == "evento-extra"){ titulo = "Eventos Extra"; nuevolnk = "registro-evento-extra "; accionlnk = "consulta-evento-extra "; }
+        if(q == "evento-social"){ titulo = "Eventos Social"; nuevolnk = "registro-evento-social "; accionlnk = "consulta-evento-social "; }
+        if(q == "preguntas-frecuentes"){ titulo = "Preguntas Frecuentes"; nuevolnk = "registro-preguntas-frecuentes"; accionlnk = "consulta-preguntas-frecuentes"; }
+        if(q == "blog"){ titulo = "Blogs"; nuevolnk = "registro-blog "; accionlnk = "consulta-blog ";}
+        if(q == "punto-venta"){ titulo = "Puntos de Venta"; nuevolnk = "registro-punto-venta "; accionlnk = "consulta-punto-venta ";}
+        if(q == "paquetes"){ titulo = "Paquetes"; nuevolnk = "registro-paquetes "; accionlnk = "consulta-paquetes ";}
+        if(q == "patrocinadores"){ titulo = "Patrocinadores"; nuevolnk = "registro-patrocinadores "; accionlnk = "consulta-patrocinadores ";}
+        if(q == "staff"){ titulo = "Staff"; document.getElementById("nuevo").style.display = "none"; accionlnk = "consulta-staff ";}
+
+
+        document.getElementById("accion-lista").action = accionlnk;
+
+
+        function nuevo(){
+            location.href = nuevolnk;
+        }
+
+
+
+            w3.includeHTML(); //INCLUIR DOCUMENTOS
+
+            document.getElementById("contador").innerHTML += 456;
+            document.getElementById("titulo").innerHTML += titulo;
+            
+            function buscar(busqueda){
+                var enlistados = document.getElementsByClassName("enlistado");
+                var C = 0;
+                while(C < enlistados.length){
+                    if(enlistados[C].innerHTML.indexOf(busqueda, 0) > 0 || enlistados[C].value.indexOf(busqueda, 0) > -1) { enlistados[C].style.display = "block"; }
+                    else{ enlistados[C].style.display = "none"; }
+                    C++;
+                }
+                return "true";
+            
+            }
+
+            function masvideo(){
+                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('videos').innerHTML += videoinput;
+                videocount++;
+            }
+            function masfoto(){
+                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('fotos').innerHTML += fotosinput;
+                fotoscount++;
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+        </script>
+</html>

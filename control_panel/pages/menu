@@ -1,0 +1,100 @@
+
+        <!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style">
+
+<div class="menu">
+        <img src="resources/user_example.png" class="user droper" onClick="activate(this)">
+            <div class="drop" id="user">
+                <center>
+                <p class="blue" onclick="location.href='usuario '"><b> Nombre Nombre Apellido Apellido </b></p>
+                <p class="white"> Puesto en Trasce </p>
+                <hr class="white">
+                <p class="white"> Puesto de Venta: </p>
+                <select>
+                  <option value="none">Seleccionar Puesto de Venta...</option>
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+                <button class="second" type="submit"> Entrar </button>
+                <hr class="white"> 
+                <button class="second"> Cerrar Sesión </button>
+                    <br> <br>
+                </center>
+            </div>
+		<ul>
+			<li>
+				<button onclick="location.href='lista?q=participante'">
+					Participantes
+				</button>
+                
+			</li>
+			<li>
+				<button class="droper" onclick="activate(this)">
+					Contenido
+				</button>
+                    <div class="drop" id="contenido">
+                        <center>
+                        <button onclick="location.href='lista?q=conferencia'">
+                            Conferencias
+                         </button> <br>
+                         <button onclick="location.href='lista?q=taller'">
+                            Talleres
+                         </button> <br>
+                         <button onclick="location.href='lista?q=visita'">
+                            Visitas
+                         </button> <br>
+                          <button onclick="location.href='lista?q=evento-social'">
+                            Eventos Sociales
+                         </button> <br>
+                         <button onclick="location.href='lista?q=evento-extra'">
+                            Otros Eventos
+                         </button> <br>
+                        <button onclick="location.href='lista?q=blog'">
+                            Blogs
+                         </button> <br>
+                        <button onclick="location.href='lista?q=preguntas-frecuentes'">
+                            Preguntas Frecuentes
+                         </button> <br><br>
+
+                        </center>
+                    </div>
+			</li>
+			<li>
+				<button class="droper" onclick="activate(this)">
+					Ventas
+				</button>
+                    <div class="drop" id="ventas">
+                        <center>
+                        <button onclick="location.href='lista?q=punto-venta'">
+                            Puntos de Venta
+                         </button> <br>
+                         <button onclick="location.href='lista?q=paquetes'">
+                            Paquetes
+                         </button> <br>
+                         <button onclick="location.href='lista?q=patrocinadores'">
+                            Patrocinadores
+                         </button> <br><br>
+                        </center>
+                    </div>
+			</li>
+		</ul>
+</div>
+<br> <br><br> <br>  <br>
+    
+    <script>
+			function activate(elem){
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+    var puesto = false;
+    //ACTIVE, PARA EL MENU MOVIL
+
+    </script>

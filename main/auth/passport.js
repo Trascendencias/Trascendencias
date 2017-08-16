@@ -4,6 +4,23 @@ var facebook_strategy = require('passport-facebook').Strategy;
 var participant = require('../../database/models').participant;
 var facebook_config = require('./facebook.js');
 
+var nodemailer = require('nodemailer');
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'trasce4eva@gmail.com',
+        pass: 'admin@trasce4eva'
+    }
+});
+
+let mail_options = {
+	from: '"Trascendencias" <trasce4eva@gmail.com>',
+	to: 'edgarmv97@gmail.com',
+	subject: 'Verifica tu cuenta de Trascendencias'
+};
+
+
 module.exports = function(passport) {
 	passport.serializeUser(function(user, done){
 		done(null, user.id);
@@ -15,56 +32,66 @@ module.exports = function(passport) {
 		});
 	});
 
-	passport.use('local-signup', new local_strategy({
+	passport.use('signup', new local_strategy({
 		usernameField: 'email',
 		passwordField: 'password',
 		passReqToCallback: true
 	},
-	function(req, email, password, done){
+	function(req, email, password, done) {
 		process.nextTick(function(){
-			participant.findOne({ 'local.username': email }, function(err, searched_participant) {
+			participant.findOne({ 'email': email }, function(err, searched_participant) {
 				if(err) {
 					return done(err);
 				}
 				else if(searched_participant) {
-					return done(null, false, req.flash('signupMessage', 'That email already taken'));
+					return done(null, false, req.flash('message', 'Correo ya registrado.'));
 				}
 				else {
 					var new_participant = new participant();
+					new_participant.name = req.form.name;
 					new_participant.email = email;
-					new_participant.local.password = new_participant.generateHash(password);
+					new_participant.local.password = new_participant.generate_hash(password);
 					new_participant.debt = 0;
 					new_participant.package = 'Ninguno';
+					new_participant.verified = false;
+
+					mail_options.text = "Da click al siguiente link para verificar tu cuenta: hash_here";
+					transporter.sendMail(mail_options, (error, info) => {
+						if (error) {
+							return console.log(error);
+						}
+					});
+
 
 					new_participant.save(function(err) {
 						if(err) {
 							throw err;
 						}
 
-						return done(null, newUser);
-					})
+						return done(null, new_participant);
+					});
 				}
 			})
 
 		});
 	}));
 
-	passport.use('local-login', new local_strategy({
-			usernameField: 'email',
+	passport.use('login', new local_strategy({
+			usernameField: 'name',
 			passwordField: 'password',
 			passReqToCallback: true
 		},
-		function(req, email, password, done){
+		function(req, name, password, done){
 			process.nextTick(function() {
-				participant.findOne({ 'local.username': email}, function(err, searched_participant) {
+				participant.findOne({ 'name': name }, function(err, searched_participant) {
 					if(err) {
 						return done(err);
 					}
 					else if(!searched_participant) {
-						return done(null, false, req.flash('loginMessage', 'No User found'));
+						return done(null, false, req.flash('message', 'Name not found.'));
 					}
-					else if(!searched_participant.validPassword(password)) {
-						return done(null, false, req.flash('loginMessage', 'invalid password'));
+					else if(!searched_participant.valid_password(password)) {
+						return done(null, false, req.flash('message', 'Invalid password.'));
 					}
 
 					return done(null, searched_participant);
@@ -95,6 +122,7 @@ module.exports = function(passport) {
 					new_participant.email = profile.emails[0].value;
 					new_participant.package = 'Ninguno';
 					new_participant.debt = 0;
+					new_participant.verified = true;
 
 					new_participant.save(function(err) {
 						if(err) {
