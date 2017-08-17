@@ -35,6 +35,13 @@ app.use('/resources', express.static(__dirname + '/control_panel/resources'));
 app.use(body_parser.urlencoded({
 	extended: true
 }));
+app.use(function(req, res) {
+	if(!req.isAuthenticated() && req.method != 'POST') {
+		return res.render('login', { message: req.flash('message') });
+	}
+
+	next();
+});
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/control_panel/pages');
