@@ -58,7 +58,6 @@ var schemas = {
 		position: String
 	}),
 	admin: mongoose.Schema({
-		name: String,
 		password: String
 	})
 };

@@ -12,7 +12,10 @@ var session = require('express-session');
 var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
 var database = require('./database/connection');
+var flash = require('connect-flash');
 var control_panel_sessions = require('./database/sessions').control_panel;
+
+require('./control_panel/auth/passport')(passport);
 
 form.configure({
 	passThrough: true
@@ -23,6 +26,7 @@ app.use(session({
 	secret: 'other_super_secret_string',
 	store: new mongo_store({ mongooseConnection: control_panel_sessions })
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -31,14 +35,6 @@ app.use('/resources', express.static(__dirname + '/control_panel/resources'));
 app.use(body_parser.urlencoded({
 	extended: true
 }));
-app.use(function (req, res, next) {
-	return next();
-	if(!req.isAuthenticated()) {
-		return res.render('login');
-	}
-
-	next();
-})
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/control_panel/pages');
@@ -52,8 +48,13 @@ app.get('/', function(request, response) {
 });
 
 app.get('/login', function(req, res) {
-	res.send('Sesion ya iniciada.');	
+	res.render('login', { message: req.flash('message') });
 });
+
+app.post('/login', form(), passport.authenticate('login-admin', {
+	successRedirect : '/',
+	failureRedirect : '/login'
+}));
 
 app.get('/register-:collection', function(request, response) {
 	response.render('register-' + request.params.collection);
