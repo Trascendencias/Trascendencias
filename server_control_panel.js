@@ -35,12 +35,12 @@ app.use('/resources', express.static(__dirname + '/control_panel/resources'));
 app.use(body_parser.urlencoded({
 	extended: true
 }));
-app.use(function(req, res) {
-	if(!req.isAuthenticated() && req.method != 'POST') {
-		return res.render('login', { message: req.flash('message') });
+app.use(function(req, res, next) {
+	if(!req.isAuthenticated() && req.method == 'GET') {
+		return res.render('login-admin', { message: req.flash('message') });
 	}
 
-	next();
+	next();	
 });
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -54,14 +54,24 @@ app.get('/', function(request, response) {
 	response.render('index');
 });
 
-app.get('/login', function(req, res) {
-	res.render('login', { message: req.flash('message') });
+app.get('/login-admin', function(req, res) {
+	if(req.isAuthenticated()) {
+		return res.send("Sesion ya iniciada.");
+	}
+
+	res.render('login-admin', { message: req.flash('message') });
 });
 
-app.post('/login', form(), passport.authenticate('login-admin', {
-	successRedirect : '/',
-	failureRedirect : '/login'
+app.post('/login-admin', form(), passport.authenticate('login-admin', {
+	successRedirect: '/',
+	failureRedirect: '/login',
+	failureFlash: true
 }));
+
+app.get('/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
+});
 
 app.get('/register-:collection', function(request, response) {
 	response.render('register-' + request.params.collection);
@@ -69,16 +79,16 @@ app.get('/register-:collection', function(request, response) {
 
 app.post('/register-:collection', form(), function(request, response) {
 	console.log("Register " + request.params.collection + ":");
-	database_connection.register[request.params.collection](request.form);
+	database.register[request.params.collection](request.form);
 	response.redirect('/');
 });
 
 app.get('/list-:collection', function(request, response) {
-	database_connection.list(request, response);
+	database.list(request, response);
 });
 
 app.get('/look-:collection/:document', function(request, response) {
-	database_connection.look(request, response);
+	database.look(request, response);
 });
 
 app.get('/:file', function(request, response) {

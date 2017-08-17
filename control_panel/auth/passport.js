@@ -9,7 +9,14 @@ module.exports = function(passport) {
 
 	passport.deserializeUser(function(id, done) {
 		staff_member.findById(id, function(err, user) {
-			done(err, user);
+			if(user == null) {
+				admin.findById(id, function(err, user) {
+					done(err, user);
+				});
+			}
+			else {
+				done(err, user);
+			}
 		});
 	});
 
@@ -74,22 +81,19 @@ module.exports = function(passport) {
 	));
 
 	passport.use('login-admin', new local_strategy({
-			passwordField: 'password',
 			passReqToCallback: true
 		},
-		function(req, password, done) {
-			process.nextTick(function() {	
-				admin.findOne({ 'password': password }, function(err, searched_admin) {
-					if(err) {
-						return done(err);
-					}
-					else if(!searched_admin) {
-						return done(null, false, req.flash('message', 'Credenciales invalidas.'));
-					}
+		function(req, username, password, done) {
+			admin.findOne({ 'password': password }, function(err, searched_admin) {
+				if(err) {
+					return done(err);
+				}
+				else if(!searched_admin) {
+					return done(null, false, req.flash('message', 'Contraseña invalida.'));
+				}
 
-					return done(null, searched_admin);
-				});
+				return done(null, searched_admin);
 			});
-		}
-	));
+		})
+	);
 };
