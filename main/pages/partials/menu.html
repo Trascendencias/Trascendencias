@@ -2,6 +2,13 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/style.css">
 
+<script>
+	function activate(elem) {
+		if(elem.classList.contains('active')) elem.classList.remove('active'); 
+		else elem.classList.add('active'); 
+	}
+</script>
+
 <div class="menu">
 	<a href="index">
 		<img class="logo" src="resources/logo.svg">
@@ -79,6 +86,12 @@
 		<% if(user == undefined) { %>
 		<button class="iniciar-sesion" onclick="activate(this)"> Iniciar Sesión </button>
 		<div class="usuario-info iniciar-sesion">
+			<% if(message != '') { %>
+				<h3 style="color: red;">Error: <%= message %></h3>
+				<script>
+					document.getElementsByClassName("iniciar-sesion")[0].click();
+				</script>
+			<% } %>
 			<form action="/login" method="post" id="login">
 				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="name" required><br>
 				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="password" required>
@@ -103,8 +116,12 @@
 					</tr>
 					<tr>
 						<td>
+							<% if(user.verified) { %>
 							<h2> Paquete Elegido: <%= user.package %> </h2>
 							<h3> Restante: <%= user.debt %> pesos </h3>
+							<% } else { %>
+								<h3>Favor de verificar tu cuenta en el correo registrado.</h3>
+							<% } %>
 						</td>
 						<td>
 							<button class="second"> Cambiar </button>
@@ -117,9 +134,3 @@
 	</div>
 
 </div>
-<script>
-	function activate(elem){
-		if(elem.classList.contains('active')) elem.classList.remove('active'); 
-		else elem.classList.add('active'); 
-	}
-</script>

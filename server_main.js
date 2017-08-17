@@ -11,7 +11,8 @@ var session = require('express-session');
 var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
 var flash = require('connect-flash');
-var database_connection = require('./database/connection');
+var database = require('./database/connection');
+var main_sessions = require('./database/sessions').main;
 
 require('./main/auth/passport')(passport);
 
@@ -24,7 +25,7 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true,
 	secret: 'super_secret_string',
-	store: new mongo_store({ mongooseConnection: database_connection })
+	store: new mongo_store({ mongooseConnection: main_sessions })
 }));
 app.use(flash());
 app.use(passport.initialize());
@@ -34,7 +35,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/main/pages');
 
-require('./main/routes.js')(http_app, app, fs, passport);
+require('./main/routes.js')(http_app, app, fs, passport, database);
 
 var ssl = require('./ssl_config');
 https.createServer({

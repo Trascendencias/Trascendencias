@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var connection = mongoose.connect('mongodb://localhost/test').connection;
+var database = mongoose.connect('mongodb://localhost/test').connection;
 var models = require('./models');
+var bcrypt = require('bcrypt');
 
-connection.register = {
+database.register = {
 	conference: function(form) {
 		let conference_model = models.conference;
 
@@ -43,9 +44,23 @@ connection.register = {
 	}
 };
 
-connection.list = function(request, response) {
+database.valid_verification_hash = function(email, hash) {
+	return bcrypt.compareSync(email, hash);
+}
+
+database.verify = function(email) {
+	database.collection('participants').updateOne({
+		email: email
+	}, {
+		$set: {
+			verified: true
+		}
+	});
+}
+
+database.list = function(request, response) {
 	let docs = [];
-	connection.collection(request.params.collection).find().forEach(function(doc) {
+	database.collection(request.params.collection).find().forEach(function(doc) {
 		docs.push(doc);
 	},
 	function(err) {
@@ -53,11 +68,11 @@ connection.list = function(request, response) {
 	});
 }
 
-connection.look = function(request, response) {
-	connection.collection(request.params.collection).findOne({ email: request.params.document }, function(err, doc) {
+database.look = function(request, response) {
+	database.collection(request.params.collection).findOne({ email: request.params.document }, function(err, doc) {
 		response.render('look', { doc: doc });
 	});
 }
 
 
-module.exports = connection;
+module.exports = database;

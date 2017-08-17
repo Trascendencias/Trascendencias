@@ -11,7 +11,8 @@ var favicon = require('serve-favicon');
 var session = require('express-session');
 var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
-var database_connection = require('./database/connection');
+var database = require('./database/connection');
+var control_panel_sessions = require('./database/sessions').control_panel;
 
 form.configure({
 	passThrough: true
@@ -19,8 +20,8 @@ form.configure({
 app.use(session({
 	resave: true,
 	saveUninitialized: true,
-	secret: 'super_secret_string',
-	store: new mongo_store({ mongooseConnection: database_connection })
+	secret: 'other_super_secret_string',
+	store: new mongo_store({ mongooseConnection: control_panel_sessions })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -31,6 +32,7 @@ app.use(body_parser.urlencoded({
 	extended: true
 }));
 app.use(function (req, res, next) {
+	return next();
 	if(!req.isAuthenticated()) {
 		return res.render('login');
 	}
@@ -50,7 +52,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/login', function(req, res) {
-	res.send('hola!');	
+	res.send('Sesion ya iniciada.');	
 });
 
 app.get('/register-:collection', function(request, response) {

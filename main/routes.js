@@ -4,12 +4,12 @@ form.configure({
 	passThrough: true
 });
 
-module.exports = function(http_app, app, fs, passport) {
+module.exports = function(http_app, app, fs, passport, database) {
 	http_app.get('*', function(request, response) {
 		response.redirect('https://trascendencias.org' + request.url);
 	});
 
-	app.get('/control', function(req, res) {
+	app.get('/admin', function(req, res) {
 		res.redirect('https://trascendencias.org:8443');
 	});
 
@@ -18,6 +18,15 @@ module.exports = function(http_app, app, fs, passport) {
 			user: req.user,
 			message: req.flash('message')
 		});
+	});
+
+	app.get('/verify', form(), function(req, res) {
+		if(database.valid_verification_hash(req.form.email, req.form.hash)) {
+			database.verify(req.form.email);
+			return res.redirect('/')
+		}
+
+		return res.send('Verification fallida.');
 	});
 
 	app.post('/signup', form(), passport.authenticate('signup', {
@@ -63,12 +72,18 @@ module.exports = function(http_app, app, fs, passport) {
 	);
 
 	app.get('/', function(request, response) {
-		response.render('index', { user: request.user });
+		response.render('index', {
+			user: request.user,
+			message: request.flash('message')
+		});
 	});
 
 	app.get('/:name', function(request, response) {
 		if(fs.existsSync(__dirname + '/pages/' + request.params.name + '.html')) {
-			return response.render(request.params.name, { user: request.user });
+			return response.render(request.params.name, {
+				user: request.user,
+				message: request.flash('message')
+			});
 		}
 
 		response.status(404).send('File not found.');

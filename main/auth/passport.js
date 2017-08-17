@@ -16,7 +16,6 @@ let transporter = nodemailer.createTransport({
 
 let mail_options = {
 	from: '"Trascendencias" <trasce4eva@gmail.com>',
-	to: 'edgarmv97@gmail.com',
 	subject: 'Verifica tu cuenta de Trascendencias'
 };
 
@@ -47,7 +46,7 @@ module.exports = function(passport) {
 					return done(null, false, req.flash('message', 'Correo ya registrado.'));
 				}
 				else {
-					var new_participant = new participant();
+					let new_participant = new participant();
 					new_participant.name = req.form.name;
 					new_participant.email = email;
 					new_participant.local.password = new_participant.generate_hash(password);
@@ -55,7 +54,9 @@ module.exports = function(passport) {
 					new_participant.package = 'Ninguno';
 					new_participant.verified = false;
 
-					mail_options.text = "Da click al siguiente link para verificar tu cuenta: hash_here";
+					let verification_hash = new_participant.generate_hash(email);
+					mail_options.text = 'Da click al siguiente link para verificar tu cuenta: https://trascendencias.org/verify?email=' + email + '&hash=' + verification_hash;
+					mail_options.to = email;
 					transporter.sendMail(mail_options, (error, info) => {
 						if (error) {
 							return console.log(error);
@@ -71,8 +72,7 @@ module.exports = function(passport) {
 						return done(null, new_participant);
 					});
 				}
-			})
-
+			});
 		});
 	}));
 
@@ -87,11 +87,8 @@ module.exports = function(passport) {
 					if(err) {
 						return done(err);
 					}
-					else if(!searched_participant) {
-						return done(null, false, req.flash('message', 'Name not found.'));
-					}
-					else if(!searched_participant.valid_password(password)) {
-						return done(null, false, req.flash('message', 'Invalid password.'));
+					else if(!searched_participant || !searched_participant.valid_password(password)) {
+						return done(null, false, req.flash('message', 'Credenciales invalidas.'));
 					}
 
 					return done(null, searched_participant);
