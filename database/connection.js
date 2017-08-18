@@ -37,12 +37,7 @@ database.register = {
 		new_staff_member.team = form.team;
 		new_staff_member.position = form.position;
 		new_staff_member.photo = __dirname + '/images/' + Date.now().toString() + '-' + req.files.photo.name;
-
-		req.files.photo.mv(new_staff_member.photo, function(err) {
-			if(err) {
-				console.log(err);
-			}
-		});
+		database.upload(req.files.photo, new_staff_member.phot);
 
 		new_staff_member.save(function(err) {
 			if(err) {
@@ -52,11 +47,17 @@ database.register = {
 	}
 };
 
-database.upload = function();
+database.upload = function(file, path) {
+	file.mv(path, function(err) {
+		if(err) {
+			console.log("Error uploading file: %s", err)
+		}
+	})
+};
 
 database.valid_verification_hash = function(email, hash) {
 	return bcrypt.compareSync(email, hash);
-}
+};
 
 database.verify = function(email) {
 	database.collection('participants').updateOne({
