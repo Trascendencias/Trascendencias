@@ -87,7 +87,7 @@ app.get('/look-:collection/:document', function(req, res) {
 	database.look(req, res);
 });
 
-app.get('*', function(req, res) {
+app.get(':/module/*', function(req, res) {
 	return res.render((req.baseUrl + req.path).substring(1));
 });
 
