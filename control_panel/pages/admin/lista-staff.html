@@ -1,15 +1,15 @@
-<html> 
+i<html> 
 
     <head>      
         <!-- tag para hacerlo escalable -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
         <!--- INCLUIR DOCUMENTOS -->
-         <script src="https://www.w3schools.com/lib/w3.js"></script>
-	    <div w3-include-html="partials/menu "></div>
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+	    <% include menu.html %>
 
         <!--- Title --> 
-        <title> Pagos </title>
+        <title> Lista del Staff </title>
             
         <!--- Pa que agarren los acentos -->
         <meta charset="UTF-8">
@@ -22,93 +22,63 @@
         h3, p, button.nuevo {
             display: inline;
         }
+        button.claves {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
     </style>
 <body>
         
         <div class="lista">
         <br>
-        <h3>Pagos: <p id="contador"> error.. </p></h3>
+        <br>
+        <h3> <span id="titulo">  </span>:  <p id="contador">  </p><button class="nuevo" onClick="nuevo()"> + Nuevo </button></h3>
 
         <form id="searchForm" action="javascript:buscarPalabras();">
             <input id="search" class="search" onBlur="if (this.value == '') { this.value = 'Buscar...'; showAll();}"  onfocus="if(this.value == 'Buscar...') { this.value = ''; } " type="text" value="Buscar..." > 
             <button class="third search" type="button" onClick="buscarPalabras();"> 🔎 </button>
             <center>
 
-            <button class="third" style="float: left;" type="button" onClick="location.href='imprimirLista '"> Imprimir </button>
+            <button class="third" style="float: left;" type="button" onClick="location.href='generar-claves '"> Generar Claves </button>
 
             </center>
         </form>
-        <br><br>
+        <br>
         <hr>
-
-
+                
+        <form id="accion-lista">
         
-        <div class="spacer"></div>
-        
-            <div class="accion enlistado">
-                <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
-                <p> De patrocinador <i> Zapatos Lujosos </i> </p><br>
-                <p> Recibió <i> Nombre Apellido Apellido </i> </p><br>
-                <p> En <i> Punto de Venta </i> </p><br>
-            </div>
+        <!--- AQUI ES EL WHILE -->
+        <button class='enlistado' name='codigo' value='xxx'> Francisco Arturo Peña </button>
+        <button class='enlistado' name='codigo' value='xxx'> Diana Laura Martinez Garcia </button>
+        <button class='enlistado' name='codigo' value='xxx'> Jesús Ismael Villegas </button>
+        <button class='enlistado' name='codigo' value='xxx'> Foráneo Alexis Córdova </button>
 
-            <div class="accion enlistado">
-                <h3 class="dineromas"> +$230 </h3><p> 13/SEP/17 22:45h</p> <br>
-                <p> De participante <i> Pedro Larez </i> </p><br>
-                <p> Recibió <i> Nombre Apellido Apellido </i> </p><br>
-                <p> En <i> Punto de Venta 3</i> </p><br>
-            </div>
-
-            <div class="accion enlistado">
-                <h3 class="dineromas"> +$180 </h3><p> 13/SEP/17 22:45h</p> <br>
-                <p> De patrocinador <i> Zapatos Lujosos </i> </p><br>
-                <p> Recibió <i> Nombre Apellido Apellido </i> </p><br>
-                <p> En <i> Punto de Venta </i> </p><br>
-            </div>
-
-            <div class="accion enlistado">
-                <h3 class="dineromas"> +$40 </h3><p> 13/SEP/17 22:45h</p> <br>
-                <p> De Participante <i> Ismael Villegas </i> </p><br>
-                <p> Recibió <i> Nombre Apellido Apellido </i> </p><br>
-                <p> En <i> Punto de Venta 2 </i> </p><br>
-            </div>
-
-            <div class="accion enlistado">
-                <h3 class="dineromas"> +$250 </h3><p> 13/SEP/17 22:45h</p> <br>
-                <p> De patrocinador <i> Zapatos Lujosos </i> </p><br>
-                <p> Recibió <i> Nombre Apellido Apellido </i> </p><br>
-                <p> En <i> Punto de Venta </i> </p><br>
-            </div>
-
+        </form>
         </div>
 
 </body>
         
         <script>
+        //AQUI PONES EL VALOR DE Q
+        var titulo; var nuevolnk; var accionlnk;
+        titulo = "Miembros"; nuevolnk = "registro-staff "; accionlnk = "consulta-staff ";
+
+        document.getElementById("accion-lista").action = accionlnk;
+
+
+        function nuevo(){
+            location.href = nuevolnk;
+        }
+
+
 
               //INCLUIR DOCUMENTOS
 
-            document.getElementById("contador").innerHTML = "$" + total();
+            document.getElementById("contador").innerHTML += 456;
             document.getElementById("titulo").innerHTML += titulo;
             
-            function total(){
-                var valores = document.getElementsByClassName("dineromas");
-                var divholder = document.getElementsByClassName("enlistado");
-                var total = 0; 
-                var C = 0;
-                var value;
-                while(C < valores.length){
-                    if(divholder[C].style.display != "none"){
-                        value = valores[C].innerHTML.replace("+$","");
-                        value = value.replace(" ", "");
-                        value = value.replace(" ", "");
-                        value = value.replace(",", "");
-                        total +=  Number(value); }
-                    C++;
-                }
-                return total;
-            }
-
             function buscarPalabras(){
                 var palabras=document.getElementById("search").value;
                 var enlistados = document.getElementsByClassName("enlistado");
@@ -134,7 +104,6 @@
                             E++;
                         }
 
-                document.getElementById("contador").innerHTML = "+$" + total();
                 }
                 
                 else {
@@ -156,7 +125,6 @@
                         C++;;
                     }
                     }
-                document.getElementById("contador").innerHTML = "+$" + total();
                 }
 
 
@@ -167,7 +135,6 @@
                     enlistados[C].style.display = "block";
                     C++;
                 }
-            document.getElementById("contador").innerHTML = "+$" + total();
             }
             function sinAcento(str){
                 str = str.replace("á", "a");
@@ -182,11 +149,5 @@
                 str = str.replace("Ú", "u");
                 return str;
             }
-                
-
-                
-            
-            
-
         </script>
 </html>

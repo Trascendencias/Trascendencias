@@ -33,16 +33,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(favicon(__dirname + '/favicon.ico'));
-app.use('/resources', express.static(__dirname + '/control_panel/resources'));
+app.use('/registro/resources', express.static(__dirname + '/control_panel/pages/registro/resources'));
+app.use('/admin/resources', express.static(__dirname + '/control_panel/pages/admin/resources'));
 app.use(body_parser.urlencoded({
 	extended: true
 }));
 app.use(function(req, res, next) {
-	if(!req.isAuthenticated() && req.method == 'GET') {
-		return res.render('login-admin', { message: req.flash('message') });
-	}
+	let path = req.baseUrl + req.path;
+	console.log("%s\t%s\tSession: %s", req.method, path, req.isAuthenticated());
+	/*if(!req.isAuthenticated() && req.method == 'GET') {
+		return res.render('registro/login', { message: req.flash('message') });
+	}*/
 
-	next();	
+	next();
 });
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -52,19 +55,15 @@ http_app.get('*', function(req, res) {
 	res.redirect('https://trascendencias.org:8443' + req.url);
 });
 
-app.get('/', function(req, res) {
-	res.render('index');
-});
-
-app.get('/login-admin', function(req, res) {
+app.get('/login', function(req, res) {
 	if(req.isAuthenticated()) {
 		return res.send("Sesion ya iniciada.");
 	}
 
-	res.render('login-admin', { message: req.flash('message') });
+	res.render('registro/login', { message: req.flash('message') });
 });
 
-app.post('/login-admin', form(), passport.authenticate('login-admin', {
+app.post('/login', form(), passport.authenticate('login', {
 	successRedirect: '/',
 	failureRedirect: '/login',
 	failureFlash: true
@@ -88,12 +87,8 @@ app.get('/look-:collection/:document', function(req, res) {
 	database.look(req, res);
 });
 
-app.get('/:file', function(req, res) {
-	if(fs.existsSync(__dirname + '/control_panel/pages/' + req.params.file + '.html')) {
-		return res.render(req.params.file);
-	}
-
-	res.status(404).send('File not found.');
+app.get('*', function(req, res) {
+	return res.render((req.baseUrl + req.path).substring(1));
 });
 
 https.createServer({

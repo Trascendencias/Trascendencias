@@ -1,11 +1,9 @@
 <html> 
 	<body>
 		<script>
-		loggedIn = true; 
-		if(loggedIn){window.location.href = 'reportes-generales ';}
-			else {window.location.href = '../';}
+		loggedIn = false; 
 
-		function validate(){
+		function validate() {
                var value1 = document.getElementById("value1");
                var value2 = document.getElementById("value2");
                var send = true;
@@ -14,6 +12,6 @@
                if(value1.value!="Usuario" && value2.value!="Contraseña") { document.getElementById("forma").submit(); }
 		}
 		</script>
-</body>
+	</body>
 
 </html>

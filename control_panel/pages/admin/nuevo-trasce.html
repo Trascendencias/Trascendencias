@@ -5,13 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
         <!--- INCLUIR DOCUMENTOS -->
-<% include partials/menu.html %>
-            
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <% include menu.html %>            
         <!--- Pa que agarren los acentos -->
         <meta charset="UTF-8">
 
+        <!--- Title --> 
+        <title> Nuevo Trascendencias </title>
+
         <!--- Pa que agarre el Styleshit los acentos -->
-        <link rel="stylesheet" type="text/css" href="../resources/style.css">
+        <link rel="stylesheet" type="text/css" href="resources/style.css">
     
     </head>
     <style>
@@ -51,23 +54,23 @@
 
         <br><br>
        
-        <form action="gasto.html" id="forma-registro">
+        <form action="nuevo-trasce-2 " method="post" id="forma-registro">
                  <!-- COSTO Paquetes -->
-                <p class="title"> Nuevo Año: </p>
-                <input type=number name="gasto" class="numero" value="1" >
-                <p class="error"> *Debe llenar esta información </p>
-                <br><br><br>
+            
                 <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="contrasena" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <br>
                 
-                <center>
-                    <button type="button" class="submit" style="display:inline;" onClick="validate()"> Siguiente </button>  
-                    <button type="button" class="third" style="display:inline;" onClick="window.history.back();"> Cancelar </button>
+                <div class="registro">
+                        <hr>
+                    <button type="button" class="submit" onClick="validate()"> Siguiente </button>  
+                    <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                    </div>
                 </center>
         </form>
-        <hr>
+        </form>
+
         </div>
 
         </div>
@@ -86,7 +89,7 @@
             }
 
 
-             //INCLUIR DOCUMENTOS
+              //INCLUIR DOCUMENTOS
 
             function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
                 if(elem.classList.contains('active')) elem.classList.remove('active'); 

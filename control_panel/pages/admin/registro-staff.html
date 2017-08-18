@@ -1,28 +1,28 @@
 <html> 
 
 	<head>		
-		<!-- tag para hacerlo escalable -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		    <!-- tag para hacerlo escalable -->
+		    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-		<!--- INCLUIR DOCUMENTOS -->
+		    <!--- INCLUIR DOCUMENTOS -->
         <script src="https://www.w3schools.com/lib/w3.js"></script>
-        <div w3-include-html="partials/menu "></div>
+        <% include menu.html %>
             
         <!--- Pa que agarren los acentos -->
-		<meta charset="UTF-8">
+		    <meta charset="UTF-8">
 
         <!--- Title --> 
         <title> Registro Staff </title>
 
-		<!--- Pa que agarre el Styleshit los acentos -->
-		<link rel="stylesheet" type="text/css" href="resources/style.css">
+		    <!--- Pa que agarre el Styleshit los acentos -->
+		    <link rel="stylesheet" type="text/css" href="resources/style.css">
 	
     </head>
 <body>
 		
         <div class="body">
 		<br>
-		<center><h6> Editar Miembro de Staff </h6> </center>
+		<center><h6> Registro de Miembro de Staff </h6> </center>
 			
 			<form class="registro" id="forma-registro" method="get" action="registro "> <br><br>
                
@@ -30,12 +30,10 @@
                 <input type="hidden" name="registrado" value="participante">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-                <p class="title black"> Nombre </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Ismael Villegas" name="title" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="title" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- TALLA Participantes -->
-                <p class="title black"> Talla </p><br><br>
                 <select id="select" name="talla">
                     <option value="none"> Talla... </option>
                   <option value="XS"> XS </option>
@@ -47,52 +45,43 @@
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-                <p class="title black"> Teléfono </p><br><br>
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="(686)123 45 67" name="telefono-contacto" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="Teléfono" name="telefono-contacto" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-                <p class="title black"> Correo </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="correo@email.com" name="correo" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="correo" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- FACEBOOK -->
-                <p class="title black"> Link de Facebook </p><br><br>
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Link de Facebook'; }"  onfocus="if(this.value == 'Link de Facebook') { this.value = ''; }" type="text" value="https://www.facebook.com/profile.php?id=100009661066774" name="facebook" required>
+                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Link de Facebook'; }"  onfocus="if(this.value == 'Link de Facebook') { this.value = ''; }" type="text" value="Link de Facebook" name="facebook" required>
                 <p class="error"> *Debe llenar esta información </p>
 
 				<!-- INSTITUCION DE PROCEDENCIA Participante-->
-                <p class="title black"> Carrera </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Carrera'; }"  onfocus="if(this.value == 'Carrera') { this.value = ''; }" type="text" value="IDGD" name="carrera" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Carrera'; }"  onfocus="if(this.value == 'Carrera') { this.value = ''; }" type="text" value="Carrera" name="carrera" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				 <!-- SEMESTRE-->
-                <p class="title black"> Semestre: </p><br><br><br>
-                <input type=number name="semestre" class="numero" value="5">
+                <p class="title"> Semestre: </p>
+                <input type=number name="semestre" class="numero" value="1">
                 <p class="error"> *Debe llenar esta información </p>
 
 				<!-- CIUDAD Participante-->
-                <p class="title black"> Ciudad </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Mexicali" name="ciudad" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Ciudad" name="ciudad" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CONTRASENA Participante-->
-                <p class="title black"> Contraseña </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; }" type="password" value="Contraseña" name="contrasena" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="contrasena" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- REPITE LA CONTRASENA Participante-->
-                <p class="title black"> Repita la Contraseña </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = '';}" type="password" value="contraseña" name="contrasena2" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="contrasena2" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- ALERGIAS Participante-->
-                <p class="title black"> Alergias </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="Paracetamol" name="alergias" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="¿Tienes alergias?" name="alergias" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Equipo Staff -->
-                <p class="title black"> Equipo en Staff </p><br><br>
                 <select id="select" name="equipo">
                   <option value="none"> Equipo en Trascendencias... </option>
                   <option value="general">General</option>
@@ -105,7 +94,6 @@
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- Puesto ELEGIDO  -->
-                <p class="title black"> Puesto Elegido </p><br><br>
                 <select id="select" name="puesto">
                   <option value="none"> Puesto ... </option>
                   <option value="coordinador">Coordinador</option>
@@ -114,13 +102,13 @@
                 </select>
 				<p class="error"> *Debe llenar esta información </p>
 
-				<p class="title black"> Foto del Staff </p><br><br><br>
+				<p class="title"> Foto del Staff </p><br><br><br>
                 <input type="file" width="150px" name="foto" value="fileupload" id="image" style="display: inline;">
                 <p class="error"> *Debe llenar esta información </p>
 
                 <div class="spacer"></div>
                 <hr>
-				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
+				        <button type="button" class="submit" onClick="validate()"> Siguiente </button>
                 <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
@@ -142,7 +130,16 @@
                 document.getElementById("forma-registro").submit();
             }
             
-            
+            function masvideo(){
+                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('videos').innerHTML += videoinput;
+                videocount++;
+            }
+            function masfoto(){
+                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('fotos').innerHTML += fotosinput;
+                fotoscount++;
+            }
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 

@@ -1,15 +1,15 @@
-i<html> 
+<html> 
 
     <head>      
         <!-- tag para hacerlo escalable -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
         <!--- INCLUIR DOCUMENTOS -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
-	    <div w3-include-html="partials/menu "></div>
+             <script src="https://www.w3schools.com/lib/w3.js"></script>
+	    <% include menu.html %>
 
         <!--- Title --> 
-        <title> Lista del Staff </title>
+        <title> Gastos </title>
             
         <!--- Pa que agarren los acentos -->
         <meta charset="UTF-8">
@@ -22,62 +22,71 @@ i<html>
         h3, p, button.nuevo {
             display: inline;
         }
-        button.claves {
-            margin-bottom: 10px;
-            width: 100%;
-        }
-
     </style>
-<body>
+<body> 
+
         
         <div class="lista">
         <br>
-        <br>
-        <h3> <span id="titulo">  </span>:  <p id="contador">  </p><button class="nuevo" onClick="nuevo()"> + Nuevo </button></h3>
+        <h3>Gastos: <p id="contador"> error.. </p><button class="nuevo" onClick="location.href='registrar-gasto '"> + Nuevo </button></h3></h3>
 
         <form id="searchForm" action="javascript:buscarPalabras();">
             <input id="search" class="search" onBlur="if (this.value == '') { this.value = 'Buscar...'; showAll();}"  onfocus="if(this.value == 'Buscar...') { this.value = ''; } " type="text" value="Buscar..." > 
             <button class="third search" type="button" onClick="buscarPalabras();"> 🔎 </button>
             <center>
 
-            <button class="third" style="float: left;" type="button" onClick="location.href='generar-claves '"> Generar Claves </button>
+            <button class="third" style="float: left;" type="button" onClick="location.href='imprimirLista '"> Imprimir </button>
 
             </center>
         </form>
-        <br>
-        <hr>
-                
-        <form id="accion-lista">
         
-        <!--- AQUI ES EL WHILE -->
-        <button class='enlistado' name='codigo' value='xxx'> Francisco Arturo Peña </button>
-        <button class='enlistado' name='codigo' value='xxx'> Diana Laura Martinez Garcia </button>
-        <button class='enlistado' name='codigo' value='xxx'> Jesús Ismael Villegas </button>
-        <button class='enlistado' name='codigo' value='xxx'> Foráneo Alexis Córdova </button>
+        <br><br>
+        <hr>
 
-        </form>
+            <div class="accion enlistado">
+                <h3 class="dineromenos"> -$250 </h3><p> 13/SEP/17 22:45h</p> <br>
+                <p> A participante <i> Daniel Vazquez </i> </p><br>
+                <p> Dado por <i> Nombre Apellido Apellido </i> </p><br>
+                <p> En <i> Punto de Venta </i> </p><br>
+            </div>
+
+            <div class="accion enlistado">
+                <h3 class="dineromenos"> -$150 </h3><p> 13/SEP/17 22:45h</p> <br>
+                <p> Admin <i> No había papel en el baño. </i> </p><br>
+            </div>
+
         </div>
 
 </body>
         
         <script>
-        //AQUI PONES EL VALOR DE Q
-        var titulo; var nuevolnk; var accionlnk;
-        titulo = "Miembros"; nuevolnk = "registro-staff "; accionlnk = "consulta-staff ";
 
-        document.getElementById("accion-lista").action = accionlnk;
-
-
-        function nuevo(){
-            location.href = nuevolnk;
-        }
-
+            
 
 
               //INCLUIR DOCUMENTOS
 
-            document.getElementById("contador").innerHTML += 456;
+            document.getElementById("contador").innerHTML = "-$" + total();
             document.getElementById("titulo").innerHTML += titulo;
+            
+            function total(){
+                var valores = document.getElementsByClassName("dineromenos");
+                var divholder = document.getElementsByClassName("enlistado");
+                var total = 0; 
+                var C = 0;
+                var value;
+                while(C < valores.length){
+                    if(divholder[C].style.display != "none"){
+                        value = valores[C].innerHTML.replace("-$","");
+                        value = value.replace(" ", "");
+                        value = value.replace(" ", "");
+                        value = value.replace(",", "");
+                        total +=  Number(value); }
+                    C++;
+                }
+                return total;
+            }
+            
             
             function buscarPalabras(){
                 var palabras=document.getElementById("search").value;
@@ -104,6 +113,7 @@ i<html>
                             E++;
                         }
 
+                document.getElementById("contador").innerHTML = "-$" + total();
                 }
                 
                 else {
@@ -125,6 +135,7 @@ i<html>
                         C++;;
                     }
                     }
+                document.getElementById("contador").innerHTML = "-$" + total();
                 }
 
 
@@ -135,6 +146,7 @@ i<html>
                     enlistados[C].style.display = "block";
                     C++;
                 }
+            document.getElementById("contador").innerHTML = "-$" + total();
             }
             function sinAcento(str){
                 str = str.replace("á", "a");
@@ -149,5 +161,8 @@ i<html>
                 str = str.replace("Ú", "u");
                 return str;
             }
+
+
+
         </script>
 </html>

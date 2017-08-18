@@ -26,6 +26,7 @@ h3, ul {
 	color: #1D5E89;
 	font-weight: bold;
 }
+
 .h4holder {
 	width: 112%;
 	position: static;
@@ -64,12 +65,7 @@ p {
 	word-wrap: break-word;
 	font-weight: lighter;
 }
-p.blue {
-	color: #456672;
-}
-p.white {
-	color: white;
-}
+
 a {
 	text-decoration: none;
 	color: #071D25;
@@ -82,7 +78,7 @@ hr.white {
     border-color: white;
 }
 button{
-	background-color: #425DF4;
+	background-color: #42C7F4;
 	border: 0;
 	border-radius: 100px;
 	color: white;
@@ -92,13 +88,8 @@ button{
 }
 button:hover {
 	cursor: pointer;
-	box-shadow: 0px 1px 20px #42C7F4;
-	text-shadow: 0px 1px 10px white;
+	box-shadow: 0px 0px 7px #42C7F4;
 	transition: box-shadow 1s, text-shadow .5s;
-}
-.menu button:hover {
-	box-shadow: 0px 1px 20px #425DF4	;
-
 }
 button.second{
 	border-radius: 3px;
@@ -110,8 +101,8 @@ button.third{
 	border-radius: 3px;
 	background-color: rgba(0,0,0,0);
 	border: 1px solid #CCC;
-    padding: 10px 20px;
-    margin-bottom: 40px;
+    padding: 5px 20px 5px 20px;
+    margin: 5px 5px 5px 0px;
     color: #CCC;
     display: block;
 }
@@ -211,6 +202,9 @@ input.error + p.error{
 	float: right;
 	padding: 10px 20px;
 }
+.registro button.third{
+	float:left;
+}
 .goright {
     position: absolute;
     right: 0px;
@@ -240,11 +234,79 @@ button.enlistado:hover{
 }
 #search {
 	border: 1px solid #CCC;
-	border-radius: 5px;
+
 	margin-top: 10px;
 
 }
+input.search {
+	width: calc(100% - 50px);
+	display: inline;
+	border-radius: 5px 0px 0px 5px;
+	height: 50px;
+}
+button.search{
+	width: 50px;
+	height: 50px;
+	padding: 9px;
+	margin: 0px;
+	float: right;
+	margin-top: 10px;
+	border-radius: 0px 5px 5px 0px;
+	border-left: 0px;
+}
+/* CONSULTA STAFF */
+img.staff-pic {
+	width: 150px;
+	height: 150px;
+	border-radius: 100px;
+}
+/* ACCIONES */
+div.accion {
+	border: 1px solid #CCC;
+	padding: 10px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+.accion h3, .accion p{
+	display: inline;
+	line-height: 1.5;
+}
+.dineromas {
+	color: #218425;
+}
+.dineromenos {
+	color: #B41C0F;
+}
 
+/* CONSULTA */
+div.consulta div.foto {
+	width: 100px;
+	height: 100px; 
+	background-position: center center;
+	background-size: 100px;
+	margin: 10px;
+	display: inline-block;
+
+}
+div.foto button{
+	opacity: 0;
+	box-shadow: 1px 1px 10px rgba(0,0,0,.5);
+	margin-top: 40px;
+}
+div.foto:hover button{
+	opacity: 1;
+	transition:  opacity .5s;
+}
+div.consulta iframe{
+	margin: 10px;
+}
+.persona {
+	border-radius: 1000px;	
+}
+div.consulta img.foto {
+	height: 100px;
+	width: 100px;
+}
 
 /* MENU */
 	.menu {
@@ -253,7 +315,7 @@ button.enlistado:hover{
 		top: 0px;
 		width: 100vw;
 		height: 60px;
-		background-color: #425DF4;
+		background-color: #42C7F4;
 		z-index: 1;
 		box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
         font-weight: lighter;
@@ -275,18 +337,19 @@ button.enlistado:hover{
 		margin: 7px;
 		width: auto;
         border-radius: 100px;
-        cursor: pointer;
 	}
     div.drop {
         display: none;
         position: fixed; 
-        top: 60px;
+        top: 0px;
         z-index: -1;
-        background-color: #425DF4;
-        box-shadow: 0px px 10px rgba(0,0,0,.3);
-
+        background-color: #42C7F4;
+        padding-top: 60px;
     }
-    .active + div.drop {
+    .dropper:hover + div.drop{
+    	display: block;
+    }
+	div.drop:hover {
 		display: block;
 	}
     #contenido {
@@ -320,11 +383,9 @@ button.enlistado:hover{
     .menu hr {
         border: 1px solid rgba(255,255,255,.5);
     }
-    button.nuevo-trasce {
-    	background-color: #FF0000;
-    }
-    button.admin {
-    	border: none;
+    .menu button:hover {
+    	color: #4E8296;
+    	transition: color .2s;
     }
 
 @media only screen and (max-width: 420px) {
@@ -339,10 +400,10 @@ button.enlistado:hover{
 	}
     .menu button {
         font-size: 9pt;
-        margin: 5px;
+        margin: 8.5px;
         padding: 0;
         margin-top: 10px;
-        
+        border-bottom: 2px solid rgba(0,0,0,0);
     }
     div.drop{
         width: 100vw;
@@ -362,29 +423,48 @@ button.enlistado:hover{
     button.second {
         padding: 5px 15px ;
     }
+    hr.search {
+    	margin-top: 20px;
+    }
 }
 
-/* CONSULTA STAFF */
-img.staff-pic {
-	width: 150px;
-	border-radius: 100px;
-}
 
-/* ACCIONES */
-div.accion {
-	border: 1px solid #CCC;
-	padding: 10px;
-	border-radius: 10px;
-	margin-bottom: 20px;
+/* CONSULTA */ 
+div.consulta h3 {
+	color: #CCC;
+	font-weight: lighter;
+	margin: 0px;
+	margin-top: 10px;
+	line-height: 1;
 }
-.accion h3, .accion p{
-	display: inline;
-	line-height: 1.5;
+div.consulta p {
+	color: black;
+	font-weight: bold;
+	line-height: 1;
+	margin: 0px;
+	margin-top: 8px;
 }
-.dineromas {
-	color: #218425;
-}
-.dineromenos {
-	color: #B41C0F;
-}
+button.votacion {
+	width: 100%;
+	height: 50px;
+	}
 
+/*EXTRAS*/
+.blue {
+	color: #456672;
+}
+.white {
+	color: white;
+}
+.black {
+	color: black;
+}
+.hidden {
+	display: none;
+}
+.inline{
+	display: inline-block;
+}
+.pointer {
+	cursor: pointer;
+}
