@@ -1,0 +1,160 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Title --> 
+        <title> Editar Usuario </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+		
+        <div class="body">
+		<br>
+		<center><h6> Cambiar Contraseña </h6> </center>
+			
+			<form class="registro" id="forma-contrasena" method="post" action="contrasena "> <br><br>
+
+				<!-- CONTRASENA -->
+				<input id="value1" maxlength="50" onBlur="if (this.value == '') { this.value = 'Nueva Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Nueva Contraseña') { this.value = ''; this.type='password'}" type="text" value="Nueva Contraseña" name="contrasena" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- REPITE LA CONTRASENA -->
+				<input id="value2" maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="contrasena2" required>
+				<p class="error"> *Debe llenar esta información </p>
+                
+               
+                <div class="spacer"></div>
+                <hr>
+				<button type="button" class="submit" onClick="validateContrasena()"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+			</form>
+
+			<center><h6> Editar Información </h6> </center>
+			
+			<form class="registro" id="forma-editar" method="post" action="registro "> <br><br>
+               
+                <!--- TIPO DE REGISTRO --> 
+                <input type="hidden" name="registrado" value="staff">
+                
+				<!-- NOMBRE/TITULO TODOS-->
+				<p class="title black"> Nombre: </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Jesús de la Rocha Ramirez" name="title" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+                <!-- TALLA s -->
+                
+                <select id="select" name="talla">
+                    <option value="none"> Talla... </option>
+                  <option value="XS"> XS </option>
+                  <option value="S"> S </option>
+                  <option value="M"> M </option>
+                  <option value="L"> L </option>
+                  <option value="XL"> XL </option>
+                </select>
+                <p class="error"> *Debe llenar esta información </p>
+                
+                <!-- TELEFONO s, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
+                <p class="title black"> Teléfono: </p><br><br>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="(686) 123 45 67" name="telefono-contacto" required>
+				<p class="error"> *Debe llenar esta información </p>
+                
+				<!-- CORREO s, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
+				<p class="title black"> Correo: </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="email@correo.com" name="correo" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- FACEBOOK -->
+				<p class="title black"> Facebook: </p><br><br>
+                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Link de Facebook'; }"  onfocus="if(this.value == 'Link de Facebook') { this.value = ''; }" type="text" value="https://www.facebook.com/profile.php?id=100009661066774" name="facebook" required>
+                <p class="error"> *Debe llenar esta información </p>
+
+				<!-- INSTITUCION DE PROCEDENCIA -->
+				<p class="title black"> Carrera: </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Carrera'; }"  onfocus="if(this.value == 'Carrera') { this.value = ''; }" type="text" value="Ingeniería en Aerovisual" name="carrera" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				 <!-- SEMESTRE-->
+				 <p class="title black"> Semestre: </p><br><br>
+                <p class="title"> Semestre: </p>
+                <input type=number name="semestre" class="numero" value="7">
+                <p class="error"> *Debe llenar esta información </p>
+
+				<!-- CIUDAD -->
+				<p class="title black"> Ciudad: </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Mexicali" name="ciudad" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+                <!-- ALERGIAS -->
+                <p class="title black"> Alergias: </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="Paracetamol" name="alergias" required>
+				<p class="error"> *Debe llenar esta información </p>
+                
+
+				<p class="title black"> Foto del Staff </p><br><br><br>
+                <input type="file" width="150px" name="foto" value="fileupload" id="image" style="display: inline;">
+                <p class="error"> *Debe llenar esta información </p>
+
+
+                <div class="spacer"></div>
+                <hr>
+				<button type="button" class="submit" onClick="validateEditar()"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+			
+			</form>
+
+
+		</div>
+
+</body>
+		
+		<script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+              //INCLUIR DOCUMENTOS
+
+            var videocount = 2;
+            var fotoscount = 2;
+            var send = true;
+            function validateContrasena(){
+            	var value1 = document.getElementById('value1');
+            	var value2 = document.getElementById('value2');
+            	if(value1.value == value2.value) send = true;
+            	if(value1.value=="Nueva Contraseña" || value2.value=="Repita la Contraseña"){
+            		value1.classList.add('error');
+            		value2.classList.add('error');
+            		send = false;
+            	}
+            	if(value1.value != value2.value) { send=false; alert("Las contraseñas no coinciden."); }
+
+
+            	if(send) { document.getElementById("forma-contrasena").submit(); }
+            }
+            function validateEditar(){
+            	 document.getElementById("forma-editar").submit(); 
+            }
+
+		</script>
+</html>

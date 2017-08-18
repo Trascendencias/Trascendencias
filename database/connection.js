@@ -20,8 +20,9 @@ database.register = {
 	expense: function(form) {
 		console.log(JSON.stringify(form));
 	},
-	staff: function(form) {
+	staff: function(req) {
 		let staff_member_model = models.staff_member;
+		let form = req.form;
 
 		let new_staff_member = new staff_member_model();
 		new_staff_member.name = form.name;
@@ -35,6 +36,13 @@ database.register = {
 		new_staff_member.alergies = form.alergies;
 		new_staff_member.team = form.team;
 		new_staff_member.position = form.position;
+		new_staff_member.photo = __dirname + '/images/' + Date.now().toString() + '-' + req.files.photo.name;
+
+		req.files.photo.mv(new_staff_member.photo, function(err) {
+			if(err) {
+				console.log(err);
+			}
+		});
 
 		new_staff_member.save(function(err) {
 			if(err) {
@@ -43,6 +51,8 @@ database.register = {
 		});
 	}
 };
+
+database.upload = function();
 
 database.valid_verification_hash = function(email, hash) {
 	return bcrypt.compareSync(email, hash);

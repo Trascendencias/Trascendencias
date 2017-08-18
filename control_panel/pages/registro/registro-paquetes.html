@@ -1,0 +1,141 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+        <!--- Title --> 
+        <title> Registro de Paquetes </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+		
+        <div class="body">
+		<br>
+		<center><h6><b> Registro Paquetes </b></h6> </center>
+			
+			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+               
+                <!--- TIPO DE REGISTRO --> 
+                <input type="hidden" name="registrado" value="Paquetes">
+                
+				<!-- NOMBRE/TITULO TODOS-->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="title" required>
+				<p class="error"> *Debe llenar esta información </p>
+            
+                <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
+                <p class="title"> Fecha Inicio </p>
+                <input name="fecha" id="date" type="date" value="MM/DD/YYYY" required>
+                <p class="error"> *Debe llenar esta información </p>
+
+                <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
+                <p class="title"> Fecha Fin </p>
+                <input name="fecha-fin" id="date" type="date" value="MM/DD/YYYY" required>
+                <p class="error"> *Debe llenar esta información </p>
+                
+                <!-- Requisitos Visita, Taller, Oferta  -->
+                <textarea name="requisitos" class="large-text" required> Requisitos... </textarea>
+                <p class="error"> *Debe llenar esta información </p>
+                
+                <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
+                <p class="title"> Fotos (1920x1080px)</p><br><br><br>
+                <div id="fotos">
+                <input type="file" width="150px" name="foto1" value="fileupload" id="image" style="display: inline;">
+                <p class="error"> *Debe llenar esta información </p>
+                </div>
+               <button class="third" onClick="masfoto()" type="button"> Agregar Foto </button>
+                <br><br><br><br>
+                
+                <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
+                <div id="videos">
+                <p class="title"> URL en Youtube de videos </p><br><br><br>
+                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'URL Video 1'; }"  onfocus="if(this.value == 'URL Video 1') { this.value = ''; }" type="text" value="URL Video 1" name="video1" class="video" required>
+                <p class="error"> *Debe llenar esta información </p>
+                </div>
+                <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
+                <br><br><br><br><br><br>
+                
+                <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
+                <textarea name="resumen" id="resumen" required> Resumen... </textarea>
+                <p class="error"> *Debe llenar esta información </p>
+                
+                <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
+                <textarea name="descripcion" class="large-text" required> Descripción... </textarea>
+                <p class="error"> *Debe llenar esta información </p>
+                
+                <!-- Cantidad Paquetes-->
+                <p class="title"> Paquete de: </p>
+                <input type=number name="num-personas" class="numero" value="1" style="margin-left:0px; width: 60px;">
+                <p class="title"> Personas </p>
+                <p class="error"> *Debe llenar esta información </p>
+                
+                <!-- Cantidad Paquetes-->
+                <p class="title"> Cupo: </p>
+                <input type=number name="cupo" class="numero" value="1" style="margin-left:0px; width: 100px;">
+                 <p class="error"> *Debe llenar esta información </p>           
+                
+                <!-- COSTO Paquetes -->
+                <p class="title"> Costo: </p>
+                <input type=number name="costo" class="numero" value="1" >
+                <p class="error"> *Debe llenar esta información </p>
+               
+                <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
+                <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
+                <input type=number name="teaser-index" class="numero goright" value="1">
+                <div class="spacer"></div>
+                <hr>
+				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
+                <button type="button" class="third" onClick="location.href='../'"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+			
+			</form>
+		</div>
+
+</body>
+		
+		<script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+              //INCLUIR DOCUMENTOS
+            var videocount = 2;
+            var fotoscount = 2;
+
+            function validate(){
+                document.getElementById("forma-registro").submit();
+            }
+            
+            function masvideo(){
+                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('videos').innerHTML += videoinput;
+                videocount++;
+            }
+            function masfoto(){
+                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('fotos').innerHTML += fotosinput;
+                fotoscount++;
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+		</script>
+</html>

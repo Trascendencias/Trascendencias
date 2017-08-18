@@ -1,0 +1,218 @@
+<html> 
+
+<head>
+	<!---FACEBOOK OPTIMIZATION -->
+	<meta property="og:url" content="#!URL" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="#!TITLE" />
+	<meta property="og:image" content="#!IMG" />
+	
+	<!---SEO OPTIMIZATION -->
+	<title> #!TITLE </title>
+	<meta name="description" content="#!DESCRIPTION">
+	<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+	<meta name="author" content="#!AUTOR">
+
+	<!-- tag para hacerlo escalable -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Title --> 
+        <title> Consulta </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+
+	<!--- Pa que agarren los acentos -->
+	<meta charset="UTF-8">
+
+	<!--- Pa que agarre el Styleshit los acentos -->
+	<link rel="stylesheet" type="text/css" href="resources/style.css">
+</head>
+			
+<body>
+		<!-- Plugin de Facebook -->
+		<div id="fb-root"></div>
+		<script>  (function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+		<!--- INDICADOR DE PAGINA -->
+		<div class="pageLocation cmen"><h5 id="pageLocation"> #!Consulta </h5></div> 
+
+		<!-- ESTE DIV ES SOLO PARA CONFERENCIAS Y TALLERES -->
+		<div class="persona1">
+			<img src="resources/user_example.png" class="persona1">
+			<h3> Presenta: Nombre Apellido </h3>
+			<p><i> Por qué este wey es tan vergas </i></p>
+		</div>
+
+
+
+		<!-- ESTE ES EL PUTO SLIDER -->
+		<div class="slider">
+				
+				<div class="slides" id="slides" style="width: calc(100vw * 5);"><!-- El 5 es la cantidad total de slides -->
+
+					
+					<!-- PUES AQUI SE PONE EL WHILE PA QUE AGREGUE TODAS LAS IMAGENES -->
+					<div class="slide" style="background: url('resources/slider1.jpg') center center; left: calc(100vw * 0);"></div> 
+					<!-- El 0 es la posición del slide 1 menos 1, osea 0, igual con los demás -->
+					<div class="slide" style="background: url('resources/slider2.jpg') center center; left: calc(100vw * 1);">
+					<!-- NINGUN VIDEO VA EN NINGUN TEASER, ESTE ES UN EJEMPLO PARA LAS ENTRADAS DE BLOG, VISITAS, TALLERES Y EVENTOS -->
+						<iframe width=100% height="100%" src="https://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
+					</div>
+					<div class="slide" style="background: url('resources/slider3.jpg') center center; left: calc(100vw * 2);"></div>
+					<div class="slide" style="background: url('resources/slider4.jpg') center center; left: calc(100vw * 3);"></div>
+					<div class="slide" style="background: url('resources/slider5.jpg') center center; left: calc(100vw * 4);"></div>
+				
+				</div>
+
+				<button class="left-arrow" onClick="leftSlider()"> ➜ </button>
+				<button class="right-arrow" onClick="rightSlider()"> ➜ </button>
+			
+		</div>
+
+		<!-- SLIDER EN GRANDE -->
+		<div id="biggerImage" > <img src="resources/slider1.jpg" id="biggerImg"> </div>
+
+			
+
+		<div class="ingresar-visita-taller">
+			<h5> Cupo Abierto <b> 13/25 </b> </h5>
+			<button class="second"> Ingresar </button> <!---Si ya lo eligieron manda un dialog box y desaparece con la confirmación--> 
+		</div>
+
+		<div class="contenido">
+			<h1> Título del Blog </h1>
+			<!-- LOS BLOGS NO TIENEN SUBTITULOS AQUI -->
+			<h6><i> Lugar (si aplcia) </i></h6>
+			<h6><b> 10/Oct • 10am </b></h6>
+			<p> 1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio. El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”. </p>
+			
+			<h3> De 8am a 9pm </h3>
+			
+			<h2> Subtítulo </h2>
+			<p> 1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio. El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”. </p>
+			<h2> Ejemplo de Lista </h2>
+			<ul>
+				<li>
+					Item 1
+				</li>
+				<li>
+					Item 2
+				</li>
+				<li>
+					Item 3
+				</li>
+				<li>
+					Item 4
+				</li>
+				<li>
+					Item 5
+				</li>
+				<li>
+					Item 6
+				</li>
+				<li>
+					Item 7
+				</li>
+
+			</ul>
+			<!--EL BOTON DE COMPRAR ES SOLO PARA PAQUETES-->
+			<br>
+			<center><button onClick="location.href='registro-online'"> COMPRAR </button></center>
+			<br>
+
+			<div class="fb-like" data-href="#" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+
+			
+			
+			<!--LOS UNICOS QUE PRESENTAN LOS AUTORES SON LOS BLOGS-->
+			<br><br>
+			<div class="staff2">
+				
+				<img src="resources/user_example.png" class="persona2">
+				<h3> Por: Nombre Nombre Apellido </h3>
+				<p><i> Puesto en Trasce • 13/Sep </i> </p>
+
+			</div>
+
+		</div>
+
+		<div class="recomendaciones">
+			<div class="h4holder">
+				<h4> Blogs </h4>
+			</div>
+
+			<h2 onClick="location.href='link'"> Puesto en UABC </h2>
+			<h2> Chanclazos maternos </h2>
+			<h2> Arrivederchi </h2>
+			<h2> HOLA COMO TAS </h2>
+			<h2> muy bieni tu? </h2>
+			
+			<br>
+			
+			<center> 
+				<button onClick="#">Ver Todos </button>
+			</center>
+		</div>
+
+		<div class="fb-comments" data-href="http://9gag.com" data-numposts="5" data-width=100%></div>
+</body>
+		
+<hr style="width: 100vw; border-color: rgba(0,0,0,0);"> <!--- Sin esto se hace feo el pedo -->
+
+<% include footer %>	
+	
+	<script>  
+
+		//SLIDER
+		var currentSlide = 0; //El slide en el que está menos 1
+		var slides = document.getElementById("slides");
+		var beforeSlide = 4;
+		var afterSlide = 1;
+		function rightSlider(){
+			if(currentSlide == 4){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
+				currentSlide = 0; 
+				slides.style.left = "0px"; 
+			}
+			else {
+				currentSlide++; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")";
+			}
+		}
+		function leftSlider(){
+			if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
+				slides.style.left = "calc(-100vw * 4)"; 
+				currentSlide = 4;}
+			else { 
+				currentSlide--; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
+			}
+		}
+		
+		function activate(elem){ //Activar / desactivar mierda
+			if(elem.classList.contains('active')) elem.classList.remove('active'); 
+			else elem.classList.add('active'); 
+			}
+
+		//SlideShow en Gigante
+		document.getElementById("slides").onclick = function(){  show(currentSlide) };
+		document.getElementById("biggerImage").onclick = function(){ document.getElementById("biggerImage").style.display = "none"; }
+		function show(slideNumber){
+			document.getElementById("biggerImg").src = "resources/slider" +  (slideNumber + 1) + ".jpg"; 
+			//aquí nomás se cambia a que sea la imagen de la base de datos que corresponda con el numero de la imagen y sha :D
+			document.getElementById("biggerImage").style.display = "block";
+		}
+
+
+
+	</script>
+</html>

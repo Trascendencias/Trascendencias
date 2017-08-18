@@ -1,0 +1,63 @@
+<html> 
+
+	<head>		
+		<!---FACEBOOK OPTIMIZATION -->
+		<meta property="og:url" content="#!URL" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="#!TITLE" />
+		<meta property="og:image" content="#!IMG" />
+		
+		<!---SEO OPTIMIZATION -->
+		<title> #!TITLE </title>
+		<meta name="description" content="#!DESCRIPTION">
+		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+		<meta name="author" content="#!AUTOR">
+
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Title --> 
+        <title> Erro: #404 </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+
+		<!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+
+	</head>
+
+
+	<body>
+
+		<div class="pageLocation cmen">
+			<h5 id="pageLocation"> Error: #404 </h5>
+		</div> 
+
+		<div class="body error404">
+		<h3> ups... </h3> 
+		<h3 class="error404"> ¿A dónde dijiste que querías ir? </h3> 
+		<p> No se ha encontrado nada en ésta dirección... </p> 
+		</div>
+
+		<hr style="width: 100vw; border-color: rgba(0,0,0,0);"> <!-- Esto es pa que no se corra el footer, no se por que pero con esto se arregla ja-->
+		
+		 <!-- INCLUIR FOOTER-->
+		<% include footer %>
+		
+		<script>  
+
+
+			function activate(elem){ // ES PARA APARECER / DESAPARECER COSAS (COMO EL MENU)
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+		</script>
+	</body>
+</html>

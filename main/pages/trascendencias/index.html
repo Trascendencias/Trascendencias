@@ -1,0 +1,215 @@
+<html>
+	<head>
+		<!---FACEBOOK OPTIMIZATION -->
+		<meta property="og:url" content="#!URL" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="#!TITLE" />
+		<meta property="og:image" content="#!IMG" />
+		
+		<!---SEO OPTIMIZATION -->
+		<title> Trascendencias 2017 </title>
+		<meta name="description" content="#!DESCRIPTION">
+		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+		<meta name="author" content="#!AUTOR">
+
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Title --> 
+        <title> Trascendencias </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+
+		<!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	</head>
+
+	<body>
+	
+		<script src="https://www.w3schools.com/lib/w3.js"></script>
+		<div w3-include-html="menu"></div>
+
+		<div class="slider main" style="margin-top: -10px;">
+					
+			<div class="slides main" id="slides" style="width: calc(100vw * 5);">
+			<!-- PUES AQUI SE PONE EL WHILE PA QUE AGREGUE TODAS LAS IMAGENES -->
+				<div class="slide main" style="background: url('resources/slider1.jpg') center center; left: calc(100vw * 0);">
+					<div class="slide-textholder">
+						<h1 class="cwhite"> MEJOR SIMPOSIO DEL NOROESTE </h1> <!-- Titulo del Teaser Banner -->
+						<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. <!-- Descripción del Teaser Banner -->
+							<button> ¡QUIERO ASISTIR! </button> <!-- BOTON DE ACCION -->
+						</p>
+					</div>
+				</div>
+			<!-- PUES AQUI SE ACABA LO DEL WHILE -->
+				<div class="slide main" style="background: url('resources/slider2.jpg') center center; left: calc(100vw * 1);">
+						<div class="slide-textholder">							<h1 class="cwhite"> PUESTO DE VENTA EN ECATEPEC</h1> <!-- Titulo del Teaser Banner -->
+							<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. <!-- Descripción del Teaser Banner -->
+								<button> ¿Cuándo? </button> <!-- BOTON DE ACCION -->
+							</p>
+						</div>
+				</div>
+					
+				<div class="slide main" style="background: url('resources/slider3.jpg') center center; left: calc(100vw * 2);">
+						<div class="slide-textholder">							
+						<h1 class="cwhite"> TITULO TEASER </h1> <!-- Titulo del Teaser Banner -->
+							<p class="cwhite"> Resumen del teaser <!-- Descripción del Teaser Banner -->
+								<button> Action </button> <!-- BOTON DE ACCION -->
+							</p>
+						</div>
+				</div>
+				<div class="slide main" style="background: url('resources/slider4.jpg') center center; left: calc(100vw * 3);">
+						<div class="slide-textholder">							
+						<h1 class="cwhite"> TITULO TEASER</h1> <!-- Titulo del Teaser Banner -->
+							<p class="cwhite"> Resumen del teaser <!-- Descripción del Teaser Banner -->
+								<button> Action </button> <!-- BOTON DE ACCION -->
+							</p>
+						</div>
+				</div>
+				<div class="slide main" style="background: url('resources/slider5.jpg') center center; left: calc(100vw * 4);"></div>
+			</div>
+
+
+			<button class="left-arrow main-btn" onClick="leftSlider()"> ➜ </button>
+			<button class="right-arrow main-btn" onClick="rightSlider()"> ➜ </button>			
+		</div>
+
+
+		<div class="testimonios">
+
+			<div class="testimonio">
+				<img src="resources/user_example.png" class="persona2">
+				<p> "Es el mejor simpiosio al que he asistido en toda mi vida" </p>
+				<p> <i> -Algun Participante </i></p>
+			</div>
+
+			<div class="testimonio">
+				<img src="resources/user_example.png" class="persona2">
+				<p> "Es el mejor simpiosio al que he asistido en toda mi vida" </p>
+				<p> <i> -Algun Participante </i></p>
+			</div>
+
+			<div class="testimonio">
+				<img src="resources/user_example.png" class="persona2">
+				<p> "Es el mejor simpiosio al que he asistido en toda mi vida" </p>
+				<p> <i> -Algun Participante </i></p>
+			</div>
+
+		</div>
+
+		<center>
+		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/XGSy3_Czz8k" class="comercial"></iframe>
+		</center>
+
+
+		<div class="contenido-inicio">
+			<div class="contenido-inicio1">
+				<img src="resources/slider1.jpg">
+				<div>
+					<center>
+						<h4> Conferencias </h4>
+						<p> Dadas por expertos en su tema. Inspírate y aprende escuchándo en vivo lo que personas destacadas y admiradas en todo el mundo tienen que decirte </p> 
+						<button onClick="location.href='contenido#conferencias'"> Ver Todas </button>
+					</center>
+				</div>
+			</div>
+
+			<div class="contenido-inicio2">
+				<img src="resources/slider1.jpg">
+				<div>
+					<center>
+						<h4> Talleres </h4>
+						<p> Aprende y pon en práctica habilidades que te ayudarán a conocer más sobre actividades que te interesan </p> 
+						<button onClick="location.href='contenido#talleres'"> Ver Todas </button>
+					</center>
+				</div>
+			</div>
+
+			<div class="contenido-inicio1">
+				<img src="resources/slider1.jpg">
+				<div>
+					<center>
+						<h4> Visitas </h4>
+						<p> Asiste al lugar en donde te gustaría trabajar para conocer cómo se manejan y cuál es la mejor manera de llegar ahí </p>
+						<button onClick="location.href='contenido#visitas'"> Ver Todas </button>
+					</center>
+				</div> 
+			</div>
+
+			<div class="contenido-inicio2">
+				<img src="resources/slider1.jpg">
+				<div>
+					<center>
+						<h4> Eventos Sociales </h4>
+						<p> Rompe el hielo con tus compañeros participantes y haz networking con personas que comparten tus aspiraciones </p> 
+						<button onClick="location.href='contenido#eventosSociales'"> Ver Todas </button>
+					</center>
+				</div>
+			</div>
+		</div>
+		<h2 style="margin: auto 20px"> ¡Desde #!PRECIO-MAS-BAJO pesos! </h2><br>
+						<div class="card-holder">
+								<div class="card" onClick="location.href='#!LINK'">
+									<img src="resources/image_example.png">
+									<h3> Paquete Individual </h3>
+									<p> De qué se trata éste bella conferencia </p>
+									<button class="buy"> COMPRAR </button>
+								</div>
+								<div class="card" onClick="location.href='#!LINK'">
+									<img src="resources/image_example.png">
+									<h3> Nombre Conferencia </h3>
+									<p> De qué se trata éste bella conferencia </p>
+									<button class="buy"> COMPRAR</button>
+								</div>
+						</div>
+
+
+		<center>
+			<button style="padding: 10px 30px;" onClick="location.href='ventas'"> Ver Paquetes </button> 
+		</center>
+		<br><br><br>
+
+
+	</body>
+<% include footer %>	
+	<script>  
+
+		//SLIDER
+		var currentSlide = 0; //El slide en el que está menos 1
+		var slides = document.getElementById("slides");E
+		var beforeSlide = 4;
+		var afterSlide = 1;
+		function rightSlider(){
+			if(currentSlide == 4){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
+				currentSlide = 0; 
+				slides.style.left = "0px"; 
+			}
+			else {
+				currentSlide++; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")";
+			}
+				}
+		function leftSlider(){
+			if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
+				slides.style.left = "calc(-100vw * 4)"; 
+				currentSlide = 4;}
+			else { 
+				currentSlide--; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
+			}
+				}
+
+
+		function activate(elem){ // ES PARA APARECER / DESAPARECER COSAS (COMO EL MENU)
+			if(elem.classList.contains('active')) elem.classList.remove('active'); 
+			else elem.classList.add('active'); 
+		}
+	</script>
+</html>

@@ -1,0 +1,73 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include partials/menu  %> -->
+
+		<!--- Title --> 
+        <title> Consulta Staff </title>
+
+        <!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style.css">
+    
+    </head>
+<body>
+        
+        <div class="body">
+	        <center>
+	        	<h6><b> Consulta Staff </b></h6> 
+	        </center>
+	        <br>
+	        
+	        <center>
+		        <div class="spacer"></div>
+		        <img src="resources/user_example.png" class="staff-pic">
+	        </center>
+	        <br>
+	        <h3> Nombre Nombre Apellido </h3>
+	        <p> <i> Puesto en Trasce</i></p>
+	        <hr>
+	        <p> Carrera, 2do Semestre </p>
+	        <p> Talla M </p>
+	        <p id="telephone"> (686) 123 45 67  <button onClick="location.href='tel:6861234567'">llamar</button></p>
+	        <p> email@correo.com </p>
+	        <h3 class='black'> Activo en Puesto de Venta 3 </h3>
+	        <button onClick="location.href='https://www.facebook.com'">Ver en Facebook</button>
+	        <hr> 
+	        <button class="third votacion" id="votacion" onClick="votar(this);"> Votar para Próximo Coordinador General </button>
+	        <br>
+        </div>
+
+</body>
+        
+        <script>
+         	  //INCLUIR DOCUMENTOS
+
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+			function votar(elem){
+				if(elem.innerHTML == "✓ Haz Votado (click para cancelar)"){
+					elem.innerHTML = "Votar para Próximo Coordinador General";
+					elem.style.color = "#CCC"; 
+				}
+				else {
+					elem.innerHTML = "✓ Haz Votado (click para cancelar)";
+					elem.style.color = "#46C7F4"; 
+				}
+			}
+
+        </script>
+</html>

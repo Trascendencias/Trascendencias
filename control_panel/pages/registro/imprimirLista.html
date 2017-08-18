@@ -1,0 +1,100 @@
+<html>
+<head>
+	<!--- Title --> 
+        <title> Imprimir Lista </title>
+                <meta charset="UTF-8">
+</head>
+<body>
+    <style>
+        body{
+            width: 792px;
+            margin: 0px;
+            padding: 0px;
+            font-family: helvetica;
+        }
+        div.title {
+            width: 90vw;
+            border-radius: 10px;
+            border: 2px solid #555;
+            padding: 5px 20px 5px 20px;
+            margin: 2vw;
+            margin-bottom: 20px;
+        }
+        p{
+            font-size: 16px;
+        }
+        p, h3{
+            margin: 0px;
+            padding: 10px;
+            line-height: 1;
+        }
+        .lighter {
+            font-weight: lighter;
+        }
+        div.lista {
+            margin: 2vw;
+            margin-top: 0px;
+             padding: 5px 20px 5px 20px;
+             width: 90vw;
+        }
+        .asistio {
+            float: right;
+            font-size: 23px;
+            position: relative;
+            top: -2px;
+        }
+        .elemlista .title {
+            font-size: 16px;
+        }
+        .elemlista {
+            -webkit-print-color-adjust: exact;
+        }
+        .elemlista p {
+            line-height: .7;
+            font-size: 14px;
+        }
+
+    </style>
+    <div class="title">
+        <center><p> <b> Encargado: </b> <span contenteditable="true"> Nombre Nombre Apellido Apellido </span> |  <b><span contenteditable="true"> Taller de Modelado en 3D </span> | <b> Trascendencias</b><span class="lighter" contenteditable="true">2017</span> | <span class="lighter">13/SEP/2017</span></b></p></center>
+    </div>
+    <div class="lista">
+        <div class="elemlista"> <p><b> Nombre Completo Participante <span class="asistio title"> Asistió </span> </b></p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p> </div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre  Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido  <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre  Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre  Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido  <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre  Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        <div class="elemlista"> <p> <span class="num"> </span> Nombre Nombre Apellido Apellido <span class="asistio"> ▢ </span> </p></div>
+        
+    </div>
+<script> 
+    var C = 0; 
+    while(C<document.getElementsByClassName("num").length){
+        document.getElementsByClassName("num")[C].innerHTML = C+1 + ")";
+        C++; 
+    }
+    C = 0; 
+    while(C<document.getElementsByClassName("elemlista").length){
+        if(C%2 == 1) document.getElementsByClassName("elemlista")[C].style["background-color"] = "#EEE";
+        C++; 
+    }
+
+</script> 
+    
+    </body>
+</html>

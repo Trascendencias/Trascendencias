@@ -1,0 +1,153 @@
+i<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+	    <div w3-include-html="partials/menu "></div>
+
+        <!--- Title --> 
+        <title> Lista del Staff </title>
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style.css">
+    
+    </head>
+    <style>
+        h3, p, button.nuevo {
+            display: inline;
+        }
+        button.claves {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+    </style>
+<body>
+        
+        <div class="lista">
+        <br>
+        <br>
+        <h3> <span id="titulo">  </span>:  <p id="contador">  </p><button class="nuevo" onClick="nuevo()"> + Nuevo </button></h3>
+
+        <form id="searchForm" action="javascript:buscarPalabras();">
+            <input id="search" class="search" onBlur="if (this.value == '') { this.value = 'Buscar...'; showAll();}"  onfocus="if(this.value == 'Buscar...') { this.value = ''; } " type="text" value="Buscar..." > 
+            <button class="third search" type="button" onClick="buscarPalabras();"> 🔎 </button>
+            <center>
+
+            <button class="third" style="float: left;" type="button" onClick="location.href='generar-claves '"> Generar Claves </button>
+
+            </center>
+        </form>
+        <br>
+        <hr>
+                
+        <form id="accion-lista">
+        
+        <!--- AQUI ES EL WHILE -->
+        <button class='enlistado' name='codigo' value='xxx'> Francisco Arturo Peña </button>
+        <button class='enlistado' name='codigo' value='xxx'> Diana Laura Martinez Garcia </button>
+        <button class='enlistado' name='codigo' value='xxx'> Jesús Ismael Villegas </button>
+        <button class='enlistado' name='codigo' value='xxx'> Foráneo Alexis Córdova </button>
+
+        </form>
+        </div>
+
+</body>
+        
+        <script>
+        //AQUI PONES EL VALOR DE Q
+        var titulo; var nuevolnk; var accionlnk;
+        titulo = "Miembros"; nuevolnk = "registro-staff "; accionlnk = "consulta-staff ";
+
+        document.getElementById("accion-lista").action = accionlnk;
+
+
+        function nuevo(){
+            location.href = nuevolnk;
+        }
+
+
+
+              //INCLUIR DOCUMENTOS
+
+            document.getElementById("contador").innerHTML += 456;
+            document.getElementById("titulo").innerHTML += titulo;
+            
+            function buscarPalabras(){
+                var palabras=document.getElementById("search").value;
+                var enlistados = document.getElementsByClassName("enlistado");
+                var A = 0; 
+                while(A < enlistados.length){
+                    enlistados[A].style.display = "none";
+                    A++;
+                }
+                if(palabras == "Buscar..." || palabras == ""){ showAll(); document.getElementById("contador").innerHTML = "-$" + total(); }
+                if(palabras.indexOf("+", 0) > 0) {
+                        palabras = palabras.split("+");
+                        var E = 0; 
+                        while(E<palabras.length){
+                            var C = 0;
+                            while(C < enlistados.length){
+                                var contenido = sinAcento(enlistados[C].innerHTML.toLowerCase());
+                                var abuscar = sinAcento(palabras[E].toLowerCase());
+                                if(contenido.indexOf(abuscar, 0)>0){
+                                    enlistados[C].style.display = "block";
+                                }
+                                C++;
+                            }
+                            E++;
+                        }
+
+                }
+                
+                else {
+                    palabras = palabras.split(" ");
+                    var C = 0;
+
+                    while(C < enlistados.length){
+                        var B = 0; 
+                        var E = 0;
+                        E = 0; 
+                        while(E < palabras.length){
+                            var contenido = sinAcento(enlistados[C].innerHTML.toLowerCase());
+                            var abuscar = sinAcento(palabras[E].toLowerCase());
+                            if(contenido.indexOf(abuscar) >= 0){ }
+                            else B = 1;
+                            E++; 
+                        }
+                        if(B == 0){ enlistados[C].style.display = "block";}
+                        C++;;
+                    }
+                    }
+                }
+
+
+            function showAll(){
+                var enlistados = document.getElementsByClassName("enlistado");
+                var C = 0; 
+                while(C< enlistados.length){
+                    enlistados[C].style.display = "block";
+                    C++;
+                }
+            }
+            function sinAcento(str){
+                str = str.replace("á", "a");
+                str = str.replace("Á", "a");
+                str = str.replace("é", "e");
+                str = str.replace("É", "e");
+                str = str.replace("í", "i");
+                str = str.replace("Í", "i");
+                str = str.replace("ó", "o");
+                str = str.replace("Ó", "o");
+                str = str.replace("ú", "u");
+                str = str.replace("Ú", "u");
+                return str;
+            }
+        </script>
+</html>

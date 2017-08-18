@@ -1,0 +1,96 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+        <!--- Title --> 
+        <title> Consulta Preguntas Frecuentes </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+		
+        <div class="body">
+        <center><h6><b> Consulta Preguntas Frecuentes </b></h6> </center>
+		<br>
+<button onClick="location.href='editar-preguntas-frecuentes?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>			
+			   <div class="consulta">
+				<!-- NOMBRE/TITULO TODOS-->
+				<h3> Pregunta: <p><i> ¿Esta es una muy buena pregunta? </i></p> </h3><br>
+                
+                <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
+                <h3> Respuesta: <p><i> Esta es una respuesta considerablemente corta.  </i></p> </h3><br>
+                
+                <!-- POSICION Preguntas Frecuentes -->
+                <h3> Posición: <p><i> 4 </i></p> </h3><br>                
+
+                </div>
+                
+                <hr>
+                <h3> Historial de Cambios </h3>
+                 <div class="accion">
+                    <h3> Creado </h3><p> 13/SEP/2017 22:45h</p> <br>
+                    <p>Por: <i> Nombre Miembro Staff </i> </p>
+                </div>
+
+                <div class="accion">
+                    <h3> Editado </h3><p> 13/SEP/17 22:46h</p> <br>
+                    <p>Por: <i> ONombre Miembro Staff </i> </p>
+                </div>
+                <div class="accion">
+                    <h3> Eliminado </h3><p> 13/SEP/2017 22:47h</p> <br>
+                    <p>Por: <i> Nombre Miembro Staff </i> </p>
+                </div>
+            </div>
+
+</body>	<script>
+			function eliminar(){
+					if(confirm("Ésta a punto de eliminar éste contenido. Ésta acción no puede revertirse. ¿Desea continuar?")){
+						
+						}
+					else { };
+				}
+				
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+              //INCLUIR DOCUMENTOS
+            var videocount = 2;
+            var fotoscount = 2;
+
+            function validate(){
+                document.getElementById("forma-registro").submit();
+            }
+            
+            function masvideo(){
+                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('videos').innerHTML += videoinput;
+                videocount++;
+            }
+            function masfoto(){
+                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('fotos').innerHTML += fotosinput;
+                fotoscount++;
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+		</script>
+</html>

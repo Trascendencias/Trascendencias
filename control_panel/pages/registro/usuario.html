@@ -1,0 +1,95 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+        <!--- <% include partials/menu  %> -->
+        
+        <!--- Title --> 
+        <title> Información del Usuario </title>
+        
+        <!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style.css">
+    
+    </head>
+
+<body>
+        
+        <div class="body">
+        <br>
+        
+        <center> 
+        	<button onClick="location.href='lista ?q=staff'"> Staff </button> 
+        	<button onClick="location.href='editar-usuario '"> Editar Info </button>
+        </center>
+
+        <div class="spacer"></div>
+        
+        <center>
+        	<img src="resources/user_example.png" class="staff-pic">
+        </center>
+        <br>
+        
+        <h3> Nombre Nombre Apellido </h3>
+        <p> <i> Puesto en Trasce</i></p>
+        <hr>
+        <p> Carrera, 2do Semestre </p>
+        <p> Talla M </p>
+        <p> (686) 123 45 67 </p>
+        <p> email@correo.com </p>
+        <h3 class='black'> Activo en Puesto de Venta 3 </h3>
+        <hr>
+
+        
+
+
+
+        <h3> Historial de Acciones </h3>   
+        <!-- RECIBIO DINERO -->
+        <div class="accion">
+            <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
+            <p> De patrocinador <i> Zapatos Lujosos </i> </p>
+        </div>
+        <!-- REGRESO DINERO -->     
+        <div class="accion">
+            <h3 class="dineromenos"> -$450 </h3><p> 13/SEP/17 22:45h</p> <br>
+            <p> A participante <i> Emiliano Zapata </i> </p>
+        </div>
+        <!-- CREO -->
+        <div class="accion">
+            <h3> Creó </h3><p> 13/SEP/2017 22:45h</p> <br>
+            <p>Blog: <i> 10 maneras de suprimir la cruda </i> </p>
+        </div>
+
+        <div class="accion">
+            <h3> Eliminó </h3><p> 13/SEP/17 22:46h</p> <br>
+            <p>Conferencia: <i> Odio al mundo, a ti también </i> </p>
+        </div>
+        <div class="accion">
+            <h3> Editó </h3><p> 13/SEP/2017 22:47h</p> <br>
+            <p>Participante <i> Pito Parado </i> </p>
+        </div>
+
+        </div>
+
+</body>
+        
+        <script>
+        	  //INCLUIR DOCUMENTOS
+			
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+        </script>
+</html>

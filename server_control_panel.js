@@ -28,6 +28,7 @@ app.use(session({
 	store: new mongo_store({ mongooseConnection: control_panel_sessions })
 }));
 app.use(flash());
+app.use(file_upload());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -74,12 +75,8 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
-app.get('/registro-:collection', function(req, res) {
-	res.render('register-' + req.params.collection);
-});
-
 app.post('/registro-:collection', form(), function(req, res) {
-	database.register[req.params.collection](req.form);
+	database.register[req.params.collection](req);
 	res.redirect('/');
 });
 

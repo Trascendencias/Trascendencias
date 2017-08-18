@@ -1,0 +1,84 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+         <script src="https://www.w3schools.com/lib/w3.js"></script>
+	    <div w3-include-html="partials/menu "></div>
+
+        <!--- Title --> 
+        <title> Generar Claves de Registro Staff </title>
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style.css">
+    
+    </head>
+    <style>
+        h3, p, button.nuevo {
+            margin: 2px;
+        }
+        .numero {
+            margin: 0px;
+        }
+    </style>
+<body>
+        
+        <div class="body">
+        <br>
+            <center>
+            	<br>
+                <h6> Enviar Claves </h6>
+                <br>
+            
+            <br>
+            <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="correo" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+            <button onClick=""> Enviar </button> 
+            <br> <br>
+            <hr>
+            </center>
+
+
+        </div>
+
+</body>
+        
+        <script>
+            //Genera un grupo de 4 digitos
+            function generarClave(){
+                var random;
+                var claveDigits = ["E","r","r","."];
+                var clave; 
+                var alphaNum = ["0","1",'2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+                    random = getRandom(1, 14776335);
+                    claveDigits[3] = alphaNum[random%62];
+                    random = Math.floor(random/62);
+                    claveDigits[2] = alphaNum[random%62];
+                    random = Math.floor(random/62);
+                    claveDigits[1] = alphaNum[random%62];
+                    random = Math.floor(random/62);
+                    claveDigits[0] = alphaNum[random%62];
+                    random = Math.floor(random/62);
+                    clave = claveDigits[0] + claveDigits[1] + claveDigits[2] + claveDigits[3];
+                return clave;
+
+            }
+
+            function getRandom(min, max) {
+              min = Math.ceil(min);
+              max = Math.floor(max);
+              return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+            }
+
+
+
+              //INCLUIR DOCUMENTOS
+
+        </script>
+</html>

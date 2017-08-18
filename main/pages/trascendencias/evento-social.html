@@ -1,0 +1,107 @@
+<html> 
+<head>
+	<!---FACEBOOK OPTIMIZATION -->
+	<meta property="og:url" content="#!URL" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="#!TITLE" />
+	<meta property="og:image" content="#!IMG" />
+	
+	<!---SEO OPTIMIZATION -->
+	<title> #!TITLE </title>
+	<meta name="description" content="#!DESCRIPTION">
+	<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+	<meta name="author" content="#!AUTOR">
+
+	<!-- tag para hacerlo escalable -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Title --> 
+        <title> Evento Social </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+
+	<!--- Pa que agarren los acentos -->
+	<meta charset="UTF-8">
+
+	<!--- Pa que agarre el Styleshit los acentos -->
+	<link rel="stylesheet" type="text/css" href="resources/style.css">
+</head>
+
+
+<body>
+	<!-- Plugin de Facebook (PARA LIKES Y COMENTARIOS -->
+		<div id="fb-root"></div>
+			<script>  (function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>
+
+		<!--- INDICADOR DE PAGINA -->
+		<div class="pageLocation ceve" style="background-color: #F442B6">
+			<h5 id="pageLocation"> Evento Social > #!Evento </h5>
+		</div>
+
+		<img src="resources/image_example.png" class="poster-evento">
+			<div class="contenido">
+				<h1> Noche Bohemia </h1> <!-- Título -->
+				<h6><i> Cervecería Averno </i></h6> <!-- Lugar -->
+				<h6><b> 10/Oct • 8pm - 10pm </b></h6> <!-- Día/Mes • hora inicio - fin -->
+				<p> 1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio.  </p><!-- Descripción  -->
+				
+				<ul> <!-- Lista de todo lo que se va a ofrecer en el evento -->
+					<li>
+						Item 1
+					</li>
+					<li>
+						Item 2
+					</li>
+					<li>
+						Item 3
+					</li>
+					<li>
+						Item 4
+					</li>
+					<li>
+						Item 5
+					</li>
+					<li>
+						Item 6
+					</li>
+					<li>
+						Item 7
+					</li>
+
+				</ul>
+
+				<!-- Facebook Like -->
+				<div class="fb-like" data-href="#" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+
+				<!-- Links a todos los eventos sociales -->
+				<h2 onClick="location.href='link'"> Rompe Hielos </h2>
+				<h2 onClick="location.href='link'"> Noche Bohemia </h2>
+				<h2 onClick="location.href='link'"> Fiesta de Clausura </h2>
+
+			</div>
+		<!--- Comentarios de Facebook --> 
+		<div class="fb-comments" data-href="http://9gag.com" data-numposts="5" data-width=100%></div>
+		
+		
+</body>
+
+	<hr style="width: 100vw; border-color: rgba(0,0,0,0);">
+	<% include footer %>
+	
+	<script>  
+			function activate(elem){
+			if(elem.classList.contains('active')) elem.classList.remove('active'); 
+			else elem.classList.add('active'); 
+			}
+	</script>
+</html>

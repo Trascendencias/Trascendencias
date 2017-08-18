@@ -1,0 +1,63 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Title --> 
+        <title> Login </title>
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+	<style>
+    div.body {
+        margin-top: 20vh;
+    }
+    button {
+    	display: inline-block;
+    	float:left;
+    	margin: 5px;
+    }
+    </style>	
+        <div class="body" id="login" style="width: 300px;">
+            <center>
+	            <h6> <b> Login </b> </h6>
+	            <br><br><br>
+	            <form method="post" id="forma" action="login " style="width: 300px;">
+	                
+	                <input id="value1" style="width: 300px;" maxlength="50" onBlur="if (this.value == '') { this.value = 'Usuario'; }"  onfocus="if(this.value == 'Usuario') { this.value = ''; }" type="text" value="Usuario" name="usuario" required>
+	                <p class="error"> *Debe llenar esta información </p>
+	                
+	                <input id="value2" style="width: 300px;" maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="contrasena" required>
+	                <p class="error"> *Debe llenar esta información </p>
+           
+           
+				<button type="button" class="third" onClick="location.href='registro-staff '"> Registrarse </button>
+            	<button type="button" onClick="validate()"> Siguiente </button>
+
+            	</center>
+             </form>
+		</div>
+		<script>
+		var loggedIn = false;
+		if(loggedIn){ window.location.href= 'lista ?q=participante'; }
+
+
+		function validate(){
+               var value1 = document.getElementById("value1");
+               var value2 = document.getElementById("value2");
+               var send = true;
+               if(value1.value=="Usuario") { send = false; value1.classList.add("error"); }
+               if(value2.value=="Contraseña") { send = false; value2.classList.add("error"); }
+               if(value1.value!="Usuario" && value2.value!="Contraseña") { document.getElementById("forma").submit(); }
+		}
+		</script>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<html> 
+
+	<head>		
+		<!---FACEBOOK OPTIMIZATION -->
+		<meta property="og:url" content="#!URL" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="#!TITLE" />
+		<meta property="og:image" content="#!IMG" />
+		
+		<!---SEO OPTIMIZATION -->
+		<title> #!TITLE </title>
+		<meta name="description" content="#!DESCRIPTION">
+		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+		<meta name="author" content="#!AUTOR">
+
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+			<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Title --> 
+        <title> Editar Usuario </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+
+		<!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	</head>
+
+
+	<body>
+	<div class="pageLocation cmen">
+		<h5 id="pageLocation"> Editar Usuario </h5>
+	</div> 
+		<div class="registro">
+		<br>
+		<center><h6> <b> Editar Usuario </b></h6> </center>
+			
+			<form class="registro" action="registro-terminado"> <br><br>
+
+				<!-- NOMBRE -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="nombre" required>
+				<p class="error"> *Debe llenar esta información </p>
+				
+                
+                <p class="title"> Foto de Perfil (300x300px) </p>
+                <input type="file" accept="image/x-png,image/gif,image/jpeg" width="150px" name="main-foto" value="fileupload" id="image" style="display: inline;">
+                <p class="error"> *Debe llenar esta información </p>
+                
+				<!-- TALLA -->
+                <select id="select" name="talla">
+                    <option value="none"> Talla... </option>
+                  <option value="XS"> XS </option>
+                  <option value="S"> S </option>
+                  <option value="M"> M </option>
+                  <option value="L"> L </option>
+                  <option value="XL"> XL </option>
+                </select>
+                <p class="error"> *Debe llenar esta información </p>
+
+				<!-- CORREO -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="correo" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- INSTITUCION DE PROCEDENCIA -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Institución de procedencia'; }"  onfocus="if(this.value == 'Institución de procedencia') { this.value = ''; }" type="text" value="Institución de procedencia" name="institucion" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- CARRERA -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Carrera'; }"  onfocus="if(this.value == 'Carrera') { this.value = ''; }" type="text" value="Carrera" name="carrera" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- SEMESTRE-->
+                <select id="select" name="semestre">
+                <option value="none"> Semestre... </option>
+                  <option value="1"> 1er Semestre </option>
+                  <option value="2"> 2do Semestre </option>
+                  <option value="3"> 3er Semestre </option>
+                  <option value="4"> 4to Semestre </option>
+                  <option value="5"> 5to Semestre </option>
+                  <option value="6"> 6to Semestre </option>
+                  <option value="7"> 7mo Semestre </option>
+                  <option value="8"> 8vo Semestre </option>
+                  <option value="9"> 9no Semestre </option>
+                  <option value="egresado"> Egresado </option>
+                </select>
+                <p class="error"> *Debe llenar esta información </p>
+
+				<!-- CIUDAD -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Ciudad" name="ciudad" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- TELEFONO -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="Teléfono" name="institucion" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- CONTRASENA -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="contrasena" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- REPITE LA CONTRASENA -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="contrasena2" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- ALERGIAS -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="¿Tienes alergias?" name="alergias" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+
+				<button type="submit" onClick="location.href='registro-terminado"> Siguiente </button>
+			
+			</form>
+		
+		</div>
+
+
+
+
+
+</body>
+		
+		<script>  
+
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+			            function generarClave(){
+                var random;
+                var claveDigits = ["E","r","r","."];
+                var clave; 
+                var alphaNum = ["0","1",'2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+                    random = getRandom(1, 60466170);
+                    claveDigits[5] = alphaNum[random%36];
+                    random = Math.floor(random/36);
+                    claveDigits[4] = alphaNum[random%36];
+                    random = Math.floor(random/36);
+                    claveDigits[3] = alphaNum[random%36];
+                    random = Math.floor(random/36);
+                    claveDigits[2] = alphaNum[random%36];
+                    random = Math.floor(random/36);
+                    claveDigits[1] = alphaNum[random%36];
+                    random = Math.floor(random/36);
+                    claveDigits[0] = alphaNum[random%36];
+                    random = Math.floor(random/36);
+                    clave = claveDigits[0] + claveDigits[1] + claveDigits[2] + claveDigits[3] + claveDigits[4] + claveDigits[5];
+                return clave;
+
+            }
+            //Genera un código de grupo hasta que no se repita en la base de datos, solo lo registra en la base de datos cuando le da siguiente
+            function codigoGrupo(){
+                if(document.getElementById("codigo-grupo-btn").innerHTML == "Cancelar"){
+                	var z = document.getElementById("codigo-grupo");
+                	z.value = "Código de Grupo";
+	                document.getElementById("codigo-grupo-btn").innerHTML = "Nuevo";
+	                document.getElementById("codigo-grupo").readOnly = false;
+	                document.getElementById("codigo-generado").value = "false";
+                }
+                else {
+                var z = document.getElementById("codigo-grupo");
+                //Aquí va un while, pero aja
+                z.value=generarClave();
+                document.getElementById("codigo-grupo-btn").innerHTML = "Cancelar";
+                document.getElementById("codigo-grupo").readOnly = true; }
+                document.getElementById("codigo-generado").value = "true";
+            }
+
+            function getRandom(min, max) {
+              min = Math.ceil(min);
+              max = Math.floor(max);
+              return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+            }
+		</script>
+</html>

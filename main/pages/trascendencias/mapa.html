@@ -1,0 +1,130 @@
+<html> 
+
+	<head>		
+		<!---FACEBOOK OPTIMIZATION -->
+		<meta property="og:url" content="#!URL" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="#!TITLE" />
+		<meta property="og:image" content="#!IMG" />
+		
+		<!---SEO OPTIMIZATION -->
+		<title> #!TITLE </title>
+		<meta name="description" content="#!DESCRIPTION">
+		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+		<meta name="author" content="#!AUTOR">
+
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Title --> 
+        <title> Mapa </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+
+		<!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	</head>
+
+
+	<body>
+	<div class="pageLocation cmen">
+		<h5 id="pageLocation"> Mapa </h5>
+	</div> 
+	<style>
+		.mapa{
+			width: 100vw;
+			height: 80vh;
+			overflow: auto;
+		}
+		.mapa img{
+			width: 100%;
+			height: auto;
+		}
+		img.ico-map{
+			width: 40px;
+			height: auto;
+			float: left;
+			margin: 5px 10px;
+			margin-top: 0px;
+		}
+		div.staff2{
+			margin-top: 40px;
+			width: 300px;
+			display: inline-block;
+			margin-left: 3vw;
+			margin-right: 3vw;
+		}
+	</style>
+	
+	<div class="mapa">
+		<img src="resources/mapa.jpg">
+	</div>
+	
+	<div class="staff2">
+		<img src="resources/ico_map_conferencias.svg" class="ico-map">
+		<h3> Conferencias </h3>
+		<hr> 
+	</div>
+
+	<div class="staff2">
+		<img src="resources/ico_map_banos.svg" class="ico-map">
+		<h3> Baños </h3>
+		<hr> 
+	</div>
+
+	<div class="staff2">
+		<img src="resources/ico_map_comida.svg" class="ico-map">
+		<h3> Comida </h3>
+		<hr> 
+	</div>
+
+	<div class="staff2">
+		<img src="resources/ico_map_enfermeria.svg" class="ico-map">
+		<h3> Enfermería </h3>
+		<hr> 
+	</div>
+
+	<div class="staff2">
+		<img src="resources/ico_map_edificio.svg" class="ico-map">
+		<h3> Edificios </h3>
+		<hr> 
+	</div>
+
+	<div class="staff2">
+		<img src="resources/ico_map_talleres.svg" class="ico-map">
+		<h3> Talleres </h3>
+		<hr> 
+	</div>
+
+	<div class="staff2">
+		<img src="resources/ico_map_visitas.svg" class="ico-map">
+		<h3> Visitas </h3>
+		<hr> 
+	</div>
+
+	<br><br><br><br><br><br>
+
+
+
+
+
+
+
+		<% include footer %>
+		<script>  
+		
+		function activate(elem){
+			if(elem.classList.contains('active')) elem.classList.remove('active'); 
+			else elem.classList.add('active'); 
+		}
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,104 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Title --> 
+        <title> Editar Usuario Admin </title>
+
+		<!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+	    <div w3-include-html="partials/menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+		
+        <div class="body">
+		<br>
+		<center><h6> Cambiar Contraseña </h6> </center>
+			
+			<form class="registro" id="forma-contrasena" method="post" action="contrasena "> <br><br>
+
+				<!-- CONTRASENA -->
+				<input id="value1" maxlength="50" onBlur="if (this.value == '') { this.value = 'Nueva Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Nueva Contraseña') { this.value = ''; this.type='password'}" type="text" value="Nueva Contraseña" name="contrasena" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- REPITE LA CONTRASENA -->
+				<input id="value2" maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="contrasena2" required>
+				<p class="error"> *Debe llenar esta información </p>
+                
+               
+                <div class="spacer"></div>
+                <hr>
+				<button type="button" class="submit" onClick="validateContrasena()"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+			</form>
+
+			<center><h6> Cambiar Correo </h6> </center>
+			
+			<form class="registro" id="forma-editar" method="post" action="registro "> <br><br>
+               
+                
+				<!-- CORREO s, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="email@correo.com" name="correo" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				
+                <hr>
+				<button type="button" class="submit" onClick="validateEditar()"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+			
+			</form>
+
+
+		</div>
+
+</body>
+		
+		<script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+              //INCLUIR DOCUMENTOS
+
+            var videocount = 2;
+            var fotoscount = 2;
+            var send = true;
+            function validateContrasena(){
+            	var value1 = document.getElementById('value1');
+            	var value2 = document.getElementById('value2');
+            	if(value1.value == value2.value) send = true;
+            	if(value1.value=="Nueva Contraseña" || value2.value=="Repita la Contraseña"){
+            		value1.classList.add('error');
+            		value2.classList.add('error');
+            		send = false;
+            	}
+            	if(value1.value != value2.value) { send=false; alert("Las contraseñas no coinciden."); }
+
+
+            	if(send) { document.getElementById("forma-contrasena").submit(); }
+            }
+            function validateEditar(){
+            	 document.getElementById("forma-editar").submit(); 
+            }
+
+		</script>
+</html>

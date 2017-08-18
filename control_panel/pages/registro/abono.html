@@ -1,0 +1,73 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="menu "></div> 
+
+        <!--- Title --> 
+        <title> Registrar Abono de Participante </title>       
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style.css">
+    
+    </head>
+    <style>
+
+      
+    </style>
+<body> 
+
+        <div class="body"> 
+        <br>
+        <center><h6> Registrar Abono </h6>
+        
+        <h3> Jesús de la Rocha Ramírez</h3></center>
+        <br><br>
+       
+        <form action="abono " method=POST id="forma-registro">
+                 <!-- COSTO Paquetes -->
+                <p class="title"> Cantidad: </p>
+                <input type=number name="gasto" class="numero" value="1" >
+                <p class="error"> *Debe llenar esta información </p>
+             
+                
+               
+                
+                <center>
+                <div class="registro">
+                        <hr>
+                    <button type="button" class="submit" onClick="validate()"> Siguiente </button>  
+                    <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                    </div>
+                </center>
+        </form>
+
+        </div>
+
+        </div>
+
+</body>
+        
+        <script>
+
+            function validate(){
+                var alert = confirm('Estás a punto de registrar un abono. Ésta acción no puede eliminarse, ¿Seguro que desea proseguir?');
+                if (alert) {
+                    document.getElementById("forma-registro").submit();
+                } else {
+                    // Do nothing!
+                }
+            }
+
+
+              //INCLUIR DOCUMENTOS
+
+        </script>
+</html>

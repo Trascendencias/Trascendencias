@@ -1,0 +1,143 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+        <!--- Title --> 
+        <title> Consulta Taller </title>
+
+		<!--- Incluir documeentos -->
+<% include menu  %>
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+		
+        <div class="body">
+        <center><h6><b> Consulta Taller </b></h6> </center>
+		<br>
+<button onClick="location.href='editar-taller?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>			
+               <div class="consulta">
+				<!-- NOMBRE/TITULO TODOS-->
+				<h3> Título: <p><i> Éste es un título muy campante </i></p> </h3><br>                
+                
+                <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
+				<h3> Fecha y Hora: <p><i> 11/OCT/17 • 11:00 - 12:00hrs </i></p> </h3><br>                
+                
+                <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
+				<h3> Nombre de Contacto: <p><i> Jesús de la Rocha Ramirez </i></p> </h3><br>                
+                
+                <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
+				<h3> Títulos del Presentador: <p><i> Licenciatura en Ingeniería </i></p> </h3><br>  
+                
+                 <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
+				<h3> Foto del Tallerista:</h3><br>
+                <div class="foto persona" style="background-image: url('resources/user_example.png')"> </div>              
+                
+                <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
+				<h3> Teléfono: <p><i> (686) 123 45 67 <button style="margin-left: 20px;" onClick="location.href='tel:6861234567'"> Llamar </button></i></p></h3><br>				
+                
+                <!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
+				<h3> Correo de Contacto: <p><i> email@corre.com </i></p> </h3><br>                
+                
+                <!-- LUGAR EN CETYS Conferencia, Taller, Evento Extra -->
+				<h3> Lugar en Cetys: <p><i> Auditorio </i></p> </h3><br>                
+                
+                <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
+				<h3> Dirección: <p><i> Av. Cibeles #123 Col. Beño </i></p> </h3><br>
+                
+                <!-- CUPO Visita, Taller, Paquete -->
+                <h3> Cupo: <p><i> 13/25 </i></p> </h3><br>     
+                
+				<!-- Requisitos Visita, Taller, Oferta  -->
+                <h3> Requisitos:</h3>
+                <ul> 
+                	<li> Requisito </li>  
+                    <li> Requisito </li>  
+                    <li> Requisito </li>  
+                </ul>                
+
+                <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
+                <h3> Fotos: </h3><br>
+                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
+                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
+                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
+                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
+                
+                <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
+                <h3> Videos: </h3><br>
+                <iframe width="260px" height="100px" src="https://www.youtube.com/embed/mr8GBzTsWqM" frameborder="0"></iframe>
+                <iframe width="260px" height="100px" src="https://www.youtube.com/embed/mr8GBzTsWqM" frameborder="0"></iframe>
+                <iframe width="260px" height="100px" src="https://www.youtube.com/embed/mr8GBzTsWqM" frameborder="0"></iframe>                
+                <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
+                <h3> Resumen: <p><i> Este es un resumen considerablemente corto... </i></p> </h3><br>
+                
+                <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
+                <h3> Contenido: <p><i> Esta es un contenido considerablemente corto.  </i></p> </h3><br>
+                </div>
+
+                <hr>
+                <h3> Historial de Cambios </h3>
+                 <div class="accion">
+                    <h3> Creado </h3><p> 13/SEP/2017 22:45h</p> <br>
+                    <p>Por: <i> Nombre Miembro Staff </i> </p>
+                </div>
+
+                <div class="accion">
+                    <h3> Editado </h3><p> 13/SEP/17 22:46h</p> <br>
+                    <p>Por: <i> ONombre Miembro Staff </i> </p>
+                </div>
+                <div class="accion">
+                    <h3> Eliminado </h3><p> 13/SEP/2017 22:47h</p> <br>
+                    <p>Por: <i> Nombre Miembro Staff </i> </p>
+                </div>
+        </div>
+
+</body>	<script>
+			function eliminar(){
+					if(confirm("Ésta a punto de eliminar éste contenido. Ésta acción no puede revertirse. ¿Desea continuar?")){
+						
+						}
+					else { };
+				}
+				
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+              //INCLUIR DOCUMENTOS
+            var videocount = 2;
+            var fotoscount = 2;
+
+            function validate(){
+                document.getElementById("forma-registro").submit();
+            }
+            
+            function masvideo(){
+                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('videos').innerHTML += videoinput;
+                videocount++;
+            }
+            function masfoto(){
+                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('fotos').innerHTML += fotosinput;
+                fotoscount++;
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+		</script>
+</html>

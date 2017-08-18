@@ -1,0 +1,79 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<!--- <% include menu  %> -->
+
+		<!--- Title --> 
+        <title> Editar Usuario </title>
+
+		<!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+	    <div w3-include-html="partials/menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+<style>
+	p#content::first-letter {
+		text-transform: capitalize;
+}
+</style>
+		
+        <div class="body">
+		<br>
+			
+			<div class="registro">   <br><br>
+			<center><b><h6 id="titulo">  Error.. </h6></b>
+			 <p id="content"> Error.. Es posible que haya un problema corriendo JavaScript</p> </center>
+                
+               
+                <div class="spacer"></div>
+                <hr>
+				<button type="button" class="submit" onClick="location.href='index '"> Aceptar </button> 
+
+
+
+			
+
+
+		</div>
+
+</body>
+		
+		<script>
+		var q = window.location.href;
+        q = q.split('=')[1];
+        var titulo = q.split('-')[0];
+        var content = q.split('-')[1];
+        if(titulo == "registro") titulo= "Registro Existoso";
+        if(titulo == "editar") titulo= "Edición Exitosa";
+        if(titulo == "eliminar") titulo= "Eliminación Exitosa";
+        if(titulo == "abono") titulo = "Abono Exitoso";
+        if(titulo == "error"){ titulo = "¿A dónde dijiste que querías ir?"; content = "Error #404: No se ha encontrado nada en ésta dirección..."; }
+
+
+
+
+		document.getElementById("titulo").innerHTML = titulo;
+        document.getElementById("content").innerHTML = content;
+
+
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+              //INCLUIR DOCUMENTOS
+
+
+		</script>
+</html>

@@ -1,0 +1,19 @@
+<html> 
+	<body>
+		<script>
+		loggedIn = true; 
+		if(loggedIn){window.location.href = 'reportes-generales ';}
+			else {window.location.href = '../';}
+
+		function validate(){
+               var value1 = document.getElementById("value1");
+               var value2 = document.getElementById("value2");
+               var send = true;
+               if(value1.value=="Usuario") { send = false; value1.classList.add("error"); }
+               if(value2.value=="Contraseña") { send = false; value2.classList.add("error"); }
+               if(value1.value!="Usuario" && value2.value!="Contraseña") { document.getElementById("forma").submit(); }
+		}
+		</script>
+</body>
+
+</html>

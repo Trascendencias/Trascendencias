@@ -1,0 +1,235 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+        <!--- <% include menu  %> -->
+
+        <!--- Title --> 
+        <title id="titulo2"> Lista de </title>        
+
+        <!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style.css">
+    
+    </head>
+    <style>
+        h3, p, button.nuevo {
+            display: inline;
+        }
+        button.third{
+            margin-left: 0px;
+        }
+
+    </style>
+<body>
+        
+        <div class="lista">
+        <br>
+        <h3> <span id="titulo"> </span>:  <p id="contador">  </p><button id="nuevo" class="nuevo" onClick="nuevo()"> + Nuevo </button></h3>
+        <form id="searchForm" action="javascript:buscarPalabras();">
+            <input id="search" class="search" onBlur="if (this.value == '') { this.value = 'Buscar...'; showAll();}"  onfocus="if(this.value == 'Buscar...') { this.value = ''; } " type="text" value="Buscar..." > 
+            <button class="third search" type="button" onClick="buscarPalabras();"> 🔎 </button>
+            <center>
+
+            <button class="third contact" id="correosButton" style="float: left;" type="button" onClick="correo();"> Correos </button>
+            <button class="third contact" style="float: left;" type="button" onClick="location.href='imprimirLista '"> Imprimir </button>
+
+            </center>
+        </form>
+        
+        <br>
+        <hr class="search">
+        <form id="accion-lista">
+        
+        <!--- AQUI ES EL WHILE -->
+        <div id="correos"> </div>
+        <div id="resultados">
+            <button class='enlistado' name='codigo' value='xxx'> 
+                <p class="hidden"> Taller Legos, Ciudad Ensenada, Foráneo, email:correo1@email.com </p> 
+                Francisco Arturo Peña 
+            </button>
+            <button class='enlistado' name='codigo' value='xxx'> 
+                <p class="hidden"> Estudiante, Visita Gameloft, Diseño Gráfico, email:correo2@email.com </p> 
+                Diana Laura Martínez García
+            </button>
+            <button class='enlistado' name='codigo' value='xxx'> 
+                <p class="hidden"> Estudiante, Visita Gameloft, Diseño Gráfico, email:correo3@email.com </p> 
+                 Esteban Martínez
+            </button>
+            <button class='enlistado' name='codigo' value='xxx'> 
+                <p class="hidden"> Visita Gameloft, Diseño Web, email:correo4@email.com </p> 
+                Jesús Ismael Villegas 
+            </button>
+            <button class='enlistado' name='codigo' value='xxx'> 
+                <p class="hidden"> Taller Legos, Programador Web, Base de Datos, email:correo5@email.com </p> 
+                Edgar Magdaleno
+            </button>
+        </div>
+        
+
+        </form>
+        </div>
+
+</body>
+        <script>
+		function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+			if(elem.classList.contains('active')) elem.classList.remove('active'); 
+			else elem.classList.add('active'); 
+		}
+
+        var q = window.location.href;
+        q = q.split('=')[1];
+        var titulo; var nuevolnk; var accionlnk; 
+        if(q == "participante"){ titulo = "Participantes"; nuevolnk = "registro-participante "; accionlnk = "consulta-participante "; }
+        if(q == "conferencia"){ titulo = "Conferencias"; nuevolnk = "registro-conferencia "; accionlnk = "consulta-conferencia "; }
+        if(q == "taller"){ titulo = "Talleres"; nuevolnk = "registro-taller "; accionlnk = "consulta-taller "; }
+        if(q == "visita"){ titulo = "Visitas"; nuevolnk = "registro-visita "; accionlnk = "consulta-visita "; }
+        if(q == "evento-extra"){ titulo = "Eventos Extra"; nuevolnk = "registro-evento-extra "; accionlnk = "consulta-evento-extra "; }
+        if(q == "evento-social"){ titulo = "Eventos Sociales"; nuevolnk = "registro-evento-social "; accionlnk = "consulta-evento-social "; }
+        if(q == "preguntas-frecuentes"){ titulo = "Preguntas"; nuevolnk = "registro-preguntas-frecuentes"; accionlnk = "consulta-preguntas-frecuentes "; }
+        if(q == "blog"){ titulo = "Blogs"; nuevolnk = "registro-blog "; accionlnk = "consulta-blog ";}
+        if(q == "punto-venta"){ titulo = "Puntos de Venta"; nuevolnk = "registro-punto-venta "; accionlnk = "consulta-punto-venta ";}
+        if(q == "paquetes"){ titulo = "Paquetes"; nuevolnk = "registro-paquetes "; accionlnk = "consulta-paquetes ";}
+        if(q == "patrocinadores"){ titulo = "Patrocinadores"; nuevolnk = "registro-patrocinadores "; accionlnk = "consulta-patrocinadores ";}
+        if(q == "staff"){ titulo = "Staff"; document.getElementById("nuevo").style.display = "none"; accionlnk = "consulta-staff ";}
+        if(q == "testimonios"){ titulo = "Testimonios"; nuevolnk = "registro-testimonios "; accionlnk = "consulta-testimonios ";}
+
+
+        document.getElementById("titulo2").innerHTML += titulo;
+        document.getElementById("accion-lista").action = accionlnk;
+
+
+        function nuevo(){
+            location.href = nuevolnk;
+        }
+
+              //INCLUIR DOCUMENTOS
+
+            document.getElementById("contador").innerHTML += 456;
+            document.getElementById("titulo").innerHTML += titulo;
+
+            function buscarPalabras(){
+                var palabras=document.getElementById("search").value;
+                var enlistados = document.getElementsByClassName("enlistado");
+                var A = 0; 
+                while(A < enlistados.length){
+                    enlistados[A].style.display = "none";
+                    A++;
+                }
+                if(palabras == "Buscar..." || palabras == ""){ showAll(); }
+                if(palabras.indexOf("+", 0) > 0) {
+                        palabras = palabras.split("+");
+                        var E = 0; 
+                        while(E<palabras.length){
+                            var C = 0;
+                            while(C < enlistados.length){
+                                var contenido = sinAcento(enlistados[C].innerHTML.toLowerCase());
+                                var abuscar = sinAcento(palabras[E].toLowerCase());
+                                if(contenido.indexOf(abuscar, 0)>0){
+                                    enlistados[C].style.display = "block";
+                                }
+                                C++;
+                            }
+                            E++;
+                        }
+
+                }
+                
+                else {
+                    palabras = palabras.split(" ");
+                    var C = 0;
+
+                    while(C < enlistados.length){
+                        var B = 0; 
+                        var E = 0;
+                        E = 0; 
+                        while(E < palabras.length){
+                            var contenido = sinAcento(enlistados[C].innerHTML.toLowerCase());
+                            var abuscar = sinAcento(palabras[E].toLowerCase());
+                            if(contenido.indexOf(abuscar) >= 0){ }
+                            else B = 1;
+                            E++; 
+                        }
+                        if(B == 0){ enlistados[C].style.display = "block";}
+                        C++;;
+                    }
+                    }
+                }
+
+
+            function showAll(){
+                var enlistados = document.getElementsByClassName("enlistado");
+                var C = 0; 
+                while(C< enlistados.length){
+                    enlistados[C].style.display = "block";
+                    C++;
+                }
+            }
+            function sinAcento(str){
+                str = str.replace("á", "a");
+                str = str.replace("Á", "a");
+                str = str.replace("é", "e");
+                str = str.replace("É", "e");
+                str = str.replace("í", "i");
+                str = str.replace("Í", "i");
+                str = str.replace("ó", "o");
+                str = str.replace("Ó", "o");
+                str = str.replace("ú", "u");
+                str = str.replace("Ú", "u");
+                return str;
+            }
+            if(q != "participante"){
+                document.getElementsByClassName("contact")[0].style.display = "none"; 
+                document.getElementsByClassName("contact")[1].style.display = "none";
+            }
+
+            var correosActive = false;
+            function correo(){
+                if(correosActive){
+                    okaybye();
+                    document.getElementById("correosButton").innerHTML = "Correos";
+                }
+                else {
+                    document.getElementById("correosButton").innerHTML = "Lista";
+                    document.getElementById("correos").style.display = "block";
+                var enlistados = document.getElementsByClassName("enlistado");
+                var A = 0; 
+                var correos = "Correos: ";
+                while(A < enlistados.length){
+                    var correo;
+                    var innerHTML; 
+                    if(enlistados[A].style.display != "none"){
+
+                        innerHTML = enlistados[A].innerHTML.split(" ");
+                        var C = 0; 
+                        while(C<innerHTML.length){
+                            if(innerHTML[C].indexOf("@") > 0) correos += innerHTML[C].split(":")[1] + ", ";
+                            C++; 
+                        }
+                    }
+                    A++;
+                }
+                document.getElementById("correos").innerHTML = "<p>" + correos + "</p>";
+                document.getElementById("resultados").style.display = "none";
+                correosActive = true;
+
+                }
+            }
+            function okaybye(){
+                document.getElementById("correos").style.display = "none";
+                document.getElementById("resultados").style.display = "block";
+                correosActive = false;
+            }
+
+
+        </script>
+</html>

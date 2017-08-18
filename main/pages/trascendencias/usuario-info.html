@@ -1,0 +1,91 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        <!--- INCLUIR DOCUMENTOS -->
+        <!--- <% include partials/menu  %> -->
+        
+        <!--- Title --> 
+        <title> Información del Usuario </title>
+        
+        <!--- Incluir documeentos -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style.css">
+    
+    </head>
+
+<body>
+        
+        <div class="body">
+        <br>
+
+        <div class="spacer"></div>
+        
+        <center>
+        <br><br>
+        	<img src="resources/user_example.png" class="consultausuario">
+                    <h3 style="font-size: 20px"> Nombre Nombre Apellido </h3>
+
+        </center>
+        <br>
+        
+        <p> <i> Paquete Elegido </i><button class="third" style="display:inline; margin-left: 10px" onClick="cambiarPaquete();"> Cambiar </button></p>
+        <p> Saldo: <span class="dineromenos"> -$450 </span></p>
+
+        <hr>
+        <p> Talla M </p>
+        <p> email@correo.com </p>
+        <p> Institución de Procedencia </p>
+        <p> Carrera, 2do Semestre </p>
+        <p> Mexicali, Baja California. </p>
+        <p> (686) 123 45 67 </p>
+        <p> Alergias: Plástico </p>
+       
+<center> 
+            <button onClick="location.href='editar-usuario '"> Editar Info </button>
+        </center>        <hr>
+
+        
+
+
+
+        <h3> Historial de Acciones </h3>   
+        <div class="accion">
+            <h3> Registro </h3><p> 13/SEP/2017 22:45h</p> <br>
+            <p>Registrado por: <i> Interner </i> </p>
+        </div>
+        <div class="accion">
+            <h3 class="dineromas"> Abono </h3><p> 13/SEP/17 22:45h</p> <br>
+            <p> Cantidad de: <i> $450.00 </i> </p>
+        </div>
+        <div class="accion">
+            <h3 class="dineromas"> Abono </h3><p> 13/SEP/17 22:45h</p> <br>
+            <p> Cantidad de: <i> $450.00 </i> </p>
+        </div>
+        <div class="accion">
+            <h3> Liquidado </h3><p> 13/SEP/2017 22:45h</p> <br>
+        </div>
+
+
+        </div>
+
+</body>
+        
+        <script>
+        	  //INCLUIR DOCUMENTOS
+			
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+        </script>
+</html>

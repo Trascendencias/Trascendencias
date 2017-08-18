@@ -1,0 +1,157 @@
+<html> 
+
+	<head>		
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="partials/menu "></div>
+            
+        <!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+        <!--- Title --> 
+        <title> Registro Staff </title>
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+		
+        <div class="body">
+		<br>
+		<center><h6> Editar Miembro de Staff </h6> </center>
+			
+			<form class="registro" id="forma-registro" method="get" action="registro "> <br><br>
+               
+                <!--- TIPO DE REGISTRO --> 
+                <input type="hidden" name="registrado" value="participante">
+                
+				<!-- NOMBRE/TITULO TODOS-->
+                <p class="title black"> Nombre </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Ismael Villegas" name="title" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+                <!-- TALLA Participantes -->
+                <p class="title black"> Talla </p><br><br>
+                <select id="select" name="talla">
+                    <option value="none"> Talla... </option>
+                  <option value="XS"> XS </option>
+                  <option value="S"> S </option>
+                  <option value="M"> M </option>
+                  <option value="L"> L </option>
+                  <option value="XL"> XL </option>
+                </select>
+                <p class="error"> *Debe llenar esta información </p>
+                
+                <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
+                <p class="title black"> Teléfono </p><br><br>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="(686)123 45 67" name="telefono-contacto" required>
+				<p class="error"> *Debe llenar esta información </p>
+                
+				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
+                <p class="title black"> Correo </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="correo@email.com" name="correo" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+                <!-- FACEBOOK -->
+                <p class="title black"> Link de Facebook </p><br><br>
+                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Link de Facebook'; }"  onfocus="if(this.value == 'Link de Facebook') { this.value = ''; }" type="text" value="https://www.facebook.com/profile.php?id=100009661066774" name="facebook" required>
+                <p class="error"> *Debe llenar esta información </p>
+
+				<!-- INSTITUCION DE PROCEDENCIA Participante-->
+                <p class="title black"> Carrera </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Carrera'; }"  onfocus="if(this.value == 'Carrera') { this.value = ''; }" type="text" value="IDGD" name="carrera" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				 <!-- SEMESTRE-->
+                <p class="title black"> Semestre: </p><br><br><br>
+                <input type=number name="semestre" class="numero" value="5">
+                <p class="error"> *Debe llenar esta información </p>
+
+				<!-- CIUDAD Participante-->
+                <p class="title black"> Ciudad </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Mexicali" name="ciudad" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- CONTRASENA Participante-->
+                <p class="title black"> Contraseña </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; }" type="password" value="Contraseña" name="contrasena" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- REPITE LA CONTRASENA Participante-->
+                <p class="title black"> Repita la Contraseña </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = '';}" type="password" value="contraseña" name="contrasena2" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+                <!-- ALERGIAS Participante-->
+                <p class="title black"> Alergias </p><br><br>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="Paracetamol" name="alergias" required>
+				<p class="error"> *Debe llenar esta información </p>
+                
+                <!-- Equipo Staff -->
+                <p class="title black"> Equipo en Staff </p><br><br>
+                <select id="select" name="equipo">
+                  <option value="none"> Equipo en Trascendencias... </option>
+                  <option value="general">General</option>
+                  <option value="contenido">Contenido</option>
+                  <option value="mkt">Mkt y Ventas</option>
+                  <option value="imagen">Imagen</option>
+                  <option value="estrategia">Estrategia</option>
+                  <option value="eventos">Eventos Sociales</option>
+                </select>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- Puesto ELEGIDO  -->
+                <p class="title black"> Puesto Elegido </p><br><br>
+                <select id="select" name="puesto">
+                  <option value="none"> Puesto ... </option>
+                  <option value="coordinador">Coordinador</option>
+                  <option value="subcoordinador">Subcoordinador</option>
+                  <option value="miembro">Miembro</option>
+                </select>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<p class="title black"> Foto del Staff </p><br><br><br>
+                <input type="file" width="150px" name="foto" value="fileupload" id="image" style="display: inline;">
+                <p class="error"> *Debe llenar esta información </p>
+
+                <div class="spacer"></div>
+                <hr>
+				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+
+                
+			
+			</form>
+		</div>
+
+</body>
+		
+		<script>
+              //INCLUIR DOCUMENTOS
+            var videocount = 2;
+            var fotoscount = 2;
+
+            function validate(){
+                document.getElementById("forma-registro").submit();
+            }
+            
+            
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+		</script>
+</html>
