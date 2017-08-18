@@ -37,7 +37,7 @@ database.register = {
 		new_staff_member.team = form.team;
 		new_staff_member.position = form.position;
 		new_staff_member.photo = __dirname + '/images/' + Date.now().toString() + '-' + req.files.photo.name;
-		database.upload(req.files.photo, new_staff_member.phot);
+		database.upload(req.files.photo, new_staff_member.photo);
 
 		new_staff_member.save(function(err) {
 			if(err) {
