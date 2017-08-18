@@ -13,6 +13,7 @@ var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
 var database = require('./database/connection');
 var flash = require('connect-flash');
+var file_upload = require('express-fileupload')
 var control_panel_sessions = require('./database/sessions').control_panel;
 
 require('./control_panel/auth/passport')(passport);
@@ -46,12 +47,12 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/control_panel/pages');
 
-http_app.get('*', function(request, response) {
-	response.redirect('https://trascendencias.org:8443' + request.url);
+http_app.get('*', function(req, res) {
+	res.redirect('https://trascendencias.org:8443' + req.url);
 });
 
-app.get('/', function(request, response) {
-	response.render('index');
+app.get('/', function(req, res) {
+	res.render('index');
 });
 
 app.get('/login-admin', function(req, res) {
@@ -73,30 +74,29 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
-app.get('/register-:collection', function(request, response) {
-	response.render('register-' + request.params.collection);
+app.get('/registro-:collection', function(req, res) {
+	res.render('register-' + req.params.collection);
 });
 
-app.post('/register-:collection', form(), function(request, response) {
-	console.log("Register " + request.params.collection + ":");
-	database.register[request.params.collection](request.form);
-	response.redirect('/');
+app.post('/registro-:collection', form(), function(req, res) {
+	database.register[req.params.collection](req.form);
+	res.redirect('/');
 });
 
-app.get('/list-:collection', function(request, response) {
-	database.list(request, response);
+app.get('/list-:collection', function(req, res) {
+	database.list(req, res);
 });
 
-app.get('/look-:collection/:document', function(request, response) {
-	database.look(request, response);
+app.get('/look-:collection/:document', function(req, res) {
+	database.look(req, res);
 });
 
-app.get('/:file', function(request, response) {
-	if(fs.existsSync(__dirname + '/control_panel/pages/' + request.params.file + '.html')) {
-		return response.render(request.params.file);
+app.get('/:file', function(req, res) {
+	if(fs.existsSync(__dirname + '/control_panel/pages/' + req.params.file + '.html')) {
+		return res.render(req.params.file);
 	}
 
-	response.status(404).send('File not found.');
+	res.status(404).send('File not found.');
 });
 
 https.createServer({
