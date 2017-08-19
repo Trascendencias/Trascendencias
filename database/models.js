@@ -56,17 +56,22 @@ var schemas = {
 		alergies: String,
 		team: String,
 		position: String
-	}),
-	admin: mongoose.Schema({
-		password: String
 	})
-};
+}
 
 schemas.participant.methods.generate_hash = function(password) {
-	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(9), null);
 }
 
 schemas.participant.methods.valid_password = function(password) {
+	return bcrypt.compareSync(password, this.local.password);
+}
+
+schemas.staff_member.methods.generate_hash = function(password) {
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(9), null);
+}
+
+schemas.staff_member.methods.valid_password = function(password) {
 	return bcrypt.compareSync(password, this.local.password);
 }
 
@@ -75,6 +80,5 @@ module.exports = {
 	participant: mongoose.model('participants', schemas.participant),
 	social_event: mongoose.model('social_events', schemas.social_event),
 	sale_point: mongoose.model('sale_points', schemas.sale_point),
-	staff_member: mongoose.model('staff_members', schemas.staff_member),
-	admin: mongoose.model('admins', schemas.staff_member)
+	staff_member: mongoose.model('staff_members', schemas.staff_member)
 };

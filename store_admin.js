@@ -1,8 +1,8 @@
 var database = require('./database/connection');
-var admin_model = require('./database/models').admin;
+var staff_member = require('./database/models').staff_member;
 
-var admin = new admin_model();
-admin.password = 'admin@trasce4eva';
+var new_staff_member = new staff_member();
+new_staff_member.password = 'admin@trasce4eva';
 
 admin.save(function(err) {
 	if(err) {
@@ -10,4 +10,5 @@ admin.save(function(err) {
 	}
 
 	console.log("Admin stored");
+	process.exit();
 });

@@ -39,11 +39,13 @@ app.use(body_parser.urlencoded({
 	extended: true
 }));
 app.use(function(req, res, next) {
-	let path = req.baseUrl + req.path;
-	console.log("%s\t%s\tSession: %s", req.method, path, req.isAuthenticated());
-	/*if(!req.isAuthenticated() && req.method == 'GET') {
-		return res.render('registro/login', { message: req.flash('message') });
-	}*/
+	if(req.method != 'GET') {
+		return next();
+	}
+
+	if(req.isAuthenticated()) {
+
+	}
 
 	next();
 });
@@ -55,7 +57,7 @@ http_app.get('*', function(req, res) {
 	res.redirect('https://trascendencias.org:8443' + req.url);
 });
 
-app.get('/login', function(req, res) {
+app.get('registro/login', function(req, res) {
 	if(req.isAuthenticated()) {
 		return res.send("Sesion ya iniciada.");
 	}
@@ -74,21 +76,19 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+app.get('/:module/*', function(req, res) {
+	let path = (req.baseUrl + req.path).substring(1);
+
+	return res.render(path);
+});
+
+app.get('/', function(req, res) {
+	return res.redirect('/registro/login');
+});
+
 app.post('/registro-:collection', form(), function(req, res) {
 	database.register[req.params.collection](req);
 	res.redirect('/');
-});
-
-app.get('/list-:collection', function(req, res) {
-	database.list(req, res);
-});
-
-app.get('/look-:collection/:document', function(req, res) {
-	database.look(req, res);
-});
-
-app.get(':/module/*', function(req, res) {
-	return res.render((req.baseUrl + req.path).substring(1));
 });
 
 https.createServer({
