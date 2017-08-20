@@ -9,7 +9,7 @@ module.exports = function(http_app, app, fs, passport, database) {
 		response.redirect('https://trascendencias.org' + request.url);
 	});
 
-	app.get('/admin', function(req, res) {
+	app.get('/staff', function(req, res) {
 		res.redirect('https://trascendencias.org:8443');
 	});
 

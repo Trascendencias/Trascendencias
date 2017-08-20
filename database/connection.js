@@ -55,9 +55,13 @@ database.upload = function(file, path) {
 	})
 };
 
-database.valid_verification_hash = function(email, hash) {
-	return bcrypt.compareSync(email, hash);
+database.valid_hash = function(string, hash) {
+	return bcrypt.compareSync(string, hash);
 };
+
+database.generate_hash = function(string) {
+	bcrypt.hashSync(string, bcrypt.genSaltSync(9), null);
+}
 
 database.verify = function(email) {
 	database.collection('participants').updateOne({

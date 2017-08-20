@@ -49,8 +49,10 @@ module.exports = function(passport) {
 		});
 	}));
 
-	passport.use('login', new local_strategy(
-		function(username, password, done) {
+	passport.use('login', new local_strategy( {
+			passReqToCallback: true,
+		},
+		function(req, username, password, done) {
 			staff_member.findOne({ 'name': username }, function(err, searched_staff_member) {
 				if(err) {
 					return done(err);

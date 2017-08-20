@@ -72,7 +72,7 @@ schemas.staff_member.methods.generate_hash = function(password) {
 }
 
 schemas.staff_member.methods.valid_password = function(password) {
-	return bcrypt.compareSync(password, this.local.password);
+	return bcrypt.compareSync(password, this.password);
 }
 
 module.exports = {

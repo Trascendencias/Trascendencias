@@ -13,10 +13,24 @@ var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
 var database = require('./database/connection');
 var flash = require('connect-flash');
-var file_upload = require('express-fileupload')
+var file_upload = require('express-fileupload');
+var nodemailer = require('nodemailer');
 var control_panel_sessions = require('./database/sessions').control_panel;
 
 require('./control_panel/auth/passport')(passport);
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'trasce4eva@gmail.com',
+        pass: 'admin@trasce4eva'
+    }
+});
+
+let mail_options = {
+	from: '"Trascendencias" <trasce4eva@gmail.com>',
+	subject: 'Se parte del Staff de Trascendencias'
+};
 
 form.configure({
 	passThrough: true
@@ -38,17 +52,6 @@ app.use('/admin/resources', express.static(__dirname + '/control_panel/pages/adm
 app.use(body_parser.urlencoded({
 	extended: true
 }));
-app.use(function(req, res, next) {
-	if(req.method != 'GET') {
-		return next();
-	}
-
-	if(req.isAuthenticated()) {
-
-	}
-
-	next();
-});
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/control_panel/pages');
@@ -57,39 +60,92 @@ http_app.get('*', function(req, res) {
 	res.redirect('https://trascendencias.org:8443' + req.url);
 });
 
-app.get('registro/login', function(req, res) {
-	if(req.isAuthenticated()) {
-		return res.send("Sesion ya iniciada.");
-	}
-
-	res.render('registro/login', { message: req.flash('message') });
+app.get('/login', function(req, res) {
+	res.render('login', { message: req.flash('message') });
 });
-
-app.post('/login', form(), passport.authenticate('login', {
-	successRedirect: '/',
-	failureRedirect: '/login',
-	failureFlash: true
-}));
 
 app.get('/logout', function(req, res) {
 	req.logout();
-	res.redirect('/');
+	res.redirect('/login');
 });
 
-app.get('/:module/*', function(req, res) {
-	let path = (req.baseUrl + req.path).substring(1);
-
-	return res.render(path);
+app.get('/registro-staff', form(), valid_hash, function(req, res) {
+	res.render('registro-staff', { message: req.flash('message') });
 });
 
-app.get('/', function(req, res) {
-	return res.redirect('/registro/login');
+app.get('/:module/:page?', check_session, protect, function(req, res) {
+	return res.render((req.baseUrl + req.path).substring(1), function(err, html) {
+		if (err) {
+			if (err.message.indexOf('Failed to lookup view') !== -1) {
+				return res.status(404).send('404');
+			}
+
+			throw err;
+		}
+
+		res.send(html);
+	});
 });
+
+app.get('/', check_session, function(req, res) {
+	if(req.user.position == 'Administrator') {
+		res.redirect('/admin/menu');
+	}
+	else {
+		res.redirect('/registro/menu');
+	}
+})
+
+app.post('/login', form(), passport.authenticate('login', {
+	failureRedirect: 'login',
+	failureFlash: true
+}), function(req, res) {
+	if(req.user.position == 'Administrator') {
+		return res.redirect('/admin/menu');
+	}
+	
+	res.redirect('/registro/menu');
+});
+
+app.post('/admin/generar-claves', form(), function(req, res) {
+	let verification_hash = database.generate_hash(email);
+	mail_options.text = 'Da click al siguiente link para ser parte del Staff de Trascendencias: https://trascendencias.org/verify?email=' + req.form.email + '&key=' + verification_hash;
+	mail_options.to = req.form.email;
+	transporter.sendMail(mail_options, (error, info) => {
+		if (error) {
+			return console.log(error);
+		}
+	});
+})
 
 app.post('/registro-:collection', form(), function(req, res) {
 	database.register[req.params.collection](req);
 	res.redirect('/');
 });
+
+function check_session(req, res, next) {
+	if(!req.isAuthenticated()) {
+		return res.redirect('/login');
+	}
+
+	next();
+}
+
+function protect(req, res, next) {
+	if(req.params.module == 'admin' && req.user.position != 'Administrator') {
+		res.redirect('/registro/menu');
+	}
+
+	next();
+}
+
+function valid_hash(req, res, next) {
+	if(!database.valid_hash(req.form.email, req.form.key)) {
+		return res.send('Clave de verificaion invalida.');
+	}
+
+	next();
+}
 
 https.createServer({
 	ca: fs.readFileSync(ssl.chain),

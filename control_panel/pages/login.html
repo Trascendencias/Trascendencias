@@ -11,7 +11,7 @@
         <title> Login </title>
 
 		<!--- Pa que agarre el Styleshit los acentos -->
-		<link rel="stylesheet" type="text/css" href="resources/style.css">
+		<link rel="stylesheet" type="text/css" href="registro/resources/style.css">
 	
     </head>
 <body>
@@ -28,7 +28,9 @@
         <div class="body" id="login" style="width: 300px;">
             <center>
 	            <h6> <b> Login </b> </h6>
-	            <br><br><br>
+	           	<% if(message) { %>
+	            	<h3 style='color:red;'><%= message %></h3>
+	            <% } %><br><br><br>
 	            <form method="post" id="forma" action="/login" style="width: 300px;">
 	                
 	                <input id="value1" style="width: 300px;" maxlength="50" onBlur="if (this.value == '') { this.value = 'Usuario'; }"  onfocus="if(this.value == 'Usuario') { this.value = ''; }" type="text" value="Usuario" name="username" required>
@@ -38,8 +40,8 @@
 	                <p class="error"> *Debe llenar esta información </p>
            
            
-				<button type="button" class="third" onClick="location.href='registro-staff '"> Registrarse </button>
-            	<button type="submit" onClick="validate()"> Siguiente </button>
+				<button type="button" class="third" onClick="location.href='registro-staff'"> Registrarse </button>
+            	<button type="submit"> Siguiente </button>
 
             	</center>
              </form>

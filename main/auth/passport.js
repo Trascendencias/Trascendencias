@@ -7,18 +7,17 @@ var facebook_config = require('./facebook.js');
 var nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'trasce4eva@gmail.com',
-        pass: 'admin@trasce4eva'
-    }
+	service: 'gmail',
+	auth: {
+		user: 'trasce4eva@gmail.com',
+		pass: 'admin@trasce4eva'
+	}
 });
 
 let mail_options = {
 	from: '"Trascendencias" <trasce4eva@gmail.com>',
 	subject: 'Verifica tu cuenta de Trascendencias'
 };
-
 
 module.exports = function(passport) {
 	passport.serializeUser(function(user, done){
