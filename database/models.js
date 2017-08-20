@@ -51,7 +51,7 @@ var schemas = {
 		email: String,
 		major: String,
 		semester: String,
-		facebook: String
+		facebook: String,
 		city: String,
 		password: String,
 		alergies: String,
