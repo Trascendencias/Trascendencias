@@ -64,13 +64,17 @@ database.used_email = function(email, done) {
 	});
 }
 
-database.list = function(request, response) {
+database.list = function(collection, done) {
 	let docs = [];
-	database.collection(request.params.collection).find().forEach(function(doc) {
+	database.collection(collection).find().forEach(function(doc) {
 		docs.push(doc);
 	},
 	function(err) {
-		response.render('list', { list: docs });
+		if(err) {
+			throw err;
+		}
+
+		done(docs);
 	});
 }
 
