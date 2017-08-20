@@ -51,11 +51,13 @@ var schemas = {
 		email: String,
 		major: String,
 		semester: String,
+		facebook: String
 		city: String,
 		password: String,
 		alergies: String,
 		team: String,
-		position: String
+		position: String,
+		photo: String
 	})
 }
 

@@ -19,31 +19,6 @@ database.register = {
 	},
 	expense: function(form) {
 		console.log(JSON.stringify(form));
-	},
-	staff: function(req) {
-		let staff_member_model = models.staff_member;
-		let form = req.form;
-
-		let new_staff_member = new staff_member_model();
-		new_staff_member.name = form.name;
-		new_staff_member.shirt_size = form.shirt_size;
-		new_staff_member.phone = form.phone;
-		new_staff_member.email = form.email;
-		new_staff_member.major = form.major;
-		new_staff_member.semester = form.semester;
-		new_staff_member.city = form.city;
-		new_staff_member.password = 'nuevo';
-		new_staff_member.alergies = form.alergies;
-		new_staff_member.team = form.team;
-		new_staff_member.position = form.position;
-		new_staff_member.photo = __dirname + '/images/' + Date.now().toString() + '-' + req.files.photo.name;
-		database.upload(req.files.photo, new_staff_member.photo);
-
-		new_staff_member.save(function(err) {
-			if(err) {
-				throw err;
-			}
-		});
 	}
 };
 
@@ -60,8 +35,8 @@ database.valid_hash = function(string, hash) {
 };
 
 database.generate_hash = function(string) {
-	bcrypt.hashSync(string, bcrypt.genSaltSync(9), null);
-}
+	return bcrypt.hashSync(string, bcrypt.genSaltSync(9), null);
+};
 
 database.verify = function(email) {
 	database.collection('participants').updateOne({
@@ -69,6 +44,22 @@ database.verify = function(email) {
 	}, {
 		$set: {
 			verified: true
+		}
+	});
+}
+
+database.used_email = function(email, done) {
+	let staff_member = models.staff_member;
+	
+	staff_member.findOne({ 'email': email }, function(err, searched_staff_member) {
+		if(err) {
+			return done(err);
+		}
+		else if(searched_staff_member) {
+			return done(null, true);
+		}
+		else {
+			return done(null, false);
 		}
 	});
 }

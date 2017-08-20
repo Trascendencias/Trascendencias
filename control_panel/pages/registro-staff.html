@@ -23,17 +23,17 @@
 		<br>
 		<center><h6> Registro de Miembro de Staff </h6> </center>
 			
-			<form class="registro" id="forma-registro" method="get" action="registro "> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/signup"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="participante">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="title" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- TALLA Participantes -->
-                <select id="select" name="talla">
+                <select id="select" name="shirt_size">
                     <option value="none"> Talla... </option>
                   <option value="XS"> XS </option>
                   <option value="S"> S </option>
@@ -44,11 +44,7 @@
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="Teléfono" name="telefono-contacto" required>
-				<p class="error"> *Debe llenar esta información </p>
-                
-				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="correo" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="Teléfono" name="phone" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- FACEBOOK -->
@@ -56,32 +52,32 @@
                 <p class="error"> *Debe llenar esta información </p>
 
 				<!-- INSTITUCION DE PROCEDENCIA Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Carrera'; }"  onfocus="if(this.value == 'Carrera') { this.value = ''; }" type="text" value="Carrera" name="carrera" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Carrera'; }"  onfocus="if(this.value == 'Carrera') { this.value = ''; }" type="text" value="Carrera" name="major" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				 <!-- SEMESTRE-->
                 <p class="title"> Semestre: </p>
-                <input type=number name="semestre" class="numero" value="1">
+                <input type=number name="semester" class="numero" value="1">
                 <p class="error"> *Debe llenar esta información </p>
 
 				<!-- CIUDAD Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Ciudad" name="ciudad" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Ciudad" name="city" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CONTRASENA Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="contrasena" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="password" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- REPITE LA CONTRASENA Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="contrasena2" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="password2" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- ALERGIAS Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="¿Tienes alergias?" name="alergias" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="¿Tienes alergias?" name="alergies" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Equipo Staff -->
-                <select id="select" name="equipo">
+                <select id="select" name="team">
                   <option value="none"> Equipo en Trascendencias... </option>
                   <option value="general">General</option>
                   <option value="contenido">Contenido</option>
@@ -93,7 +89,7 @@
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- Puesto ELEGIDO  -->
-                <select id="select" name="puesto">
+                <select id="select" name="position">
                   <option value="none"> Puesto ... </option>
                   <option value="coordinador">Coordinador</option>
                   <option value="subcoordinador">Subcoordinador</option>
@@ -102,7 +98,7 @@
 				<p class="error"> *Debe llenar esta información </p>
 
 				<p class="title"> Foto del Staff </p><br><br><br>
-                <input type="file" width="150px" name="foto" value="fileupload" id="image" style="display: inline;">
+                <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;">
                 <p class="error"> *Debe llenar esta información </p>
 
                 <div class="spacer"></div>

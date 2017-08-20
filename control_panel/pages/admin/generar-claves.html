@@ -36,10 +36,11 @@
                 <br>
             
             <br>
-            <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="correo" required>
+            <form method='post' action='/generar-claves'>
+            <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="email" required>
 				<p class="error"> *Debe llenar esta información </p>
 
-            <button onClick=""> Enviar </button> 
+            <button type='submit'> Enviar </button> </form>
             <br> <br>
             <hr>
             </center>

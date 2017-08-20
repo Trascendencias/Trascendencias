@@ -21,7 +21,7 @@ module.exports = function(http_app, app, fs, passport, database) {
 	});
 
 	app.get('/verify', form(), function(req, res) {
-		if(database.valid_verification_hash(req.form.email, req.form.hash)) {
+		if(database.valid_hash(req.form.email, req.form.key)) {
 			database.verify(req.form.email);
 			return res.redirect('/')
 		}

@@ -69,7 +69,7 @@ app.get('/logout', function(req, res) {
 	res.redirect('/login');
 });
 
-app.get('/registro-staff', form(), valid_hash, function(req, res) {
+app.get('/registro-staff', form(), valid_registration, function(req, res) {
 	res.render('registro-staff', { message: req.flash('message') });
 });
 
@@ -97,7 +97,7 @@ app.get('/', check_session, function(req, res) {
 })
 
 app.post('/login', form(), passport.authenticate('login', {
-	failureRedirect: 'login',
+	failureRedirect: '/login',
 	failureFlash: true
 }), function(req, res) {
 	if(req.user.position == 'Administrator') {
@@ -107,16 +107,20 @@ app.post('/login', form(), passport.authenticate('login', {
 	res.redirect('/registro/menu');
 });
 
-app.post('/admin/generar-claves', form(), function(req, res) {
-	let verification_hash = database.generate_hash(email);
-	mail_options.text = 'Da click al siguiente link para ser parte del Staff de Trascendencias: https://trascendencias.org/verify?email=' + req.form.email + '&key=' + verification_hash;
+app.post('/generar-claves', form(), function(req, res) {
+	let verification_hash = database.generate_hash(req.form.email);
+	mail_options.text = 'Da click al siguiente link para ser parte del Staff de Trascendencias: https://trascendencias.org:8443/registro-staff?email=' + req.form.email + '&key=' + verification_hash;
 	mail_options.to = req.form.email;
 	transporter.sendMail(mail_options, (error, info) => {
 		if (error) {
 			return console.log(error);
 		}
 	});
+
+	res.redirect('/admin/menu');
 })
+
+app.post('/signup', form(), passport.authenticate('signup'));
 
 app.post('/registro-:collection', form(), function(req, res) {
 	database.register[req.params.collection](req);
@@ -139,12 +143,22 @@ function protect(req, res, next) {
 	next();
 }
 
-function valid_hash(req, res, next) {
+function valid_registration(req, res, next) {
 	if(!database.valid_hash(req.form.email, req.form.key)) {
 		return res.send('Clave de verificaion invalida.');
 	}
 
-	next();
+	database.used_email(req.form.email, function(err, used) {
+		if(err) {
+			throw err;
+		}
+		else if(used) {
+			return res.send('Correo ya registrado.');
+		}
+		else {
+			next();
+		}
+	});
 }
 
 https.createServer({
