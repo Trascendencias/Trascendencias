@@ -26,13 +26,13 @@
 		<br>
 		<center><h6><b> Registro de Conferencia </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-conferencia"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="Conferencia">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="title" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
@@ -51,11 +51,11 @@
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre de Conferencista'; }"  onfocus="if(this.value == 'Nombre de Conferencista') { this.value = ''; }" type="text" value="Nombre de Conferencista" name="nombre-contacto" required>
+                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre de Conferencista'; }"  onfocus="if(this.value == 'Nombre de Conferencista') { this.value = ''; }" type="text" value="Nombre de Conferencista" name="contact_name" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Titulos del Conferencista'; }"  onfocus="if(this.value == 'Titulos del Conferencista') { this.value = ''; }" type="text" value="Titulos del Conferencista" name="titulos-presentador" required>
+                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Titulos del Conferencista'; }"  onfocus="if(this.value == 'Titulos del Conferencista') { this.value = ''; }" type="text" value="Titulos del Conferencista" name="speaker_titles" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
@@ -63,11 +63,11 @@
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo del Conferencista'; }"  onfocus="if(this.value == 'Correo del Conferencista') { this.value = ''; }" type="text" value="Correo del Conferencista" name="correo" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo del Conferencista'; }"  onfocus="if(this.value == 'Correo del Conferencista') { this.value = ''; }" type="text" value="Correo del Conferencista" name="email" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- LUGAR EN CETYS Conferencia, Taller, Evento Extra -->
-                 <select id="select" name="lugar-cetys">
+                 <select id="select" name="location">
                   <option value="none">Lugar en Cetys ...</option>
                   <option value="auditorio">Auditorio</option>
                   <option value="cat">CAT</option>
@@ -86,13 +86,13 @@
                 
                 <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
                 <p class="title"> Foto del Conferencista (300x300px) </p><br><br><br>
-                <input type="file" width="150px" name="main-foto" value="fileupload" id="image" style="display: inline;">
+                <input type="file" width="150px" name="speaker_photo" value="fileupload" id="image" style="display: inline;">
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <p class="title"> Fotos (1920x1080px) </p><br><br><br>
                 <div id="fotos">
-                <input type="file" width="150px" name="foto1" value="fileupload" id="image" style="display: inline;">
+                <input type="file" width="150px" name="photo_1" value="fileupload" id="image" style="display: inline;">
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                 <button class="third" onClick="masfoto()" type="button"> Agregar Foto </button>
@@ -101,7 +101,7 @@
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p><br><br><br>
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'URL Video 1'; }"  onfocus="if(this.value == 'URL Video 1') { this.value = ''; }" type="text" value="URL Video 1" name="video1" class="video" required>
+                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'URL Video 1'; }"  onfocus="if(this.value == 'URL Video 1') { this.value = ''; }" type="text" value="URL Video 1" name="video_url" class="video" required>
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
@@ -112,11 +112,11 @@
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <textarea name="descripcion" class="large-text" required> Descripción... </textarea>
+                <textarea name="description" class="large-text" required> Descripción... </textarea>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
-                <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
+                <input type="checkbox" name="teaser_banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
                 <input type=number name="teaser-index" class="numero goright" value="1">
                 <div class="spacer"></div>
                 <hr>

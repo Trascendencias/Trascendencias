@@ -5,7 +5,7 @@ var models = require('./models');
 var bcrypt = require('bcrypt');
 
 database.register = {
-	conference: function(form) {
+	conferencia: function(form) {
 		let conference_model = models.conference;
 
 		let new_conference = new conference_model();
@@ -66,16 +66,28 @@ database.used_email = function(email, done) {
 
 database.list = function(collection, done) {
 	let docs = [];
+	if(collection == undefined) {
+		done(null, docs);
+	}
+
 	database.collection(collection).find().forEach(function(doc) {
 		docs.push(doc);
 	},
 	function(err) {
 		if(err) {
-			throw err;
+			return done(err, docs)
 		}
 
-		done(docs);
+		return done(null, docs);
 	});
+}
+
+database.consult = function(id, done) {
+	let consultation = {};
+
+	if(id == undefined) {
+		return done(null, consultation);
+	}
 }
 
 database.look = function(request, response) {

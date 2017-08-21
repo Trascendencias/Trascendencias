@@ -76,6 +76,26 @@ app.get('/registro-staff', form(), valid_registration, function(req, res) {
 	});
 });
 
+app.get('/consulta-:collection', check_session, function(req, res) {
+	database.consult(req.query.codigo, function(err, consultation) {
+		if(err) {
+			console.log(err);
+		}
+
+		return res.render('consulta-' + req.params.collection, { consulta: consultation });
+	});
+})
+
+app.get('/registro/lista', check_session, function(req, res) {
+	database.list(req.query.q, function(err, collection) {
+		if(err) {
+			console.log(err);
+		}
+
+		return res.render('registro/lista', { lista: collection });
+	});
+})
+
 app.get('/:module/:page?', check_session, protect, function(req, res) {
 	return res.render((req.baseUrl + req.path).substring(1), function(err, html) {
 		if (err) {
@@ -132,7 +152,7 @@ app.post('/signup', form(), passport.authenticate('signup', {
 });
 
 app.post('/registro-:collection', form(), function(req, res) {
-	database.register[req.params.collection](req);
+	database.register[req.params.collection](req.form);
 	res.redirect('/');
 });
 

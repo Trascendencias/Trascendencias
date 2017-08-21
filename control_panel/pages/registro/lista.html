@@ -33,7 +33,7 @@
         
         <div class="lista">
         <br>
-        <h3> <span id="titulo"> </span>:  <p id="contador">  </p><button id="nuevo" class="nuevo" onClick="nuevo()"> + Nuevo </button></h3>
+        <h3> <span id="titulo"> </span>:  <p id="contador"> <%= lista.length %> </p><button id="nuevo" class="nuevo" onClick="nuevo()"> + Nuevo </button></h3>
         <form id="searchForm" action="javascript:buscarPalabras();">
             <input id="search" class="search" onBlur="if (this.value == '') { this.value = 'Buscar...'; showAll();}"  onfocus="if(this.value == 'Buscar...') { this.value = ''; } " type="text" value="Buscar..." > 
             <button class="third search" type="button" onClick="buscarPalabras();"> 🔎 </button>
@@ -52,26 +52,14 @@
         <!--- AQUI ES EL WHILE -->
         <div id="correos"> </div>
         <div id="resultados">
-            <button class='enlistado' name='codigo' value='xxx'> 
-                <p class="hidden"> Taller Legos, Ciudad Ensenada, Foráneo, email:correo1@email.com </p> 
-                Francisco Arturo Peña 
-            </button>
-            <button class='enlistado' name='codigo' value='xxx'> 
-                <p class="hidden"> Estudiante, Visita Gameloft, Diseño Gráfico, email:correo2@email.com </p> 
-                Diana Laura Martínez García
-            </button>
-            <button class='enlistado' name='codigo' value='xxx'> 
-                <p class="hidden"> Estudiante, Visita Gameloft, Diseño Gráfico, email:correo3@email.com </p> 
-                 Esteban Martínez
-            </button>
-            <button class='enlistado' name='codigo' value='xxx'> 
-                <p class="hidden"> Visita Gameloft, Diseño Web, email:correo4@email.com </p> 
-                Jesús Ismael Villegas 
-            </button>
-            <button class='enlistado' name='codigo' value='xxx'> 
-                <p class="hidden"> Taller Legos, Programador Web, Base de Datos, email:correo5@email.com </p> 
-                Edgar Magdaleno
-            </button>
+            <% for(var i = 0; i < lista.length; i++) { %>
+                <% if(lista[i].name != 'admin') { %>
+                    <button class='enlistado' name='codigo' value='xx'> 
+                    <p class="hidden"> Taller Legos, Ciudad <%= lista[i].city %>, Foráneo, <%= lista[i].email %> </p> 
+                    <%= lista[i].name %>
+                    </button>
+                <% } %>
+            <% } %>
         </div>
         
 
@@ -88,19 +76,19 @@
         var q = window.location.href;
         q = q.split('=')[1];
         var titulo; var nuevolnk; var accionlnk; 
-        if(q == "participante"){ titulo = "Participantes"; nuevolnk = "registro-participante "; accionlnk = "consulta-participante "; }
-        if(q == "conferencia"){ titulo = "Conferencias"; nuevolnk = "registro-conferencia "; accionlnk = "consulta-conferencia "; }
-        if(q == "taller"){ titulo = "Talleres"; nuevolnk = "registro-taller "; accionlnk = "consulta-taller "; }
-        if(q == "visita"){ titulo = "Visitas"; nuevolnk = "registro-visita "; accionlnk = "consulta-visita "; }
-        if(q == "evento-extra"){ titulo = "Eventos Extra"; nuevolnk = "registro-evento-extra "; accionlnk = "consulta-evento-extra "; }
-        if(q == "evento-social"){ titulo = "Eventos Sociales"; nuevolnk = "registro-evento-social "; accionlnk = "consulta-evento-social "; }
-        if(q == "preguntas-frecuentes"){ titulo = "Preguntas"; nuevolnk = "registro-preguntas-frecuentes"; accionlnk = "consulta-preguntas-frecuentes "; }
-        if(q == "blog"){ titulo = "Blogs"; nuevolnk = "registro-blog "; accionlnk = "consulta-blog ";}
-        if(q == "punto-venta"){ titulo = "Puntos de Venta"; nuevolnk = "registro-punto-venta "; accionlnk = "consulta-punto-venta ";}
-        if(q == "paquetes"){ titulo = "Paquetes"; nuevolnk = "registro-paquetes "; accionlnk = "consulta-paquetes ";}
-        if(q == "patrocinadores"){ titulo = "Patrocinadores"; nuevolnk = "registro-patrocinadores "; accionlnk = "consulta-patrocinadores ";}
-        if(q == "staff"){ titulo = "Staff"; document.getElementById("nuevo").style.display = "none"; accionlnk = "consulta-staff ";}
-        if(q == "testimonios"){ titulo = "Testimonios"; nuevolnk = "registro-testimonios "; accionlnk = "consulta-testimonios ";}
+        if(q == "participants"){ titulo = "Participantes"; nuevolnk = "registro-participante"; accionlnk = "consulta-participante "; }
+        if(q == "conferences"){ titulo = "Conferencias"; nuevolnk = "registro-conferencia"; accionlnk = "consulta-conferencia "; }
+        if(q == "workshops"){ titulo = "Talleres"; nuevolnk = "registro-taller"; accionlnk = "consulta-taller "; }
+        if(q == "visits"){ titulo = "Visitas"; nuevolnk = "registro-visita "; accionlnk = "consulta-visita "; }
+        if(q == "extra_event"){ titulo = "Eventos Extra"; nuevolnk = "registro-evento-extra"; accionlnk = "consulta-evento-extra "; }
+        if(q == "social_events"){ titulo = "Eventos Sociales"; nuevolnk = "registro-evento-social"; accionlnk = "consulta-evento-social "; }
+        if(q == "faqs"){ titulo = "Preguntas"; nuevolnk = "registro-preguntas-frecuentes"; accionlnk = "consulta-preguntas-frecuentes "; }
+        if(q == "blogs"){ titulo = "Blogs"; nuevolnk = "registro-blog "; accionlnk = "consulta-blog ";}
+        if(q == "sale_points"){ titulo = "Puntos de Venta"; nuevolnk = "registro-punto-venta"; accionlnk = "consulta-punto-venta ";}
+        if(q == "packages"){ titulo = "Paquetes"; nuevolnk = "registro-paquetes "; accionlnk = "consulta-paquetes";}
+        if(q == "sponsors"){ titulo = "Patrocinadores"; nuevolnk = "registro-patrocinadores"; accionlnk = "consulta-patrocinadores ";}
+        if(q == "staff_members"){ titulo = "Staff"; document.getElementById("nuevo").style.display = "none"; accionlnk = "consulta-staff";}
+        if(q == "testimonies"){ titulo = "Testimonios"; nuevolnk = "registro-testimonios"; accionlnk = "consulta-testimonios ";}
 
 
         document.getElementById("titulo2").innerHTML += titulo;
@@ -113,7 +101,6 @@
 
               //INCLUIR DOCUMENTOS
 
-            document.getElementById("contador").innerHTML += 456;
             document.getElementById("titulo").innerHTML += titulo;
 
             function buscarPalabras(){
