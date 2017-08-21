@@ -79,7 +79,7 @@ app.get('/registro-staff', form(), valid_registration, function(req, res) {
 app.get('/consulta-:collection', check_session, function(req, res) {
 	database.consult(req.query.codigo, function(err, doc) {
 		if(err) {
-			console.log(err);
+			throw err;
 		}
 
 		return res.render('consulta-' + req.params.collection, { consulta: doc });

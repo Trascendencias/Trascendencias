@@ -66,7 +66,7 @@ database.used_email = function(email, done) {
 
 database.list = function(collection, done) {
 	if(translate[collection] == undefined) {
-		return done('Collection undefined.', null);
+		return done(new Error('Collection undefined.'), null);
 	}
 
 	database.collection(translate[collection]).find({}).toArray(function(err, collection) {
@@ -74,7 +74,6 @@ database.list = function(collection, done) {
 			return done(err, null);
 		}
 
-		console.log(JSON.stringify(collection));
 		return done(null, collection);
 	});
 }
