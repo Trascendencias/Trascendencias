@@ -17,7 +17,7 @@ var file_upload = require('express-fileupload');
 var nodemailer = require('nodemailer');
 var control_panel_sessions = require('./database/sessions').control_panel;
 
-require('./control_panel/auth/passport')(passport);
+require('./control_panel/auth/passport')(passport, database);
 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -70,7 +70,10 @@ app.get('/logout', function(req, res) {
 });
 
 app.get('/registro-staff', form(), valid_registration, function(req, res) {
-	res.render('registro-staff', { message: req.flash('message') });
+	res.render('registro-staff', {
+		message: req.flash('message'),
+		email: req.form.email
+	});
 });
 
 app.get('/:module/:page?', check_session, protect, function(req, res) {
@@ -94,7 +97,7 @@ app.get('/', check_session, function(req, res) {
 	else {
 		res.redirect('/registro/menu');
 	}
-})
+});
 
 app.post('/login', form(), passport.authenticate('login', {
 	failureRedirect: '/login',
@@ -107,7 +110,9 @@ app.post('/login', form(), passport.authenticate('login', {
 	res.redirect('/registro/menu');
 });
 
-app.post('/generar-claves', form(), function(req, res) {
+app.post('/generar-claves', form(
+	form.field('email').trim()
+), function(req, res) {
 	let verification_hash = database.generate_hash(req.form.email);
 	mail_options.text = 'Da click al siguiente link para ser parte del Staff de Trascendencias: https://trascendencias.org:8443/registro-staff?email=' + req.form.email + '&key=' + verification_hash;
 	mail_options.to = req.form.email;
@@ -120,7 +125,11 @@ app.post('/generar-claves', form(), function(req, res) {
 	res.redirect('/admin/menu');
 })
 
-app.post('/signup', form(), passport.authenticate('signup'));
+app.post('/signup', form(), passport.authenticate('signup', {
+	failureFlash: true
+}), function(req, res) {
+	res.redirect('/');
+});
 
 app.post('/registro-:collection', form(), function(req, res) {
 	database.register[req.params.collection](req);

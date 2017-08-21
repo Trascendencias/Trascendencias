@@ -19,7 +19,7 @@ let mail_options = {
 	subject: 'Verifica tu cuenta de Trascendencias'
 };
 
-module.exports = function(passport) {
+module.exports = function(passport, database) {
 	passport.serializeUser(function(user, done){
 		done(null, user.id);
 	});
@@ -48,13 +48,13 @@ module.exports = function(passport) {
 					let new_participant = new participant();
 					new_participant.name = req.form.name;
 					new_participant.email = email;
-					new_participant.local.password = new_participant.generate_hash(password);
+					new_participant.local.password = database.generate_hash(password);
 					new_participant.debt = 0;
 					new_participant.package = 'Ninguno';
 					new_participant.verified = false;
 
-					let verification_hash = new_participant.generate_hash(email);
-					mail_options.text = 'Da click al siguiente link para verificar tu cuenta: https://trascendencias.org/verify?email=' + email + '&hash=' + verification_hash;
+					let verification_hash = database.generate_hash(email);
+					mail_options.text = 'Da click al siguiente link para verificar tu cuenta: https://trascendencias.org/verify?email=' + email + '&key=' + verification_hash;
 					mail_options.to = email;
 					transporter.sendMail(mail_options, (error, info) => {
 						if (error) {
@@ -80,18 +80,16 @@ module.exports = function(passport) {
 			passwordField: 'password',
 			passReqToCallback: true
 		},
-		function(req, name, password, done){
-			process.nextTick(function() {
-				participant.findOne({ 'name': name }, function(err, searched_participant) {
-					if(err) {
-						return done(err);
-					}
-					else if(!searched_participant || !searched_participant.valid_password(password)) {
-						return done(null, false, req.flash('message', 'Credenciales invalidas.'));
-					}
+		function(req, name, password, done) {
+			participant.findOne({ 'name': name }, function(err, searched_participant) {
+				if(err) {
+					return done(err);
+				}
+				else if(!searched_participant || !database.valid_hash(password, searched_participant.local.password)) {
+					return done(null, false, req.flash('message', 'Credenciales invalidas.'));
+				}
 
-					return done(null, searched_participant);
-				});
+				return done(null, searched_participant);
 			});
 		}
 	));

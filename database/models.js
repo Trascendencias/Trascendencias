@@ -61,22 +61,6 @@ var schemas = {
 	})
 }
 
-schemas.participant.methods.generate_hash = function(password) {
-	return bcrypt.hashSync(password, bcrypt.genSaltSync(9), null);
-}
-
-schemas.participant.methods.valid_password = function(password) {
-	return bcrypt.compareSync(password, this.local.password);
-}
-
-schemas.staff_member.methods.generate_hash = function(password) {
-	return bcrypt.hashSync(password, bcrypt.genSaltSync(9), null);
-}
-
-schemas.staff_member.methods.valid_password = function(password) {
-	return bcrypt.compareSync(password, this.password);
-}
-
 module.exports = {
 	conference: mongoose.model('conferences', schemas.conference),
 	participant: mongoose.model('participants', schemas.participant),

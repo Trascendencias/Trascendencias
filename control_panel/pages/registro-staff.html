@@ -23,7 +23,7 @@
 		<br>
 		<center><h6> Registro de Miembro de Staff </h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="/signup"> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/signup" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="participante">
@@ -46,7 +46,7 @@
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
 				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="Teléfono" name="phone" required>
 				<p class="error"> *Debe llenar esta información </p>
-
+        <input type="hidden" name="email" value="<%=email%>">
                 <!-- FACEBOOK -->
                 <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Link de Facebook'; }"  onfocus="if(this.value == 'Link de Facebook') { this.value = ''; }" type="text" value="Link de Facebook" name="facebook" required>
                 <p class="error"> *Debe llenar esta información </p>

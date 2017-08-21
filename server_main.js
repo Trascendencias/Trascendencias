@@ -14,7 +14,7 @@ var flash = require('connect-flash');
 var database = require('./database/connection');
 var main_sessions = require('./database/sessions').main;
 
-require('./main/auth/passport')(passport);
+require('./main/auth/passport')(passport, database);
 
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use('/resources', express.static(__dirname + '/main/resources'));
