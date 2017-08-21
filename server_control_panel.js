@@ -153,7 +153,7 @@ app.post('/signup', form(), passport.authenticate('signup', {
 
 app.post('/registro-:collection', form(), function(req, res) {
 	database.register[req.params.collection](req.form);
-	res.redirect('/');
+	res.redirect('avisos?q=registro');
 });
 
 function check_session(req, res, next) {

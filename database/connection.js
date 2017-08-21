@@ -11,6 +11,7 @@ database.register = {
 		let new_conference = new conference_model();
 		new_conference.name = form.name;
 
+
 		new_conference.save(function(err) {
 			if(err) {
 				throw err;
