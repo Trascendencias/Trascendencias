@@ -65,36 +65,43 @@ database.used_email = function(email, done) {
 }
 
 database.list = function(collection, done) {
-	let docs = [];
-	if(collection == undefined) {
-		done(null, docs);
+	if(translate[collection] == undefined) {
+		return done('Collection undefined.', null);
 	}
 
-	database.collection(collection).find().forEach(function(doc) {
-		docs.push(doc);
-	},
-	function(err) {
+	database.collection(translate[collection]).find({}).toArray(function(err, collection) {
 		if(err) {
-			return done(err, docs)
+			return done(err, null);
 		}
 
-		return done(null, docs);
+		console.log(JSON.stringify(collection));
+		return done(null, collection);
 	});
 }
 
-database.consult = function(id, done) {
-	let consultation = {};
-
-	if(id == undefined) {
-		return done(null, consultation);
+database.consult = function(collection, id, done) {
+	if(translate[collection] == undefined || id == undefined) {
+		return done('Collection undefined.', null);
 	}
+
+	database.collection(translate[collection]).findById(id, function(err, doc) {
+		return done(err, doc);
+	})
 }
 
-database.look = function(request, response) {
-	database.collection(request.params.collection).findOne({ email: request.params.document }, function(err, doc) {
-		response.render('look', { doc: doc });
-	});
+var translate = {
+	'participante': 'participants',
+	'conferencia': 'conferences',
+	'paquetes': 'packages',
+	'staff': 'staff_members',
+	'taller': 'workshops',
+	'testimonios': 'testimonies',
+	'visita': 'visits',
+	'preguntas-frecuentes': 'faqs',
+	'evento-extra': 'extra_event',
+	'patrocinadores': 'sponsors',
+	'evento-social': 'social_events',
+	'punto-venta': 'sale_points'
 }
-
 
 module.exports = database;

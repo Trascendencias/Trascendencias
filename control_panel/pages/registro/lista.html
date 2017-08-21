@@ -76,19 +76,19 @@
         var q = window.location.href;
         q = q.split('=')[1];
         var titulo; var nuevolnk; var accionlnk; 
-        if(q == "participants"){ titulo = "Participantes"; nuevolnk = "registro-participante"; accionlnk = "consulta-participante "; }
-        if(q == "conferences"){ titulo = "Conferencias"; nuevolnk = "registro-conferencia"; accionlnk = "consulta-conferencia "; }
-        if(q == "workshops"){ titulo = "Talleres"; nuevolnk = "registro-taller"; accionlnk = "consulta-taller "; }
-        if(q == "visits"){ titulo = "Visitas"; nuevolnk = "registro-visita "; accionlnk = "consulta-visita "; }
-        if(q == "extra_event"){ titulo = "Eventos Extra"; nuevolnk = "registro-evento-extra"; accionlnk = "consulta-evento-extra "; }
-        if(q == "social_events"){ titulo = "Eventos Sociales"; nuevolnk = "registro-evento-social"; accionlnk = "consulta-evento-social "; }
-        if(q == "faqs"){ titulo = "Preguntas"; nuevolnk = "registro-preguntas-frecuentes"; accionlnk = "consulta-preguntas-frecuentes "; }
-        if(q == "blogs"){ titulo = "Blogs"; nuevolnk = "registro-blog "; accionlnk = "consulta-blog ";}
-        if(q == "sale_points"){ titulo = "Puntos de Venta"; nuevolnk = "registro-punto-venta"; accionlnk = "consulta-punto-venta ";}
-        if(q == "packages"){ titulo = "Paquetes"; nuevolnk = "registro-paquetes "; accionlnk = "consulta-paquetes";}
-        if(q == "sponsors"){ titulo = "Patrocinadores"; nuevolnk = "registro-patrocinadores"; accionlnk = "consulta-patrocinadores ";}
-        if(q == "staff_members"){ titulo = "Staff"; document.getElementById("nuevo").style.display = "none"; accionlnk = "consulta-staff";}
-        if(q == "testimonies"){ titulo = "Testimonios"; nuevolnk = "registro-testimonios"; accionlnk = "consulta-testimonios ";}
+        if(q == "participante"){ titulo = "Participantes"; nuevolnk = "registro-participante"; accionlnk = "consulta-participante "; }
+        if(q == "conferencia"){ titulo = "Conferencias"; nuevolnk = "registro-conferencia"; accionlnk = "consulta-conferencia "; }
+        if(q == "taller"){ titulo = "Talleres"; nuevolnk = "registro-taller"; accionlnk = "consulta-taller "; }
+        if(q == "visita"){ titulo = "Visitas"; nuevolnk = "registro-visita "; accionlnk = "consulta-visita "; }
+        if(q == "evento-extra"){ titulo = "Eventos Extra"; nuevolnk = "registro-evento-extra"; accionlnk = "consulta-evento-extra "; }
+        if(q == "evento-social"){ titulo = "Eventos Sociales"; nuevolnk = "registro-evento-social"; accionlnk = "consulta-evento-social "; }
+        if(q == "preguntas-frecuentes"){ titulo = "Preguntas"; nuevolnk = "registro-preguntas-frecuentes"; accionlnk = "consulta-preguntas-frecuentes "; }
+        if(q == "blog"){ titulo = "Blogs"; nuevolnk = "registro-blog "; accionlnk = "consulta-blog ";}
+        if(q == "punto-venta"){ titulo = "Puntos de Venta"; nuevolnk = "registro-punto-venta"; accionlnk = "consulta-punto-venta ";}
+        if(q == "paquetes"){ titulo = "Paquetes"; nuevolnk = "registro-paquetes "; accionlnk = "consulta-paquetes";}
+        if(q == "patrocinadores"){ titulo = "Patrocinadores"; nuevolnk = "registro-patrocinadores"; accionlnk = "consulta-patrocinadores ";}
+        if(q == "staff"){ titulo = "Staff"; document.getElementById("nuevo").style.display = "none"; accionlnk = "consulta-staff";}
+        if(q == "testimonios"){ titulo = "Testimonios"; nuevolnk = "registro-testimonios"; accionlnk = "consulta-testimonios ";}
 
 
         document.getElementById("titulo2").innerHTML += titulo;
