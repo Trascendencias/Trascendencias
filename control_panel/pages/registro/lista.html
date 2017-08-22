@@ -54,7 +54,7 @@
         <div id="resultados">
             <% for(var i = 0; i < lista.length; i++) { %>
                 <% if(lista[i].name != 'admin') { %>
-                    <button class='enlistado' name='codigo' value='xx'> 
+                    <button class='enlistado' name='codigo' value='<%= lista[i]._id %>'> 
                     <p class="hidden"> Taller Legos, Ciudad <%= lista[i].city %>, Foráneo, <%= lista[i].email %> </p> 
                     <%= lista[i].name %>
                     </button>

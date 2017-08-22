@@ -7,13 +7,16 @@ var schemas = {
 		start: Date,
 		end: Date,
 		speaker_name: String, 
-		speaker_description: String,
-		phone: String,
-		email: String,
+		speaker_titles: String,
+		speaker_phone: String,
+		speaker_email: String,
 		location: String,
-		speaker_photo: Buffer,
-		general_description: String,
-		include_teaser: Boolean
+		speaker_photo: String,
+		photos: [String],
+		video_url: String,
+		summary: String,
+		description: String,
+		include_teaser: Number
 	}),
 	participant: mongoose.Schema({
 		name: String,

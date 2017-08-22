@@ -28,16 +28,16 @@
         <button onClick="location.href='editar-conferencia?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>
 			<div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
-				<h3> Título: <p><i> Éste es un título muy campante </i></p> </h3><br>               
+				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>               
                 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
 				<h3> Fecha y Hora: <p><i> 11/OCT/17 • 11:00 - 12:00hrs </i></p> </h3><br>                
                 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-				<h3> Nombre de Contacto: <p><i> Jesús de la Rocha Ramirez </i></p> </h3><br>               
+				<h3> Nombre de Contacto: <p><i> <%= consulta.speaker_name %> </i></p> </h3><br>               
                 
                 <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
-				<h3> Títulos del Presentador: <p><i> Licenciatura en Ingeniería </i></p> </h3><br>               
+				<h3> Títulos del Presentador: <p><i> <%= consulta.speaker_titles %> </i></p> </h3><br>               
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
 				<h3> Teléfono: <p><i> (686) 123 45 67 <button style="margin-left: 20px;" onClick="location.href='tel:6861234567'"> Llamar </button></i></p></h3><br>				
@@ -50,7 +50,7 @@
                 
                 <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
 				<h3> Foto del Conferencista:</h3><br>
-                <div class="foto persona" style="background-image: url('resources/user_example.png')"> </div>
+                <div class="foto persona" style="background-image: url('<%=consulta.speaker_photo%>')"> </div>
 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <h3> Fotos: </h3><br>

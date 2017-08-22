@@ -38,11 +38,7 @@ module.exports = function(passport, database) {
 				new_staff_member.alergies = req.form.alergies;
 				new_staff_member.team = req.form.team;
 				new_staff_member.position = req.form.position;
-
-				if(req.files.photo != undefined) {
-					new_staff_member.photo = __dirname + '/../../database/images/' + Date.now().toString() + '-' + req.files.photo.name;
-					database.upload(req.files.photo, new_staff_member.photo);
-				}
+				new_staff_member.photo = database.get_file(req.files, 'photo');
 
 				new_staff_member.save(function(err) {
 					if(err) {

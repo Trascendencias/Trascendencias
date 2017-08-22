@@ -76,46 +76,42 @@ app.get('/registro-staff', form(), valid_registration, function(req, res) {
 	});
 });
 
-app.get('/consulta-:collection', check_session, function(req, res) {
-	database.consult(req.query.codigo, function(err, doc) {
-		if(err) {
-			throw err;
-		}
-
-		return res.render('consulta-' + req.params.collection, { consulta: doc });
-	});
-})
-
 app.get('/registro/lista', check_session, function(req, res) {
 	database.list(req.query.q, function(err, collection) {
-		if(err) {
-			throw err;
+		if(catch_errors(err, collection)) {
+			return res.redirect('/registro/avisos?titulo=error');
 		}
-
+		
 		return res.render('registro/lista', { lista: collection });
 	});
 })
 
-app.get('/:module/:page?', check_session, protect, function(req, res) {
-	return res.render((req.baseUrl + req.path).substring(1), function(err, html) {
-		if (err) {
-			if (err.message.indexOf('Failed to lookup view') !== -1) {
-				return res.status(404).send('404');
-			}
-
-			throw err;
+app.get('/registro/consulta-:collection', check_session, function(req, res) {
+	database.consult(req.params.collection, req.query.codigo, function(err, doc) {
+		if(catch_errors(err, doc)) {
+			return res.redirect('/registro/avisos?titulo=error');
 		}
 
-		res.send(html);
+		return res.render('registro/consulta-' + req.params.collection, { consulta: doc });
+	});
+});
+
+app.get('/:module/:page?', check_session, protect, function(req, res) {
+	return res.render((req.baseUrl + req.path).substring(1), function(err, html) {
+		if(catch_errors(err)) {
+			return res.redirect('/registro/avisos?titulo=error');
+		}
+
+		return res.send(html);
 	});
 });
 
 app.get('/', check_session, function(req, res) {
 	if(req.user.position == 'Administrator') {
-		res.redirect('/admin/menu');
+		return res.redirect('/admin/menu');
 	}
 	else {
-		res.redirect('/registro/menu');
+		return res.redirect('/registro/menu');
 	}
 });
 
@@ -127,7 +123,7 @@ app.post('/login', form(), passport.authenticate('login', {
 		return res.redirect('/admin/menu');
 	}
 	
-	res.redirect('/registro/menu');
+	return res.redirect('/registro/menu');
 });
 
 app.post('/generar-claves', form(
@@ -136,24 +132,39 @@ app.post('/generar-claves', form(
 	let verification_hash = database.generate_hash(req.form.email);
 	mail_options.text = 'Da click al siguiente link para ser parte del Staff de Trascendencias: https://trascendencias.org:8443/registro-staff?email=' + req.form.email + '&key=' + verification_hash;
 	mail_options.to = req.form.email;
-	transporter.sendMail(mail_options, (error, info) => {
-		if (error) {
-			return console.log(error);
+	transporter.sendMail(mail_options, (err, info) => {
+		if(catch_errors(err)) {
+			return res.redirect('/registro/avisos?titulo=error');
 		}
-	});
 
-	res.redirect('/admin/menu');
+		return res.redirect('/admin/menu');
+	});
 })
 
 app.post('/signup', form(), passport.authenticate('signup', {
 	failureFlash: true
 }), function(req, res) {
-	res.redirect('/');
+	return res.redirect('/');
 });
 
-app.post('/registro-:collection', form(), function(req, res) {
-	database.register[req.params.collection](req.form);
-	res.redirect('avisos?q=registro');
+app.post('/registro-:collection', check_session, form(), function(req, res) {
+	database.register[req.params.collection](req.form, req.files, function(err) {
+		if(catch_errors(err)) {
+			return res.redirect('/registro/avisos?titulo=error');
+		}
+
+		return res.redirect('registro/avisos?titulo=registro');
+	});
+});
+
+app.post('/eliminar-:collection', check_session, function(req, res) {
+	database.remove(req.params.collection, req.query.codigo, function(err) {
+		if(catch_errors(err)) {
+			return res.redirect('/registro/avisos?titulo=error');
+		}
+
+		return res.redirect('registro/avisos?titulo=eliminar');
+	});
 });
 
 function check_session(req, res, next) {
@@ -178,16 +189,26 @@ function valid_registration(req, res, next) {
 	}
 
 	database.used_email(req.form.email, function(err, used) {
-		if(err) {
-			throw err;
+		if(catch_errors(err, !used)) {
+			return res.redirect('/registro/avisos?titulo=error');
 		}
-		else if(used) {
-			return res.send('Correo ya registrado.');
-		}
-		else {
-			next();
-		}
+
+		next();
 	});
+}
+
+function catch_errors(err, object = true) {
+	if(err) {
+		console.log(err);
+		return true;
+	}
+
+	if(!object) {
+		console.log(new Error('Empty object'));
+		return true;
+	}
+
+	return false;
 }
 
 https.createServer({

@@ -26,7 +26,7 @@
 		<br>
 		<center><h6><b> Registro de Conferencia </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="/registro-conferencia"> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-conferencia" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="Conferencia">
@@ -51,7 +51,7 @@
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre de Conferencista'; }"  onfocus="if(this.value == 'Nombre de Conferencista') { this.value = ''; }" type="text" value="Nombre de Conferencista" name="contact_name" required>
+                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre de Conferencista'; }"  onfocus="if(this.value == 'Nombre de Conferencista') { this.value = ''; }" type="text" value="Nombre de Conferencista" name="speaker_name" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
@@ -59,7 +59,7 @@
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono del Conferencista'; }"  onfocus="if(this.value == 'Teléfono del Conferencista') { this.value = ''; }" type="text" value="Teléfono del Conferencista" name="telefono-contacto" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono del Conferencista'; }"  onfocus="if(this.value == 'Teléfono del Conferencista') { this.value = ''; }" type="text" value="Teléfono del Conferencista" name="speaker_phone" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
@@ -92,7 +92,7 @@
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <p class="title"> Fotos (1920x1080px) </p><br><br><br>
                 <div id="fotos">
-                <input type="file" width="150px" name="photo_1" value="fileupload" id="image" style="display: inline;">
+                <input type="file" width="150px" name="photo_0" value="fileupload" id="image" style="display: inline;">
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                 <button class="third" onClick="masfoto()" type="button"> Agregar Foto </button>
@@ -101,14 +101,14 @@
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p><br><br><br>
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'URL Video 1'; }"  onfocus="if(this.value == 'URL Video 1') { this.value = ''; }" type="text" value="URL Video 1" name="video_url" class="video" required>
+                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'URL Video 1'; }"  onfocus="if(this.value == 'URL Video 1') { this.value = ''; }" type="text" value="URL Video 1" name="video_url_0" class="video" required>
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
                 <br><br><br><br><br><br>
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="resumen" id="resumen" required> Resumen... </textarea>
+                <textarea name="summary" id="resumen" required> Resumen... </textarea>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
@@ -117,7 +117,7 @@
 
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
                 <input type="checkbox" name="teaser_banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
-                <input type=number name="teaser-index" class="numero goright" value="1">
+                <input type=number name="include_teaser" class="numero goright" value="1">
                 <div class="spacer"></div>
                 <hr>
 				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
@@ -138,8 +138,8 @@
 			}
 
               //INCLUIR DOCUMENTOS
-            var videocount = 2;
-            var fotoscount = 2;
+            var videocount = 1;
+            var fotoscount = 1;
 
             function validate(){
                 document.getElementById("forma-registro").submit();
@@ -151,7 +151,7 @@
                 videocount++;
             }
             function masfoto(){
-                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                var fotosinput = "<input type='file' width='150px' name='photo_"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
                 document.getElementById('fotos').innerHTML += fotosinput;
                 fotoscount++;
             }
