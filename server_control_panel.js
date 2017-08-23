@@ -38,7 +38,7 @@ form.configure({
 app.use(session({
 	resave: true,
 	saveUninitialized: true,
-	secret: 'other_super_secret_string',
+	secret: 'super_secret_string',
 	store: new mongo_store({ mongooseConnection: control_panel_sessions })
 }));
 app.use(flash());
@@ -82,7 +82,10 @@ app.get('/registro/lista', check_session, function(req, res) {
 			return res.redirect('/registro/avisos?titulo=error');
 		}
 		
-		return res.render('registro/lista', { lista: collection });
+		return res.render('registro/lista', {
+			lista: collection,
+			user: req.user
+		});
 	});
 })
 
@@ -92,12 +95,15 @@ app.get('/registro/consulta-:collection', check_session, function(req, res) {
 			return res.redirect('/registro/avisos?titulo=error');
 		}
 
-		return res.render('registro/consulta-' + req.params.collection, { consulta: doc });
+		return res.render('registro/consulta-' + req.params.collection, {
+			consulta: doc,
+			user: req.user
+		});
 	});
 });
 
 app.get('/:module/:page?', check_session, protect, function(req, res) {
-	return res.render((req.baseUrl + req.path).substring(1), function(err, html) {
+	return res.render((req.baseUrl + req.path).substring(1), { user: req.user }, function(err, html) {
 		if(catch_errors(err)) {
 			return res.redirect('/registro/avisos?titulo=error');
 		}

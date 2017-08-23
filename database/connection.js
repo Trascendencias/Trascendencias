@@ -16,77 +16,93 @@ database.register = {
 		new_conference.summary = form.summary;
 		new_conference.description = form.description;
 		new_conference.include_teaser = form.inlude_teaser;
-		database.get_file(files, 'speaker_photo', function(err, file_path) {
+		database.get_video_urls(form, function(err, video_urls) {
 			if(err) {
 				return done(err);
 			}
 
-			new_conference.speaker_photo = file_path;
+			new_conference.video_urls = video_urls;
 
-			database.get_files(files, 'photo', function(err, file_paths) {
+			database.get_file(files, 'speaker_photo', function(err, file_path) {
 				if(err) {
 					return done(err);
 				}
 
-				new_conference.photos = file_paths;
+				new_conference.speaker_photo = file_path;
 
-				new_conference.save(function(err) {
+				database.get_files(files, 'photo', function(err, file_paths) {
 					if(err) {
 						return done(err);
 					}
 
-					return done(null);
-				})
-			});			
+					new_conference.photos = file_paths;
+
+					new_conference.save(function(err) {
+						if(err) {
+							return done(err);
+						}
+
+						return done(null);
+					})
+				});			
+			});
 		});
 	},
 	expense: function(form, files, done) {
-		console.log(JSON.stringify(form));
+		
 	}
 };
+
+database.get_video_urls = function(form, done) {
+	let video_urls = [];
+	for(let count = 0; form['video_url_' + count]; count++) {
+		video_urls.push(form['video_url_' + count]);
+
+		if(!form['video_url_' + (count + 1)]) {
+			return done(null, video_urls);
+		}
+	}
+}
 
 database.get_file = function(files, filename, done) {
 	if(!files || !files[filename]) {
 		return done(null, null);
 	}
 
-	files[filename].mv(file_path(files[filename], false), function(err) {
+	let path = new_file_path();
+	files[filename].mv('/root/Trascendencias/control_panel/pages/registro/' + path, function(err) {
 		if(err) {
 			return done(err, null);
 		}
 
-		return done(null, file_path(files[filename], true));
+		return done(null, path);
 	});
 }
 
 database.get_files = function(files, filename, done) {
-	let count = 0;
-	if(!files || !files[filename + '_' + count]) {
-		return done(null, null);
+	if(!files || !files[filename + '_0']) {
+		return done(null, []);
 	}
 
 	let file_paths = [];
-	while(files[filename + '_' + count]) {
-		files[filename + '_' + count].mv(file_path(files[filename + '_' + count], false), function(err) {
+	for(let count  = 0; files[filename + '_' + count]; count++) {
+		let path = new_file_path();
+		files[filename + '_' + count].mv('/root/Trascendencias/control_panel/pages/registro/' + path, function(err) {
 			if(err) {
-				return done(err, null);
+				return done(err, []);
 			}
 
-			files_array.push(file_path(files[filename + '_' + count], true));
+			file_paths.push(path);
+
+			if(!files[filename + '_' + (count + 1)]) {
+				return done(null, file_paths);
+			}
 		});
-
-		count++;
 	}
-
-	return done(null, file_paths);
 }
 
-function file_path(file, relative) {
-	if(relative) {
-		return 'resources/' + Date.now().toString() + '.png';
-	}
-
-	return '/root/Trascendencias/control_panel/pages/registro/resources/' + Date.now().toString() + '.png';
+function new_file_path() {
+	return 'resources/' + Date.now().toString();
 }
 
 database.valid_hash = function(string, hash) {

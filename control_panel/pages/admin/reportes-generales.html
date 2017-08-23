@@ -74,6 +74,7 @@
 		<h3> Adeudos de Participantes:</h3>  <p>$<span id="dinero-adeudos"> error.. </span></p><br>
 		<h3> Dinero de Patrocinadores:</h3>  <p>$<span id="patrocinadores"> error.. </span></p><br>
 		<h3> Camisetas Totales:</h3>  <p> XS:<span id="tallaxs"> error.. </span>, S:<span id="tallas"> error.. </span>, M: <span id="tallam"> error.. </span>, L:<span id="tallal"> error.. </span> , XL:<span id="tallaxl"> error.. </span> </p><br>
+        <h3> Camisetas Staff:</h3>  <p> XS:<span id="tallaxsStaff"> error.. </span>, S:<span id="tallasStaff"> error.. </span>, M: <span id="tallamStaff"> error.. </span>, L:<span id="tallalStaff"> error.. </span> , XL:<span id="tallaxlStaff"> error.. </span> </p><br>
 		<h3> Participantes Liquidados:</h3>  <p id="liquidados"> error.. </p><br>
 		<h3> Participantes con Adeudo:</h3>  <p id="con-adeudos"> error.. </p><br>
 
@@ -106,6 +107,11 @@
             var tallam = 123;
             var tallal = 123;
             var tallaxl = 123;
+			var tallaxsStaff = 124;
+            var tallasStaff = 124;
+            var tallamStaff = 124;
+            var tallalStaff = 124;
+            var tallaxlStaff = 124;
             var liquidados = 123; //PARTICIPANTES QUE YA TERMINARON DE PAGAR SU PAQUETE
             var conadeudo = 123; //Participantes que deben dinero de su paquete
 
@@ -120,6 +126,11 @@
             document.getElementById("tallal").innerHTML = tallal;
             document.getElementById("tallaxs").innerHTML = tallaxs;
             document.getElementById("tallaxl").innerHTML = tallaxl;
+			document.getElementById("tallasStaff").innerHTML = tallasStaff;
+            document.getElementById("tallamStaff").innerHTML = tallamStaff;
+            document.getElementById("tallalStaff").innerHTML = tallalStaff;
+            document.getElementById("tallaxsStaff").innerHTML = tallaxsStaff;
+            document.getElementById("tallaxlStaff").innerHTML = tallaxlStaff;
             document.getElementById("liquidados").innerHTML = liquidados;
             document.getElementById("con-adeudos").innerHTML = conadeudo;
 

@@ -28,6 +28,7 @@
 	        	<h6><b> Consulta Staff </b></h6> 
 	        </center>
 	        <br>
+            <button onClick="location.href='editar-punto-venta?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>
 	        
 	        <center>
 		        <div class="spacer"></div>
@@ -52,7 +53,13 @@
         
         <script>
          	  //INCLUIR DOCUMENTOS
-
+				function eliminar(){
+				if(confirm("Ésta a punto de eliminar éste contenido. Ésta acción no puede revertirse. ¿Desea continuar?")){ location.href="eliminar-staff";
+						
+						}
+					else { };
+				}
+				
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 

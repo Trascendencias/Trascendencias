@@ -63,7 +63,7 @@
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo del Conferencista'; }"  onfocus="if(this.value == 'Correo del Conferencista') { this.value = ''; }" type="text" value="Correo del Conferencista" name="email" required>
+				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo del Conferencista'; }"  onfocus="if(this.value == 'Correo del Conferencista') { this.value = ''; }" type="text" value="Correo del Conferencista" name="speaker_email" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- LUGAR EN CETYS Conferencia, Taller, Evento Extra -->
@@ -146,7 +146,7 @@
             }
             
             function masvideo(){
-                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
+                var videoinput = "<input maxlength='50' name='video_url_"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
                 document.getElementById('videos').innerHTML += videoinput;
                 videocount++;
             }

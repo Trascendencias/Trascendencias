@@ -13,7 +13,7 @@ var schemas = {
 		location: String,
 		speaker_photo: String,
 		photos: [String],
-		video_url: String,
+		video_urls: [String],
 		summary: String,
 		description: String,
 		include_teaser: Number

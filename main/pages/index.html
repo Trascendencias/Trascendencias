@@ -37,15 +37,16 @@
 			<!-- PUES AQUI SE PONE EL WHILE PA QUE AGREGUE TODAS LAS IMAGENES -->
 				<div class="slide main" style="background: url('resources/slider1.jpg') center center; left: calc(100vw * 0);">
 					<div class="slide-textholder">
-						<h1 class="cwhite"> MEJOR SIMPOSIO DEL NOROESTE </h1> <!-- Titulo del Teaser Banner -->
-						<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. <!-- Descripción del Teaser Banner -->
-							<button> ¡QUIERO ASISTIR! </button> <!-- BOTON DE ACCION -->
+						<h1 class="cwhite"> MEJOR SIMPOSIO DEL NOROESTE </h1> 
+						<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. 
+							<button> ¡QUIERO ASISTIR! </button> 
 						</p>
 					</div>
 				</div>
 			<!-- PUES AQUI SE ACABA LO DEL WHILE -->
 				<div class="slide main" style="background: url('resources/slider2.jpg') center center; left: calc(100vw * 1);">
-						<div class="slide-textholder">							<h1 class="cwhite"> PUESTO DE VENTA EN ECATEPEC</h1> <!-- Titulo del Teaser Banner -->
+						<div class="slide-textholder">							
+                        <h1 class="cwhite"> PUESTO DE VENTA EN ECATEPEC</h1> <!-- Titulo del Teaser Banner -->
 							<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. <!-- Descripción del Teaser Banner -->
 								<button> ¿Cuándo? </button> <!-- BOTON DE ACCION -->
 							</p>
@@ -72,8 +73,8 @@
 			</div>
 
 
-			<button class="left-arrow main-btn" onclick="leftSlider()"> ➜ </button>
-			<button class="right-arrow main-btn" onclick="rightSlider()"> ➜ </button>			
+			<button class="left-arrow main-btn" onClick="leftSlider()"> ➜ </button>
+			<button class="right-arrow main-btn" onClick="rightSlider()"> ➜ </button>			
 		</div>
 
 
@@ -111,7 +112,7 @@
 					<center>
 						<h4> Conferencias </h4>
 						<p> Dadas por expertos en su tema. Inspírate y aprende escuchándo en vivo lo que personas destacadas y admiradas en todo el mundo tienen que decirte. </p> 
-						<button onclick="location.href='contenido#conferencias'"> Ver Todas </button>
+						<button onClick="location.href='contenido#conferencias'"> Ver Todas </button>
 					</center>
 				</div>
 			</div>
@@ -122,7 +123,7 @@
 					<center>
 						<h4> Talleres </h4>
 						<p> Dadas por expertos en su tema. Inspírate y aprende escuchándo en vivo lo que personas destacadas y admiradas en todo el mundo tienen que decirte. </p> 
-						<button onclick="location.href='contenido#talleres'"> Ver Todas </button>
+						<button onClick="location.href='contenido#talleres'"> Ver Todas </button>
 					</center>
 				</div>
 			</div>
@@ -133,7 +134,7 @@
 					<center>
 						<h4> Visitas </h4>
 						<p> Dadas por expertos en su tema. Inspírate y aprende escuchándo en vivo lo que personas destacadas y admiradas en todo el mundo tienen que decirte. </p>
-						<button onclick="location.href='contenido#visitas'"> Ver Todas </button>
+						<button onClick="location.href='contenido#visitas'"> Ver Todas </button>
 					</center>
 				</div> 
 			</div>
@@ -144,20 +145,20 @@
 					<center>
 						<h4> Eventos Sociales </h4>
 						<p> Dadas por expertos en su tema. Inspírate y aprende escuchándo en vivo lo que personas destacadas y admiradas en todo el mundo tienen que decirte. </p> 
-						<button onclick="location.href='contenido#eventosSociales'"> Ver Todas </button>
+						<button onClick="location.href='contenido#eventosSociales'"> Ver Todas </button>
 					</center>
 				</div>
 			</div>
 		</div>
 		<h2 style="margin: auto 20px"> ¡Desde #!PRECIO-MAS-BAJO pesos! </h2><br>
 						<div class="card-holder">
-								<div class="card" onclick="location.href='#!LINK'">
+								<div class="card" onClick="location.href='#!LINK'">
 									<img src="resources/image_example.png">
 									<h3> Paquete Individual </h3>
 									<p> De qué se trata éste bella conferencia </p>
 									<button class="buy"> COMPRAR </button>
 								</div>
-								<div class="card" onclick="location.href='#!LINK'">
+								<div class="card" onClick="location.href='#!LINK'">
 									<img src="resources/image_example.png">
 									<h3> Nombre Conferencia </h3>
 									<p> De qué se trata éste bella conferencia </p>
@@ -167,7 +168,7 @@
 
 
 		<center>
-			<button style="padding: 10px 30px;" onclick="location.href='ventas'"> Ver Paquetes </button> 
+			<button style="padding: 10px 30px;" onClick="location.href='ventas'"> Ver Paquetes </button> 
 		</center>
 		<br><br><br>
 <% include partials/footer.html %>
@@ -176,6 +177,7 @@
 	</body>
 	
 	<script>
+		alert("Bienvenido! Ésta página está en construcción, disculpe las molestias!"); 
 
 		//SLIDER
 		var currentSlide = 0; //El slide en el que está menos 1

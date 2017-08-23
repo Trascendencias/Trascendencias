@@ -11,9 +11,11 @@
         <img src="resources/user_example.png" class="user dropper" onClick="activate(this)">
             <div class="drop" id="user">
                 <center>
-                <p class="blue pointer" onclick="location.href='usuario '"><b> Nombre Nombre Apellido Apellido </b></p>
-                <p class="white"> Puesto en Trasce </p>
+                <p class="blue pointer" onclick="location.href='usuario '"><b> <%= user.name %><br> </b></p>
+                <p class="white"> <%= user.position %> </p>
                 <hr class="white">
+                
+                <% var enPuesto = false; if(enPuesto == false) { %> 
                 <p class="white"> Puesto de Venta: </p>
                 <select>
                   <option value="none">Seleccionar Puesto de Venta...</option>
@@ -23,6 +25,10 @@
                   <option value="audi">Audi</option>
                 </select>
                 <button class="second" type="submit"> Entrar </button>
+                <% } else { %> 
+                	<h2> NOPOOOOOO </h2>
+                <% } %> 
+                
                 <hr class="white"> 
                 <button class="second" onclick="location.href='/logout'"> Cerrar Sesión </button>
                     <br> <br>

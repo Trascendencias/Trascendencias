@@ -54,11 +54,7 @@
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
                 <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre de Contacto'; }"  onfocus="if(this.value == 'Nombre de Contacto') { this.value = ''; }" type="text" value="Nombre de Contacto" name="nombre-contacto" required>
                 <p class="error"> *Debe llenar esta información </p>
-                
-                <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Titulos del Contacto'; }"  onfocus="if(this.value == 'Titulos del Contacto') { this.value = ''; }" type="text" value="Titulos del Contacto" name="titulos-presentador" required>
-                <p class="error"> *Debe llenar esta información </p>
-                
+                                
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
                 <input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono del Contacto'; }"  onfocus="if(this.value == 'Teléfono del Contacto') { this.value = ''; }" type="text" value="Teléfono del Contacto" name="telefono-contacto" required>
                 <p class="error"> *Debe llenar esta información </p>
@@ -78,11 +74,6 @@
                 
                 <!-- Requisitos Visita, Taller, Oferta  -->
                 <textarea name="requisitos" class="large-text" required> Requisitos... </textarea>
-                <p class="error"> *Debe llenar esta información </p>
-                
-                <!-- Foto del ____ Conferencista, Contacto, Evento Social, Patrocinadores  -->
-                <p class="title"> Foto del Contacto </p><br><br><br>
-                <input type="file" width="150px" name="main-foto" value="fileupload" id="image" style="display: inline;">
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
