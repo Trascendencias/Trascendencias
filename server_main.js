@@ -12,7 +12,6 @@ var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
 var flash = require('connect-flash');
 var database = require('./database/connection');
-var main_sessions = require('./database/sessions').main;
 
 require('./main/auth/passport')(passport, database);
 
@@ -25,7 +24,7 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true,
 	secret: 'super_secret_string',
-	store: new mongo_store({ mongooseConnection: main_sessions })
+	store: new mongo_store({ mongooseConnection: database })
 }));
 app.use(flash());
 app.use(passport.initialize());

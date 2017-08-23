@@ -75,6 +75,7 @@ database.get_file = function(files, filename, done) {
 			return done(err, null);
 		}
 
+		console.log("Uploaded file: %s", path);
 		return done(null, path);
 	});
 }
@@ -92,6 +93,7 @@ database.get_files = function(files, filename, done) {
 				return done(err, []);
 			}
 
+			console.log("Uploaded file: %s", path);
 			file_paths.push(path);
 
 			if(!files[filename + '_' + (count + 1)]) {

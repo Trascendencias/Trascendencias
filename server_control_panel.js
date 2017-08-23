@@ -13,9 +13,9 @@ var mongo_store = require('connect-mongo')(session);
 var passport = require('passport');
 var database = require('./database/connection');
 var flash = require('connect-flash');
+var cookie_session = require('cookie-session');
 var file_upload = require('express-fileupload');
 var nodemailer = require('nodemailer');
-var control_panel_sessions = require('./database/sessions').control_panel;
 
 require('./control_panel/auth/passport')(passport, database);
 
@@ -35,11 +35,8 @@ let mail_options = {
 form.configure({
 	passThrough: true
 });
-app.use(session({
-	resave: true,
-	saveUninitialized: true,
-	secret: 'super_secret_string',
-	store: new mongo_store({ mongooseConnection: control_panel_sessions })
+app.use(cookie_session({
+	secret: 'secret_string'
 }));
 app.use(flash());
 app.use(file_upload());

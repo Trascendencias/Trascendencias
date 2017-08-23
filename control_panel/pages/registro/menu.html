@@ -14,9 +14,8 @@
                 <p class="blue pointer" onclick="location.href='usuario '"><b> <%= user.name %><br> </b></p>
                 <p class="white"> <%= user.position %> </p>
                 <hr class="white">
-                
-                <% var enPuesto = false; if(enPuesto == false) { %> 
                 <p class="white"> Puesto de Venta: </p>
+                <% var enPuesto = true; if(enPuesto == false) { %> 
                 <select>
                   <option value="none">Seleccionar Puesto de Venta...</option>
                   <option value="volvo">Volvo</option>
@@ -26,7 +25,7 @@
                 </select>
                 <button class="second" type="submit"> Entrar </button>
                 <% } else { %> 
-                	<h2> NOPOOOOOO </h2>
+                	<p class="white"><i> Cetys Universidad Campus Mexicali A lado de los Vichis </i><button class="second" style="margin-left: +10px;"> Salir </button></p>
                 <% } %> 
                 
                 <hr class="white"> 
