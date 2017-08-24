@@ -48,8 +48,43 @@ database.register = {
 			});
 		});
 	},
-	expense: function(form, files, done) {
-		
+	taller: function(form, files, done) {
+		let new_workshop = new models.workshop();
+		database.get_video_urls(form, function(err, video_urls) {
+			if(err) {
+				return done(err);
+			}
+
+			console.log("Set video_urls");
+			new_workshop.video_urls = video_urls;
+
+			database.get_file(files, 'instructor_photo', function(err, file_path) {
+				if(err) {
+					return done(err);
+				}
+
+				console.log("Set instructor_photo");
+				new_workshop.instructor_photo = file_path;
+
+				database.get_files(files, 'photo', function(err, file_paths) {
+					if(err) {
+						return done(err);
+					}
+
+					console.log("Set photos");
+					new_workshop.photos = file_paths;
+
+					new_workshop.save(function(err) {
+						if(err) {
+							return done(err);
+						}
+
+						console.log("Saved");
+						return done(null);
+					});
+				});			
+			});
+		});	
 	}
 };
 
@@ -57,11 +92,9 @@ database.get_video_urls = function(form, done) {
 	let video_urls = [];
 	for(let count = 0; form['video_url_' + count]; count++) {
 		video_urls.push(form['video_url_' + count]);
-
-		if(!form['video_url_' + (count + 1)]) {
-			return done(null, video_urls);
-		}
 	}
+
+	return done(null, video_urls);
 }
 
 database.get_file = function(files, filename, done) {
@@ -74,10 +107,10 @@ database.get_file = function(files, filename, done) {
 		if(err) {
 			return done(err, null);
 		}
-
-		console.log("Uploaded file: %s", path);
-		return done(null, path);
 	});
+
+	console.log("Uploaded file: %s", path);
+	return done(null, path);
 }
 
 database.get_files = function(files, filename, done) {
@@ -95,12 +128,19 @@ database.get_files = function(files, filename, done) {
 
 			console.log("Uploaded file: %s", path);
 			file_paths.push(path);
-
-			if(!files[filename + '_' + (count + 1)]) {
-				return done(null, file_paths);
-			}
 		});
 	}
+
+	return done(null, file_paths);
+}
+
+database.form_to_model = function(form, model) {
+	for(let key in form) {
+		model[key] = form[key];
+		console.log("Copied key %s to model", key);
+	}
+
+	console.log("Finished copying form_to_model");
 }
 
 function new_file_path() {

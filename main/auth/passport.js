@@ -36,42 +36,45 @@ module.exports = function(passport, database) {
 		passReqToCallback: true
 	},
 	function(req, email, password, done) {
-		process.nextTick(function(){
-			participant.findOne({ 'email': email }, function(err, searched_participant) {
-				if(err) {
-					return done(err);
-				}
-				else if(searched_participant) {
-					return done(null, false, req.flash('message', 'Correo ya registrado.'));
-				}
-				else {
-					let new_participant = new participant();
-					new_participant.name = req.form.name;
-					new_participant.email = email;
-					new_participant.local.password = database.generate_hash(password);
-					new_participant.debt = 0;
-					new_participant.package = 'Ninguno';
-					new_participant.verified = false;
+		participant.findOne({ 'email': email }, function(err, searched_participant) {
+			if(err) {
+				return done(err);
+			}
+			else if(searched_participant) {
+				return done(null, false, req.flash('message', 'Correo ya registrado.'));
+			}
+			else {
+				let new_participant = new participant();
+				new_participant.name = req.form.name;
+				new_participant.email = email;
+				new_participant.local.password = database.generate_hash(password);
+				new_participant.debt = 0;
+				new_participant.package = 'Ninguno';
+				new_participant.verified = false;
+				new_participant.alergies = req.form.alergies;
+				new_participant.institution = req.form.institution;
+				new_participant.city = req.form.city;
+				new_participant.group_code = 'Ninguno';
+				new_participant.shirt_size = req.form.shirt_size;
 
-					let verification_hash = database.generate_hash(email);
-					mail_options.text = 'Da click al siguiente link para verificar tu cuenta: https://trascendencias.org/verify?email=' + email + '&key=' + verification_hash;
-					mail_options.to = email;
-					transporter.sendMail(mail_options, (error, info) => {
-						if (error) {
-							return console.log(error);
-						}
-					});
+				let verification_hash = database.generate_hash(email);
+				mail_options.text = 'Da click al siguiente link para verificar tu cuenta: https://trascendencias.org/verify?email=' + email + '&key=' + verification_hash;
+				mail_options.to = email;
+				transporter.sendMail(mail_options, (error, info) => {
+					if (error) {
+						return console.log(error);
+					}
+				});
 
 
-					new_participant.save(function(err) {
-						if(err) {
-							throw err;
-						}
+				new_participant.save(function(err) {
+					if(err) {
+						throw err;
+					}
 
-						return done(null, new_participant);
-					});
-				}
-			});
+					return done(null, new_participant);
+				});
+			}
 		});
 	}));
 

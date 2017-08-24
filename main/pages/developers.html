@@ -2,34 +2,24 @@
 
 <head>
 	<!---FACEBOOK OPTIMIZATION -->
-	<meta property="og:url" content="#!URL" />
+	<meta property="og:url" content="www.trascendencias.org/developers" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="#!TITLE" />
-	<meta property="og:image" content="#!IMG" />
+	<meta property="og:title" content="Desarrolladores Web" />
 	
 	<!---SEO OPTIMIZATION -->
 	<title> Desarrolladores </title>
 	<meta name="description" content="#!DESCRIPTION">
-	<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
-	<meta name="author" content="#!AUTOR">
+	<meta name="keywords" content="desarrolladores, web, trascendencias.org, Ismael Villegas, Edgar Magdaleno" >
+	<meta name="author" content="Trascendencias 2017">
 
 	<!-- tag para hacerlo escalable -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include menu  %> -->
-
-		<!--- Title --> 
-        <title> Consulta </title>
-
-		<!--- Incluir documeentos -->
-<% include menu  %>
-
-	<!--- Pa que agarren los acentos -->
+    	
+    <title> Desarrolladores </title>
+	<% include partials/menu.html  %>
 	<meta charset="UTF-8">
-
-	<!--- Pa que agarre el Styleshit los acentos -->
 	<link rel="stylesheet" type="text/css" href="resources/style.css">
+
 </head>
 	<style>
 		img.developer {
@@ -119,14 +109,14 @@
 		<div class="spacer"> </div>
 		<div class="developer">
 			<div class="info">
-			<img src="resources/user_example.png" class="developer">
+			<img src="resources/ismael-01.png" class="developer">
 			<h3 onClick="location.href='https://www.facebook.com/jesismaelv/'"> Ismael Villegas </h3>
 			<p><i> Diseño Web y desarrollo front-end de Trascendencias.org y su sistema de registro. </i></p>
 			<a href ="http://ismaelvillegas.com"><i> IsmaelVillegas.com </i></a> 
 			</div>
 		</div>
 		<div class="developer">
-			<img src="resources/user_example.png" class="developer">
+			<img src="resources/edgar.jpg" class="developer">
 			<h3> Edgar Magdaleno </h3>
 			<p><i> Seguridad y desarrollo back-end de Trascendencias.org y su sistema de registro. </i></p>
 			<a href ="http://edgarmagdaleno.me"><i> EdgarMagdaleno.me </i></a> 
@@ -141,48 +131,17 @@
 		
 <hr style="width: 100vw; border-color: rgba(0,0,0,0);"> <!--- Sin esto se hace feo el pedo -->
 
-<% include footer %>	
+<% include partials/footer.html %>	
 	
 	<script>  
 
-		//SLIDER
-		var currentSlide = 0; //El slide en el que está menos 1
-		var slides = document.getElementById("slides");
-		var beforeSlide = 4;
-		var afterSlide = 1;
-		function rightSlider(){
-			if(currentSlide == 4){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
-				currentSlide = 0; 
-				slides.style.left = "0px"; 
-			}
-			else {
-				currentSlide++; 
-				slides.style.left = "calc(-100vw * " + currentSlide + ")";
-			}
-		}
-		function leftSlider(){
-			if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
-				slides.style.left = "calc(-100vw * 4)"; 
-				currentSlide = 4;}
-			else { 
-				currentSlide--; 
-				slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
-			}
-		}
+		
 		
 		function activate(elem){ //Activar / desactivar mierda
 			if(elem.classList.contains('active')) elem.classList.remove('active'); 
 			else elem.classList.add('active'); 
 			}
 
-		//SlideShow en Gigante
-		document.getElementById("slides").onclick = function(){  show(currentSlide) };
-		document.getElementById("biggerImage").onclick = function(){ document.getElementById("biggerImage").style.display = "none"; }
-		function show(slideNumber){
-			document.getElementById("biggerImg").src = "resources/slider" +  (slideNumber + 1) + ".jpg"; 
-			//aquí nomás se cambia a que sea la imagen de la base de datos que corresponda con el numero de la imagen y sha :D
-			document.getElementById("biggerImage").style.display = "block";
-		}
 
 
 

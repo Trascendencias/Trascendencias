@@ -31,14 +31,14 @@
                 
 				<!-- NOMBRE/TITULO TODOS-->
                 <p class="title black"> Nombre </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Ismael Villegas" name="title" required>
+				<input maxlength="50" placeholder="Nombre" type="text" value="Ismael Villegas" name="title" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- TALLA Participantes -->
                 <p class="title black"> Talla </p><br><br>
                 <select id="select" name="talla">
-                    <option value="none"> Talla... </option>
-                  <option value="XS"> XS </option>
+                  <option value="none"> Talla... </option>
+                  <option value="XS" selected> XS </option>
                   <option value="S"> S </option>
                   <option value="M"> M </option>
                   <option value="L"> L </option>
@@ -46,14 +46,14 @@
                 </select>
                 <p class="error"> *Debe llenar esta información </p>
                 
-                <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
+                <!-- onKeyPress="return isNumberKey(event)" TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
                 <p class="title black"> Teléfono </p><br><br>
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="(686)123 45 67" name="telefono-contacto" required>
+				<input  maxlength="10" placeholder="Teléfono" type="number" value="6861234567" name="telefono-contacto" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
                 <p class="title black"> Correo </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="correo@email.com" name="correo" required>
+				<input maxlength="50" type="email" placeholder="Correo" value="correo@email.com" name="correo" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- FACEBOOK -->

@@ -88,4 +88,14 @@ module.exports = function(http_app, app, fs, passport, database) {
 
 		response.status(404).send('File not found.');
 	});
+
+	app.post('/registro-paquete', form(), function(req, res) {
+		database.register.paquete(req.form, function(err) {
+			if(err) {
+				return res.send('Error');
+			}
+
+			return res.render('registro-participante-exito', {});
+		});
+	})
 }

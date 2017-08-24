@@ -1,21 +1,10 @@
 <html> 
 
 	<head>		
-		    <!-- tag para hacerlo escalable -->
-		    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		    <!--- INCLUIR DOCUMENTOS -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
-            
-        <!--- Pa que agarren los acentos -->
-		    <meta charset="UTF-8">
-
-        <!--- Title --> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
         <title> Registro Staff </title>
-
-		    <!--- Pa que agarre el Styleshit los acentos -->
-		    <link rel="stylesheet" type="text/css" href="admin/resources/style.css">
-	
+		<link rel="stylesheet" type="text/css" href="admin/resources/style.css">
     </head>
 <body>
 		
@@ -29,7 +18,7 @@
                 <input type="hidden" name="registrado" value="participante">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="name" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- TALLA Participantes -->

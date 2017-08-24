@@ -23,7 +23,7 @@ app.use(body_parser.urlencoded({
 app.use(session({
 	resave: true,
 	saveUninitialized: true,
-	secret: 'super_secret_string',
+	secret: 'secret_string',
 	store: new mongo_store({ mongooseConnection: database })
 }));
 app.use(flash());

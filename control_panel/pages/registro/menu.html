@@ -7,6 +7,9 @@
 		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 
+
+
+
 <div class="menu">
         <img src="resources/user_example.png" class="user dropper" onClick="activate(this)">
             <div class="drop" id="user">
@@ -25,7 +28,12 @@
                 </select>
                 <button class="second" type="submit"> Entrar </button>
                 <% } else { %> 
-                	<p class="white"><i> Cetys Universidad Campus Mexicali A lado de los Vichis </i><button class="second" style="margin-left: +10px;"> Salir </button></p>
+                   <p class="white">
+                    	<i> 
+                   		Cetys Universidad Campus Mexicali A lado de los Vichis 
+                   	  	</i>
+                   
+                    <button class="second" style="margin-left: +10px;"> Salir </button></p>
                 <% } %> 
                 
                 <hr class="white"> 
@@ -98,7 +106,6 @@
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 
 			}
-
-    var puesto = true;
+			shorten(document.getElementById("nombre-puesto"), 18); 
 
     </script>

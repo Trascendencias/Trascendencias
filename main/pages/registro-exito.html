@@ -1,0 +1,57 @@
+<html> 
+
+	<head>
+		<title> Registor Completado </title> 
+        
+		<meta name=”description” content=”#!DESCRIPCION-BLOG”>
+        
+		<!---FACEBOOK OPTIMIZATION -->
+		<meta property="og:url" content="#!URL" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="#!TITLE" />
+		<meta property="og:image" content="#!IMG" />
+	
+
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<% include partials/menu.html %>
+		<div class="menuspacer"></div>
+
+		<!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	</head>
+
+
+	<body>
+
+	<div class="registro">
+		<center>
+			<h1 class="cmenta"> ¡Registro Completado! </h1>
+			<p>  Hemos enviado un correo a tucorreo@EJSbienVergas.com para validar tu cuenta. Es necesario valirdarlo para poder elegir un paquete. </p>
+            
+            
+
+		</center>
+
+
+	</div>
+    <center>
+    <button onclick="location.href='index'"> Inicio </button>
+    </center>
+
+
+
+		<script>
+
+	function activate(elem){
+		if(elem.classList.contains('active')) elem.classList.remove('active'); 
+		else elem.classList.add('active'); 
+	}
+		</script>
+	</body>
+</html>

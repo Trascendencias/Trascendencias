@@ -33,14 +33,12 @@
 	            <% } %><br><br><br>
 	            <form method="post" id="forma" action="/login" style="width: 300px;">
 	                
-	                <input id="value1" style="width: 300px;" maxlength="50" onBlur="if (this.value == '') { this.value = 'Usuario'; }"  onfocus="if(this.value == 'Usuario') { this.value = ''; }" type="text" value="Usuario" name="username" required>
+	                <input id="value1" style="width: 300px;" maxlength="50" type="text" placeholder="Usuario" name="username" required>
 	                <p class="error"> *Debe llenar esta información </p>
 	                
-	                <input id="value2" style="width: 300px;" maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="password" required>
+	                <input id="value2" style="width: 300px;" maxlength="50" type="password" placeholder="Contraseña" name="password" required>
 	                <p class="error"> *Debe llenar esta información </p>
-           
-           
-				<button type="button" class="third" onClick="location.href='registro-staff'"> Registrarse </button>
+                    
             	<button type="submit"> Siguiente </button>
 
             	</center>

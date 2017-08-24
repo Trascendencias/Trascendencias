@@ -8,7 +8,7 @@
 		<meta property="og:image" content="#!IMG" />
 		
 		<!---SEO OPTIMIZATION -->
-		<title> #!TITLE </title>
+		<title> Registrarse </title>
 		<meta name="description" content="#!DESCRIPTION">
 		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
 		<meta name="author" content="#!AUTOR">
@@ -29,71 +29,52 @@
 
 
 	<body>
-	<div class="pageLocation cmen">
-		<h5 id="pageLocation"> Ventas > Registro </h5>
-	</div> 
 		<div class="registro">
-		<br>
-		<center><h6> <b>Nombre del Paquete </b></h6> </center>
-		<img src="resources/slider1.jpg"> <!--- AQUI VA LA IMAGEN DEL PAQUTE -->
+		<br><br><br>
+		<center><h6> <b>Registrarse </b></h6> </center>
 			<p style="color: red;"> <%= message %> </p>
 			<form class="registro" action="signup" method="post"> <br><br>
 				<!-- NOMBRE -->
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="name" required>
-				<p class="error"> *Debe llenar esta información </p>
-
-				<!-- TALLA -->
-				<input maxlength="1" onblur="if (this.value == '') { this.value = 'Talla de camiseta'; }"  onfocus="if(this.value == 'Talla de camiseta') { this.value = ''; }" type="text" value="Talla de camiseta" name="shirt_size" required>
+				<input maxlength="50" placeholder="Nombre" type="text" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CORREO -->
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="email" required>
+				<input maxlength="50" type="email" placeholder="Correo" name="email" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- INSTITUCION DE PROCEDENCIA -->
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Institución de procedencia'; }"  onfocus="if(this.value == 'Institución de procedencia') { this.value = ''; }" type="text" value="Institución de procedencia" name="institution" required>
+				<input maxlength="50" type="text" placeholder="Institución de procedencia" name="institution" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CIUDAD -->
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Ciudad" name="city" required>
+				<input maxlength="50"  type="text" placeholder="Ciudad" name="city" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- TELEFONO -->
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="Teléfono" name="phone" required>
+				<input maxlength="50" type="number" placeholder="Teléfono" name="phone" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CONTRASENA -->
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="password" required>
+				<input maxlength="50"  type="password" placeholder="Contraseña" name="password" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- REPITE LA CONTRASENA -->
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="password_repeat" required>
+				<input maxlength="50" type="password" placeholder="Repita la contraseña" name="password_repeat" required>
 				<p class="error"> *Debe llenar esta información </p>
-
-				<!-- CODIGO DE GRUPO -->
-				
-
-				<input id="codigo-grupo" maxlength="50" onblur="if (this.value == '') { this.value = 'Código de Grupo'; }"  onfocus="if(this.value == 'Código de Grupo') { this.value = ''; }" type="text" value="Código de Grupo" name="group_code" required>
-				<button class="second"> Nuevo </button>
-				<p class="error"> *Debe llenar esta información </p>
-								
-
 
 				<!-- ALERGIAS -->
-				<input maxlength="50" onblur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="¿Tienes alergias?" name="alergies" required>
+				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- TERMINOS Y CONDICIONES -->
-				<p> <input type="checkbox"> Acepto los <span class="cmenta" onclick="location.href='terminosycondiciones'"> términos y condiciones </span> </p>
-				<h1> $750.00 </h1>
+				<p> <input type="checkbox" required> Acepto los <span class="cmenta" onClick="location.href='terminosycondiciones'"> términos y condiciones </span> </p>
 
-				<button type="submit" onclick="location.href='registro-terminado"> Siguiente </button>
+				<button type="submit" onClick="location.href='registro-terminado"> Siguiente </button>
+                <br><br><br>
 			
 			</form>
 
-				<br><br><br>
-				<h2> Paquetes de Grupo </h2>
-				<p> El código de grupo es el código que se utiliza para identificar a todos los miembros de una paquete de más de 1 persona. Si alguien de tu grupo ya se ha registrado utiliza su código para hacer válida la paquete. Se puede abonar por persona y se abonará a su cuenta o se puede abonar al código de grupo y el abono se dividirá entre todos los integrantes.</p>
+
 		
 		</div>
 
