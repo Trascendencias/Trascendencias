@@ -1,20 +1,11 @@
-i<html> 
+<html> 
 
     <head>      
-        <!-- tag para hacerlo escalable -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-        <!--- INCLUIR DOCUMENTOS -->
         <script src="https://www.w3schools.com/lib/w3.js"></script>
 	    <% include menu.html %>
-
-        <!--- Title --> 
         <title> Lista del Staff </title>
-            
-        <!--- Pa que agarren los acentos -->
         <meta charset="UTF-8">
-
-        <!--- Pa que agarre el Styleshit los acentos -->
         <link rel="stylesheet" type="text/css" href="resources/style.css">
     
     </head>
@@ -33,18 +24,13 @@ i<html>
         <div class="lista">
         <br>
         <br>
-        <h3> <span id="titulo">  </span>:  <p id="contador">  </p><button class="nuevo" onClick="nuevo()"> + Nuevo </button></h3>
+        <h3> <span id="titulo">  </span>:  <p id="contador">  </p><button class="nuevo" onclick="location.href='generar-claves'"> + Nuevo </button></h3>
 
         <form id="searchForm" action="javascript:buscarPalabras();">
             <input id="search" class="search" onBlur="if (this.value == '') { this.value = 'Buscar...'; showAll();}"  onfocus="if(this.value == 'Buscar...') { this.value = ''; } " type="text" value="Buscar..." > 
             <button class="third search" type="button" onClick="buscarPalabras();"> 🔎 </button>
-            <center>
 
-            <button class="third" style="float: left;" type="button" onClick="location.href='generar-claves '"> Enviar Invitaciones </button>
-
-            </center>
         </form>
-        <br>
         <hr>
                 
         <form id="accion-lista">

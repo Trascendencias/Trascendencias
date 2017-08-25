@@ -14,11 +14,11 @@
         <img src="resources/user_example.png" class="user dropper" onClick="activate(this)">
             <div class="drop" id="user">
                 <center>
-                <p class="blue pointer" onclick="location.href='usuario '"><b> <%= user.name %><br> </b></p>
+                <p class="blue pointer" onclick="location.href='usuario'"><b> <%= user.name %><br> </b></p>
                 <p class="white"> <%= user.position %> </p>
                 <hr class="white">
                 <p class="white"> Puesto de Venta: </p>
-                <% var enPuesto = true; if(enPuesto == false) { %> 
+                <% var enPuesto = false; if(enPuesto == false) { %> 
                 <select>
                   <option value="none">Seleccionar Puesto de Venta...</option>
                   <option value="volvo">Volvo</option>

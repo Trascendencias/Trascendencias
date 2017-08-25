@@ -1,20 +1,10 @@
 <html> 
 
     <head>      
-        <!-- tag para hacerlo escalable -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-        <!--- INCLUIR DOCUMENTOS -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
         <% include menu.html %> 
-
-        <!--- Title --> 
         <title> Registrar Abono de Participante </title>       
-            
-        <!--- Pa que agarren los acentos -->
         <meta charset="UTF-8">
-
-        <!--- Pa que agarre el Styleshit los acentos -->
         <link rel="stylesheet" type="text/css" href="resources/style.css">
     
     </head>
@@ -34,16 +24,29 @@
         <form action="abono " method=POST id="forma-registro">
                  <!-- COSTO Paquetes -->
                 <p class="title"> Cantidad: </p>
-                <input type=number name="gasto" class="numero" value="1" >
+                <input type=number placeholder="$$" name="abono" class="numero"  >
                 <p class="error"> *Debe llenar esta información </p>
-             
-                
                
+                <input type="text" placeholder="Código de Grupo" name="group-code" rquired><br> <br>
+
+				<!-- TALLA s -->
+                <select id="select" name="talla">
+                    <option value="none" selected disabled> Talla... </option>
+                  <option value="XS"> XS </option>
+                  <option value="S"> S </option>
+                  <option value="M"> M </option>
+                  <option value="L"> L </option>
+                  <option value="XL"> XL </option>
+                </select>
+                <p class="error"> *Debe llenar esta información </p>
+                
+                
+ 
                 
                 <center>
                 <div class="registro">
                         <hr>
-                    <button type="button" class="submit" onClick="validate()"> Siguiente </button>  
+                    <button type="submit" class="submit"> Siguiente </button>  
                     <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                     </div>
                 </center>

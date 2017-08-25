@@ -1,4 +1,4 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- tag para hacerlo escalable -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/style.css">
 
@@ -69,13 +69,13 @@
 
 
 		<div class="redes-sociales">
-			<a href="#">
-				<img src="resources/ico_twitter.svg">
+			<a target="_blank" href="https://www.instagram.com/trascendencias_cetys/">
+				<img src="resources/ico_instagram.svg">
 			</a>
-			<a href="#">
+			<a target="_blank" href="https://www.youtube.com/channel/UCnMMJXUeCbLIyTwfnRQd-AQ?view_as=subscriber">
 				<img src="resources/ico_youtube.svg">
 			</a>
-			<a href="#">
+			<a target="_blank" href="http://www.facebook.com/trascendencias">
 				<img src="resources/ico_facebook.svg">
 			</a>
 		</div>
@@ -93,13 +93,15 @@
 				</script>
 			<% } %>
 			<form action="/login" method="post" id="login">
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="name" required><br>
-				<input maxlength="50" onblur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="password" required>
+				<input maxlength="50" placeholder="Nombre" type="text" name="name" required><br>
+				<input maxlength="50" placeholder="Contraseña" type="password" name="password" required>
 				<p class="error"> *Datos incorrectos </p>
-			</form>
-			<button type="submit" form="login">Iniciar Sesion</button>
-			<button><a href="/signup" style='color: white;'>Registrar</a></button>
-			<button><a href="/auth/facebook" style='color: white;'>Registrar with Facebook</a></button>
+            </form>
+            <button type="submit" form="login">Iniciar Sesion</button>
+            <br><br><br> 
+			
+			<u><a href="/signup" style='color: white;'>Registrarse</a></u> <br />
+			<u><a href="/auth/facebook" style='color: white;'>Registrar with Facebook</a></u>
 		</div>
 		<% } else { %>
 		<img src="resources/user_example.png" class="persona1">

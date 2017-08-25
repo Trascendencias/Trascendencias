@@ -124,7 +124,7 @@ form {
 	}
 input, #resumen, .large-text {
 	border: 0px solid white;
-	color: #CCC;
+	color: #777;
 	font-size: 20px;
 	border-bottom: 2px solid #95989a;
 	padding: 10px;
@@ -132,12 +132,12 @@ input, #resumen, .large-text {
 	max-width: 700px;
 	background-color: rgba(0,0,0,0);
 	margin-top: -25px;
-	margin-bottom:0px;
+	margin-bottom:10px;
     outline: none;
 }
 input:focus{
-	border-color: black;
-	color: #333;
+	border-color: #41C7F4;
+	color: #41C7F4;
 }
 #resumen, .large-text, .video {
     border: 1px solid #95989a;
@@ -158,12 +158,13 @@ input:focus{
     -webkit-appearance: none; 
     -moz-appearance: none;
     appearance: none;
-    color: #ccc;
+    color: #777;
     border-bottom: 2px solid #95989a;
     padding: 10px;
     border-radius: 0px;
-    margin-top: -25px;
-        outline: none;
+    margin-top: 10px;
+    outline: none;
+	margin-bottom:10px;
 
 }
 #image {

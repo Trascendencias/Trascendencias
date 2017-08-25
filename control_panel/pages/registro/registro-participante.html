@@ -1,24 +1,11 @@
 <html> 
 
 	<head>		
-		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include menu.html %> -->
-
-        <!--- Title --> 
         <title> Registro de Participante </title>
-
-		<!--- Incluir documeentos -->
-<% include menu.html %>
-            
-        <!--- Pa que agarren los acentos -->
+		<% include menu.html %>
 		<meta charset="UTF-8">
-
-		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
-	
     </head>
 <body>
 		
@@ -32,12 +19,12 @@
                 <input type="hidden" name="registrado" value="participante">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="title" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- TALLA Participantes -->
-                <select id="select" name="talla">
-                    <option value="none"> Talla... </option>
+                <select id="select" name="shirt_size" required>
+                  <option value="none" disabled selected> Talla... </option>
                   <option value="XS"> XS </option>
                   <option value="S"> S </option>
                   <option value="M"> M </option>
@@ -47,58 +34,58 @@
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="Teléfono" name="telefono-contacto" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono" name="phone" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="correo" required>
+				<input maxlength="50" type="text" placeholder="Correo" name="email" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- INSTITUCION DE PROCEDENCIA Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Institución de procedencia'; }"  onfocus="if(this.value == 'Institución de procedencia') { this.value = ''; }" type="text" value="Institución de procedencia" name="institucion" required>
+				<input maxlength="50" type="text" placeholder="Institución de procedencia" name="institution" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CIUDAD Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Ciudad" name="ciudad" required>
+				<input maxlength="50" type="text" placeholder="Ciudad" name="city" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CONTRASENA Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="contrasena" required>
+				<input maxlength="50" type="password" placeholder="Contraseña" name="password" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- REPITE LA CONTRASENA Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="contrasena2" required>
+				<input maxlength="50" type="password" placeholder="Repita la contraseña" name="password2" required>
 				<p class="error"> *Debe llenar esta información </p>
-				
-                <!-- CODIGO DE GRUPO -->
-				<input id="codigo-grupo" maxlength="50" onBlur="if (this.value == '') { this.value = 'Código de Grupo'; }"  onfocus="if(this.value == 'Código de Grupo') { this.value = ''; }" type="text" value="Código de Grupo" name="codigo-grupo" required>
-				<button type="button" id="codigo-grupo-btn" class="third codigo-grupo" onClick="codigoGrupo();"> Nuevo </button>
-				<p class="error"> *Debe llenar esta información </p>
-                <input type="hidden" name="codigo-generado" id="codigo-generado" value="false">
                 
                 <!-- ALERGIAS Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="¿Tienes alergias?" name="alergias" required>
+				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- PAQUETE ELEGIDO Participante -->
-                <select id="select" name="paquete">
-                  <option value="none">Paquete Elegido... </option>
+                <select id="select" name="package" required>
+                  <option value="none" selected disabled>Paquete Elegido... </option>
                   <option value="volvo">Paquete 1</option>
                   <option value="saab">Paquete 2</option>
                   <option value="mercedes">Paquete 3</option>
                   <option value="audi">Paquete 4</option>
                 </select>
 				<p class="error"> *Debe llenar esta información </p>
+                 
+                 <!-- CODIGO DE GRUPO -->
+				<input id="codigo-grupo" maxlength="50" type="text" placeholder="Código de Grupo" name="group_code" required>
+				<button type="button" id="codigo-grupo-btn" class="third codigo-grupo" onClick="codigoGrupo();"> Nuevo </button>
+				<p class="error"> *Debe llenar esta información </p>
+                <input type="hidden" name="codigo-generado" id="codigo-generado" value="false">
 
                 <!-- ABONO Participante, Patrocinadores-->
                 <p class="title"> Abono: </p>
-                <input type=number name="abono" class="numero" value="1">
+                <input type=number name="abono" class="numero" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                
                 <div class="spacer"></div>
                 <hr>
-				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
+				<button type="submit" class="submit" > Siguiente </button>
                 <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
@@ -114,15 +101,7 @@
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 
 			}
-
-              //INCLUIR DOCUMENTOS
-            var videocount = 2;
-            var fotoscount = 2;
-
-            function validate(){
-                document.getElementById("forma-registro").submit();
-            }
-            
+    
             function isNumberKey(evt){
                 var charCode = (evt.which) ? evt.which : event.keyCode
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
@@ -155,7 +134,7 @@
             function codigoGrupo(){
                 if(document.getElementById("codigo-grupo-btn").innerHTML == "Cancelar"){
                 	var z = document.getElementById("codigo-grupo");
-                	z.value = "Código de Grupo";
+                	z.value = "";
 	                document.getElementById("codigo-grupo-btn").innerHTML = "Nuevo";
 	                document.getElementById("codigo-grupo").readOnly = false;
 	                document.getElementById("codigo-generado").value = "false";

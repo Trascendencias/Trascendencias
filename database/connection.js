@@ -7,15 +7,7 @@ var bcrypt = require('bcrypt');
 database.register = {
 	conferencia: function(form, files, done) {
 		let new_conference = new models.conference();
-		new_conference.name = form.name;
-		new_conference.speaker_name = form.speaker_name;
-		new_conference.speaker_titles = form.speaker_titles;
-		new_conference.speaker_phone = form.speaker_phone;
-		new_conference.speaker_email = form.speaker_email;
-		new_conference.location = form.location;
-		new_conference.summary = form.summary;
-		new_conference.description = form.description;
-		new_conference.include_teaser = form.inlude_teaser;
+		form_to_model(form, new_conference);
 		database.get_video_urls(form, function(err, video_urls) {
 			if(err) {
 				return done(err);
@@ -50,12 +42,12 @@ database.register = {
 	},
 	taller: function(form, files, done) {
 		let new_workshop = new models.workshop();
+		form_to_model(form, new_workshop);
 		database.get_video_urls(form, function(err, video_urls) {
 			if(err) {
 				return done(err);
 			}
 
-			console.log("Set video_urls");
 			new_workshop.video_urls = video_urls;
 
 			database.get_file(files, 'instructor_photo', function(err, file_path) {
@@ -63,7 +55,6 @@ database.register = {
 					return done(err);
 				}
 
-				console.log("Set instructor_photo");
 				new_workshop.instructor_photo = file_path;
 
 				database.get_files(files, 'photo', function(err, file_paths) {
@@ -71,7 +62,6 @@ database.register = {
 						return done(err);
 					}
 
-					console.log("Set photos");
 					new_workshop.photos = file_paths;
 
 					new_workshop.save(function(err) {
@@ -79,7 +69,6 @@ database.register = {
 							return done(err);
 						}
 
-						console.log("Saved");
 						return done(null);
 					});
 				});			
@@ -109,7 +98,6 @@ database.get_file = function(files, filename, done) {
 		}
 	});
 
-	console.log("Uploaded file: %s", path);
 	return done(null, path);
 }
 
@@ -126,7 +114,6 @@ database.get_files = function(files, filename, done) {
 				return done(err, []);
 			}
 
-			console.log("Uploaded file: %s", path);
 			file_paths.push(path);
 		});
 	}
@@ -134,13 +121,10 @@ database.get_files = function(files, filename, done) {
 	return done(null, file_paths);
 }
 
-database.form_to_model = function(form, model) {
+form_to_model = function(form, model) {
 	for(let key in form) {
 		model[key] = form[key];
-		console.log("Copied key %s to model", key);
 	}
-
-	console.log("Finished copying form_to_model");
 }
 
 function new_file_path() {
@@ -243,7 +227,8 @@ var translate = {
 	'evento-extra': 'extra_event',
 	'patrocinadores': 'sponsors',
 	'evento-social': 'social_events',
-	'punto-venta': 'sale_points'
+	'punto-venta': 'sale_points',
+	'blog': 'blogs'
 }
 
 module.exports = database;

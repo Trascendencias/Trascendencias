@@ -1,23 +1,10 @@
 <html> 
 
 	<head>		
-		<!-- tag para hacerlo escalable -->
+		<title> Editar Usuario Admin </title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include menu  %> -->
-
-		<!--- Title --> 
-        <title> Editar Usuario Admin </title>
-
-		<!--- Incluir documeentos -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
 	    <% include menu.html %>
-            
-        <!--- Pa que agarren los acentos -->
 		<meta charset="UTF-8">
-
-		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 	
     </head>
@@ -30,11 +17,11 @@
 			<form class="registro" id="forma-contrasena" method="post" action="contrasena "> <br><br>
 
 				<!-- CONTRASENA -->
-				<input id="value1" maxlength="50" onBlur="if (this.value == '') { this.value = 'Nueva Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Nueva Contraseña') { this.value = ''; this.type='password'}" type="text" value="Nueva Contraseña" name="contrasena" required>
+				<input id="value1" maxlength="50" placeholder="Nueva Contraseña" type="password" name="password" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- REPITE LA CONTRASENA -->
-				<input id="value2" maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="contrasena2" required>
+				<input id="value2" maxlength="50" placeholder="Repita la Contraseña" type="password" name="password2" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                
@@ -51,9 +38,7 @@
 			
 			<form class="registro" id="forma-editar" method="post" action="registro "> <br><br>
                
-                
-				<!-- CORREO s, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="email@correo.com" name="correo" required>
+			<input maxlength="50" placeholder="Nuevo Correo" type="text" name="email" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				
@@ -78,9 +63,6 @@
 			}
 
               //INCLUIR DOCUMENTOS
-
-            var videocount = 2;
-            var fotoscount = 2;
             var send = true;
             function validateContrasena(){
             	var value1 = document.getElementById('value1');

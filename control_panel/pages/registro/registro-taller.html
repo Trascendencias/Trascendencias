@@ -1,22 +1,10 @@
 <html> 
 
 	<head>		
-		<!-- tag para hacerlo escalable -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include menu.html %> -->
-
-        <!--- Title --> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Registro de Taller </title>
-
-		<!--- Incluir documeentos -->
-<% include menu.html %>
-            
-        <!--- Pa que agarren los acentos -->
+		<% include menu.html %>
 		<meta charset="UTF-8">
-
-		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 	
     </head>
@@ -32,43 +20,43 @@
                 <input type="hidden" name="registrado" value="taller">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="name" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
-                <input name="date" id="date" type="date" value="MM/DD/YYYY" required>
+                <input name="day" id="date" type="date" value="MM/DD/YYYY" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
-                <input type="time" name="inicio"  id="time">
+                <input type="time" name="start"  id="time" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
-                <input type="time" name="fin" id="time">
+                <input type="time" name="end" id="time" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre de Tallerista'; }"  onfocus="if(this.value == 'Nombre de Tallerista') { this.value = ''; }" type="text" value="Nombre de Tallerista" name="nombre-contacto" required>
+                <input maxlength="50" type="text" placeholder="Nombre de Tallerista" name="instructor_name" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Titulos del Tallerista'; }"  onfocus="if(this.value == 'Titulos del Tallerista') { this.value = ''; }" type="text" value="Titulos del Tallerista" name="instructor_titles" required>
+                <input maxlength="50" type="text" placeholder="Titulos del Tallerista" name="instructor_titles" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono del Tallerista'; }"  onfocus="if(this.value == 'Teléfono del Tallerista') { this.value = ''; }" type="text" value="Teléfono del Tallerista" name="instructor_phone" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono del Tallerista" name="instructor_phone" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo del Tallerista'; }"  onfocus="if(this.value == 'Correo del Tallerista') { this.value = ''; }" type="text" value="Correo del Tallerista" name="instructor_email" required>
+				<input maxlength="50" type="text" placeholder="Correo del Tallerista" name="instructor_email" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- LUGAR EN CETYS Conferencia, Taller, Evento Extra -->
-                 <select id="select" name="location">
-                  <option value="none">Lugar en Cetys ...</option>
+                 <select id="select" name="location" required>
+                  <option value="none" disabled selected>Lugar en Cetys ...</option>
                   <option value="auditorio">Auditorio</option>
                   <option value="cat">CAT</option>
                   <option value="vildosola">Sala Vildósola</option>
@@ -87,47 +75,43 @@
                 
                 <!-- CUPO Visita, Taller, Paquete -->
                 <p class="title"> Cupo: </p>
-                <input type=number name="cap" class="numero" value="1">
+                <input type=number name="cap" class="numero" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Requisitos Visita, Taller, Oferta  -->
-                <textarea name="requisites" class="large-text" required> Requisitos... </textarea>
+                <textarea name="requisites" class="large-text" placeholder="Requisitos..." required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
                 <p class="title"> Foto del Tallerista (300x300px)</p><br><br><br>
-                <input type="file" width="150px" name="instructor_photo" value="fileupload" id="image" style="display: inline;">
+                <input required type="file" width="150px" name="instructor_photo" value="fileupload" id="image" style="display: inline;" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <p class="title"> Fotos </p><br><br><br>
-                <div id="fotos">
-                <input type="file" width="150px" name="photos_0" value="fileupload" id="image" style="display: inline;">
+                <input type="file" width="150px" name="photos_0" value="fileupload" id="image" style="display: inline;" multiple required>
                 <p class="error"> *Debe llenar esta información </p>
-                </div>
-                <button class="third" onClick="masfoto()" type="button"> Agregar Foto </button>
-                <br><br><br><br>
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p><br><br><br>
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'URL Video 1'; }"  onfocus="if(this.value == 'URL Video 1') { this.value = ''; }" type="text" value="URL Video 1" name="video_urls_0" class="video" required>
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls_0" class="video">
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
                 <br><br><br><br><br>
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="summary" id="resumen" required> Resumen... </textarea>
+                <textarea name="summary" id="resumen" placeholder="Resumen..." required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <textarea name="description" class="large-text" required> Descripción... </textarea>
+                <textarea name="description" class="large-text" placeholder="Descripción..." required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
  
                 <hr>
-				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
-                <button type="button" class="third" onClick="location.href='../'"> Cancelar </button>
+				<button type="submit" class="submit"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
@@ -143,23 +127,11 @@
 				else elem.classList.add('active'); 
 			}
 
-              //INCLUIR DOCUMENTOS
-            var videocount = 1;
-            var fotoscount = 1;
-
-            function validate(){
-                document.getElementById("forma-registro").submit();
-            }
-            
+            var videocount = 2;
             function masvideo(){
-                var videoinput = "<input maxlength='50' name='vide_url_"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
-                document.getElementById('videos').innerHTML += videoinput;
-                videocount++;
-            }
-            function masfoto(){
-                var fotosinput = "<input type='file' width='150px' name='photo_"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
-                document.getElementById('fotos').innerHTML += fotosinput;
-                fotoscount++;
+            var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
+            document.getElementById('videos').innerHTML += videoinput;
+            	videocount++;
             }
             
             function isNumberKey(evt){

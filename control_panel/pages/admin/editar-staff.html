@@ -1,22 +1,11 @@
 <html> 
 
-	<head>		
-		<!-- tag para hacerlo escalable -->
+	<head>	
+        <title> Registro Staff </title>	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR DOCUMENTOS -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
-        <% include menu.html %>
-            
-        <!--- Pa que agarren los acentos -->
+		<% include menu.html %>
 		<meta charset="UTF-8">
-
-        <!--- Title --> 
-        <title> Registro Staff </title>
-
-		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
-	
     </head>
 <body>
 		
@@ -27,18 +16,19 @@
 			<form class="registro" id="forma-registro" method="get" action="registro "> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
-                <input type="hidden" name="registrado" value="participante">
+                <input type="hidden" name="registrado" value="staff">
                 
 				<!-- NOMBRE/TITULO TODOS-->
                 <p class="title black"> Nombre </p><br><br>
-				<input maxlength="50" placeholder="Nombre" type="text" value="Ismael Villegas" name="title" required>
+				<input maxlength="50" placeholder="Nombre" type="text" value="Ismael Villegas" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- TALLA Participantes -->
+                <!-- OSHE MAGDA: PONERLE SELECTED HACE QUE EL OPTION SEA EL SELECCIONADO AL HACERSE LOAD A LA PAGINA, TAL VES SI LE PONES UN IF CON EJS ADENTRO DE CADA OPTION QUE IMPRIMA 'SELECTED" SI LA OPCION ES IGUAL A LA DE LA BASE DE DATOS FUNCIONE :D <3 PUTO --> 
                 <p class="title black"> Talla </p><br><br>
-                <select id="select" name="talla">
-                  <option value="none"> Talla... </option>
-                  <option value="XS" selected> XS </option>
+                <select id="select" name="shirt_size">
+                  <option value="none" disabled> Talla... </option>
+                  <option value="XS"> XS </option>
                   <option value="S"> S </option>
                   <option value="M"> M </option>
                   <option value="L"> L </option>
@@ -46,9 +36,9 @@
                 </select>
                 <p class="error"> *Debe llenar esta información </p>
                 
-                <!-- onKeyPress="return isNumberKey(event)" TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
+                <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
                 <p class="title black"> Teléfono </p><br><br>
-				<input  maxlength="10" placeholder="Teléfono" type="number" value="6861234567" name="telefono-contacto" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" placeholder="Teléfono" type="number" value="6861234567" name="phone" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
@@ -58,42 +48,54 @@
 
                 <!-- FACEBOOK -->
                 <p class="title black"> Link de Facebook </p><br><br>
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Link de Facebook'; }"  onfocus="if(this.value == 'Link de Facebook') { this.value = ''; }" type="text" value="https://www.facebook.com/profile.php?id=100009661066774" name="facebook" required>
+                <input maxlength="50" type="text" value="https://www.facebook.com/profile.php?id=100009661066774" placeholder="Link de Facebook" name="facebook" required>
                 <p class="error"> *Debe llenar esta información </p>
 
-				<!-- INSTITUCION DE PROCEDENCIA Participante-->
+				<!--CARRERA-->
                 <p class="title black"> Carrera </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Carrera'; }"  onfocus="if(this.value == 'Carrera') { this.value = ''; }" type="text" value="IDGD" name="carrera" required>
+				<input maxlength="50" placeholder="Carrera" type="text" value="IDGD" name="major" required>
 				<p class="error"> *Debe llenar esta información </p>
 
-				 <!-- SEMESTRE-->
-                <p class="title black"> Semestre: </p><br><br><br>
-                <input type=number name="semestre" class="numero" value="5">
+				<!-- SEMESTRE-->
+                <p class="title black"> Semestre: </p><br><br>
+                <select id="select" name="semester" required>
+                  <option value="none" disabled> Semestre</option>
+                  <option value="1er"> 1er </option>
+                  <option value="2do"> 2do </option>
+                  <option value="3er"> 3er </option>
+                  <option value="4to"> 4to </option>
+                  <option value="5to"> 5to </option>
+                  <option value="6to"> 6to </option>
+                  <option value="7mo"> 7mo </option>
+                  <option value="8vo"> 8vo </option>
+                  <option value="9no"> 9no </option>
+                  <option value="Otro"> Otro... </option>
+                </select>
                 <p class="error"> *Debe llenar esta información </p>
 
 				<!-- CIUDAD Participante-->
                 <p class="title black"> Ciudad </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Mexicali" name="ciudad" required>
+				<input maxlength="50" placeholder="Ciudad" type="text" value="Mexicali" name="city" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CONTRASENA Participante-->
                 <p class="title black"> Contraseña </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; }" type="password" value="Contraseña" name="contrasena" required>
+				<input maxlength="50" placeholder="Contraseña" type="password" value="Contraseña" name="password" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- REPITE LA CONTRASENA Participante-->
                 <p class="title black"> Repita la Contraseña </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = '';}" type="password" value="contraseña" name="contrasena2" required>
+				<input maxlength="50" placeholder="Repita la Contraseña" type="password" value="contraseña" name="password2" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- ALERGIAS Participante-->
                 <p class="title black"> Alergias </p><br><br>
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="Paracetamol" name="alergias" required>
+				<input maxlength="50" placeholder="Alergias" type="text" value="Paracetamol" name="alergies" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Equipo Staff -->
                 <p class="title black"> Equipo en Staff </p><br><br>
-                <select id="select" name="equipo">
+                <select id="select" name="team" required>
                   <option value="none"> Equipo en Trascendencias... </option>
                   <option value="general">General</option>
                   <option value="contenido">Contenido</option>
@@ -106,7 +108,7 @@
 
 				<!-- Puesto ELEGIDO  -->
                 <p class="title black"> Puesto Elegido </p><br><br>
-                <select id="select" name="puesto">
+                <select id="select" name="position" required>
                   <option value="none"> Puesto ... </option>
                   <option value="coordinador">Coordinador</option>
                   <option value="subcoordinador">Subcoordinador</option>
@@ -115,7 +117,7 @@
 				<p class="error"> *Debe llenar esta información </p>
 
 				<p class="title black"> Foto del Staff </p><br><br><br>
-                <input type="file" width="150px" name="foto" value="fileupload" id="image" style="display: inline;">
+                <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <div class="spacer"></div>

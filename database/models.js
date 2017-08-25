@@ -13,7 +13,7 @@ var schemas = {
 		institution: String,
 		phone: String,
 		group_code: String,
-		workshop: String,
+		workshop: [mongoose.Schema.Types.ObjectId],
 		local: {
 			password: String,
 		},
@@ -38,8 +38,6 @@ var schemas = {
 	}),
 	conference: mongoose.Schema({
 		name: String,
-		start: Date,
-		end: Date,
 		speaker_name: String, 
 		speaker_titles: String,
 		speaker_phone: String,
@@ -54,6 +52,7 @@ var schemas = {
 	}),
 	workshop: mongoose.Schema({
 		name: String,
+		day: Date,
 		start: Date,
 		end: Date,
 		instructor_name: String, 
@@ -71,6 +70,7 @@ var schemas = {
 	}),
 	visit: mongoose.Schema({
 		name: String,
+		day: Date,
 		start: Date,
 		end: Date,
 		contact_name: String, 
@@ -86,6 +86,7 @@ var schemas = {
 	}),
 	social_event: mongoose.Schema({
 		name: String,
+		day: Date,
 		start: Date,
 		end: Date,
 		location: String,
@@ -94,29 +95,48 @@ var schemas = {
 		contact_email: String,
 		location: String,
 		summary: String,
-		description: String
+		description: String,
 		event_poster: String
 	}),
 	extra_event: mongoose.Schema({
 		name: String,
+		day: Date,
 		start: Date,
 		end: Date,
 		location: String,
 		event_icon: String
 	}),
+	blog: mongoose.Schema({
+		name: String,
+		photos: String,
+		video_urls: String,
+		summary: String,
+		description: String,
+		include_teaser: Number
+	}),
+	faq: mongoose.Schema({
+		question: String,
+		answer: String,
+		position: String
+	}),
 	sale_point: mongoose.Schema({
 		name: String,
+		day: String,
 		start: Date,
 		end: Date,
 		location: String
-	}),
+	})
 }
 
 module.exports = {
-	conference: mongoose.model('conferences', schemas.conference),
 	participant: mongoose.model('participants', schemas.participant),
-	social_event: mongoose.model('social_events', schemas.social_event),
-	sale_point: mongoose.model('sale_points', schemas.sale_point),
 	staff_member: mongoose.model('staff_members', schemas.staff_member),
-	workshop: mongoose.model('staff_members', schemas.staff_member)
+	conference: mongoose.model('conferences', schemas.conference),
+	workshop: mongoose.model('workshops', schemas.staff_member),
+	visit: mongoose.model('visits', schemas.staff_member),
+	social_event: mongoose.model('social_events', schemas.social_event),
+	extra_event: mongoose.model('extra_events', schemas.staff_member),
+	blog: mongoose.model('blogs', schemas.staff_member),
+	faq: mongoose.model('faqs', schemas.staff_member),
+	sale_point: mongoose.model('sale_points', schemas.sale_point)
 };

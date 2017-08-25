@@ -1,22 +1,10 @@
 <html> 
 
 	<head>		
-		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include menu.html %> -->
-        
-        <!--- Title --> 
         <title> Registro Punto de Venta </title>
-
-		<!--- Incluir documeentos -->
-<% include menu.html %>
-            
-        <!--- Pa que agarren los acentos -->
+		<% include menu.html %>
 		<meta charset="UTF-8">
-
-		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 	
     </head>
@@ -32,7 +20,7 @@
                 <input type="hidden" name="registrado" value="punto-venta">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="title" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="title" required>
 				<p class="error"> *Debe llenar esta información </p>
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
@@ -42,32 +30,32 @@
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
-                <input type="time" name="inicio"  id="time">
+                <input type="time" name="inicio"  id="time" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
-                <input type="time" name="fin" id="time">
+                <input type="time" name="fin" id="time" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Dirección'; }"  onfocus="if(this.value == 'Dirección') { this.value = ''; }" type="text" value="Dirección" name="direccion" required>
+                <input maxlength="50" type="text" placeholder="Dirección" name="direccion" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="resumen" id="resumen" required> Resumen... </textarea>
+                <textarea name="resumen" id="resumen" placeholder="Resumen" required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <textarea name="descripcion" class="large-text" required> Descripción... </textarea>
+                <textarea name="descripcion" class="large-text" placeholder="Descripción..." required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
                 <!-- POSICION Preguntas Frecuentes -->
 
 				
                 <div class="spacer"></div>
                 <hr>
-				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
-                <button type="button" class="third" onClick="location.href='../'"> Cancelar </button>
+				<button type="submit" class="submit"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
@@ -83,24 +71,6 @@
 				else elem.classList.add('active'); 
 			}
 
-              //INCLUIR DOCUMENTOS
-            var videocount = 2;
-            var fotoscount = 2;
-
-            function validate(){
-                document.getElementById("forma-registro").submit();
-            }
-            
-            function masvideo(){
-                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
-                document.getElementById('videos').innerHTML += videoinput;
-                videocount++;
-            }
-            function masfoto(){
-                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
-                document.getElementById('fotos').innerHTML += fotosinput;
-                fotoscount++;
-            }
             
             function isNumberKey(evt){
                 var charCode = (evt.which) ? evt.which : event.keyCode

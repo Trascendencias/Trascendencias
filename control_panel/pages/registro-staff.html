@@ -15,15 +15,15 @@
 			<form class="registro" id="forma-registro" method="post" action="/signup" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
-                <input type="hidden" name="registrado" value="participante">
+                <input type="hidden" name="registrado" value="staff">
                 
 				<!-- NOMBRE/TITULO TODOS-->
 				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- TALLA Participantes -->
-                <select id="select" name="shirt_size">
-                    <option value="none"> Talla... </option>
+                <select id="select" name="shirt_size" required>
+                  <option value="none" disabled selected> Talla... </option>
                   <option value="XS"> XS </option>
                   <option value="S"> S </option>
                   <option value="M"> M </option>
@@ -33,51 +33,54 @@
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono'; }"  onfocus="if(this.value == 'Teléfono') { this.value = ''; }" type="text" value="Teléfono" name="phone" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="number" placeholder="Teléfono" name="phone" required>
 				<p class="error"> *Debe llenar esta información </p>
-        <input type="hidden" name="email" value="<%=email%>">
+                
+        		<input type="hidden" name="email" value="<%=email%>">
+                
                 <!-- FACEBOOK -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Link de Facebook'; }"  onfocus="if(this.value == 'Link de Facebook') { this.value = ''; }" type="text" value="Link de Facebook" name="facebook" required>
+                <input maxlength="50" type="text" placeholder="Link de Facebook" name="facebook" required>
                 <p class="error"> *Debe llenar esta información </p>
 
-				<!-- INSTITUCION DE PROCEDENCIA Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Carrera'; }"  onfocus="if(this.value == 'Carrera') { this.value = ''; }" type="text" value="Carrera" name="major" required>
+				<!-- CARRERA -->
+				<input maxlength="50" type="text" placeholder="Carrera" name="major" required>
 				<p class="error"> *Debe llenar esta información </p>
 
-				 <!-- SEMESTRE-->
-                <p class="title"> Semestre: </p>
-                <select id="select" name="semester">
-                    <option value="none"> 1er Semestre </option>
-                  <option value="XS"> 2do Semestre </option>
-                  <option value="S"> 3er Semestre </option>
-                  <option value="M"> 4to Semestre </option>
-                  <option value="L"> 5to Semestre </option>
-                  <option value="XL"> 6to Semestre </option>
-                  <option value="XL"> 7mo Semestre </option>
-                  <option value="XL"> 8vo Semestre </option>
-                  <option value="XL"> 9no Semestre </option>
+				<!-- SEMESTRE-->
+                <select id="select" name="semester" required>
+                  <option value="none" disabled selected> Semestre</option>
+                  <option value="1er"> 1er </option>
+                  <option value="2do"> 2do </option>
+                  <option value="3er"> 3er </option>
+                  <option value="4to"> 4to </option>
+                  <option value="5to"> 5to </option>
+                  <option value="6to"> 6to </option>
+                  <option value="7mo"> 7mo </option>
+                  <option value="8vo"> 8vo </option>
+                  <option value="9no"> 9no </option>
+                  <option value="Otro"> Otro... </option>
                 </select>
                 <p class="error"> *Debe llenar esta información </p>
 
 				<!-- CIUDAD Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Ciudad'; }"  onfocus="if(this.value == 'Ciudad') { this.value = ''; }" type="text" value="Ciudad" name="city" required>
+				<input maxlength="50" type="text" placeholder="Ciudad" name="city" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CONTRASENA Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Contraseña'; this.type='text' }"  onfocus="if(this.value == 'Contraseña') { this.value = ''; this.type='password'}" type="text" value="Contraseña" name="password" required>
+				<input maxlength="50" type="password" placeholder="Contraseña" name="password" required>
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- REPITE LA CONTRASENA Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Repita la contraseña'; this.type='text' }"  onfocus="if(this.value == 'Repita la contraseña') { this.value = ''; this.type='password'}" type="text" value="Repita la contraseña" name="password2" required>
+				<input maxlength="50"  type="password" placeholder="Repita la contraseña" name="password2" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- ALERGIAS Participante-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Tienes alergias?'; }"  onfocus="if(this.value == '¿Tienes alergias?') { this.value = ''; }" type="text" value="¿Tienes alergias?" name="alergies" required>
+				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Equipo Staff -->
-                <select id="select" name="team">
-                  <option value="none"> Equipo en Trascendencias... </option>
+                <select id="select" name="team" required>
+                  <option value="none" disabled selected> Equipo en Trascendencias... </option>
                   <option value="general">General</option>
                   <option value="contenido">Contenido</option>
                   <option value="mkt">Mkt y Ventas</option>
@@ -88,7 +91,7 @@
 				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- Puesto ELEGIDO  -->
-                <select id="select" name="position">
+                <select id="select" name="position" required>
                   <option value="none"> Puesto ... </option>
                   <option value="coordinador">Coordinador</option>
                   <option value="subcoordinador">Subcoordinador</option>
@@ -97,12 +100,12 @@
 				<p class="error"> *Debe llenar esta información </p>
 
 				<p class="title"> Foto del Staff </p><br><br><br>
-                <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;">
+                <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <div class="spacer"></div>
                 <hr>
-				        <button type="button" class="submit" onClick="validate()"> Siguiente </button>
+				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
                 <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
@@ -116,24 +119,7 @@
 </body>
 		
 		<script>
-              //INCLUIR DOCUMENTOS
-            var videocount = 2;
-            var fotoscount = 2;
 
-            function validate(){
-                document.getElementById("forma-registro").submit();
-            }
-            
-            function masvideo(){
-                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
-                document.getElementById('videos').innerHTML += videoinput;
-                videocount++;
-            }
-            function masfoto(){
-                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
-                document.getElementById('fotos').innerHTML += fotosinput;
-                fotoscount++;
-            }
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 

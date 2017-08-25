@@ -1,22 +1,10 @@
 <html> 
 
 	<head>		
-		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include menu.html %> -->
-
-        <!--- Title --> 
         <title> Registro de Evento Social </title>
-
-		<!--- Incluir documeentos -->
-<% include menu.html %>
-            
-        <!--- Pa que agarren los acentos -->
+		<% include menu.html %>
 		<meta charset="UTF-8">
-
-		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 	
     </head>
@@ -24,7 +12,7 @@
 		
         <div class="body">
 		<br>
-		<center><h6><b> Registro Evento Social </b></h6> </center>
+		<center><h6><b> Registro holi Social </b></h6> </center>
 			
 			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
                
@@ -32,59 +20,58 @@
                 <input type="hidden" name="registrado" value="evento-social">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="title" required>
+				<input maxlength="50" placeholder="Nombre" type="text" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
-                <input name="fecha" id="date" type="date" value="MM/DD/YYYY" required>
+                <input name="day" id="date" type="date" value="MM/DD/YYYY" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
-                <input type="time" name="inicio"  id="time">
+                <input type="time" name="start"  id="time" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
-                <input type="time" name="fin" id="time">
+                <input type="time" name="end" id="time" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre de Contacto'; }"  onfocus="if(this.value == 'Nombre de Contacto') { this.value = ''; }" type="text" value="Nombre de Contacto" name="nombre-contacto" required>
+                <input maxlength="50" type="text" placeholder="Nombre de Contacto" name="contact_name" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono de Contacto'; }"  onfocus="if(this.value == 'Teléfono de Contacto') { this.value = ''; }" type="text" value="Teléfono de Contacto" name="telefono-contacto" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono de Contacto" name="contact_phone" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo de Contacto'; }"  onfocus="if(this.value == 'Correo de Contacto') { this.value = ''; }" type="text" value="Correo de Contacto" name="correo" required>
+				<input maxlength="50" type="text" placeholder="contact_email" name="correo" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Dirección'; }"  onfocus="if(this.value == 'Dirección') { this.value = ''; }" type="text" value="Dirección" name="direccion" required>
+                <input maxlength="50" type="text" placeholder="Dirección" name="location" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 
-                <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
+                <!-- POSTER DEL EVENTO  -->
                 <p class="title"> Poster del Evento (11x18"@72ppi)</p><br><br><br>
-                <input type="file" width="150px" name="main-foto" value="fileupload" id="image" style="display: inline;">
+                <input type="file" width="150px" name="event_poster" value="fileupload" id="image" style="display: inline;"  accept="image/*" required>
                 <p class="error"> *Debe llenar esta información </p>
- 
+
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="resumen" id="resumen" required> Resumen... </textarea>
+                <textarea name="summary" id="resumen" placeholder="Resumen..." required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <textarea name="descripcion" class="large-text" required> Descripción... </textarea>
+                <textarea name="description" class="large-text" placeholder="Descripción..." required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
 
-                <input type=number name="teaser-index" class="numero goright" value="1">
                 <div class="spacer"></div>
                 <hr>
 				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
-                <button type="button" class="third" onClick="location.href='../'"> Cancelar </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
                 <div class="spacer"></div>

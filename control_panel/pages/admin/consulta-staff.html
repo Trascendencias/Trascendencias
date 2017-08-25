@@ -1,22 +1,11 @@
 <html> 
 
     <head>      
-        <!-- tag para hacerlo escalable -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-        <!--- INCLUIR DOCUMENTOS -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
-        <% include menu.html %>
-        
-        <!--- Title --> 
         <title> Consulta Staff </title>
-
-        <!--- Pa que agarren los acentos -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <meta charset="UTF-8">
-
-        <!--- Pa que agarre el Styleshit los acentos -->
         <link rel="stylesheet" type="text/css" href="resources/style.css">
-    
+		 <% include menu.html %>    
     </head>
     <style>
         h3, p {
@@ -28,7 +17,7 @@
         <div class="lista">
         <br>
         <center>
-        <button onClick="location.href='editar-staff ?code=xxx'"> Editar </button> <button> Eliminar </button>
+        <button onClick="location.href='editar-staff'"> Editar </button> <button> Eliminar </button>
         <div class="spacer"></div>
         <img src="../img/user_example.png" class="staff-pic">
         </center>

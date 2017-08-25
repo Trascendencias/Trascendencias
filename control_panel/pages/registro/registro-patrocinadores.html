@@ -1,22 +1,10 @@
 <html> 
 
 	<head>		
-		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include menu.html %> -->
-
-        <!--- Title --> 
         <title> Registro de Patrocinadores </title>
-
-		<!--- Incluir documeentos -->
-<% include menu.html %>
-            
-        <!--- Pa que agarren los acentos -->
+		<% include menu.html %>
 		<meta charset="UTF-8">
-
-		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 	
     </head>
@@ -32,36 +20,36 @@
                 <input type="hidden" name="registrado" value="patrocinador">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="title" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="title" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre de Contacto'; }"  onfocus="if(this.value == 'Nombre de Contacto') { this.value = ''; }" type="text" value="Nombre de Contacto" name="nombre-contacto" required>
+                <input maxlength="50"  type="text" placeholder="Nombre de Contacto" name="nombre-contacto" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" onBlur="if (this.value == '') { this.value = 'Teléfono de Contacto'; }"  onfocus="if(this.value == 'Teléfono de Contacto') { this.value = ''; }" type="text" value="Teléfono de Contacto" name="telefono-contacto" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono de Contacto" name="telefono-contacto" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo de Contacto'; }"  onfocus="if(this.value == 'Correo de Contacto') { this.value = ''; }" type="text" value="Correo de Contacto" name="correo" required>
+				<input maxlength="50"  type="email" placeholder="Correo de Contacto" name="correo" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
                 <p class="title"> Logo de la Empresa (300x100px sobre negro) </p><br><br><br>
-                <input type="file" width="150px" name="main-foto" value="fileupload" id="image" style="display: inline;">
+                <input type="file" width="150px" name="main-foto" value="fileupload" id="image" style="display: inline;" accept="image/*" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- ABONO Participante, Patrocinadores-->
                 <p class="title"> Abono: </p>
-                <input type=number name="abono" class="numero" value="1">
+                <input type=number name="abono" class="numero" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <div class="spacer"></div>
                 <hr>
-				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
-                <button type="button" class="third" onClick="location.href='../'"> Cancelar </button>
+				<button type="submit" class="submit"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
                 <div class="spacer"></div>

@@ -150,8 +150,8 @@ app.post('/signup', form(), passport.authenticate('signup', {
 	return res.redirect('/');
 });
 
-app.post('/registro-:collection', check_session, form(), function(req, res) {
-	database.register[req.params.collection](req.form, req.files, function(err) {
+app.post('/registro-:group', check_session, form(), function(req, res) {
+	database.register[req.params.group](req.form, req.files, function(err) {
 		if(catch_errors(err)) {
 			return res.redirect('/registro/avisos?titulo=error');
 		}
