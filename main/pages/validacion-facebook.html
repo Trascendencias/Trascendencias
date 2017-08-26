@@ -1,0 +1,75 @@
+<html> 
+
+	<head>		
+		<!---FACEBOOK OPTIMIZATION -->
+		<meta property="og:url" content="www.trascendencias.org/validacion-facebook" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="#!TITLE" />
+		
+		<!---SEO OPTIMIZATION -->
+		<title> Validación Facebook </title>
+		<meta name="description" content="#!DESCRIPTION">
+		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
+		<meta name="author" content="#!AUTOR">
+
+		<!-- tag para hacerlo escalable -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+		<!--- INCLUIR DOCUMENTOS -->
+		<% include partials/menu.html %>
+		<div class="menuspacer"></div>
+
+		<!--- Pa que agarren los acentos -->
+		<meta charset="UTF-8">
+
+		<!--- Pa que agarre el Styleshit los acentos -->
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	</head>
+
+
+	<body>
+		<div class="registro">
+		<br><br><br>
+		<center><h6> <b> Llena estos datos para completar tu usuario </b></h6> </center>
+			<p style="color: red;"> <%= message %> </p>
+			<form class="registro" action="signup-facebook" method="post"> <br><br>
+
+				<!-- INSTITUCION DE PROCEDENCIA -->
+				<input maxlength="50" type="text" placeholder="Institución de procedencia" name="institution" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- CIUDAD -->
+				<input maxlength="50"  type="text" placeholder="Ciudad" name="city" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- TELEFONO -->
+				<input maxlength="50" type="number" placeholder="Teléfono" name="phone" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- ALERGIAS -->
+				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<button type="submit" onClick="location.href='validacion-facebook-exito'"> Siguiente </button>
+                <br><br><br>
+			
+			</form>
+
+
+		
+		</div>
+
+
+
+
+
+</body>
+		
+		<script>
+
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+		</script>
+</html>

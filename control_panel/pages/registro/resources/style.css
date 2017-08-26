@@ -135,7 +135,7 @@ input, #resumen, .large-text {
 	margin-bottom:10px;
     outline: none;
 }
-input:focus{
+input:focus, #resumen:focus, .large-text:focus{
 	border-color: #41C7F4;
 	color: #41C7F4;
 }
@@ -170,13 +170,13 @@ input:focus{
 #image {
     border: 0px solid white;
 }
-#date {
+.date {
     width: 250px;
 }
-#time, .numero {
+.time, .numero {
     width: 170px;
 }
-#date, #time, .numero{
+.date, .time, .numero{
     border: 1px solid #95989a;
     margin-left: 20px;
     border-radius: 5px;

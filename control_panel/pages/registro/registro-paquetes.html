@@ -14,71 +14,71 @@
 		<br>
 		<center><h6><b> Registro Paquetes </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-paquetes"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="Paquetes">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre" name="title" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Inicio </p>
-                <input name="fecha" id="date" type="date" value="Usa otro navegador" required>
+                <input name="start_day" class="date" type="date" value="Usa otro navegador" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Fin </p>
-                <input name="fecha-fin" id="date" type="date" value="Usa otro navegador" required>
+                <input name="end_day" class="date" type="date" value="Usa otro navegador" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Requisitos Visita, Taller, Oferta  -->
-                <textarea name="requisitos" class="large-text" placeholder="Requisitos..." required></textarea>
+                <textarea name="requisites" class="large-text" placeholder="Requisitos..." required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <p class="title"> Fotos (1920x1080px)</p><br><br><br>
-                <input type="file" width="150px" name="foto1" value="fileupload" id="image" style="display: inline;" accept="image/*" multiple required>
+                <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;" accept="image/*" multiple required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p><br><br><br>
-                <input maxlength="50" type="text" placeholder="URL Video 1" name="video1" class="video">
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_url_1" class="video">
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
                 <br><br><br><br><br><br>
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="resumen" id="resumen" placeholder="Resumen..." required></textarea>
+                <textarea name="summary" id="resumen" placeholder="Resumen..." required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <textarea name="descripcion" class="large-text" placeholder="Descripción..." required></textarea>
+                <textarea name="description" class="large-text" placeholder="Descripción..." required></textarea>
                 <p class="error"> *Debe llenar esta información </p>
                 
-                <!-- Cantidad Paquetes-->
-                <p class="title"> Paquete de: </p>
-                <input type=number name="num-personas" class="numero" style="margin-left:0px; width: 60px;" required>
+                <!-- GRUPO Paquetes-->
+                <p class="title"> Grupo de: </p>
+                <input type=number name="group_number" class="numero" style="margin-left:0px; width: 60px;" required>
                 <p class="title"> Personas </p>
                 <p class="error"> *Debe llenar esta información </p>
                 
-                <!-- Cantidad Paquetes-->
+                <!-- CUPO Paquetes-->
                 <p class="title"> Cupo: </p>
-                <input type=number name="cupo" class="numero" style="margin-left:0px; width: 100px;" required>
+                <input type=number name="cap" class="numero" style="margin-left:0px; width: 100px;" required>
                  <p class="error"> *Debe llenar esta información </p>           
                 
                 <!-- COSTO Paquetes -->
                 <p class="title"> Costo: </p>
-                <input type=number name="costo" class="numero" required>
+                <input type=number name="cost" class="numero" required>
                 <p class="error"> *Debe llenar esta información </p>
                
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
                 <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
-                <input type=number name="teaser-index" class="numero goright" value="1">
+                <input type=number name="include_teaser" class="numero goright" value="1">
                 <div class="spacer"></div>
                 <hr>
 				<button type="submit" class="submit"> Siguiente </button>
@@ -92,7 +92,17 @@
 
 </body>
 		
-		<script>
+				<script>
+		var startTime;
+		var endTime;
+		 function timeFields(){
+                startTime = document.getElementById("start_day").value.toString()+"T00:00:00-8:00";
+				endTime = document.getElementById("end_day").value.toString()+"T00:00:00-8:00";
+				document.getElementById("start").value = startTime;
+				document.getElementById("end").value = endTime;
+            }
+			
+			
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 

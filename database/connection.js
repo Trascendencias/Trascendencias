@@ -8,127 +8,169 @@ database.register = {
 	conferencia: function(form, files, done) {
 		let new_conference = new models.conference();
 		form_to_model(form, new_conference);
-		database.get_video_urls(form, function(err, video_urls) {
+		console.log("Form: " + JSON.stringify(form, null, 4));
+		new_conference.speaker_photo = get_files(files, 'speaker_photo');
+		new_conference.photos = get_files(files, 'photos');
+
+		new_conference.save(function(err) {
 			if(err) {
 				return done(err);
 			}
 
-			new_conference.video_urls = video_urls;
-
-			database.get_file(files, 'speaker_photo', function(err, file_path) {
-				if(err) {
-					return done(err);
-				}
-
-				new_conference.speaker_photo = file_path;
-
-				database.get_files(files, 'photo', function(err, file_paths) {
-					if(err) {
-						return done(err);
-					}
-
-					new_conference.photos = file_paths;
-
-					new_conference.save(function(err) {
-						if(err) {
-							return done(err);
-						}
-
-						return done(null);
-					})
-				});			
-			});
+			return done(null);
 		});
 	},
 	taller: function(form, files, done) {
 		let new_workshop = new models.workshop();
 		form_to_model(form, new_workshop);
-		database.get_video_urls(form, function(err, video_urls) {
+		new_workshop.instructor_photo = get_files(files, 'instructor_photo');
+		new_workshop.photos = get_files(files, 'photos');
+
+		new_workshop.save(function(err) {
 			if(err) {
 				return done(err);
 			}
 
-			new_workshop.video_urls = video_urls;
+			return done(null);
+		});
+	},
+	visita: function(form, files, done) {
+		let new_visit = new models.visit();
+		form_to_model(form, new_visit);
+		new_visit.photos = get_files(files, 'photos');
 
-			database.get_file(files, 'instructor_photo', function(err, file_path) {
-				if(err) {
-					return done(err);
-				}
+		new_visit.save(function(err) {
+			if(err) {
+				return done(err);
+			}
 
-				new_workshop.instructor_photo = file_path;
+			return done(null);
+		});
+	},
+	'evento-social': function(form, files, done) {
+		let new_social_event = new models.social_event();
+		form_to_model(form, new_social_event);
+		new_social_event.event_poster = get_files(files, 'event_poster');
 
-				database.get_files(files, 'photo', function(err, file_paths) {
-					if(err) {
-						return done(err);
-					}
+		new_social_event.save(function(err) {
+			if(err) {
+				return done(err);
+			}
 
-					new_workshop.photos = file_paths;
+			return done(null);
+		});
+	},
+	'evento-extra': function(form, files, done) {
+		let new_extra_event = new models.extra_event();
+		form_to_model(form, new_extra_event);
+		new_extra_event.event_icon = get_files(files, 'event_icon');
 
-					new_workshop.save(function(err) {
-						if(err) {
-							return done(err);
-						}
+		new_extra_event.save(function(err) {
+			if(err) {
+				return done(err);
+			}
 
-						return done(null);
-					});
-				});			
-			});
-		});	
+			return done(null);
+		});
+	},
+	blog: function(form, files, done) {
+		let new_blog = new models.blog();
+		form_to_model(form, new_blog);
+		new_blog.photos = get_files(files, 'photos');
+
+		new_blog.save(function(err) {
+			if(err) {
+				return done(err);
+			}
+
+			return done(null);
+		});
+	},
+	'preguntas-frecuentes': function(form, files, done) {
+		let new_faq = new models.faq();
+		form_to_model(form, new_faq);
+
+		new_faq.save(function(err) {
+			if(err) {
+				return done(err);
+			}
+
+			return done(null);
+		});
+	},
+	paquetes: function(form, files, done) {
+		let new_package = new models.package();
+		form_to_model(form, new_package);
+		new_package.photos = get_files(files, 'photos');
+
+		new_package.save(function(err) {
+			if(err) {
+				return done(err);
+			}
+
+			return done(null);
+		});
+	},
+	patrocinadores: function(form, files, done) {
+		let new_sponsor = new models.sponsor();
+		form_to_model(form, new_sponsor);
+		new_sponsor.company_logo = get_files(files, 'company_logo');
+
+		new_sponsor.save(function(err) {
+			if(err) {
+				return done(err);
+			}
+
+			return done(null);
+		});
 	}
 };
 
-database.get_video_urls = function(form, done) {
-	let video_urls = [];
-	for(let count = 0; form['video_url_' + count]; count++) {
-		video_urls.push(form['video_url_' + count]);
-	}
-
-	return done(null, video_urls);
-}
-
-database.get_file = function(files, filename, done) {
+get_files = function(files, filename) {
 	if(!files || !files[filename]) {
-		return done(null, null);
+		throw new Error('Undefined files');
+		return null;
 	}
 
-	let path = new_file_path();
-	files[filename].mv('/root/Trascendencias/control_panel/pages/registro/' + path, function(err) {
-		if(err) {
-			return done(err, null);
-		}
-	});
-
-	return done(null, path);
-}
-
-database.get_files = function(files, filename, done) {
-	if(!files || !files[filename + '_0']) {
-		return done(null, []);
+	if(!Array.isArray(files[filename])) {
+		files[filename] = [files[filename]];
 	}
 
 	let file_paths = [];
-	for(let count  = 0; files[filename + '_' + count]; count++) {
+	files[filename].forEach(function(element) {
 		let path = new_file_path();
-		files[filename + '_' + count].mv('/root/Trascendencias/control_panel/pages/registro/' + path, function(err) {
+		element.mv(storage_path(path), function(err) {
 			if(err) {
-				return done(err, []);
+				return done(err, null);
 			}
-
-			file_paths.push(path);
 		});
-	}
 
-	return done(null, file_paths);
+		file_paths.push(path);
+	});
+
+	return file_paths;
 }
 
 form_to_model = function(form, model) {
 	for(let key in form) {
-		model[key] = form[key];
+		if(model.schema.paths[key]) {
+			if(model.schema.paths[key].instance == 'Array') {
+				model[key] = [form[key]];
+			}
+			else {
+				console.log(model.schema.paths[key].instance);
+				model[key] = form[key];
+			}
+		}
 	}
 }
 
-function new_file_path() {
+new_file_path = function() {
 	return 'resources/' + Date.now().toString();
+}
+
+storage_path = function(path) {
+	return '/root/Trascendencias/control_panel/pages/registro/' + path;
 }
 
 database.valid_hash = function(string, hash) {

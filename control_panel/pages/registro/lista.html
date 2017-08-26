@@ -37,12 +37,12 @@
         <form id="searchForm" action="javascript:buscarPalabras();">
             <input id="search" class="search" onBlur="if (this.value == '') { this.value = 'Buscar...'; showAll();}"  onfocus="if(this.value == 'Buscar...') { this.value = ''; } " type="text" value="Buscar..." > 
             <button class="third search" type="button" onClick="buscarPalabras();"> 🔎 </button>
+            
             <center>
-
             <button class="third contact" id="correosButton" style="float: left;" type="button" onClick="correo();"> Correos </button>
             <button class="third contact" style="float: left;" type="button" onClick="location.href='imprimirLista'"> Imprimir </button>
-
             </center>
+            
         </form>
         
         <br>
@@ -55,7 +55,7 @@
             <% for(var i = 0; i < lista.length; i++) { %>
                 <% if(lista[i].name != 'admin') { %>
                     <button class='enlistado' name='codigo' value='<%= lista[i]._id %>'> 
-                    <p class="hidden"> Taller Legos, Ciudad <%= lista[i].city %>, Foráneo, <%= lista[i].email %> </p> 
+                    <p class="hidden">  <%= lista[i].city %>, email:<%= lista[i].email %> </p> 
                     <%= lista[i].name %>
                     </button>
                 <% } %>

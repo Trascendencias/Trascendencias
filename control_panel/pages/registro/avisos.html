@@ -4,14 +4,11 @@
 		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-		<!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include menu.html %> -->
-
 		<!--- Title --> 
         <title> AVISOS </title>
 
 		<!--- Incluir documeentos -->
-<% include menu.html %>
+		<% include menu.html %>
             
         <!--- Pa que agarren los acentos -->
 		<meta charset="UTF-8">
@@ -37,7 +34,7 @@
                
                 <div class="spacer"></div>
                 <hr>
-				<button type="button" class="submit" onClick="location.href='menu'"> Aceptar </button> 
+				<button type="button" class="submit" onClick="window.history.back();"> Aceptar </button> 
 
 
 
@@ -57,7 +54,7 @@
         if(titulo == "editar") titulo= "Edición Exitosa";
         if(titulo == "eliminar") titulo= "Eliminación Exitosa";
         if(titulo == "abono") titulo = "Abono Exitoso";
-        if(titulo == "error"){ titulo = "¿A dónde dijiste que querías ir?"; content = "Error #404: No se ha encontrado nada en ésta dirección..."; }
+        if(titulo == "error"){ titulo = "Ha ocurrido un problema..."; content = "Error #404: No se ha encontrado nada en ésta dirección."; }
 
 
 

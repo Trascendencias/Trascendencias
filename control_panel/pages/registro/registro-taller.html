@@ -14,7 +14,7 @@
 		<br>
 		<center><h6><b> Registro de Taller </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="/registro-taller"> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-taller" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="taller">
@@ -25,17 +25,20 @@
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
-                <input name="day" id="date" type="date" value="MM/DD/YYYY" required>
+                <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
-                <input type="time" name="start"  id="time" required>
+                <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
                 <p class="error"> *Debe llenar esta información </p>
+                
+                <input type="hidden" id="start" name="start"> 
+                <input type="hidden" id="end" name="end"> 
                 
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
-                <input type="time" name="end" id="time" required>
+                <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
@@ -51,24 +54,12 @@
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" type="text" placeholder="Correo del Tallerista" name="instructor_email" required>
+				<input maxlength="50" type="email" placeholder="Correo del Tallerista" name="instructor_email" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- LUGAR EN CETYS Conferencia, Taller, Evento Extra -->
                  <select id="select" name="location" required>
-                  <option value="none" disabled selected>Lugar en Cetys ...</option>
-                  <option value="auditorio">Auditorio</option>
-                  <option value="cat">CAT</option>
-                  <option value="vildosola">Sala Vildósola</option>
-                  <option value="amarillas">Sala Amarillas</option>
-                  <option value="gallegos">Sala Gallego</option>
-                  <option value="kenworth">Sala Kenworth</option>
-                  <option value="hermosillo">Sala Hermosillo</option>
-                  <option value="jardin">Jardín</option>
-                  <option value="biblioteca">Biblioteca</option>
-                  <option value="idiomas">Idiomas</option>
-                  <option value="cece">CECE</option>
-                  <option value="licenciatura">Licenciatura</option>
+				<% include lugares-cetys.html %>
                 </select>
                 <p class="error"> *Debe llenar esta información </p>
 
@@ -89,13 +80,13 @@
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <p class="title"> Fotos </p><br><br><br>
-                <input type="file" width="150px" name="photos_0" value="fileupload" id="image" style="display: inline;" multiple required>
+                <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;" multiple required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p><br><br><br>
-                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls_0" class="video">
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video">
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
@@ -121,7 +112,17 @@
 
 </body>
 		
-		<script>
+				<script>
+		var startTime;
+		var endTime;
+		 function timeFields(){
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-08:00";
+				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-08:00";
+				document.getElementById("start").value = startTime;
+				document.getElementById("end").value = endTime;
+            }
+			
+			
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 
@@ -129,7 +130,7 @@
 
             var videocount = 2;
             function masvideo(){
-            var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
+            var videoinput = "<input maxlength='50' name='video_urls"+ videocount +"' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
             document.getElementById('videos').innerHTML += videoinput;
             	videocount++;
             }

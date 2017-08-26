@@ -12,7 +12,7 @@
 		
         <div class="body">
 		<br>
-		<center><h6><b> Registro holi Social </b></h6> </center>
+		<center><h6><b> Registro Evento Social </b></h6> </center>
 			
 			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
                
@@ -25,17 +25,20 @@
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
-                <input name="day" id="date" type="date" value="MM/DD/YYYY" required>
+                <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
-                <input type="time" name="start"  id="time" required>
+                <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
                 <p class="error"> *Debe llenar esta información </p>
+                
+                <input type="hidden" id="start" name="start"> 
+                <input type="hidden" id="end" name="end"> 
                 
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
-                <input type="time" name="end" id="time" required>
+                <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
@@ -47,7 +50,7 @@
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" type="text" placeholder="contact_email" name="correo" required>
+				<input maxlength="50" type="email" placeholder="contact_email" name="correo" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
@@ -81,7 +84,17 @@
 
 </body>
 		
-		<script>
+				<script>
+		var startTime;
+		var endTime;
+		 function timeFields(){
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
+				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
+				document.getElementById("start").value = startTime;
+				document.getElementById("end").value = endTime;
+            }
+			
+			
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 

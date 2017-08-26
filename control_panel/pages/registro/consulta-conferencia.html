@@ -4,8 +4,7 @@
 		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-		<!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include menu.html %> -->
+		
 
 		<!--- Title --> 
 		<title> Consulta Conferencia </title>
@@ -31,7 +30,21 @@
 				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>               
 				
 				<!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
-				<h3> Fecha y Hora: <p><i> 11/OCT/17 • 11:00 - 12:00hrs </i></p> </h3><br>                
+				<h3> Fecha y Hora: <p><i>
+				<%
+					var options = {  
+					    weekday: "long", year: "numeric", month: "long",  
+					    day: "numeric", hour: "2-digit", minute: "2-digit"  
+					};
+
+					var hour_options = {
+						hour: "2-digit", minute: "2-digit"
+					};
+				%>
+				<%= consulta.start.toLocaleTimeString("en-us", options); %>
+				-
+				<%= consulta.end.toLocaleTimeString("en-us", hour_options); %>
+				</i></p> </h3><br>                
 				
 				<!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
 				<h3> Nombre del Presentador: <p><i> <%= consulta.speaker_name %> </i></p> </h3><br>               

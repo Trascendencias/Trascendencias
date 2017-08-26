@@ -25,34 +25,25 @@
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
-                <input name="fecha" id="date" type="date" value="MM/DD/YYYY" required>
+                <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
-                <input type="time" name="inicio" id="time" required>
+                <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
                 <p class="error"> *Debe llenar esta información </p>
+                
+                <input type="hidden" id="start" name="start"> 
+                <input type="hidden" id="end" name="end"> 
                 
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
-                <input type="time" name="fin" id="time" required>
+                <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- LUGAR EN CETYS Conferencia, Taller, Evento Extra -->
-                 <select id="select" name="lugar-cetys" required>
-                  <option value="none" disabled selected>Lugar en Cetys ...</option>
-                  <option value="auditorio">Auditorio</option>
-                  <option value="cat">CAT</option>
-                  <option value="vildosola">Sala Vildósola</option>
-                  <option value="amarillas">Sala Amarillas</option>
-                  <option value="gallegos">Sala Gallego</option>
-                  <option value="kenworth">Sala Kenworth</option>
-                  <option value="hermosillo">Sala Hermosillo</option>
-                  <option value="jardin">Jardín</option>
-                  <option value="biblioteca">Biblioteca</option>
-                  <option value="idiomas">Idiomas</option>
-                  <option value="cece">CECE</option>
-                  <option value="licenciatura">Licenciatura</option>
+                 <select id="select" name="location" required>
+				<% include lugares-cetys.html %>
                 </select>
                 <p class="error"> *Debe llenar esta información </p>
                                 
@@ -77,7 +68,17 @@
 
 </body>
 		
-		<script>
+				<script>
+		var startTime;
+		var endTime;
+		 function timeFields(){
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
+				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
+				document.getElementById("start").value = startTime;
+				document.getElementById("end").value = endTime;
+            }
+			
+			
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 

@@ -38,6 +38,8 @@ var schemas = {
 	}),
 	conference: mongoose.Schema({
 		name: String,
+		start: Date,
+		end: Date,
 		speaker_name: String, 
 		speaker_titles: String,
 		speaker_phone: String,
@@ -52,7 +54,6 @@ var schemas = {
 	}),
 	workshop: mongoose.Schema({
 		name: String,
-		day: Date,
 		start: Date,
 		end: Date,
 		instructor_name: String, 
@@ -70,7 +71,6 @@ var schemas = {
 	}),
 	visit: mongoose.Schema({
 		name: String,
-		day: Date,
 		start: Date,
 		end: Date,
 		contact_name: String, 
@@ -86,7 +86,6 @@ var schemas = {
 	}),
 	social_event: mongoose.Schema({
 		name: String,
-		day: Date,
 		start: Date,
 		end: Date,
 		location: String,
@@ -100,7 +99,6 @@ var schemas = {
 	}),
 	extra_event: mongoose.Schema({
 		name: String,
-		day: Date,
 		start: Date,
 		end: Date,
 		location: String,
@@ -121,22 +119,45 @@ var schemas = {
 	}),
 	sale_point: mongoose.Schema({
 		name: String,
-		day: String,
 		start: Date,
 		end: Date,
 		location: String
-	})
+	}),
+	package: mongoose.Schema({
+		name: String,
+		start: Date,
+		end: Date,
+		requisites: String,
+		photos: [String],
+		video_urls: [String],
+		summary: String,
+		description: String,
+		group_of: Number,
+		cap: Number,
+		cost: Number,
+		include_teaser: Number
+	}),
+	sponsor: mongoose.Schema({
+		name: String,
+		contact_name: String, 
+		contact_phone: String,
+		contact_email: String,
+		company_logo: String,
+		payment: Number
+	}),
 }
 
 module.exports = {
 	participant: mongoose.model('participants', schemas.participant),
 	staff_member: mongoose.model('staff_members', schemas.staff_member),
 	conference: mongoose.model('conferences', schemas.conference),
-	workshop: mongoose.model('workshops', schemas.staff_member),
-	visit: mongoose.model('visits', schemas.staff_member),
+	workshop: mongoose.model('workshops', schemas.workshop),
+	visit: mongoose.model('visits', schemas.visit),
 	social_event: mongoose.model('social_events', schemas.social_event),
-	extra_event: mongoose.model('extra_events', schemas.staff_member),
-	blog: mongoose.model('blogs', schemas.staff_member),
-	faq: mongoose.model('faqs', schemas.staff_member),
-	sale_point: mongoose.model('sale_points', schemas.sale_point)
+	extra_event: mongoose.model('extra_events', schemas.extra_event),
+	blog: mongoose.model('blogs', schemas.blog),
+	faq: mongoose.model('faqs', schemas.faq),
+	sale_point: mongoose.model('sale_points', schemas.sale_point),
+	package: mongoose.model('packages', schemas.package),
+	sponsor: mongoose.model('sponsors', schemas.sponsor)
 };

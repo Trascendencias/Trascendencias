@@ -1,6 +1,7 @@
 <html> 
 
-	<head>		
+	<head>	
+    <!--- -->	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <title> Registro de Patrocinadores </title>
 		<% include menu.html %>
@@ -14,36 +15,36 @@
 		<br>
 		<center><h6><b> Registro Patrocinadores </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-patrocinadores"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="patrocinador">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre" name="title" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50"  type="text" placeholder="Nombre de Contacto" name="nombre-contacto" required>
+                <input maxlength="50"  type="text" placeholder="Nombre de Contacto" name="contact_name" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
                
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono de Contacto" name="telefono-contacto" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono de Contacto" name="contact_phone" required>
 				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50"  type="email" placeholder="Correo de Contacto" name="correo" required>
+				<input maxlength="50"  type="email" placeholder="Correo de Contacto" name="contact_email" required>
 				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
                 <p class="title"> Logo de la Empresa (300x100px sobre negro) </p><br><br><br>
-                <input type="file" width="150px" name="main-foto" value="fileupload" id="image" style="display: inline;" accept="image/*" required>
+                <input type="file" width="150px" name="company_logo" value="fileupload" id="image" style="display: inline;" accept="image/*" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- ABONO Participante, Patrocinadores-->
                 <p class="title"> Abono: </p>
-                <input type=number name="abono" class="numero" required>
+                <input type=number name="payment" class="numero" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <div class="spacer"></div>
