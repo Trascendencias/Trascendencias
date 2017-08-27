@@ -70,7 +70,7 @@
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="fotos">
                 <p class="title"> Fotos (1920x1080px) </p><br><br><br>
-                <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;"  accept="image/*" required>
+                <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;"  accept="image/*" required>
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                  <button class="third" onClick="masfoto()" type="button"> Agregar Foto </button><br><br><br>
@@ -78,7 +78,7 @@
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p><br><br><br>
-                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video">
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_url" class="video">
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
@@ -132,12 +132,12 @@
                 document.getElementById("forma-registro").submit();
             }
             function masvideo(){
-            var videoinput = "<input maxlength='50' name='video_urls' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
+            var videoinput = "<input maxlength='50' name='video_url' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
                 document.getElementById('videos').innerHTML += videoinput;
             	videocount++;
             }
             function masfoto(){
-                var fotosinput = "<input type='file' width='150px' name='photos' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                var fotosinput = "<input type='file' width='150px' name='photo' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
                 document.getElementById('fotos').innerHTML += fotosinput;   
             }
             function isNumberKey(evt){

@@ -49,9 +49,23 @@ module.exports = function(http_app, app, fs, passport, database) {
 	}));
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-		successRedirect: '/',
+		successRedirect: '/validacion-facebook',
 		failureRedirect: '/'
 	}));
+
+	app.get('/ventas', function(req, res) {
+		database.list('paquetes', function(err, collection) {
+			if(err || !collection) {
+				return res.redirect('/registro/avisos?titulo=error');
+			}
+			
+			return res.render('ventas', {
+				user: req.user,
+				message: req.flash('message'),
+				packages: collection
+			});
+		});
+	});
 
 	app.post('/registro-terminado', 
 		form(
@@ -78,6 +92,14 @@ module.exports = function(http_app, app, fs, passport, database) {
 		});
 	});
 
+	app.get('/validacion-facebook', check_session, function(req, res) {
+		if(req.user.verified) {
+			return res.redirect('/err404');
+		}
+
+		res.render('validaction-facebook');
+	})
+
 	app.get('/:name', function(request, response) {
 		if(fs.existsSync(__dirname + '/pages/' + request.params.name + '.html')) {
 			return response.render(request.params.name, {
@@ -95,7 +117,37 @@ module.exports = function(http_app, app, fs, passport, database) {
 				return res.send('Error');
 			}
 
-			return res.render('registro-participante-exito', {});
+			return res.render('registro-participante-exito', { user: req.user });
 		});
-	})
+	});
+
+	app.post('/complete-facebook', check_session, form(), function(req, res) {
+		if(req.user.verified) {
+			res.redirect('/error404');
+		}
+
+		database.models.participant.findByIdAndUpdate(req.user.id, {
+			$set: {
+				institution: req.form.institution,
+				phone: req.form.phone,
+				alergies: req.form.alergies,
+				city: req.form.city
+			}
+		}, function (err, tank) {
+			if (err) {
+				console.log(err);
+				res.redirect('/error404');
+			}
+
+			res.redirect('/validacion-facebook-exito');
+		});
+	});
+
+	function check_session(req, res, next) {
+		if(!req.user) {
+			return res.redirect('/');
+		}
+
+		next();
+	}
 }

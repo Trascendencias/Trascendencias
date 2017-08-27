@@ -27,51 +27,54 @@
 <button onClick="location.href='editar-paquetes?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>			
 		       <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
-				<h3> Título: <p><i> Éste es un título muy campante </i></p> </h3><br>                
+				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>                
                 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
-				<h3> Fecha y Hora inicio: <p><i> 11/OCT/17 • 11:00 - 12:00hrs </i></p> </h3><br>                
-                
-                <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
-				<h3> Fecha y Hora Fin: <p><i> 11/OCT/17 • 11:00 - 12:00hrs </i></p> </h3><br>
+				<h3> Fecha de inicio: <p><i>
+                <%
+                    var options = {  
+                        weekday: "long", year: "numeric", month: "long",  
+                        day: "numeric", hour: "2-digit", minute: "2-digit"  
+                    };
+                %>
+                <%= consulta.start.toLocaleTimeString("en-us", options); %>
+                </i></p> </h3><br>
+                <h3> Fecha de cerrado: <p><i>
+                <%= consulta.end.toLocaleTimeString("en-us", options); %>
+                </i></p> </h3><br>
 
 				<!-- Requisitos Visita, Taller, Oferta  -->
-                <h3> Requisitos:</h3>
-                <ul> 
-                	<li> Requisito </li>  
-                    <li> Requisito </li>  
-                    <li> Requisito </li>  
-                </ul>              
+                <h3> Requisitos: </h3> <br>
+                <p><%= consulta.requisites %> </p>           
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <h3> Fotos: </h3><br>
-                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
-                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
-                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
-                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
+                <% consulta.photos.forEach(function(element) { %>
+                    <div class="foto" style="background-image: url('<%= element %>')"> </div>
+                <% }); %>
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <h3> Videos: </h3><br>
-                <iframe width="260px" height="100px" src="https://www.youtube.com/embed/mr8GBzTsWqM" frameborder="0"></iframe>
-                <iframe width="260px" height="100px" src="https://www.youtube.com/embed/mr8GBzTsWqM" frameborder="0"></iframe>
-                <iframe width="260px" height="100px" src="https://www.youtube.com/embed/mr8GBzTsWqM" frameborder="0"></iframe>               
+                <% consulta.video_urls.forEach(function(element) { %>
+                    <a href="<%= element %>"><%= element %></a><br>
+                <% }); %>            
                  <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <h3> Resumen: <p><i> Este es un resumen considerablemente corto... </i></p> </h3><br>
+                <h3> Resumen: <p><i> <%= consulta.summary %>. </i></p> </h3><br>
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <h3> Contenido: <p><i> Esta es un contenido considerablemente corto.  </i></p> </h3><br>
+                <h3> Contenido: <p><i> <%= consulta.description %>  </i></p> </h3><br>
                 
                 <!-- Cantidad Paquetes-->
-                <h3> Cupo: <p><i> 14/25 </i></p> </h3><br>
+                <h3> Cupo: <p><i> <%= consulta.cap %> </i></p> </h3><br>
                 
-                <h3> Paquete para: <p><i> 3 Personas </i></p> </h3><br>
+                <h3> Paquete para: <p><i> <%= consulta.group_size %> </i></p> </h3><br>
                 
                 
                 <!-- COSTO Paquetes -->
-                <h3> Costo: <p><i> $750 </i></p> </h3><br>                
+                <h3> Costo: <p><i> <%= consulta.cost %> </i></p> </h3><br>                
                 
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
-				<h3> Teaser Banner: <p><i> Pos. 3. </i></p> </h3><br>
+				<h3> Teaser Banner: <p><i> <%= consulta.teaser_position %> </i></p> </h3><br>
                 </div>
                 
                 <hr>

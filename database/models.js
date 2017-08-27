@@ -4,22 +4,28 @@ var bcrypt = require('bcrypt');
 var schemas = {
 	participant: mongoose.Schema({
 		name: String,
-		package: String,
 		email: String,
-		debt: Number,
-		verified: Boolean,
 		alergies: String,
 		city: String,
 		institution: String,
 		phone: String,
-		group_code: String,
-		workshop: [mongoose.Schema.Types.ObjectId],
+		selected_package: mongoose.Schema.Types.ObjectId,
+		workshop_0: mongoose.Schema.Types.ObjectId,
+		workshop_1: mongoose.Schema.Types.ObjectId,
 		local: {
 			password: String,
 		},
 		facebook: {
 			id: String,
-		}
+		},
+		verified: Boolean,
+	}),
+	active_package: mongoose.Schema({
+		shirt_size: String,
+		package: mongoose.Schema.Types.ObjectId,
+		debt: Number,
+		liquidation_date: Date,
+		group_code: String
 	}),
 	staff_member: mongoose.Schema({
 		name: String,
@@ -132,10 +138,10 @@ var schemas = {
 		video_urls: [String],
 		summary: String,
 		description: String,
-		group_of: Number,
+		group_size: Number,
 		cap: Number,
 		cost: Number,
-		include_teaser: Number
+		teaser_position: Number
 	}),
 	sponsor: mongoose.Schema({
 		name: String,
@@ -159,5 +165,6 @@ module.exports = {
 	faq: mongoose.model('faqs', schemas.faq),
 	sale_point: mongoose.model('sale_points', schemas.sale_point),
 	package: mongoose.model('packages', schemas.package),
-	sponsor: mongoose.model('sponsors', schemas.sponsor)
+	sponsor: mongoose.model('sponsors', schemas.sponsor),
+	active_package: mongoose.model('active_packages', schemas.active_package)
 };

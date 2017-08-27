@@ -17,6 +17,7 @@ require('./main/auth/passport')(passport, database);
 
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use('/resources', express.static(__dirname + '/main/resources'));
+app.use('/files', express.static(__dirname + '/database/files'));
 app.use(body_parser.urlencoded({
 	extended: true
 }));

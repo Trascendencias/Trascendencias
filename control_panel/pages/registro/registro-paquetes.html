@@ -14,7 +14,7 @@
 		<br>
 		<center><h6><b> Registro Paquetes </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="/registro-paquetes"> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-paquetes" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="Paquetes">
@@ -25,12 +25,12 @@
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Inicio </p>
-                <input name="start_day" class="date" type="date" value="Usa otro navegador" required>
+                <input name="start" class="date" type="date" value="Usa otro navegador" required>
                 <p class="error"> *Debe llenar esta información </p>
 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Fin </p>
-                <input name="end_day" class="date" type="date" value="Usa otro navegador" required>
+                <input name="end" class="date" type="date" value="Usa otro navegador" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Requisitos Visita, Taller, Oferta  -->
@@ -38,15 +38,18 @@
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
-                <p class="title"> Fotos (1920x1080px)</p><br><br><br>
-                <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;" accept="image/*" multiple required>
+                <div id="fotos">
+                <p class="title"> Fotos (1920x1080px) </p><br><br><br>
+                <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;"  accept="image/*" required>
                 <p class="error"> *Debe llenar esta información </p>
+                </div>
+                 <button class="third" onClick="masfoto()" type="button"> Agregar Foto </button><br><br><br>
                 
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p><br><br><br>
-                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_url_1" class="video">
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video">
                 <p class="error"> *Debe llenar esta información </p>
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
@@ -62,12 +65,12 @@
                 
                 <!-- GRUPO Paquetes-->
                 <p class="title"> Grupo de: </p>
-                <input type=number name="group_number" class="numero" style="margin-left:0px; width: 60px;" required>
+                <input type=number name="group_size" class="numero" style="margin-left:0px; width: 60px;" required>
                 <p class="title"> Personas </p>
                 <p class="error"> *Debe llenar esta información </p>
                 
                 <!-- CUPO Paquetes-->
-                <p class="title"> Cupo: </p>
+                <p class="title"> Cantidad de grupos maximo: </p>
                 <input type=number name="cap" class="numero" style="margin-left:0px; width: 100px;" required>
                  <p class="error"> *Debe llenar esta información </p>           
                 
@@ -78,7 +81,7 @@
                
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
                 <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
-                <input type=number name="include_teaser" class="numero goright" value="1">
+                <input type=number name="teaser_position" class="numero goright" value="0">
                 <div class="spacer"></div>
                 <hr>
 				<button type="submit" class="submit"> Siguiente </button>
@@ -96,8 +99,8 @@
 		var startTime;
 		var endTime;
 		 function timeFields(){
-                startTime = document.getElementById("start_day").value.toString()+"T00:00:00-8:00";
-				endTime = document.getElementById("end_day").value.toString()+"T00:00:00-8:00";
+                startTime = document.getElementById("start_day").value.toString()+"T00:00:00-08:00";
+				endTime = document.getElementById("end_day").value.toString()+"T00:00:00-08:00";
 				document.getElementById("start").value = startTime;
 				document.getElementById("end").value = endTime;
             }
@@ -111,11 +114,14 @@
 
             var videocount = 2;
             function masvideo(){
-            var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
+            var videoinput = "<input maxlength='50' name='video_urls' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
             document.getElementById('videos').innerHTML += videoinput;
             	videocount++;
             }
-            
+            function masfoto(){
+                var fotosinput = "<input type='file' width='150px' name='photos' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('fotos').innerHTML += fotosinput;   
+            }
             function isNumberKey(evt){
                 var charCode = (evt.which) ? evt.which : event.keyCode
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;

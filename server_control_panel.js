@@ -46,6 +46,7 @@ app.use(passport.session());
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use('/registro/resources', express.static(__dirname + '/control_panel/pages/registro/resources'));
 app.use('/admin/resources', express.static(__dirname + '/control_panel/pages/admin/resources'));
+app.use('/registro/files', express.static(__dirname + '/database/files'));
 app.use(body_parser.urlencoded({
 	extended: true
 }));

@@ -4,11 +4,12 @@ var database = mongoose.connect('mongodb://localhost/test').connection;
 var models = require('./models');
 var bcrypt = require('bcrypt');
 
+database.models = models;
+
 database.register = {
 	conferencia: function(form, files, done) {
 		let new_conference = new models.conference();
 		form_to_model(form, new_conference);
-		console.log("Form: " + JSON.stringify(form, null, 4));
 		new_conference.speaker_photo = get_files(files, 'speaker_photo');
 		new_conference.photos = get_files(files, 'photos');
 
@@ -100,6 +101,7 @@ database.register = {
 	},
 	paquetes: function(form, files, done) {
 		let new_package = new models.package();
+		console.log('\n' + JSON.stringify(form, null, 4) + '\n');
 		form_to_model(form, new_package);
 		new_package.photos = get_files(files, 'photos');
 
@@ -141,7 +143,7 @@ get_files = function(files, filename) {
 		let path = new_file_path();
 		element.mv(storage_path(path), function(err) {
 			if(err) {
-				return done(err, null);
+				console.log(err);
 			}
 		});
 
@@ -155,10 +157,14 @@ form_to_model = function(form, model) {
 	for(let key in form) {
 		if(model.schema.paths[key]) {
 			if(model.schema.paths[key].instance == 'Array') {
-				model[key] = [form[key]];
+				if(!Array.isArray(form[key])) {
+					model[key] = [form[key]];
+				}
+				else {
+					model[key] = form[key];
+				}
 			}
 			else {
-				console.log(model.schema.paths[key].instance);
 				model[key] = form[key];
 			}
 		}
@@ -166,11 +172,11 @@ form_to_model = function(form, model) {
 }
 
 new_file_path = function() {
-	return 'resources/' + Date.now().toString();
+	return 'files/' + Date.now().toString();
 }
 
 storage_path = function(path) {
-	return '/root/Trascendencias/control_panel/pages/registro/' + path;
+	return '/root/Trascendencias/database/' + path;
 }
 
 database.valid_hash = function(string, hash) {

@@ -65,36 +65,14 @@
 
 
 		<div class="card-holder">
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-									<button class="buy"> Leer Más </button>
-								</div>
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-									<button class="buy"> Leer Más</button>
-								</div>
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-									<button class="buy"> Leer Más</button>
-								</div>
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-									<button class="buy"> Leer Más</button>
-								</div>
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-									<button class="buy"> Leer Más</button>
-								</div>
+			<% packages.forEach(function(element) { %>
+				<div class="card" onClick="location.href='consulta'">
+					<img src="<%= element.photos[0] %>">
+					<h3> <%= element.name %> </h3>
+					<p> <%= element.summary %> </p>
+					<button class="buy"> Leer Más </button>
+				</div>
+			<% }); %>
 	</div>
     <div class="dropContent" id="puntos-de-venta" >
 		<div class="h4holder">
