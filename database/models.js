@@ -9,7 +9,10 @@ var schemas = {
 		city: String,
 		institution: String,
 		phone: String,
-		selected_package: mongoose.Schema.Types.ObjectId,
+		selected_package: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'active_package'
+		},
 		workshop_0: mongoose.Schema.Types.ObjectId,
 		workshop_1: mongoose.Schema.Types.ObjectId,
 		local: {
@@ -22,7 +25,10 @@ var schemas = {
 	}),
 	active_package: mongoose.Schema({
 		shirt_size: String,
-		package: mongoose.Schema.Types.ObjectId,
+		package: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'package'
+		},
 		debt: Number,
 		liquidation_date: Date,
 		group_code: String
@@ -152,6 +158,19 @@ var schemas = {
 		payment: Number
 	}),
 }
+
+let populate_selected_package = function(next) {
+	this.populate('selected_package');
+	next();
+};
+
+let populate_package = function(next) {
+	this.populate('package');
+	next();
+}
+
+schemas.participant.pre('findOne', populate_selected_package).pre('find', populate_selected_package);
+schemas.active_package.pre('findOne', populate_package).pre('find', populate_package);
 
 module.exports = {
 	participant: mongoose.model('participants', schemas.participant),

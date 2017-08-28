@@ -117,9 +117,9 @@ module.exports = function(passport, database) {
 					new_participant.facebook.id = profile.id;
 					new_participant.name = profile.name.givenName + ' ' + profile.name.familyName;
 					new_participant.email = profile.emails[0].value;
-					new_participant.package = 'Ninguno';
+					new_participant.package = null;
 					new_participant.debt = 0;
-					new_participant.verified = true;
+					new_participant.verified = false;
 
 					new_participant.save(function(err) {
 						if(err) {

@@ -85,7 +85,35 @@ app.get('/registro/lista', check_session, function(req, res) {
 			user: req.user
 		});
 	});
-})
+});
+
+app.post('/abonar-:id', check_session, function(req, res) {
+	database.models.participant.findByIdAndUpdate(req.params.id, {
+		'$set': {
+			'selected_package.debt': 'Edgar Magdaleno'
+		}
+	},
+	function(err, participant) {
+		if (catch_errors(err, participant)) {
+			return res.redirect('/registro/avisos?titulo=error');
+		}
+
+		return res.redirect('/registro/menu');
+	});
+});
+
+app.get('/registro/abono', check_session, function(req, res) {
+	database.consult('participante', req.query.id, function(err, doc) {
+		if(catch_errors(err, doc)) {
+			return res.redirect('/registro/avisos?titulo=error');
+		}
+
+		return res.render('registro/abono', {
+			consulta: doc,
+			user: req.user
+		});
+	});
+});
 
 app.get('/registro/consulta-:collection', check_session, function(req, res) {
 	database.consult(req.params.collection, req.query.codigo, function(err, doc) {

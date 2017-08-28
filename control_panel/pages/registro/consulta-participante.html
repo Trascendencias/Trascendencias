@@ -25,19 +25,21 @@
         <center><h6><b> Consulta Participante </b></h6> </center>
 		<br>
 		<button onClick="editar();"> Editar </button>
-		<button onClick="eliminar();"> Eliminar </button>		
-		<button onClick="location.href='abono?code=xxx'"> Abono</button>
+		<button onClick="eliminar();"> Eliminar </button>
+		<button onClick="location.href='abono?id=<%= consulta.id %>'">Abono</button>
 				<div class="consulta">	
 		        <br><br>
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Nombre: <p><i> <%= consulta.name %> </i></p> </h3><br>
 
-				<!--- TIPO DE REGISTRO --> 
-				<h3> Registrado Por: <p><i> Internet </i></p> </h3><br>
-
-                <!-- TALLA Participantes -->
-		        <h3> Talla de camiseta: <p><i> <%= consulta.shirt_size %> </i></p> </h3><br>
-
+				<% if(consulta.selected_package) { %>
+				<%= JSON.stringify(consulta.selected_package, null, 4) %>
+				<h3> Paquete Elegido: <p><i> <%= consulta.selected_package.package.name %> </i></p> </h3><br>
+				<h3> Deuda: <i><p id="saldo">$<%= consulta.selected_package.debt %></p> </i></h3><br>
+				<h3> Talla de camiseta: <p><i> <%= consulta.selected_package.shirt_size %> </i></p> </h3><br>
+				<% } else { %>
+				<h3> Paquete Elegido: <p><i> Ninguno </i></p> </h3><br>
+				<% } %>
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
                 <h3> Teléfono: <p><i> <%= consulta.phone %> <button style="margin-left: 20px;" onClick="location.href='tel:6861234567'"> Llamar </button></i></p></h3><br>
 
@@ -55,12 +57,6 @@
 
                 <!-- ALERGIAS Participante-->
 		        <h3> Alergias: <p><i> <%= consulta.alergies %> </i></p> </h3><br>
-
-                <!-- PAQUETE ELEGIDO Participante -->
-        		<h3> Paquete Elegido: <p><i> <%= consulta.package %> </i></p> </h3><br>
-
-                <!-- SALDO Participante, Patrocinadores-->
-                <h3> Saldo: <i><p id="saldo"><%= consulta.debt %></p> </i></h3><br>
 
                 <h3> Liquidado el: <i><p> 13/SEP/17 22:45h</p> </i></h3><br>
                 </div>
@@ -104,21 +100,5 @@
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 
 			}
-
-              //INCLUIR DOCUMENTOS
-            var code = "XHDERBEZ";
-            var saldo = -450; //AQUI VA EL SALDO
-            if(saldo>=0){ document.getElementById("saldo").className += "dineromas"; document.getElementById("saldo").innerHTML= "$" + saldo; }
-            else { document.getElementById("saldo").className += "dineromenos"; document.getElementById("saldo").innerHTML= "$" + saldo; }
-           
-            function editar(){
-            	location.href="editar-participante?code=" + code;
-            }
-            
-            function isNumberKey(evt){
-                var charCode = (evt.which) ? evt.which : event.keyCode
-                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
-                return true;
-            }
 		</script>
 </html>

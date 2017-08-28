@@ -92,19 +92,31 @@ module.exports = function(http_app, app, fs, passport, database) {
 		});
 	});
 
+	app.get('/apartar-paquete', check_session, function(req, res) {
+		database.consult('paquetes', req.query.paquete, function(err, doc) {
+			if(catch_errors(err, doc)) {
+				return res.redirect('/err404');
+			}
+
+			return res.render('apartar-paquete', {
+				user: req.user,
+				package: doc
+			});
+		});
+	});
+
 	app.get('/validacion-facebook', check_session, function(req, res) {
 		if(req.user.verified) {
 			return res.redirect('/err404');
 		}
 
-		res.render('validaction-facebook');
+		res.render('validacion-facebook', { user: req.user });
 	})
 
 	app.get('/:name', function(request, response) {
 		if(fs.existsSync(__dirname + '/pages/' + request.params.name + '.html')) {
 			return response.render(request.params.name, {
-				user: request.user,
-				message: request.flash('message')
+				user: request.user
 			});
 		}
 
@@ -131,15 +143,55 @@ module.exports = function(http_app, app, fs, passport, database) {
 				institution: req.form.institution,
 				phone: req.form.phone,
 				alergies: req.form.alergies,
-				city: req.form.city
+				city: req.form.city,
+				verified: true
 			}
-		}, function (err, tank) {
-			if (err) {
-				console.log(err);
-				res.redirect('/error404');
+		},function(err, participant) {
+			if (catch_errors(err, participant)) {
+				res.redirect('/err404');
 			}
 
 			res.redirect('/validacion-facebook-exito');
+		});
+	});
+
+	app.post('/apartar-paquete-:package_id', check_session, form(), function(req, res) {
+		if(req.user.selected_package) {
+			return res.redirect('/err404');
+		}
+
+		database.models.package.findById(req.params.package_id, function(err, package) {
+			if(catch_errors(err, package)) {
+				return res.redirect('/error404');
+			}
+
+			if(package.group_size > 1) {
+
+			}
+			else {
+				new database.models.active_package({
+					shirt_size: req.form.shirt_size,
+					package: package.id,
+					debt: package.cost
+				}).save(function(err, saved_active_package) {
+					if (catch_errors(err, saved_active_package)) {
+						res.redirect('/err404');
+					}
+
+					database.models.participant.findByIdAndUpdate(req.user.id, {
+						$set: {
+							selected_package: saved_active_package.id
+						}
+					},
+					function(err, participant) {
+						if (catch_errors(err, participant)) {
+							res.redirect('/err404');
+						}
+
+						return res.redirect('/apartar-paquete-exito');
+					});
+				});
+			}
 		});
 	});
 
@@ -149,5 +201,19 @@ module.exports = function(http_app, app, fs, passport, database) {
 		}
 
 		next();
+	}
+
+	function catch_errors(err, object = true) {
+		if(err) {
+			console.log(err);
+			return true;
+		}
+
+		if(!object) {
+			console.log(new Error('Empty object'));
+			return true;
+		}
+
+		return false;
 	}
 }

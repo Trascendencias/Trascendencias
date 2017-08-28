@@ -18,10 +18,10 @@
         <br>
         <center><h6> Registrar Abono </h6>
         
-        <h3> Jesús de la Rocha Ramírez</h3></center>
+        <h3><%= consulta.name %></h3></center>
         <br><br>
        
-        <form action="abono " method=POST id="forma-registro">
+        <form action="/abonar-<%= consulta.id %>" method="post" id="forma-registro">
                  <!-- COSTO Paquetes -->
                 <p class="title"> Cantidad: </p>
                 <input type=number placeholder="$$" name="abono" class="numero"  >

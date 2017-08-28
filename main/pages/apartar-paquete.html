@@ -25,36 +25,39 @@
 	</div> 
 		<div class="registro">
 		<br>
-		<center><h6> <b>Nombre del Paquete </b></h6> </center>
-			<p style="color: red;"> <%= message %> </p>
-			<form class="registro" action="get_package" method="post"> <br><br>
-
+		<center><h6> <b> <%= package.name %> </b></h6> </center>
+			<% if(locals.message) { %>
+			<p style="color: red;">
+				<%= message %>
+			</p>
+			<% } %>
+			<form class="registro" action="/apartar-paquete-<%= package.id %>" method="post"> <br><br>
 				<!-- TALLA -->
 				<input maxlength="1" onBlur="if (this.value == '') { this.value = 'Talla de camiseta'; }"  onfocus="if(this.value == 'Talla de camiseta') { this.value = ''; }" type="text" value="Talla de camiseta" name="shirt_size" required>
 				<p class="error"> *Debe llenar esta información </p>
 
-				
-
 				<!-- CODIGO DE GRUPO -->
-				<input id="codigo-grupo" maxlength="50" onBlur="if (this.value == '') { this.value = 'Código de Grupo'; }"  onfocus="if(this.value == 'Código de Grupo') { this.value = ''; }" type="text" value="Código de Grupo" name="codigo-grupo" required>
+				<% if(package.group_size > 1) { %>
+				<input id="codigo-grupo" maxlength="50" onBlur="if (this.value == '') { this.value = 'Código de Grupo'; }"  onfocus="if(this.value == 'Código de Grupo') { this.value = ''; }" type="text" value="Código de Grupo" name="shirt_size" required>
 				<button class="second" type="button" id="codigo-grupo-btn" onClick="codigoGrupo();"> Nuevo </button>
 				<p class="error"> *Debe llenar esta información </p>
 				<input type="hidden" name="codigo-generado" id="codigo-generado" value="false">
-                
+                <% } %>
 								
 				<!-- TERMINOS Y CONDICIONES -->
 				<p> <input type="checkbox"> Acepto los <a class="cmenta" target="_blank" href='terminosycondiciones'> términos y condiciones </a> </p>
-				<p> Total a pagar: de pagar: </p>
-                <h1> $750.00 </h1>
+				<p> Total a pagar: </p>
+                <h1> $<%= package.cost %> </h1>
                 
 
-				<button type="button" onClick="location.href='apartar-paquete-exito'"> Siguiente </button>
+				<button type="submit"> Siguiente </button>
 			
 			</form>
-
+				<% if(package.group_size > 1) { %>
 				<br><br><br>
 				<h2> Paquetes de Grupo </h2>
 				<p> El código de grupo es el código que se utiliza para identificar a todos los miembros de una paquete de más de 1 persona. Si alguien de tu grupo ya se ha registrado utiliza su código para hacer válida la paquete. Se puede abonar por persona y se abonará a su cuenta o se puede abonar al código de grupo y el abono se dividirá entre todos los integrantes.</p>
+				<% } %>
 		
 		</div>
 

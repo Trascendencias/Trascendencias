@@ -218,7 +218,7 @@ database.list = function(collection, done) {
 		return done(new Error('Collection undefined'), null);
 	}
 
-	database.collection(translate[collection]).find({}).toArray(function(err, collection) {
+	database.models[translate[collection]].find({}, function(err, collection) {
 		if(err) {
 			return done(err, null);
 		}
@@ -226,6 +226,21 @@ database.list = function(collection, done) {
 		return done(null, collection);
 	});
 };
+
+database.generate_group_code = function(done) {
+	let group_code = Math.floor(Math.random() * 900 + 100);
+	models.selected_packages.find({ 'group_code': group_code }, function(err, doc) {
+		if(err) {
+			return done(err, null);
+		}
+
+		if(doc) {
+			return generate_group_code(done);
+		}
+
+		return done(null, group_code);
+	});
+}
 
 database.consult = function(collection, id, done) {
 	if(translate[collection] == undefined || id == undefined) {
@@ -236,7 +251,7 @@ database.consult = function(collection, id, done) {
 		return done(new Error('Invalid id'), null);
 	}
 
-	database.collection(translate[collection]).findOne({ '_id': mongoose.Types.ObjectId(id) }, function(err, doc) {
+	database.models[translate[collection]].findOne({ '_id': mongoose.Types.ObjectId(id) }, function(err, doc) {
 		if(err) {
 			return done(err, null);
 		}
@@ -254,7 +269,7 @@ database.remove = function(collection, id, done) {
 		return done(new Error('Invalid id'), null);
 	}
 
-	database.collection(translate[collection]).removeOne({ '_id': mongoose.Types.ObjectId(id) }, function(err) {
+	database.models[translate[collection]].removeOne({ '_id': mongoose.Types.ObjectId(id) }, function(err) {
 		if(err) {
 			return done(err);
 		}
@@ -264,19 +279,19 @@ database.remove = function(collection, id, done) {
 };
 
 var translate = {
-	'participante': 'participants',
-	'conferencia': 'conferences',
-	'paquetes': 'packages',
-	'staff': 'staff_members',
-	'taller': 'workshops',
-	'testimonios': 'testimonies',
-	'visita': 'visits',
-	'preguntas-frecuentes': 'faqs',
+	'participante': 'participant',
+	'conferencia': 'conference',
+	'paquetes': 'package',
+	'staff': 'staff_member',
+	'taller': 'workshop',
+	'testimonios': 'testimonie',
+	'visita': 'visit',
+	'preguntas-frecuentes': 'faq',
 	'evento-extra': 'extra_event',
-	'patrocinadores': 'sponsors',
-	'evento-social': 'social_events',
-	'punto-venta': 'sale_points',
-	'blog': 'blogs'
+	'patrocinadores': 'sponsor',
+	'evento-social': 'social_event',
+	'punto-venta': 'sale_point',
+	'blog': 'blog'
 }
 
 module.exports = database;
