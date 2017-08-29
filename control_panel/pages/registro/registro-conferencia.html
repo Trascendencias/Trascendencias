@@ -20,17 +20,16 @@
                 
 				<!-- NOMBRE/TITULO TODOS-->
 				<input maxlength="50" placeholder="Nombre" type="text" name="name" required>
-				<p class="error"> *Debe llenar esta información </p>
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
                 <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
                 <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <input type="hidden" id="start" name="start"> 
                 <input type="hidden" id="end" name="end"> 
@@ -38,62 +37,57 @@
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
                 <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
-                <p class="error"> *Debe llenar esta información </p>
+                
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
                 <input maxlength="50" placeholder="Nombre del Conferencista" type="text" name="speaker_name" required>
-				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
                 <input maxlength="50" type="text" placeholder="Titulos del Conferencista" name="speaker_titles" required>
-				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
 				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono del Conferencista" name="speaker_phone" required>
-				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
 				<input maxlength="50" type="email" placeholder="Correo del Conferencista" name="speaker_email" required>
-				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- LUGAR EN CETYS Conferencia, Taller, Evento Extra -->
                  <select id="select" name="location" required>
 				<% include lugares-cetys.html %>
                 </select>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
-                <p class="title"> Foto del Conferencista (300x300px) </p><br><br><br>
+                <p class="title"> Foto del Conferencista (300x300px) </p>
                 <input type="file" width="150px" name="speaker_photo" value="fileupload" id="image"  accept="image/*" style="display: inline;" required accept="image/*">
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="fotos">
-                <p class="title"> Fotos (1920x1080px) </p><br><br><br>
-                <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;"  accept="image/*" required>
-                <p class="error"> *Debe llenar esta información </p>
+                <p class="title"> Fotos (1920x1080px) </p>
+                <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;"  accept="image/*" multiple required>
+                
                 </div>
-                 <button class="third" onClick="masfoto()" type="button"> Agregar Foto </button><br><br><br>
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
-                <p class="title"> URL en Youtube de videos </p><br><br><br>
+                <p class="title"> URL en Youtube de videos </p>
                 <input maxlength="50" type="text" placeholder="URL Video 1" name="video_url" class="video">
-                <p class="error"> *Debe llenar esta información </p>
+                
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
-                <br><br><br><br><br><br>
+                
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
                 <textarea name="summary" id="resumen" placeholder="Resumen... " required></textarea>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
                 <textarea name="description" class="large-text" placeholder='Descripción...' required></textarea>
-                <p class="error"> *Debe llenar esta información </p>
+                
 
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
-                <input type="checkbox" name="teaser_banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
+                <p class='teaser'><input type="checkbox" name="teaser_banner" value="TRUE"> Incluir en Teaser Banner </p>
                 <input type=number name="include_teaser" class="numero goright" value="1">
                 <div class="spacer"></div>
                 <hr>

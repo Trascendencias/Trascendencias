@@ -20,7 +20,6 @@
                 
 				<!-- NOMBRE/TITULO TODOS-->
 				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
-				<p class="error"> *Debe llenar esta información </p>
 
                 <!-- TALLA Participantes -->
                 <select id="select" name="shirt_size" required>
@@ -35,31 +34,24 @@
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
 				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono" name="phone" required>
-				<p class="error"> *Debe llenar esta información </p>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
 				<input maxlength="50" type="email" placeholder="Correo" name="email" required>
-				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- INSTITUCION DE PROCEDENCIA Participante-->
 				<input maxlength="50" type="text" placeholder="Institución de procedencia" name="institution" required>
-				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CIUDAD Participante-->
 				<input maxlength="50" type="text" placeholder="Ciudad" name="city" required>
-				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- CONTRASENA Participante-->
 				<input maxlength="50" type="password" placeholder="Contraseña" name="password" required>
-				<p class="error"> *Debe llenar esta información </p>
 
 				<!-- REPITE LA CONTRASENA Participante-->
 				<input maxlength="50" type="password" placeholder="Repita la contraseña" name="password2" required>
-				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- ALERGIAS Participante-->
 				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
-				<p class="error"> *Debe llenar esta información </p>
                 
                 <!-- PAQUETE ELEGIDO Participante -->
                 <select id="select" name="package" required>
@@ -69,17 +61,15 @@
                   <option value="mercedes">Paquete 3</option>
                   <option value="audi">Paquete 4</option>
                 </select>
-				<p class="error"> *Debe llenar esta información </p>
                  
                  <!-- CODIGO DE GRUPO -->
 				<input id="codigo-grupo" maxlength="50" type="text" placeholder="Código de Grupo" name="group_code" required>
 				<button type="button" id="codigo-grupo-btn" class="third codigo-grupo" onClick="codigoGrupo();"> Nuevo </button>
-				<p class="error"> *Debe llenar esta información </p>
                 <input type="hidden" name="codigo-generado" id="codigo-generado" value="false">
 
                 <!-- ABONO Participante, Patrocinadores-->
                 <p class="title"> Abono: </p>
-                <input type=number name="abono" class="numero" required>
+                <input type=number name="abono" class="numero" placeholder="$$$" required>
                 <p class="error"> *Debe llenar esta información </p>
                 
                

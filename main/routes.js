@@ -67,24 +67,6 @@ module.exports = function(http_app, app, fs, passport, database) {
 		});
 	});
 
-	app.post('/registro-terminado', 
-		form(
-			form.field('nombre').trim(),
-			form.field('talla').trim(),
-			form.field('email').trim(),
-			form.field('institucion'),
-			form.field('ciudad').trim(),
-			form.field('telefono').trim(),
-			form.field('contrasena').trim(),
-			form.field('alergias').trim()
-		),
-		function(request, response) {
-			request.form.codigo = generate_package_code();
-			print_collection('paquetes');
-			response.render('registro-terminado', {code: request.form.codigo});
-		}
-	);
-
 	app.get('/', function(request, response) {
 		response.render('index', {
 			user: request.user,
@@ -107,10 +89,12 @@ module.exports = function(http_app, app, fs, passport, database) {
 
 	app.get('/validacion-facebook', check_session, function(req, res) {
 		if(req.user.verified) {
-			return res.redirect('/err404');
+			return res.redirect('/');
 		}
 
-		res.render('validacion-facebook', { user: req.user });
+		res.render('validacion-facebook', {
+			user: req.user
+		});
 	})
 
 	app.get('/:name', function(request, response) {
@@ -135,7 +119,7 @@ module.exports = function(http_app, app, fs, passport, database) {
 
 	app.post('/complete-facebook', check_session, form(), function(req, res) {
 		if(req.user.verified) {
-			res.redirect('/error404');
+			res.redirect('/');
 		}
 
 		database.models.participant.findByIdAndUpdate(req.user.id, {
@@ -157,47 +141,21 @@ module.exports = function(http_app, app, fs, passport, database) {
 
 	app.post('/apartar-paquete-:package_id', check_session, form(), function(req, res) {
 		if(req.user.selected_package) {
-			return res.redirect('/err404');
+			return res.redirect('/err404?mensaje=Ya elejiste tu paquete.');
 		}
 
-		database.models.package.findById(req.params.package_id, function(err, package) {
-			if(catch_errors(err, package)) {
-				return res.redirect('/error404');
+		database.assign_package(req.user.id, req.params.package_id, req.form, function(err, message, group_code) {
+			if(catch_errors(err)) {
+				return res.redirect('/err404?mensaje=' + message);
 			}
 
-			if(package.group_size > 1) {
-
-			}
-			else {
-				new database.models.active_package({
-					shirt_size: req.form.shirt_size,
-					package: package.id,
-					debt: package.cost
-				}).save(function(err, saved_active_package) {
-					if (catch_errors(err, saved_active_package)) {
-						res.redirect('/err404');
-					}
-
-					database.models.participant.findByIdAndUpdate(req.user.id, {
-						$set: {
-							selected_package: saved_active_package.id
-						}
-					},
-					function(err, participant) {
-						if (catch_errors(err, participant)) {
-							res.redirect('/err404');
-						}
-
-						return res.redirect('/apartar-paquete-exito');
-					});
-				});
-			}
+			return res.redirect('/apartar-paquete-exito?codigo=' + group_code);
 		});
 	});
 
 	function check_session(req, res, next) {
 		if(!req.user) {
-			return res.redirect('/');
+			return res.redirect('/err404?mensaje=Porfavor, inicia sesion.');
 		}
 
 		next();

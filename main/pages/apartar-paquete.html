@@ -2,19 +2,10 @@
 
 	<head>		
 		<title> Apartar un Paquete </title>
-	
-
-		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR DOCUMENTOS -->
 		<% include partials/menu.html %>
 		<div class="menuspacer"></div>
-
-		<!--- Pa que agarren los acentos -->
 		<meta charset="UTF-8">
-
-		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 	</head>
 
@@ -25,24 +16,35 @@
 	</div> 
 		<div class="registro">
 		<br>
-		<center><h6> <b> <%= package.name %> </b></h6> </center>
+		<center><h6> <b> <%= package.name %> </b></h6> </center><br>
 			<% if(locals.message) { %>
 			<p style="color: red;">
 				<%= message %>
 			</p>
 			<% } %>
-			<form class="registro" action="/apartar-paquete-<%= package.id %>" method="post"> <br><br>
-				<!-- TALLA -->
-				<input maxlength="1" onBlur="if (this.value == '') { this.value = 'Talla de camiseta'; }"  onfocus="if(this.value == 'Talla de camiseta') { this.value = ''; }" type="text" value="Talla de camiseta" name="shirt_size" required>
-				<p class="error"> *Debe llenar esta información </p>
-
+			<form class="registro" action="/apartar-paquete-<%= package.id %>" method="post">
+			<input type="hidden" value="<%= user.name %>" name="assign_name">
+			<!-- TALLA Participantes -->
+            <select id="select" name="shirt_size" required>
+                  <option value="none" disabled selected> Talla... </option>
+                  <option value="XS"> XS </option>
+                  <option value="S"> S </option>
+                  <option value="M"> M </option>
+                  <option value="L"> L </option>
+                  <option value="XL"> XL </option>
+                </select>
+                
 				<!-- CODIGO DE GRUPO -->
 				<% if(package.group_size > 1) { %>
-				<input id="codigo-grupo" maxlength="50" onBlur="if (this.value == '') { this.value = 'Código de Grupo'; }"  onfocus="if(this.value == 'Código de Grupo') { this.value = ''; }" type="text" value="Código de Grupo" name="shirt_size" required>
-				<button class="second" type="button" id="codigo-grupo-btn" onClick="codigoGrupo();"> Nuevo </button>
-				<p class="error"> *Debe llenar esta información </p>
-				<input type="hidden" name="codigo-generado" id="codigo-generado" value="false">
-                <% } %>
+                <p class="title black"> Código de Grupo </p>
+				
+                <button class="selectorLeft" id="selectorLeft" type="button" onClick="codigoGrupoNuevo(this);"> Nuevo </button>
+                <button class="selectorRight" id="selectorRight" type="button" onClick="codigoGrupoUsar(this);"> Usar Código </button>
+                
+                <input id="codigo-grupo" maxlength="50" placeholder="Código de Grupo..." type="text" name="group-code" required> 
+				<% } else { %>
+                <input type="hidden" name="group-code" value="none">
+				<% } %>
 								
 				<!-- TERMINOS Y CONDICIONES -->
 				<p> <input type="checkbox"> Acepto los <a class="cmenta" target="_blank" href='terminosycondiciones'> términos y condiciones </a> </p>
@@ -68,55 +70,30 @@
 </body>
 		
 		<script>
-					            function generarClave(){
-                var random;
-                var claveDigits = ["E","r","r","."];
-                var clave; 
-                var alphaNum = ["0","1",'2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-                    random = getRandom(1, 60466170);
-                    claveDigits[5] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[4] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[3] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[2] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[1] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[0] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    clave = claveDigits[0] + claveDigits[1] + claveDigits[2] + claveDigits[3] + claveDigits[4] + claveDigits[5];
-                return clave;
-
-            }
-            //Genera un código de grupo hasta que no se repita en la base de datos, solo lo registra en la base de datos cuando le da siguiente
-            function codigoGrupo(){
-                if(document.getElementById("codigo-grupo-btn").innerHTML == "Cancelar"){
-                	var z = document.getElementById("codigo-grupo");
-                	z.value = "Código de Grupo";
-	                document.getElementById("codigo-grupo-btn").innerHTML = "Nuevo";
-	                document.getElementById("codigo-grupo").readOnly = false;
-	                document.getElementById("codigo-generado").value = "false";
-                }
-                else {
-                var z = document.getElementById("codigo-grupo");
-                //Aquí va un while, pero aja
-                z.value=generarClave();
-                document.getElementById("codigo-grupo-btn").innerHTML = "Cancelar";
-                document.getElementById("codigo-grupo").readOnly = true; }
-                document.getElementById("codigo-generado").value = "true";
-            }
-
-            function getRandom(min, max) {
-              min = Math.ceil(min);
-              max = Math.floor(max);
-              return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-            }
-
+			codigoGrupoNuevo(document.getElementById("selectorLeft")); 
+			function codigoGrupoUsar(elem) {
+				activeSelector(elem); 
+				document.getElementById("codigo-grupo").style.display = "block";
+				document.getElementById("codigo-grupo").value = "";
+				}
+			function codigoGrupoNuevo(elem) {
+				activeSelector(elem); 
+				document.getElementById("codigo-grupo").style.display = "none";
+				document.getElementById("codigo-grupo").value = "none";
+				}
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 
 			}
+			function activeSelector(elem) {
+				var elements = document.getElementsByClassName("selectorActive"); 
+				var C = 0; 
+				while(C< elements.length) {
+					elements[C].classList.remove("selectorActive"); 
+					C++;
+					}
+				elem.classList.add("selectorActive");
+			}
+				
 		</script>
 </html>

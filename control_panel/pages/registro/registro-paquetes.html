@@ -21,66 +21,64 @@
                 
 				<!-- NOMBRE/TITULO TODOS-->
 				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Inicio </p>
                 <input name="start" class="date" type="date" value="Usa otro navegador" required>
-                <p class="error"> *Debe llenar esta información </p>
+                
 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Fin </p>
                 <input name="end" class="date" type="date" value="Usa otro navegador" required>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- Requisitos Visita, Taller, Oferta  -->
                 <textarea name="requisites" class="large-text" placeholder="Requisitos..." required></textarea>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="fotos">
-                <p class="title"> Fotos (1920x1080px) </p><br><br><br>
-                <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;"  accept="image/*" required>
-                <p class="error"> *Debe llenar esta información </p>
+                <p class="title"> Fotos (1920x1080px) </p>
+                <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;"  accept="image/*" required multiple>
+                
                 </div>
-                 <button class="third" onClick="masfoto()" type="button"> Agregar Foto </button><br><br><br>
                 
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
-                <div id="videos">
-                <p class="title"> URL en Youtube de videos </p><br><br><br>
+                <p class="title"> URL en Youtube de videos </p>
+                                <div id="videos">
                 <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video">
-                <p class="error"> *Debe llenar esta información </p>
+                
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
-                <br><br><br><br><br><br>
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
                 <textarea name="summary" id="resumen" placeholder="Resumen..." required></textarea>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
                 <textarea name="description" class="large-text" placeholder="Descripción..." required></textarea>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- GRUPO Paquetes-->
-                <p class="title"> Grupo de: </p>
+                <p class="teaser"> Grupo de: </p>
                 <input type=number name="group_size" class="numero" style="margin-left:0px; width: 60px;" required>
-                <p class="title"> Personas </p>
-                <p class="error"> *Debe llenar esta información </p>
+                <p class="teaser"> Personas </p>
+                
                 
                 <!-- CUPO Paquetes-->
                 <p class="title"> Cantidad de grupos maximo: </p>
                 <input type=number name="cap" class="numero" style="margin-left:0px; width: 100px;" required>
-                 <p class="error"> *Debe llenar esta información </p>           
+                            
                 
                 <!-- COSTO Paquetes -->
                 <p class="title"> Costo: </p>
-                <input type=number name="cost" class="numero" required>
-                <p class="error"> *Debe llenar esta información </p>
+                <input type=number name="cost" placeholder="$$$"class="numero" required><br>
+                
                
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
-                <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
+                <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="teaser">Incluir en Teaser Banner </p>
                 <input type=number name="teaser_position" class="numero goright" value="0">
                 <div class="spacer"></div>
                 <hr>

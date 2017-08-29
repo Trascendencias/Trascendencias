@@ -106,6 +106,30 @@ button.third{
     color: #CCC;
     display: block;
 }
+button.selectorLeft, button.selectorRight{
+	background-color: rgba(0,0,0,0);
+	border: 1px solid #CCC;
+    padding: 5px 20px 5px 20px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+    color: #CCC;
+    display: block;
+	float: none; 
+	display: inline;
+	}
+button.selectorLeft {
+	border-radius: 10px 0px 0px 10px;
+	margin-right: -2px; 
+	}
+button.selectorRight {
+	border-radius: 0px 10px 10px 0px;
+	margin-left: -3px; 
+	}
+button.selectorActive{
+	background-color: #41C7F4;
+	color: white;
+	border-color: #41C7F4;
+	}
 div.body, div.lista{
 	display: block;
 	margin: 0 auto;
@@ -131,10 +155,13 @@ input, #resumen, .large-text {
 	width: 90vw;
 	max-width: 700px;
 	background-color: rgba(0,0,0,0);
-	margin-top: -25px;
+	margin-top: 10px;
 	margin-bottom:10px;
     outline: none;
 }
+input[type='file']{
+	margin: 0px;
+	}
 input:focus, #resumen:focus, .large-text:focus{
 	border-color: #41C7F4;
 	color: #41C7F4;
@@ -149,7 +176,7 @@ input:focus, #resumen:focus, .large-text:focus{
 .large-text {
     height: 200px;
 }
-#select {
+#select, .select {
     border: none;
     background-color: white;
     font-size: 20px;
@@ -162,9 +189,9 @@ input:focus, #resumen:focus, .large-text:focus{
     border-bottom: 2px solid #95989a;
     padding: 10px;
     border-radius: 0px;
-    margin-top: 10px;
+    margin-top: 0px;
     outline: none;
-	margin-bottom:10px;
+	margin-bottom:0px;
 
 }
 #image {
@@ -182,8 +209,11 @@ input:focus, #resumen:focus, .large-text:focus{
     border-radius: 5px;
 }
 p.title {
-    display: inline;
     font-size: 20px;
+	margin-bottom: 0px;
+}
+p.teaser {
+	display: inline;
 }
 input[type=checkbox]{
 	width: 15px;
@@ -194,7 +224,7 @@ p.error{
 	position: relative;
 	top: -10px;
 	left: 5px;
-	visibility: hidden;
+	display: none;
 }
 input.error + p.error{
 	visibility: visible;

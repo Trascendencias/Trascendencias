@@ -1063,12 +1063,36 @@ input.error + p.error{
 
 }
 .registro button{
-	float: right;
+	float:right;
 	padding: 10px 20px;
 }
+button.selectorLeft, button.selectorRight{
+	background-color: rgba(0,0,0,0);
+	border: 1px solid #CCC;
+    padding: 5px 20px 5px 20px;
+    margin: 5px 5px 5px 0px;
+    color: #CCC;
+    display: block;
+	float: none; 
+	display: inline;
+	}
+button.selectorLeft {
+	border-radius: 100px 0px 0px 100px;
+	margin-right: -2px; 
+	}
+button.selectorRight {
+	border-radius: 0px 100px 100px 0px;
+	margin-left: -3px; 
+	}
+button.selectorActive{
+	background-color: #41C7F4;
+	color: white;
+	border-color: #41C7F4;
+	}
 #codigo-grupo{
-	width: calc(90vw - 125px);
+	width: calc(90vw);
 	max-width: 575px;
+	margin-top: 10px;
 }
 #codigo-grupo-btn{
 	color: #ccc;

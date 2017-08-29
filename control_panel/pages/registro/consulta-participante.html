@@ -33,35 +33,43 @@
 				<h3> Nombre: <p><i> <%= consulta.name %> </i></p> </h3><br>
 
 				<% if(consulta.selected_package) { %>
-				<%= JSON.stringify(consulta.selected_package, null, 4) %>
+				<%= // JSON.stringify(consulta.selected_package, null, 4) %>
 				<h3> Paquete Elegido: <p><i> <%= consulta.selected_package.package.name %> </i></p> </h3><br>
-				<h3> Deuda: <i><p id="saldo">$<%= consulta.selected_package.debt %></p> </i></h3><br>
-				<h3> Talla de camiseta: <p><i> <%= consulta.selected_package.shirt_size %> </i></p> </h3><br>
+				<% if(consulta.selected_package.group_code) { %>
+					<h3> Codigo de grupo: <p><i> <%= consulta.selected_package.group_code %> </i></p> </h3><br>
+					<h3> Miembros: <p><i> <%= consulta.selected_package.members %> </i></p> </h3><br>
+				<% } %>
+				<h3> Deuda: <i><p id="saldo">$<%= consulta.package_information.debt %></p> </i></h3>
+				<% if(consulta.package_information.liquidation_date) { %>
+				<h3> Fecha de liquidacion: <i><p><%= consulta.package_information.liquidation_date %></p></i></h3>
+				<% } %>
+				<br>
+				<h3> Talla de camiseta: <p><i> <%= consulta.package_information.shirt_size %> </i></p> </h3><br>
 				<% } else { %>
 				<h3> Paquete Elegido: <p><i> Ninguno </i></p> </h3><br>
 				<% } %>
-                <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-                <h3> Teléfono: <p><i> <%= consulta.phone %> <button style="margin-left: 20px;" onClick="location.href='tel:6861234567'"> Llamar </button></i></p></h3><br>
-
-				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
+				
+				<% if(consulta.email) { %>
 				<h3> Correo: <p><i> <%= consulta.email %> </i></p> </h3><br>
+				<% } %>
 
-				<!-- INSTITUCION DE PROCEDENCIA Participante-->
-				<h3> Institución: <p><i> <%= consulta.institution %> </i></p> </h3><br>
+				<% if(consulta.institution) { %>
+				<h3> Institucion: <p><i> <%= consulta.institution %> </i></p> </h3><br>
+				<% } %>
 
-				<!-- CIUDAD Participante-->
+				<% if(consulta.city) { %>
 				<h3> Ciudad: <p><i> <%= consulta.city %> </i></p> </h3><br>
+				<% } %>
 
-                <!-- CODIGO DE GRUPO -->
-		        <h3> Codigo de Grupo: <p><i> XHDERBEZ </i></p> </h3><br>
+				<% if(consulta.phone) { %>
+				<h3> Teléfono: <p><i> <%= consulta.phone %> <button style="margin-left: 20px;" onClick="location.href='tel:6861234567'"> Llamar </button></i></p></h3><br>
+				<% } %>
 
-                <!-- ALERGIAS Participante-->
-		        <h3> Alergias: <p><i> <%= consulta.alergies %> </i></p> </h3><br>
+				<% if(consulta.alergies) { %>
+				<h3> Alergias: <p><i> <%= consulta.alergies %> </i></p> </h3><br>
+				<% } %>
 
-                <h3> Liquidado el: <i><p> 13/SEP/17 22:45h</p> </i></h3><br>
                 </div>
-
-
                 
                 <hr> 
  

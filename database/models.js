@@ -9,6 +9,11 @@ var schemas = {
 		city: String,
 		institution: String,
 		phone: String,
+		package_information: {
+			debt: Number,
+			liquidation_date: String,
+			shirt_size: String
+		},
 		selected_package: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'active_package'
@@ -24,14 +29,12 @@ var schemas = {
 		verified: Boolean,
 	}),
 	active_package: mongoose.Schema({
-		shirt_size: String,
 		package: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'package'
 		},
-		debt: Number,
-		liquidation_date: Date,
-		group_code: String
+		group_code: String,
+		members: [String]
 	}),
 	staff_member: mongoose.Schema({
 		name: String,

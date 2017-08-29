@@ -38,9 +38,7 @@
 		</div> 
 
 		<div class="body error404">
-		<h3> ups... </h3> 
-		<h3 class="error404"> ¿A dónde dijiste que querías ir? </h3> 
-		<p> No se ha encontrado nada en ésta dirección... </p> 
+		<h3 class="error404" id="mensaje"></h3> 
 		</div>
 
 		<hr style="width: 100vw; border-color: rgba(0,0,0,0);"> <!-- Esto es pa que no se corra el footer, no se por que pero con esto se arregla ja-->
@@ -49,7 +47,23 @@
 		<% include partials/footer.html %>
 		
 		<script>  
+			function getParameterByName(name, url) {
+			    if (!url) url = window.location.href;
+			    name = name.replace(/[\[\]]/g, "\\$&");
+			    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			        results = regex.exec(url);
+			    if (!results) return null;
+			    if (!results[2]) return '';
+			    return decodeURIComponent(results[2].replace(/\+/g, " "));
+			}
 
+	        var mensaje = getParameterByName('mensaje');
+	        if(mensaje) {
+	        	document.getElementById('mensaje').innerHTML += mensaje;
+	        }
+	        else {
+	        	document.getElementById('mensaje').innerHTML += 'Error 404';
+	        }
 
 			function activate(elem){ // ES PARA APARECER / DESAPARECER COSAS (COMO EL MENU)
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 

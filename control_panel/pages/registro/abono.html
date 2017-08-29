@@ -22,34 +22,58 @@
         <br><br>
        
         <form action="/abonar-<%= consulta.id %>" method="post" id="forma-registro">
-                 <!-- COSTO Paquetes -->
-                <p class="title"> Cantidad: </p>
-                <input type=number placeholder="$$" name="abono" class="numero"  >
-                <p class="error"> *Debe llenar esta información </p>
-               
-                <input type="text" placeholder="Código de Grupo" name="group-code" rquired><br> <br>
+            <input type="hidden" value="<%= consulta.name %>" name="assign_name">
+            <% if(!consulta.verified) { %>
+                <% if(consulta.facebook) { %>
+            <input maxlength="50" type="text" placeholder="Institución de procedencia" name="institution" required>
+            
 
-				<!-- TALLA s -->
-                <select id="select" name="talla">
-                    <option value="none" selected disabled> Talla... </option>
-                  <option value="XS"> XS </option>
-                  <option value="S"> S </option>
-                  <option value="M"> M </option>
-                  <option value="L"> L </option>
-                  <option value="XL"> XL </option>
-                </select>
-                <p class="error"> *Debe llenar esta información </p>
-                
-                
- 
-                
-                <center>
-                <div class="registro">
-                        <hr>
-                    <button type="submit" class="submit"> Siguiente </button>  
-                    <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
-                    </div>
-                </center>
+            <input maxlength="50"  type="text" placeholder="Ciudad" name="city" required>
+            
+
+            <input maxlength="50" type="number" placeholder="Teléfono" name="phone" required>
+            
+
+            <input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
+            
+                <% } %>
+            <% } %>
+           
+            <% if(!consulta.selected_package) { %>
+            
+            <select class="select" name="shirt_size">
+            <option value="none" selected disabled> Talla... </option>
+              <option value="XS"> XS </option>
+              <option value="S"> S </option>
+              <option value="M"> M </option>
+              <option value="L"> L </option>
+              <option value="XL"> XL </option>
+            </select><br><br><br>
+             <button class="selectorLeft" id="selectorLeft" type="button" onClick="codigoGrupo(this);"> Código Grupo </button>
+             <button class="selectorRight" id="selectorRight" type="button" onClick="escogerPaquete(this);"> Paquete </button>
+            
+            <input type="text" placeholder="Código de Grupo" id="codigo-grupo" name="group-code" required>
+            
+            <select class="select" id="paquete" name="selected_package">
+            <option value="none" selected disabled>Paquete</option>
+            <% packages.forEach(function(package) { %>
+                <option value="<%= package.id %>"><%= package.name %></option>
+            <% }); %>
+            
+            </select>
+            <% } %>
+            
+
+            <p class="title"> Cantidad: </p>
+            <input type=number placeholder="$$$" name="abono" class="numero"  >
+            
+            <center>
+            <div class="registro">
+                    <hr>
+                <button type="submit" class="submit"> Siguiente </button>  
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                </div>
+            </center>
         </form>
 
         </div>
@@ -59,7 +83,7 @@
 </body>
         
         <script>
-
+			codigoGrupo(document.getElementById("selectorLeft"));
             function validate(){
                 var alert = confirm('Estás a punto de registrar un abono. Ésta acción no puede eliminarse, ¿Seguro que desea proseguir?');
                 if (alert) {
@@ -68,6 +92,27 @@
                     // Do nothing!
                 }
             }
+			function codigoGrupo(elem) {
+				activeSelector(elem); 
+				document.getElementById("codigo-grupo").style.display = "block";
+				document.getElementById("codigo-grupo").value = "";
+				document.getElementById("paquete").style.display = "none";
+				}
+			function escogerPaquete(elem) {
+				activeSelector(elem); 
+				document.getElementById("codigo-grupo").style.display = "none";
+				document.getElementById("codigo-grupo").value = "none";
+				document.getElementById("paquete").style.display = "block";
+				}
+			function activeSelector(elem) {
+				var elements = document.getElementsByClassName("selectorActive"); 
+				var C = 0; 
+				while(C< elements.length) {
+					elements[C].classList.remove("selectorActive"); 
+					C++;
+					}
+				elem.classList.add("selectorActive");
+			}
 
 
               //INCLUIR DOCUMENTOS

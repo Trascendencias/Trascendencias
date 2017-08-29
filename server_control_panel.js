@@ -87,18 +87,49 @@ app.get('/registro/lista', check_session, function(req, res) {
 	});
 });
 
-app.post('/abonar-:id', check_session, function(req, res) {
-	database.models.participant.findByIdAndUpdate(req.params.id, {
-		'$set': {
-			'selected_package.debt': 'Edgar Magdaleno'
-		}
-	},
-	function(err, participant) {
-		if (catch_errors(err, participant)) {
-			return res.redirect('/registro/avisos?titulo=error');
+app.post('/abonar-:id', check_session, form(), function(req, res) {
+	database.assign_package(req.params.id, req.form.selected_package, req.form, function(err, message) {
+		if(catch_errors(err)) {
+			return res.redirect('/err404?mensaje=' + message);
 		}
 
-		return res.redirect('/registro/menu');
+		database.consult('participante', req.params.id, function(err, doc) {
+			if(catch_errors(err, doc)) {
+				return res.redirect('/registro/avisos?titulo=error');
+			}
+
+			if(req.form.abono < 1) {
+				return res.redirect('/registro/avisos?tutulo=error');
+			}
+
+			doc.package_information.debt -= req.form.abono;
+			if(doc.package_information.debt <= 0) {
+				doc.package_information.debt = 0;
+				doc.package_information.liquidation_date = Date.now();
+			}
+
+			if(!doc.verified) {
+				doc.institution = req.form.institution;
+				doc.phone = req.form.phone;
+				doc.city = req.form.city;
+				doc.alergies = req.form.alergies;
+				doc.verified = true;
+			}
+			
+			doc.save(function(err) {
+				if(catch_errors(err)) {
+					return res.redirect('/registro/avisos?titulo=error');
+				}
+
+				doc.selected_package.save(function(err, saved) {
+					if(catch_errors(err)) {
+						return res.redirect('/registro/avisos?titulo=error');
+					}
+
+					return res.redirect('/');
+				});
+			});
+		});
 	});
 });
 
@@ -108,10 +139,25 @@ app.get('/registro/abono', check_session, function(req, res) {
 			return res.redirect('/registro/avisos?titulo=error');
 		}
 
-		return res.render('registro/abono', {
-			consulta: doc,
-			user: req.user
-		});
+		if(!doc.selected_package) {
+			database.list('paquetes', function(err, collection) {
+				if(catch_errors(err, doc)) {
+					return res.redirect('/registro/avisos?titulo=error');
+				}
+
+				return res.render('registro/abono', {
+					consulta: doc,
+					user: req.user,
+					packages: collection
+				});
+			});
+		}
+		else {
+			return res.render('registro/abono', {
+				consulta: doc,
+				user: req.user
+			});
+		}
 	});
 });
 

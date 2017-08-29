@@ -27,11 +27,7 @@
 			<h1 class="cmenta"> ¡Felicidades! </h1>
 			<p> <b> ¡Ya casi eres parte de Trascendencias! </b> </p>
 
-			<p> <i> Tu código de registro es: </i></p>
-			<h6 class="cmenta"> 34GSD90 </h6> 
-
-			<p> <i> Presenta este código QR para acelerar tus abonos: </i> </p> 
-			<img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=www.trascendencias.com/abonos.html?34GSD90" class="qr">
+			<h2 id = "mensaje"></h2><br><br>
 		</center>
 
 		<h2> Para completar tu registro </h2>
@@ -59,12 +55,27 @@
 
 
 
-		<script> w3.includeHTML();
+		<script>
 
 	function activate(elem){
 		if(elem.classList.contains('active')) elem.classList.remove('active'); 
 		else elem.classList.add('active'); 
 	}
+
+				function getParameterByName(name, url) {
+			    if (!url) url = window.location.href;
+			    name = name.replace(/[\[\]]/g, "\\$&");
+			    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			        results = regex.exec(url);
+			    if (!results) return null;
+			    if (!results[2]) return '';
+			    return decodeURIComponent(results[2].replace(/\+/g, " "));
+			}
+
+	        var codigo = getParameterByName('codigo');
+	        if(codigo) {
+	        	document.getElementById('mensaje').innerHTML += "Tu codigo de grupo es " + codigo;
+	        }
 		</script>
 	</body>
 </html>

@@ -9,7 +9,7 @@ database.models = models;
 database.register = {
 	conferencia: function(form, files, done) {
 		let new_conference = new models.conference();
-		form_to_model(form, new_conference);
+		database.form_to_model(form, new_conference);
 		new_conference.speaker_photo = get_files(files, 'speaker_photo');
 		new_conference.photos = get_files(files, 'photos');
 
@@ -23,7 +23,7 @@ database.register = {
 	},
 	taller: function(form, files, done) {
 		let new_workshop = new models.workshop();
-		form_to_model(form, new_workshop);
+		database.form_to_model(form, new_workshop);
 		new_workshop.instructor_photo = get_files(files, 'instructor_photo');
 		new_workshop.photos = get_files(files, 'photos');
 
@@ -37,7 +37,7 @@ database.register = {
 	},
 	visita: function(form, files, done) {
 		let new_visit = new models.visit();
-		form_to_model(form, new_visit);
+		database.form_to_model(form, new_visit);
 		new_visit.photos = get_files(files, 'photos');
 
 		new_visit.save(function(err) {
@@ -50,7 +50,7 @@ database.register = {
 	},
 	'evento-social': function(form, files, done) {
 		let new_social_event = new models.social_event();
-		form_to_model(form, new_social_event);
+		database.form_to_model(form, new_social_event);
 		new_social_event.event_poster = get_files(files, 'event_poster');
 
 		new_social_event.save(function(err) {
@@ -63,7 +63,7 @@ database.register = {
 	},
 	'evento-extra': function(form, files, done) {
 		let new_extra_event = new models.extra_event();
-		form_to_model(form, new_extra_event);
+		database.form_to_model(form, new_extra_event);
 		new_extra_event.event_icon = get_files(files, 'event_icon');
 
 		new_extra_event.save(function(err) {
@@ -76,7 +76,7 @@ database.register = {
 	},
 	blog: function(form, files, done) {
 		let new_blog = new models.blog();
-		form_to_model(form, new_blog);
+		database.form_to_model(form, new_blog);
 		new_blog.photos = get_files(files, 'photos');
 
 		new_blog.save(function(err) {
@@ -89,7 +89,7 @@ database.register = {
 	},
 	'preguntas-frecuentes': function(form, files, done) {
 		let new_faq = new models.faq();
-		form_to_model(form, new_faq);
+		database.form_to_model(form, new_faq);
 
 		new_faq.save(function(err) {
 			if(err) {
@@ -101,8 +101,7 @@ database.register = {
 	},
 	paquetes: function(form, files, done) {
 		let new_package = new models.package();
-		console.log('\n' + JSON.stringify(form, null, 4) + '\n');
-		form_to_model(form, new_package);
+		database.form_to_model(form, new_package);
 		new_package.photos = get_files(files, 'photos');
 
 		new_package.save(function(err) {
@@ -115,7 +114,7 @@ database.register = {
 	},
 	patrocinadores: function(form, files, done) {
 		let new_sponsor = new models.sponsor();
-		form_to_model(form, new_sponsor);
+		database.form_to_model(form, new_sponsor);
 		new_sponsor.company_logo = get_files(files, 'company_logo');
 
 		new_sponsor.save(function(err) {
@@ -153,7 +152,7 @@ get_files = function(files, filename) {
 	return file_paths;
 }
 
-form_to_model = function(form, model) {
+database.form_to_model = function(form, model) {
 	for(let key in form) {
 		if(model.schema.paths[key]) {
 			if(model.schema.paths[key].instance == 'Array') {
@@ -169,6 +168,119 @@ form_to_model = function(form, model) {
 			}
 		}
 	}
+}
+
+database.assign_package = function(user_id, package_id, form, done) {
+	database.consult('participante', user_id, function(err, doc) {
+		if(err) {
+			return done(err);
+		}
+
+		if(doc.selected_package) {
+			return done(null);
+		}
+		else {
+			if(form['group-code'] != 'none') {
+				database.models.active_package.findOne({
+					group_code: form['group-code']
+				},
+				function(err, doc) {
+					if(err || !doc) {
+						return done(err, 'Codigo de grupo no encontrado');
+					}
+
+					doc.members.push(form.assign_name);
+					doc.save(function(err) {
+						database.models.participant.findByIdAndUpdate(user_id, {
+							$set: {
+								selected_package: doc.id,
+								package_information: {
+									debt: doc.cost,
+									shirt_size: form.shirt_size
+								}
+							}
+						},
+						function(err, participant) {
+							if(err || !participant) {
+								return done(err, 'Error guardando al participante');
+							}
+
+							return done(null);
+						});
+					});
+				});
+			}
+			else {
+				database.models.package.findById(package_id, function(err, package) {
+					if(err || !package) {
+						console.log('Paquete no encontrado');
+						return done(err, 'Paquete no encontrado');
+					}
+
+					if(package.group_size > 1) {
+						database.generate_group_code(function(err, new_group_code) {
+							if(err || !new_group_code) {
+								return done(err, 'Error al generarse nuevo codigo de grupo');
+							}
+
+							new database.models.active_package({
+								package: package.id,
+								group_code: new_group_code,
+								members: [form.assign_name]
+							}).save(function(err, saved_active_package) {
+								if(err) {
+									return done(err, 'Error guardando el paquete');
+								}
+
+								database.models.participant.findByIdAndUpdate(user_id, {
+									$set: {
+										selected_package: saved_active_package.id,
+										package_information: {
+											debt: package.cost,
+											shirt_size: form.shirt_size
+										}
+									}
+								},
+								function(err, participant) {
+									if(err || !participant) {
+										return done(err, 'Error guardando al participante');
+									}
+
+									return done(null, null, new_group_code);
+								});
+							});
+						});
+					}
+					else {
+						new database.models.active_package({
+							package: package.id,
+						}).save(function(err, saved_active_package) {
+							if (err || !saved_active_package) {
+								return done(err, 'Error al guardar el paquete');
+							}
+
+							database.models.participant.findByIdAndUpdate(user_id, {
+								$set: {
+									selected_package: saved_active_package.id,
+									package_information: {
+										debt: package.cost,
+										shirt_size: form.shirt_size
+									}
+								}
+							},
+							function(err, participant) {
+								if(err || !participant) {
+									return done(err, 'Error al guardar el participante');
+								}
+
+								return done(null);
+							});
+						});
+					}
+				});
+			}
+		}
+	});
 }
 
 new_file_path = function() {
@@ -229,7 +341,7 @@ database.list = function(collection, done) {
 
 database.generate_group_code = function(done) {
 	let group_code = Math.floor(Math.random() * 900 + 100);
-	models.selected_packages.find({ 'group_code': group_code }, function(err, doc) {
+	models.active_package.findOne({ 'group_code': group_code }, function(err, doc) {
 		if(err) {
 			return done(err, null);
 		}

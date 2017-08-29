@@ -22,30 +22,30 @@
                 
 				<!-- NOMBRE/TITULO TODOS-->
 				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
                 <input maxlength="50"  type="text" placeholder="Nombre de Contacto" name="contact_name" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
                 
                
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
 				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono de Contacto" name="contact_phone" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
 				<input maxlength="50"  type="email" placeholder="Correo de Contacto" name="contact_email" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
                 <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
-                <p class="title"> Logo de la Empresa (300x100px sobre negro) </p><br><br><br>
+                <p class="title"> Logo de la Empresa (300x100px sobre negro) </p>
                 <input type="file" width="150px" name="company_logo" value="fileupload" id="image" style="display: inline;" accept="image/*" required>
-                <p class="error"> *Debe llenar esta información </p>
+                
 
                 <!-- ABONO Participante, Patrocinadores-->
                 <p class="title"> Abono: </p>
-                <input type=number name="payment" class="numero" required>
-                <p class="error"> *Debe llenar esta información </p>
+                <input type=number name="payment" placeholder="$$$" class="numero" required>
+                
                 
                 <div class="spacer"></div>
                 <hr>

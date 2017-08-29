@@ -4,7 +4,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
         <title> Registro Staff </title>
-		<link rel="stylesheet" type="text/css" href="admin/resources/style.css">
+		<link rel="stylesheet" type="text/css" href="registro/resources/style.css">
     </head>
 <body>
 		
@@ -19,7 +19,7 @@
                 
 				<!-- NOMBRE/TITULO TODOS-->
 				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
                 <!-- TALLA Participantes -->
                 <select id="select" name="shirt_size" required>
@@ -30,21 +30,21 @@
                   <option value="L"> L </option>
                   <option value="XL"> XL </option>
                 </select>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
 				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="number" placeholder="Teléfono" name="phone" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
                 
         		<input type="hidden" name="email" value="<%=email%>">
                 
                 <!-- FACEBOOK -->
                 <input maxlength="50" type="text" placeholder="Link de Facebook" name="facebook" required>
-                <p class="error"> *Debe llenar esta información </p>
+                
 
 				<!-- CARRERA -->
 				<input maxlength="50" type="text" placeholder="Carrera" name="major" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- SEMESTRE-->
                 <select id="select" name="semester" required>
@@ -60,23 +60,23 @@
                   <option value="9no"> 9no </option>
                   <option value="Otro"> Otro... </option>
                 </select>
-                <p class="error"> *Debe llenar esta información </p>
+                
 
 				<!-- CIUDAD Participante-->
 				<input maxlength="50" type="text" placeholder="Ciudad" name="city" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- CONTRASENA Participante-->
 				<input maxlength="50" type="password" placeholder="Contraseña" name="password" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- REPITE LA CONTRASENA Participante-->
 				<input maxlength="50"  type="password" placeholder="Repita la contraseña" name="password2" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
                 <!-- ALERGIAS Participante-->
 				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
                 
                 <!-- Equipo Staff -->
                 <select id="select" name="team" required>
@@ -88,7 +88,7 @@
                   <option value="estrategia">Estrategia</option>
                   <option value="eventos">Eventos Sociales</option>
                 </select>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- Puesto ELEGIDO  -->
                 <select id="select" name="position" required>
@@ -97,11 +97,11 @@
                   <option value="subcoordinador">Subcoordinador</option>
                   <option value="miembro">Miembro</option>
                 </select>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
-				<p class="title"> Foto del Staff </p><br><br><br>
+				<p class="title"> Foto del Staff </p>
                 <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;" required>
-                <p class="error"> *Debe llenar esta información </p>
+                
 
                 <div class="spacer"></div>
                 <hr>

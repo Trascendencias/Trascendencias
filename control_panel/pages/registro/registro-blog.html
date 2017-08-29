@@ -21,34 +21,34 @@
                 
 				<!-- NOMBRE/TITULO TODOS-->
 				<input maxlength="50" type="text" placeholder="Nombre" name="title" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
             
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
-                <p class="title"> Fotos (1920x1080px) </p><br><br><br>
+                <p class="title"> Fotos (1920x1080px) </p>
                 <div id="fotos">
                 <input accept="image/*" type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;" multiple required>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 </div>
 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
-                <p class="title"> URL en Youtube de videos </p><br><br><br>
+                <p class="title"> URL en Youtube de videos </p>
                 <input maxlength="50" type="text" placeholder="URL Video 1" name="video1" class="video" required>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
-                <br><br><br><br><br><br>
+                
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
                 <textarea name="resumen" id="resumen" placeholder="Resumen..." required></textarea>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
                 <textarea name="descripcion" class="large-text" required placeholder="Descripción..."></textarea>
-                <p class="error"> *Debe llenar esta información </p>
+                
 
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
-                <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="title">Incluir en Teaser Banner </p>
+                <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="teaser">Incluir en Teaser Banner </p>
                 <input type=number name="teaser-index" class="numero goright" value="1">
                 <div class="spacer"></div>
                 <hr>
