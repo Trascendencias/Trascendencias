@@ -121,14 +121,14 @@ var schemas = {
 	}),
 	blog: mongoose.Schema({
 		name: String,
-		photos: String,
-		video_urls: String,
+		photos: [String],
+		video_urls: [String],
 		summary: String,
 		description: String,
 		include_teaser: Number
 	}),
 	faq: mongoose.Schema({
-		question: String,
+		name: String,
 		answer: String,
 		position: String
 	}),
@@ -173,7 +173,7 @@ let populate_package = function(next) {
 }
 
 schemas.participant.pre('findOne', populate_selected_package).pre('find', populate_selected_package);
-schemas.active_package.pre('findOne', populate_package).pre('find', populate_package);
+schemas.active_package.pre('findOne', populate_package).pre('find', populate_package).pre('findOneAndUpdate', populate_package);
 
 module.exports = {
 	participant: mongoose.model('participants', schemas.participant),

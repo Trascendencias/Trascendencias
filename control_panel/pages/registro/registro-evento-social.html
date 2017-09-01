@@ -14,7 +14,7 @@
 		<br>
 		<center><h6><b> Registro Evento Social </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-evento-social" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="evento-social">
@@ -73,7 +73,7 @@
 
                 <div class="spacer"></div>
                 <hr>
-				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
+				<button type="submit" class="submit"> Siguiente </button>
                 <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                 <div class="spacer"></div>
                 <div class="spacer"></div>
@@ -88,10 +88,10 @@
 		var startTime;
 		var endTime;
 		 function timeFields(){
-                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
-				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
-				document.getElementById("start").value = startTime;
-				document.getElementById("end").value = endTime;
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-00:00";
+                endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("end_time").value+":00-00:00";
+                document.getElementById("start").value = startTime;
+                document.getElementById("end").value = endTime;
             }
 			
 			
@@ -102,8 +102,7 @@
 
               //INCLUIR DOCUMENTOS
             var videocount = 2;
-            var fotoscount = 2;
-
+			
             function validate(){
                 document.getElementById("forma-registro").submit();
             }
@@ -113,11 +112,7 @@
                 document.getElementById('videos').innerHTML += videoinput;
                 videocount++;
             }
-            function masfoto(){
-                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
-                document.getElementById('fotos').innerHTML += fotosinput;
-                fotoscount++;
-            }
+
             
             function isNumberKey(evt){
                 var charCode = (evt.which) ? evt.which : event.keyCode

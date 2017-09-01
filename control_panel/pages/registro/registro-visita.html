@@ -14,7 +14,7 @@
         <br>
         <center><h6><b> Registro de Visita </b></h6> </center>
             
-            <form class="registro" id="forma-registro" method="post" action="/registro-visita"> <br><br>
+            <form class="registro" id="forma-registro" method="post" action="/registro-visita" enctype='multipart/form-data'> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="visita">
@@ -25,12 +25,12 @@
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
-                <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
+                <input name="day" onKeyPress="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
                 
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
-                <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
+                <input type="time" name="start_time" onKeyPress="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
                 
                 
                 <input type="hidden" id="start" name="start"> 
@@ -38,11 +38,11 @@
                 
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
-                <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
+                <input type="time" name="end_time" onKeyPress="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
                 
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50" type="text" onBlur="timeFields();" placeholder="Nombre de Contacto" name="contact_name" required>
+                <input maxlength="50" type="text" placeholder="Nombre de Contacto" name="contact_name" required>
                 
                                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
@@ -74,7 +74,9 @@
                  <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p>
-                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls_0" class="video">
+               <p> <i>NOTA: Solo la parte final del link. https://www.youtube.com/watch?v=<u><b>RgqxZU6_qOY</b></u> </i></p>
+
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls_0" class="video" onblur='youtubeLink(this)'>
                 
                 </div>
                <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
@@ -102,11 +104,11 @@
 				<script>
 		var startTime;
 		var endTime;
-		 function timeFields(){
-                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
-				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
-				document.getElementById("start").value = startTime;
-				document.getElementById("end").value = endTime;
+	function timeFields(){
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-00:00";
+                endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("end_time").value+":00-00:00";
+                document.getElementById("start").value = startTime;
+                document.getElementById("end").value = endTime;
             }
 			
 			
@@ -120,7 +122,7 @@
 
             var videocount = 2;
             function masvideo(){
-            var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
+            var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' placeholder='URL Video "+videocount+"'required onblur='youtubeLink(this)'>"
             document.getElementById('videos').innerHTML += videoinput;
             	videocount++;
             }
@@ -130,5 +132,11 @@
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
                 return true;
             }
+					function youtubeLink(elem){
+				if(elem.value.includes('youtube')) {
+					elem.value = elem.value.split('watch?v=')[1];
+					}
+				
+				}
         </script>
 </html>

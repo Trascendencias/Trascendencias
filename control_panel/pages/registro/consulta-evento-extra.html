@@ -17,20 +17,32 @@
         <button onClick="eliminar();"> Eliminar </button>
 			<div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
-				<h3> Título: <p><i> Éste es un título muy campante </i></p> </h3><br>                
+				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>                
                 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
-				<h3> Fecha y Hora: <p><i> 11/OCT/17 • 11:00 - 12:00hrs </i></p> </h3><br>                
+				<h3> Fecha y Hora: <p><i>
+				<%
+					var options = {  
+					    weekday: "long", year: "numeric", month: "long",  
+					    day: "numeric", hour: "2-digit", minute: "2-digit"  
+					};
+
+					var hour_options = {
+						hour: "2-digit", minute: "2-digit"
+					};
+				%>
+				<%= consulta.start.toLocaleString("en-us", options); %>
+				-
+				<%= consulta.end.toLocaleString("en-us", hour_options); %>
+				</i></p> </h3><br>               
                 
                 <!-- LUGAR EN CETYS Conferencia, Taller, Evento Extra -->
-				<h3> Lugar en Cetys: <p><i> Auditorio </i></p> </h3><br>                
-                
-                <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
-				<h3> Dirección: <p><i> Av. Cibeles #123 Col. Beño </i></p> </h3><br>
+				<h3> Lugar en Cetys: <p><i> <%= consulta.location %> </i></p> </h3><br>                
+
             
                 <!-- ICONO Evento Extra -->
                 <h3> Ícono </h3><br>
-				<img src="resources/user_example.png" class="foto"> </div>
+				<img src="<%= consulta.event_icon %>" class="foto"> </div>
 
                 
                 <hr>

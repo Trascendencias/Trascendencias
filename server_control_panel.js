@@ -78,12 +78,19 @@ app.get('/registro/registro-participante', check_session, form(), function(req, 
 
 app.post('/registro-participante_por_staff', check_session, form(), function(req, res) {
 	database.register["participante_por_staff"](req.form, function(err, participant) {
+		if(catch_errors(err, participant)) return res.redirect('/registro/avisos?titulo=error&mensaje=Error del servidor');
+
 		database.assign_package(participant.id, req.form.selected_package, req.form, function(err, participant) {
+			if(catch_errors(err, participant)) return res.redirect('/registro/avisos?titulo=error&mensaje=Error del servidor');
+
+			if(!(req.form.abono = parseInt(req.form.abono))) {
+				return res.redirect('/registro/avisos?titulo=error&mensaje=Abono invalido');
+			}
 
 			participant.package_information.debt -= req.form.abono;
 			participant.verified = true;
 			participant.save(function(err, saved_participant) {
-				console.log("Saved participant by staff:\n" + JSON.stringify(saved_participant, null, 4));
+				if(catch_errors(err, participant)) return res.redirect('/registro/avisos?titulo=error');
 				return res.redirect('/');
 			});
 		});
@@ -117,12 +124,10 @@ app.post('/abonar-:id', check_session, form(), function(req, res) {
 		}
 
 		database.consult('participante', req.params.id, function(err, doc) {
-			if(catch_errors(err, doc)) {
-				return res.redirect('/registro/avisos?titulo=error');
-			}
+			if(catch_errors(err, doc)) return res.redirect('/registro/avisos?titulo=error&mensaje=Error del servidor');
 
-			if(req.form.abono < 1) {
-				return res.redirect('/registro/avisos?tutulo=error');
+			if(!(req.form.abono = parseInt(req.form.abono)) || req.form.abono < 0) {
+				return res.redirect('/registro/avisos?titulo=error&mensaje=Abono invalido');
 			}
 
 			doc.package_information.debt -= req.form.abono;

@@ -14,42 +14,43 @@
 		<br>
 		<center><h6><b> Registro de Blog </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-blog" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="blog">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre" name="title" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
 				
             
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <p class="title"> Fotos (1920x1080px) </p>
                 <div id="fotos">
-                <input accept="image/*" type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;" multiple required>
+                <input accept="image/*" type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;" multiple required>
                 
                 </div>
 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p>
-                <input maxlength="50" type="text" placeholder="URL Video 1" name="video1" class="video" required>
+                <p> <i>NOTA: Solo la parte final del link. https://www.youtube.com/watch?v=<u><b>RgqxZU6_qOY</b></u> </i></p>
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video" onBlur="youtubeLink(this)">
                 
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
                 
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="resumen" id="resumen" placeholder="Resumen..." required></textarea>
+                <textarea name="summary" id="resumen" placeholder="Resumen..." required></textarea>
                 
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <textarea name="descripcion" class="large-text" required placeholder="Descripción..."></textarea>
+                <textarea name="description" class="large-text" required placeholder="Descripción..."></textarea>
                 
 
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
                 <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="teaser">Incluir en Teaser Banner </p>
-                <input type=number name="teaser-index" class="numero goright" value="1">
+                <input type=number name="include_teaser" class="numero goright" value="1">
                 <div class="spacer"></div>
                 <hr>
 				<button type="submit" class="submit"> Siguiente </button>
@@ -73,7 +74,7 @@
                 document.getElementById("forma-registro").submit();
             }
             function masvideo(){
-                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
+                var videoinput = "<input maxlength='50' name='video_urls' class='video' placeholder='URL Video "+videocount+"'required onblur='youtubeLink(this)'>"
                 document.getElementById('videos').innerHTML += videoinput;
                 videocount++;
             }
@@ -82,5 +83,11 @@
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
                 return true;
             }
+			function youtubeLink(elem){
+				if(elem.value.includes('youtube')) {
+					elem.value = elem.value.split('watch?v=')[1];
+					}
+				
+				}
 		</script>
 </html>

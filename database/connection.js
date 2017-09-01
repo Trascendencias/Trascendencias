@@ -101,6 +101,7 @@ database.register = {
 	},
 	paquetes: function(form, files, done) {
 		let new_package = new models.package();
+		//console.log("Form: " + JSON.stringify(form, null, 4));
 		database.form_to_model(form, new_package);
 		new_package.photos = get_files(files, 'photos');
 
@@ -132,7 +133,7 @@ database.register = {
 
 		new_participant.save(function(err, saved_participant) {
 			if(err) {
-				return done(err);
+				return done(err, null);
 			}
 
 			return done(null, saved_participant);
@@ -192,67 +193,51 @@ database.assign_package = function(user_id, package_id, form, done) {
 		if(doc.selected_package) {
 			return done(null, doc);
 		}
-		else {
-			if(form['group-code'] != 'none') {
-				database.models.active_package.findOne({
-					group_code: form['group-code']
-				},
-				function(err, doc) {
-					if(err || !doc) {
-						return done(err, 'Codigo de grupo no encontrado');
-					}
 
-					doc.members.push(form.assign_name);
-					doc.selected_package = saved_active_package.id;
-					doc.package_information = {
-						debt: package.cost,
-						shirt_size: form.shirt_size
-					}
+		if(form['group-code'] != 'none') {
+			database.models.active_package.findOneAndUpdate({
+				group_code: form['group-code']
+			}, {
+				$push: {
+					members: form.assign_name || form.name
+				}
+			},
+			function(err, saved_active_package) {
+				if(err || !doc) {
+					return done(err, null);
+				}
 
-					doc.save(function(err,participant) {
-						return done(null, participant)
-					});
+				console.log(JSON.stringify(saved_active_package, null, 4));
+				doc.selected_package = saved_active_package.id;
+				doc.package_information = {
+					debt: saved_active_package.package.cost,
+					shirt_size: form.shirt_size
+				}
+
+				doc.save(function(err,participant) {
+					return done(null, participant)
 				});
-			}
-			else {
-				database.models.package.findById(package_id, function(err, package) {
-					if(err || !package) {
-						return done(err, null);
-					}
+			});
+		}
+		else {
+			database.models.package.findById(package_id, function(err, package) {
+				if(err || !package) {
+					return done(err, null);
+				}
 
-					if(package.group_size > 1) {
-						database.generate_group_code(function(err, new_group_code) {
-							if(err || !new_group_code) {
-								return done(err, 'Error al generarse nuevo codigo de grupo');
-							}
+				if(package.group_size > 1) {
+					database.generate_group_code(function(err, new_group_code) {
+						if(err || !new_group_code) {
+							return done(err, null);
+						}
 
-							new database.models.active_package({
-								package: package.id,
-								group_code: new_group_code,
-								members: [form.assign_name]
-							}).save(function(err, saved_active_package) {
-								if(err) {
-									return done(err, 'Error guardando el paquete');
-								}
-
-								doc.selected_package = saved_active_package.id;
-								doc.package_information = {
-									debt: package.cost,
-									shirt_size: form.shirt_size
-								}
-
-								doc.save(function(err,participant) {
-									return done(null, participant)
-								});
-							});
-						});
-					}
-					else {
 						new database.models.active_package({
 							package: package.id,
+							group_code: new_group_code,
+							members: [form.assign_name || form.name]
 						}).save(function(err, saved_active_package) {
-							if (err || !saved_active_package) {
-								return done(err, 'Error al guardar el paquete');
+							if(err) {
+								return done(err, null);
 							}
 
 							doc.selected_package = saved_active_package.id;
@@ -265,9 +250,28 @@ database.assign_package = function(user_id, package_id, form, done) {
 								return done(null, participant)
 							});
 						});
-					}
-				});
-			}
+					});
+				}
+				else {
+					new database.models.active_package({
+						package: package.id,
+					}).save(function(err, saved_active_package) {
+						if (err || !saved_active_package) {
+							return done(err, null);
+						}
+
+						doc.selected_package = saved_active_package.id;
+						doc.package_information = {
+							debt: package.cost,
+							shirt_size: form.shirt_size
+						}
+
+						doc.save(function(err,participant) {
+							return done(null, participant)
+						});
+					});
+				}
+			});
 		}
 	});
 }

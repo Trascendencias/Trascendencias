@@ -14,13 +14,13 @@
 		<br>
 		<center><h6><b> Registro Evento Extra </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-evento-extra" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="evento-extra">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" placeholder="Nombre" type="text" name="title" required>
+				<input maxlength="50" placeholder="Nombre" type="text" name="name" required>
 				
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
@@ -49,7 +49,7 @@
                                 
                 <!-- ICONO Evento Extra -->
                 <p class="title"> Icono del Evento (300x300px) </p>
-                <input type="file" width="150px" name="icono" value="fileupload" id="image" accept="image/*" style="display: inline;"  accept="image/*" required>
+                <input type="file" width="150px" name="event_icon" value="fileupload" id="image" accept="image/*" style="display: inline;"  accept="image/*" required>
                 
                 
                 
@@ -71,11 +71,11 @@
 				<script>
 		var startTime;
 		var endTime;
-		 function timeFields(){
-                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
-				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
-				document.getElementById("start").value = startTime;
-				document.getElementById("end").value = endTime;
+	function timeFields(){
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-00:00";
+                endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("end_time").value+":00-00:00";
+                document.getElementById("start").value = startTime;
+                document.getElementById("end").value = endTime;
             }
 			
 			

@@ -16,13 +16,13 @@
 <button onClick="location.href='editar-preguntas-frecuentes?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>			
 			   <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
-				<h3> Pregunta: <p><i> ¿Esta es una muy buena pregunta? </i></p> </h3><br>
+				<h3> Pregunta: <p><i> <%= consulta.name %> </i></p> </h3><br>
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <h3> Respuesta: <p><i> Esta es una respuesta considerablemente corta.  </i></p> </h3><br>
+                <h3> Respuesta: <p><i> <%= consulta.answer %>  </i></p> </h3><br>
                 
                 <!-- POSICION Preguntas Frecuentes -->
-                <h3> Posición: <p><i> 4 </i></p> </h3><br>                
+                <h3> Posición: <p><i> <%= consulta.position %>  </i></p> </h3><br>                
 
                 </div>
                 

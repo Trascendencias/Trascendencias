@@ -6,7 +6,6 @@
         <% include menu.html %>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="resources/style.css">
-    
     </head>
 <body>
         
@@ -20,48 +19,59 @@
 				<h3> Título: <p><i> Éste es un título muy campante </i></p> </h3><br>                
                 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
-				<h3> Fecha y Hora: <p><i> 11/OCT/17 • 11:00 - 12:00hrs </i></p> </h3><br>                
+               <h3> Fecha y Hora: <p><i>
+				<%
+                    var offset = new Date().getTimezoneOffset();
+
+					var options = {  
+					    weekday: "long", year: "numeric", month: "long",  
+					    day: "numeric", hour: "2-digit", minute: "2-digit"  
+					};
+
+					var hour_options = {
+						hour: "2-digit", minute: "2-digit"
+					};
+				%>
+				<%= (consulta.start.setMinutes(consulta.start.getMinutes() - offset)).toLocaleString() %>
+				-
+				<%= //convertUTCDateToLocalDate(new Date(consulta.end)).toLocaleString("en-us", hour_options); %>
+				</i></p> </h3><br>
                 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-				<h3> Nombre de Contacto: <p><i> Jesús de la Rocha Ramirez </i></p> </h3><br>                
+				<h3> Nombre de Contacto: <p><i> <%= consulta.contact_name %>  </i></p> </h3><br>                
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<h3> Teléfono: <p><i> (686) 123 45 67 <button style="margin-left: 20px;" onClick="location.href='tel:6861234567'"> Llamar </button></i></p></h3><br>				
+				<h3> Teléfono: <p><i> <%= consulta.contact_phone %> <button style="margin-left: 20px;" onClick="location.href='tel:<%= consulta.contact_phone %>'"> Llamar </button></i></p></h3><br>
                 
                 <!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<h3> Correo de Contacto: <p><i> email@corre.com </i></p> </h3><br>                
+				<h3> Correo de Contacto: <p><i> <%= consulta.contact_email %> </i></p> </h3><br>                
                 
                 <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
-				<h3> Dirección: <p><i> Av. Cibeles #123 Col. Beño </i></p> </h3><br>
+				<h3> Dirección: <p><i> <%= consulta.location %> </i></p> </h3><br>
                 
                 <!-- CUPO Visita, Taller, Paquete -->
                 <h3> Cupo: <p><i> 13/25 </i></p> </h3><br>                
 			
             	<!-- Requisitos Visita, Taller, Oferta  -->
                 <h3> Requisitos:</h3>
-                <ul> 
-                	<li> Requisito </li>  
-                    <li> Requisito </li>  
-                    <li> Requisito </li>  
-                </ul>                 
+               <p class="blue"> <%= consulta.requisites %> </p>                 
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <h3> Fotos: </h3><br>
-                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
-                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
-                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
-                <div class="foto" style="background-image: url('resources/user_example.png')"> </div>
+                <% consulta.photos.forEach(function(element) { %>
+					<div class="foto" style="background-image: url('<%= element %>')"> </div>
+				<% }); %>
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <h3> Videos: </h3><br>
-                <iframe width="260px" height="100px" src="https://www.youtube.com/embed/mr8GBzTsWqM" frameborder="0"></iframe>
-                <iframe width="260px" height="100px" src="https://www.youtube.com/embed/mr8GBzTsWqM" frameborder="0"></iframe>
-                <iframe width="260px" height="100px" src="https://www.youtube.com/embed/mr8GBzTsWqM" frameborder="0"></iframe>                
+                <% consulta.video_urls.forEach(function(element) { %>
+					<iframe width="260px" height="100px" src="https://www.youtube.com/embed/<%= element %>" frameborder="0"></iframe>
+				<% }); %>                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <h3> Resumen: <p><i> Este es un resumen considerablemente corto... </i></p> </h3><br>
+                <h3> Resumen: <p><i> <%= consulta.summary %> </i></p> </h3><br>
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <h3> Contenido: <p><i> Esta es un contenido considerablemente corto.  </i></p> </h3><br>
+                <h3> Contenido: <p><i> <%= consulta.description %>  </i></p> </h3><br>
                 </div>
                 <hr>
                 <h3> Historial de Cambios </h3>

@@ -47,8 +47,9 @@
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <p class="title"> URL en Youtube de videos </p>
+                <p> <i>NOTA: Solo la parte final del link. https://www.youtube.com/watch?v=<u><b>RgqxZU6_qOY</b></u> </i></p>
                                 <div id="videos">
-                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video">
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video" onblur='youtubeLink(this)'>
                 
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
@@ -97,8 +98,8 @@
 		var startTime;
 		var endTime;
 		 function timeFields(){
-                startTime = document.getElementById("start_day").value.toString()+"T00:00:00-08:00";
-				endTime = document.getElementById("end_day").value.toString()+"T00:00:00-08:00";
+                startTime = document.getElementById("start_day").value.toString()+"T00:00:00-00:00";
+				endTime = document.getElementById("end_day").value.toString()+"T23:59:00-00:00";
 				document.getElementById("start").value = startTime;
 				document.getElementById("end").value = endTime;
             }
@@ -112,7 +113,7 @@
 
             var videocount = 2;
             function masvideo(){
-            var videoinput = "<input maxlength='50' name='video_urls' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
+            var videoinput = "<input maxlength='50' name='video_urls' class='video' placeholder='URL Video "+videocount+"'required onblur='youtubeLink(this)'>"
             document.getElementById('videos').innerHTML += videoinput;
             	videocount++;
             }
@@ -125,5 +126,11 @@
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
                 return true;
             }
+			function youtubeLink(elem){
+				if(elem.value.includes('youtube')) {
+					elem.value = elem.value.split('watch?v=')[1];
+					}
+				
+				}
 		</script>
 </html>

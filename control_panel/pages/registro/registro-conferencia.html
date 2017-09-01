@@ -65,14 +65,16 @@
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="fotos">
                 <p class="title"> Fotos (1920x1080px) </p>
-                <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;"  accept="image/*" multiple required>
+                <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;"  accept="image/*" multiple required>
                 
                 </div>
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p>
-                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_url" class="video">
+                <p> <i>NOTA: Solo la parte final del link. https://www.youtube.com/watch?v=<u><b>RgqxZU6_qOY</b></u> </i></p>
+
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video" onblur='youtubeLink(this)'>
                 
                 </div>
                 <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
@@ -106,10 +108,10 @@
 		var startTime;
 		var endTime;
 		 function timeFields(){
-                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-08:00";
-				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-08:00";
-				document.getElementById("start").value = startTime;
-				document.getElementById("end").value = endTime;
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-00:00";
+                endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("end_time").value+":00-00:00";
+                document.getElementById("start").value = startTime;
+                document.getElementById("end").value = endTime;
             }
 			
 			
@@ -121,17 +123,17 @@
 			}
 
               //INCLUIR DOCUMENTOS
-            var videocount = 1;
+            var videocount = 2;
             function validate(){
                 document.getElementById("forma-registro").submit();
             }
             function masvideo(){
-            var videoinput = "<input maxlength='50' name='video_url' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
+            var videoinput = "<input maxlength='50' name='video_urls' class='video' placeholder='URL Video "+videocount+"'required onblur='youtubeLink(this)'>"
                 document.getElementById('videos').innerHTML += videoinput;
             	videocount++;
             }
             function masfoto(){
-                var fotosinput = "<input type='file' width='150px' name='photo' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                var fotosinput = "<input type='file' width='150px' name='photos' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
                 document.getElementById('fotos').innerHTML += fotosinput;   
             }
             function isNumberKey(evt){
@@ -139,5 +141,11 @@
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
                 return true;
             }
+					function youtubeLink(elem){
+				if(elem.value.includes('youtube')) {
+					elem.value = elem.value.split('watch?v=')[1];
+					}
+				
+				}
 		</script>
 </html>

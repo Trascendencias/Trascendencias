@@ -27,6 +27,7 @@
         <div class="body">
 		<br>
 			
+
 			<div class="registro">   <br><br>
 			<center><b><h6 id="titulo">  Error.. </h6></b>
 			 <p id="content"> Error.. Es posible que haya un problema corriendo JavaScript</p> </center>
@@ -46,20 +47,27 @@
 </body>
 		
 		<script>
-		var q = window.location.href;
-        q = q.split('=')[1];
-        var titulo = q.split('-')[0];
-        var content = q.split('-')[1];
+		function getParameterByName(name, url) {
+			    if (!url) url = window.location.href;
+			    name = name.replace(/[\[\]]/g, "\\$&");
+			    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			        results = regex.exec(url);
+			    if (!results) return null;
+			    if (!results[2]) return '';
+			    return decodeURIComponent(results[2].replace(/\+/g, " "));
+			}
+
+	    var titulo = getParameterByName('titulo');
         if(titulo == "registro") titulo= "Registro Existoso";
         if(titulo == "editar") titulo= "Edición Exitosa";
         if(titulo == "eliminar") titulo= "Eliminación Exitosa";
         if(titulo == "abono") titulo = "Abono Exitoso";
         if(titulo == "error"){ titulo = "Ha ocurrido un problema..."; content = "Error #404: No se ha encontrado nada en ésta dirección."; }
 
-
+        var mensaje = getParameterByName('mensaje');
 
 		document.getElementById("titulo").innerHTML = titulo;
-        document.getElementById("content").innerHTML = content;
+        document.getElementById("content").innerHTML = mensaje;
 
 
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL

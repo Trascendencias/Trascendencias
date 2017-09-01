@@ -55,7 +55,13 @@
             <% for(var i = 0; i < lista.length; i++) { %>
                 <% if(lista[i].name != 'admin') { %>
                     <button class='enlistado' name='codigo' value='<%= lista[i]._id %>'> 
-                    <p class="hidden">  <%= lista[i].city %>, email:<%= lista[i].email %> </p> 
+                    <p class="hidden">  
+                    		email:<%= lista[i].email %>,
+                            <%= lista[i].city %>,
+                            <% if(lista[i].workshop) { %> <%= lista[i].workshop %> <%= ',' %> <% } %>
+                            <% if(lista[i].visit) { %> <%= lista[i].visit %> <%= ',' %> <% } %>
+                    </p> 
+                    
                     <%= lista[i].name %>
                     </button>
                 <% } %>
