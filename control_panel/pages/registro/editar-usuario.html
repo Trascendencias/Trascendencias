@@ -14,15 +14,15 @@
 		<br>
 		<center><h6> Cambiar Contraseña </h6> </center>
 			
-			<form class="registro" id="forma-contrasena" method="post" action="contrasena "> <br><br>
+			<form class="registro" id="forma-contrasena" method="post" action="contrasena ">
 
 				<!-- CONTRASENA -->
 				<input id="value1" maxlength="50" password="text" placeholder="Nueva Contraseña" name="contrasena" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- REPITE LA CONTRASENA -->
 				<input id="value2" maxlength="50" type="password" placeholder="Repita la contraseña" name="contrasena2" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
                 
                
                 <div class="spacer"></div>
@@ -36,80 +36,76 @@
 
 			<center><h6> Editar Información </h6> </center>
 			
-			<form class="registro" id="forma-editar" method="post" action="registro "> <br><br>
+			<form class="registro" id="forma-editar" method="post" action="registro "> 
                
                 <!--- TIPO DE REGISTRO --> 
-                <input type="hidden" name="registrado" value="staff">
+                <input type="hidden" name="editar" value="usuario">
                 
 				<!-- NOMBRE/TITULO TODOS-->
 				<p class="title black"> Nombre: </p><br><br>
-				<input maxlength="50" placeholder="Nombre" type="text" value="Jesús de la Rocha Ramirez" name="title" required>
-				<p class="error"> *Debe llenar esta información </p>
+				<input maxlength="50" placeholder="Nombre" type="text" value="<%= user.name %>" name="title" required>
+				
 
                 <!-- TALLA s -->
                 
                 <select id="select" name="talla" required>
                   <option value="none" disabled> Talla... </option>
-                  <option value="XS"> XS </option>
-                  <option value="S"> S </option>
-                  <option value="M"> M </option>
-                  <option value="L"> L </option>
-                  <option value="XL"> XL </option>
+                  <option value="XS" <% if(user.shirt_size == "XS") { %> <%= 'selected' %> <% } %> > XS </option>
+                  <option value="S" <% if(user.shirt_size == "S") { %> <%= 'selected' %> <% } %> > S </option>
+                  <option value="M" <% if(user.shirt_size == "M") { %> <%= 'selected' %> <% } %>> M </option>
+                  <option value="L" <% if(user.shirt_size == "L") { %> <%= 'selected' %> <% } %>> L </option>
+                  <option value="XL" <% if(user.shirt_size == "XL") { %> <%= 'selected' %> <% } %>> XL </option>
                 </select>
-                <p class="error"> *Debe llenar esta información </p>
+                
                 
                 <!-- TELEFONO s, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-                <p class="title black"> Teléfono: </p><br><br>
-				<input onKeyPress="return isNumberKey(event)" type="text" placeholder="Teléfono" value="(686) 123 45 67" name="telefono-contacto" required>
-				<p class="error"> *Debe llenar esta información </p>
+                <p class="title black"> Teléfono: </p>
+				<input onKeyPress="return isNumberKey(event)" type="text" placeholder="Teléfono" value="<%= user.phone %>" name="telefono-contacto" required>
+				
                 
 				<!-- CORREO s, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<p class="title black"> Correo: </p><br><br>
-				<input maxlength="50" placeholder='Correo' type="text" value="email@correo.com" name="correo" required>
-				<p class="error"> *Debe llenar esta información </p>
+				<p class="title black"> Correo: </p>
+				<input maxlength="50" placeholder='Correo' type="text" value="<%= user.email %>" name="correo" required>
+				
 
 				<!-- FACEBOOK -->
-				<p class="title black"> Facebook: </p><br><br>
-                <input maxlength="50" placeholder='Facebook URL' type="text" value="https://www.facebook.com/profile.php?id=100009661066774" name="facebook" required>
-                <p class="error"> *Debe llenar esta información </p>
+				<p class="title black"> Facebook: </p>
+                <input maxlength="50" placeholder='Facebook URL' type="text" value="<%= user.facebook %>" name="facebook" required>
+                
 
 				<!-- INSTITUCION DE PROCEDENCIA -->
-				<p class="title black"> Carrera: </p><br><br>
-				<input maxlength="50" placeholder='Carrera' type="text" value="Ingeniería en Aerovisual" name="carrera" required>
-				<p class="error"> *Debe llenar esta información </p>
+				<p class="title black"> Carrera: </p>
+				<input maxlength="50" placeholder='Carrera' type="text" value="<%= user.major %>" name="carrera" required>
+				
 
 				<!-- SEMESTRE-->
-                <p class="title black"> Semestre: </p><br><br>
+                <p class="title black"> Semestre: </p>
                 <select id="select" name="semester" required>
-                  <option value="none" disabled selected> Semestre</option>
-                  <option value="1er"> 1er </option>
-                  <option value="2do"> 2do </option>
-                  <option value="3er"> 3er </option>
-                  <option value="4to"> 4to </option>
-                  <option value="5to"> 5to </option>
-                  <option value="6to"> 6to </option>
-                  <option value="7mo"> 7mo </option>
-                  <option value="8vo"> 8vo </option>
-                  <option value="9no"> 9no </option>
-                  <option value="Otro"> Otro... </option>
+                  <option value="none" disabled> Semestre</option>
+                  <option value="1er" <% if(user.semester == "1er") { %> <%= 'selected' %> <% } %>> 1er </option>
+                  <option value="2do" <% if(user.semester == "2do") { %> <%= 'selected' %> <% } %>> 2do </option>
+                  <option value="3er" <% if(user.semester == "3er") { %> <%= 'selected' %> <% } %>> 3er </option>
+                  <option value="4to" <% if(user.semester == "4to") { %> <%= 'selected' %> <% } %>> 4to </option>
+                  <option value="5to" <% if(user.semester == "5to") { %> <%= 'selected' %> <% } %>> 5to </option>
+                  <option value="6to" <% if(user.semester == "6to") { %> <%= 'selected' %> <% } %>> 6to </option>
+                  <option value="7mo" <% if(user.semester == "7mo") { %> <%= 'selected' %> <% } %>> 7mo </option>
+                  <option value="8vo" <% if(user.semester == "8vo") { %> <%= 'selected' %> <% } %>> 8vo </option>
+                  <option value="9no" <% if(user.semester == "9no") { %> <%= 'selected' %> <% } %>> 9no </option>
+                  <option value="Otro" <% if(user.semester == "Otro") { %> <%= 'selected' %> <% } %>> Otro... </option>
                  </select>
-                <p class="error"> *Debe llenar esta información </p>
+                
 
 
 				<!-- CIUDAD -->
-				<p class="title black"> Ciudad: </p><br><br>
-				<input maxlength="50" placeholder='Ciudad' type="text" value="Mexicali" name="ciudad" required>
-				<p class="error"> *Debe llenar esta información </p>
+				<p class="title black"> Ciudad: </p>
+				<input maxlength="50" placeholder='Ciudad' type="text" value="<%= user.city %>" name="ciudad" required>
+				
 
                 <!-- ALERGIAS -->
-                <p class="title black"> Alergias: </p><br><br>
-				<input maxlength="50" placeholder='Alergias' type="text" value="Paracetamol" name="alergias" required>
-				<p class="error"> *Debe llenar esta información </p>
+                <p class="title black"> Alergias: </p>
+				<input maxlength="50" placeholder='Alergias' type="text" value="<%= user.alergies %>" name="alergias" required>
+				
                 
-
-				<p class="title black"> Foto del Staff </p><br><br><br>
-                <input type="file" width="150px" name="foto" value="fileupload" id="image" style="display: inline;" accept="image/*" required>
-                <p class="error"> *Debe llenar esta información </p>
 
 
                 <div class="spacer"></div>

@@ -124,6 +124,19 @@ database.register = {
 
 			return done(null);
 		});
+	},
+	participante_por_staff: function(form, done) {
+		let new_participant = new models.participant();
+		database.form_to_model(form, new_participant);
+		new_participant.local.password = database.generate_hash(form.password);
+
+		new_participant.save(function(err, saved_participant) {
+			if(err) {
+				return done(err);
+			}
+
+			return done(null, saved_participant);
+		});
 	}
 };
 
@@ -177,7 +190,7 @@ database.assign_package = function(user_id, package_id, form, done) {
 		}
 
 		if(doc.selected_package) {
-			return done(null);
+			return done(null, doc);
 		}
 		else {
 			if(form['group-code'] != 'none') {
@@ -190,31 +203,21 @@ database.assign_package = function(user_id, package_id, form, done) {
 					}
 
 					doc.members.push(form.assign_name);
-					doc.save(function(err) {
-						database.models.participant.findByIdAndUpdate(user_id, {
-							$set: {
-								selected_package: doc.id,
-								package_information: {
-									debt: doc.cost,
-									shirt_size: form.shirt_size
-								}
-							}
-						},
-						function(err, participant) {
-							if(err || !participant) {
-								return done(err, 'Error guardando al participante');
-							}
+					doc.selected_package = saved_active_package.id;
+					doc.package_information = {
+						debt: package.cost,
+						shirt_size: form.shirt_size
+					}
 
-							return done(null);
-						});
+					doc.save(function(err,participant) {
+						return done(null, participant)
 					});
 				});
 			}
 			else {
 				database.models.package.findById(package_id, function(err, package) {
 					if(err || !package) {
-						console.log('Paquete no encontrado');
-						return done(err, 'Paquete no encontrado');
+						return done(err, null);
 					}
 
 					if(package.group_size > 1) {
@@ -232,21 +235,14 @@ database.assign_package = function(user_id, package_id, form, done) {
 									return done(err, 'Error guardando el paquete');
 								}
 
-								database.models.participant.findByIdAndUpdate(user_id, {
-									$set: {
-										selected_package: saved_active_package.id,
-										package_information: {
-											debt: package.cost,
-											shirt_size: form.shirt_size
-										}
-									}
-								},
-								function(err, participant) {
-									if(err || !participant) {
-										return done(err, 'Error guardando al participante');
-									}
+								doc.selected_package = saved_active_package.id;
+								doc.package_information = {
+									debt: package.cost,
+									shirt_size: form.shirt_size
+								}
 
-									return done(null, null, new_group_code);
+								doc.save(function(err,participant) {
+									return done(null, participant)
 								});
 							});
 						});
@@ -259,21 +255,14 @@ database.assign_package = function(user_id, package_id, form, done) {
 								return done(err, 'Error al guardar el paquete');
 							}
 
-							database.models.participant.findByIdAndUpdate(user_id, {
-								$set: {
-									selected_package: saved_active_package.id,
-									package_information: {
-										debt: package.cost,
-										shirt_size: form.shirt_size
-									}
-								}
-							},
-							function(err, participant) {
-								if(err || !participant) {
-									return done(err, 'Error al guardar el participante');
-								}
+							doc.selected_package = saved_active_package.id;
+							doc.package_information = {
+								debt: package.cost,
+								shirt_size: form.shirt_size
+							}
 
-								return done(null);
+							doc.save(function(err,participant) {
+								return done(null, participant)
 							});
 						});
 					}

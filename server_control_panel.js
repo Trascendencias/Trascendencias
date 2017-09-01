@@ -67,6 +67,29 @@ app.get('/logout', function(req, res) {
 	res.redirect('/login');
 });
 
+app.get('/registro/registro-participante', check_session, form(), function(req, res) {
+	database.list('paquetes', function(err, collection) {
+		return res.render('registro/registro-participante', {
+			user: req.user,
+			packages: collection
+		});
+	});
+});
+
+app.post('/registro-participante_por_staff', check_session, form(), function(req, res) {
+	database.register["participante_por_staff"](req.form, function(err, participant) {
+		database.assign_package(participant.id, req.form.selected_package, req.form, function(err, participant) {
+
+			participant.package_information.debt -= req.form.abono;
+			participant.verified = true;
+			participant.save(function(err, saved_participant) {
+				console.log("Saved participant by staff:\n" + JSON.stringify(saved_participant, null, 4));
+				return res.redirect('/');
+			});
+		});
+	});
+});
+
 app.get('/registro-staff', form(), valid_registration, function(req, res) {
 	res.render('registro-staff', {
 		message: req.flash('message'),
@@ -115,7 +138,7 @@ app.post('/abonar-:id', check_session, form(), function(req, res) {
 				doc.alergies = req.form.alergies;
 				doc.verified = true;
 			}
-			
+
 			doc.save(function(err) {
 				if(catch_errors(err)) {
 					return res.redirect('/registro/avisos?titulo=error');
@@ -176,11 +199,12 @@ app.get('/registro/consulta-:collection', check_session, function(req, res) {
 
 app.get('/:module/:page?', check_session, protect, function(req, res) {
 	return res.render((req.baseUrl + req.path).substring(1), { user: req.user }, function(err, html) {
-		if(catch_errors(err)) {
-			return res.redirect('/registro/avisos?titulo=error');
+		if(err) {
+			return res.redirect('registro/avisos?titulo=error');
 		}
-
-		return res.send(html);
+		else {
+			return res.send(html);
+		}	
 	});
 });
 

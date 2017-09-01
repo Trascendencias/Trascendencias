@@ -1,23 +1,10 @@
 <html> 
 
     <head>      
-        <!-- tag para hacerlo escalable -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-        <!--- INCLUIR DOCUMENTOS -->
-        <!--- <% include partials/menu  %> -->
-        
-        <!--- Title --> 
         <title> Información del Usuario </title>
-        
-        <!--- Incluir documeentos -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
         <% include menu.html %>
-            
-        <!--- Pa que agarren los acentos -->
         <meta charset="UTF-8">
-
-        <!--- Pa que agarre el Styleshit los acentos -->
         <link rel="stylesheet" type="text/css" href="resources/style.css">
     
     </head>
@@ -39,13 +26,13 @@
         </center>
         <br>
         
-        <h3> Nombre Nombre Apellido </h3>
-        <p> <i> Puesto en Trasce</i></p>
+        <h3> <%= user.name %> </h3>
+        <p> <i> <%= user.position %> de <%= user.team %></i></p>
         <hr>
-        <p> Carrera, 2do Semestre </p>
-        <p> Talla M </p>
-        <p> (686) 123 45 67 </p>
-        <p> email@correo.com </p>
+        <p> <%= user.major %>, <%= user.semester %> Semestre </p>
+        <p> Talla <%= user.shirt_size %> </p>
+        <p> <%= user.phone %> </p>
+        <p> <%= user.email %> </p>
         <h3 class='black'> Activo en Puesto de Venta 3 </h3>
         <hr>
 

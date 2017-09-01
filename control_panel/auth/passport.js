@@ -38,16 +38,13 @@ module.exports = function(passport, database) {
 				new_staff_member.alergies = req.form.alergies;
 				new_staff_member.team = req.form.team;
 				new_staff_member.position = req.form.position;
-				database.get_file(req.files, 'photo', function(err, path) {
-					new_staff_member.photo = path;
 
-					new_staff_member.save(function(err) {
-						if(err) {
-							throw err;
-						}
+				new_staff_member.save(function(err) {
+					if(err) {
+						throw err;
+					}
 
-						return done(null, new_staff_member);
-					});
+					return done(null, new_staff_member);
 				});
 			}
 		});

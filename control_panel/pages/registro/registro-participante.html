@@ -13,24 +13,16 @@
 		<br>
 		<center><h6><b> Registro de Participante </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/registro-participante_por_staff"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="participante">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
+				<input maxlength="50" type="text" placeholder="Nombre" id="nombre" onchange= "up_pass(this)" name="name" required>
 
-                <!-- TALLA Participantes -->
-                <select id="select" name="shirt_size" required>
-                  <option value="none" disabled selected> Talla... </option>
-                  <option value="XS"> XS </option>
-                  <option value="S"> S </option>
-                  <option value="M"> M </option>
-                  <option value="L"> L </option>
-                  <option value="XL"> XL </option>
-                </select>
-                <p class="error"> *Debe llenar esta información </p>
+                <p class="title"> Contrasena: </p>
+                <input readonly="readonly" name="password" id = "pass" style="font-weight: bold;color:black"></p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
 				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono" name="phone" required>
@@ -44,29 +36,30 @@
 				<!-- CIUDAD Participante-->
 				<input maxlength="50" type="text" placeholder="Ciudad" name="city" required>
 
-				<!-- CONTRASENA Participante-->
-				<input maxlength="50" type="password" placeholder="Contraseña" name="password" required>
-
-				<!-- REPITE LA CONTRASENA Participante-->
-				<input maxlength="50" type="password" placeholder="Repita la contraseña" name="password2" required>
-                
                 <!-- ALERGIAS Participante-->
 				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
-                
-                <!-- PAQUETE ELEGIDO Participante -->
-                <select id="select" name="package" required>
-                  <option value="none" selected disabled>Paquete Elegido... </option>
-                  <option value="volvo">Paquete 1</option>
-                  <option value="saab">Paquete 2</option>
-                  <option value="mercedes">Paquete 3</option>
-                  <option value="audi">Paquete 4</option>
-                </select>
-                 
-                 <!-- CODIGO DE GRUPO -->
-				<input id="codigo-grupo" maxlength="50" type="text" placeholder="Código de Grupo" name="group_code" required>
-				<button type="button" id="codigo-grupo-btn" class="third codigo-grupo" onClick="codigoGrupo();"> Nuevo </button>
-                <input type="hidden" name="codigo-generado" id="codigo-generado" value="false">
 
+                                <!-- TALLA Participantes -->
+                <select class="select" name="shirt_size">
+                <option value="none" selected disabled> Talla... </option>
+                  <option value="XS"> XS </option>
+                  <option value="S"> S </option>
+                  <option value="M"> M </option>
+                  <option value="L"> L </option>
+                  <option value="XL"> XL </option>
+                </select><br><br><br>
+                 <button class="selectorLeft" id="selectorLeft" type="button" onClick="codigoGrupo(this);"> Código Grupo </button>
+                 <button class="selectorRight" id="selectorRight" type="button" onClick="escogerPaquete(this);"> Paquete </button>
+                
+                <input type="text" placeholder="Código de Grupo" id="codigo-grupo" name="group-code" required>
+                
+                <select class="select" id="paquete" name="selected_package">
+                <option value="none" selected disabled>Paquete</option>
+                <% packages.forEach(function(package) { %>
+                    <option value="<%= package.id %>"><%= package.name %></option>
+                <% }); %>
+                
+                </select>
                 <!-- ABONO Participante, Patrocinadores-->
                 <p class="title"> Abono: </p>
                 <input type=number name="abono" class="numero" placeholder="$$$" required>
@@ -98,50 +91,40 @@
                 return true;
             }
 
-            function generarClave(){
-                var random;
-                var claveDigits = ["E","r","r","."];
-                var clave; 
-                var alphaNum = ["0","1",'2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-                    random = getRandom(1, 60466176);
-                    claveDigits[5] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[4] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[3] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[2] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[1] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    claveDigits[0] = alphaNum[random%36];
-                    random = Math.floor(random/36);
-                    clave = claveDigits[0] + claveDigits[1] + claveDigits[2] + claveDigits[3] + claveDigits[4] + claveDigits[5];
-                return clave;
-
-            }
-            //Genera un código de grupo hasta que no se repita en la base de datos, solo lo registra en la base de datos cuando le da siguiente
-            function codigoGrupo(){
-                if(document.getElementById("codigo-grupo-btn").innerHTML == "Cancelar"){
-                	var z = document.getElementById("codigo-grupo");
-                	z.value = "";
-	                document.getElementById("codigo-grupo-btn").innerHTML = "Nuevo";
-	                document.getElementById("codigo-grupo").readOnly = false;
-	                document.getElementById("codigo-generado").value = "false";
+                        codigoGrupo(document.getElementById("selectorLeft"));
+            function validate(){
+                var alert = confirm('Estás a punto de registrar un abono. Ésta acción no puede eliminarse, ¿Seguro que desea proseguir?');
+                if (alert) {
+                    document.getElementById("forma-registro").submit();
+                } else {
+                    // Do nothing!
                 }
-                else {
-                var z = document.getElementById("codigo-grupo");
-                //Aquí va un while, pero aja
-                z.value=generarClave();
-                document.getElementById("codigo-grupo-btn").innerHTML = "Cancelar";
-                document.getElementById("codigo-grupo").readOnly = true; }
-                document.getElementById("codigo-generado").value = "true";
+            }
+            function codigoGrupo(elem) {
+                activeSelector(elem); 
+                document.getElementById("codigo-grupo").style.display = "block";
+                document.getElementById("codigo-grupo").value = "";
+                document.getElementById("paquete").style.display = "none";
+                }
+            function escogerPaquete(elem) {
+                activeSelector(elem); 
+                document.getElementById("codigo-grupo").style.display = "none";
+                document.getElementById("codigo-grupo").value = "none";
+                document.getElementById("paquete").style.display = "block";
+                }
+            function activeSelector(elem) {
+                var elements = document.getElementsByClassName("selectorActive"); 
+                var C = 0; 
+                while(C< elements.length) {
+                    elements[C].classList.remove("selectorActive"); 
+                    C++;
+                    }
+                elem.classList.add("selectorActive");
             }
 
-            function getRandom(min, max) {
-              min = Math.ceil(min);
-              max = Math.floor(max);
-              return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+            up_pass = function(field) {
+                console.log(document.getElementById("nombre").value);
+                document.getElementById("pass").value = field.value.toString().toLowerCase().replace(/\s/g,'');
             }
 		</script>
 </html>

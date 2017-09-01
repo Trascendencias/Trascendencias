@@ -12,7 +12,7 @@
 		<br>
 		<center><h6> Registro de Miembro de Staff </h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="/signup" encType="multipart/form-data"> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/signup"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="staff">
@@ -81,31 +81,26 @@
                 <!-- Equipo Staff -->
                 <select id="select" name="team" required>
                   <option value="none" disabled selected> Equipo en Trascendencias... </option>
-                  <option value="general">General</option>
-                  <option value="contenido">Contenido</option>
-                  <option value="mkt">Mkt y Ventas</option>
-                  <option value="imagen">Imagen</option>
-                  <option value="estrategia">Estrategia</option>
-                  <option value="eventos">Eventos Sociales</option>
+                  <option value="General">General</option>
+                  <option value="Contenido">Contenido</option>
+                  <option value="Marketing y Ventas">Mkt y Ventas</option>
+                  <option value="Imagen">Imagen</option>
+                  <option value="Estrategia">Estrategia</option>
+                  <option value="Eventos Sociales">Eventos Sociales</option>
                 </select>
 				
 
 				<!-- Puesto ELEGIDO  -->
                 <select id="select" name="position" required>
                   <option value="none"> Puesto ... </option>
-                  <option value="coordinador">Coordinador</option>
-                  <option value="subcoordinador">Subcoordinador</option>
-                  <option value="miembro">Miembro</option>
-                </select>
-				
-
-				<p class="title"> Foto del Staff </p>
-                <input type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;" required>
-                
+                  <option value="Coordinado">Coordinador</option>
+                  <option value="Subcoordinador">Subcoordinador</option>
+                  <option value="Miembro">Miembro</option>
+                </select> 
 
                 <div class="spacer"></div>
                 <hr>
-				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
+				<button type="submit" class="submit"> Siguiente </button>
                 <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
                 <div class="spacer"></div>
                 <div class="spacer"></div>

@@ -1,0 +1,128 @@
+<html> 
+
+	<head>		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title> Editar Evento Social </title>
+		<% include menu.html %>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+		
+        <div class="body">
+		<br>
+		<center><h6><b> Registro Evento Social </b></h6> </center>
+			
+			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+               
+                <!--- TIPO DE REGISTRO --> 
+                <input type="hidden" name="registrado" value="evento-social">
+                
+				<!-- NOMBRE/TITULO TODOS-->
+				<input maxlength="50" placeholder="Nombre" type="text" name="name" required>
+				
+            
+                <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
+                <p class="title"> Fecha: </p>
+                <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
+                
+                
+                <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
+                <p class="title"> Inicio: </p>
+                <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
+                
+                
+                <input type="hidden" id="start" name="start"> 
+                <input type="hidden" id="end" name="end"> 
+                
+                <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
+                <p class="title"> Fin: </p>
+                <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
+                
+
+                <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
+                <input maxlength="50" type="text" placeholder="Nombre de Contacto" name="contact_name" required>
+				
+                
+                <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono de Contacto" name="contact_phone" required>
+				
+                
+				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
+				<input maxlength="50" type="email" name="contact_email" placeholder="Correo de Contacto" required>
+				
+
+                <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
+                <input maxlength="50" type="text" placeholder="Dirección" name="location" required>
+                
+                
+                
+                <!-- POSTER DEL EVENTO  -->
+                <p class="title"> Poster del Evento (11x18"@72ppi)</p>
+                <input type="file" width="150px" name="event_poster" value="fileupload" id="image" style="display: inline;"  accept="image/*" required>
+                
+
+                <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
+                <textarea name="summary" id="resumen" placeholder="Resumen..." required></textarea>
+                
+                
+                <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
+                <textarea name="description" class="large-text" placeholder="Descripción..." required></textarea>
+                
+
+                <div class="spacer"></div>
+                <hr>
+				<button type="button" class="submit" onClick="validate()"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+			
+			</form>
+		</div>
+
+</body>
+		
+				<script>
+		var startTime;
+		var endTime;
+		 function timeFields(){
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
+				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-8:00";
+				document.getElementById("start").value = startTime;
+				document.getElementById("end").value = endTime;
+            }
+			
+			
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+              //INCLUIR DOCUMENTOS
+            var videocount = 2;
+            var fotoscount = 2;
+
+            function validate(){
+                document.getElementById("forma-registro").submit();
+            }
+            
+            function masvideo(){
+                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' required><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('videos').innerHTML += videoinput;
+                videocount++;
+            }
+            function masfoto(){
+                var fotosinput = "<input type='file' width='150px' name='foto"+fotoscount+"' value='fileupload' id='image' style='display: inline;'><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('fotos').innerHTML += fotosinput;
+                fotoscount++;
+            }
+            
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+		</script>
+</html>

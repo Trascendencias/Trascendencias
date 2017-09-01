@@ -1,23 +1,11 @@
 <html> 
 
     <head>      
-        <!-- tag para hacerlo escalable -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-        <!--- INCLUIR DOCUMENTOS -->
-		<!--- <% include partials/menu  %> -->
-
-		<!--- Title --> 
         <title> Consulta Staff </title>
-
-        <!--- Incluir documeentos -->
         <script src="https://www.w3schools.com/lib/w3.js"></script>
         <% include menu.html %>
-            
-        <!--- Pa que agarren los acentos -->
         <meta charset="UTF-8">
-
-        <!--- Pa que agarre el Styleshit los acentos -->
         <link rel="stylesheet" type="text/css" href="resources/style.css">
     
     </head>
@@ -26,26 +14,23 @@
         <div class="body">
 	        <center>
 	        	<h6><b> Consulta Staff </b></h6> 
-	        </center>
-	        <br>
-            <button onClick="location.href='editar-punto-venta?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>
 	        
-	        <center>
+	        <br>
+	        
 		        <div class="spacer"></div>
-		        <img src="resources/user_example.png" class="staff-pic">
+		        <img src="<%= consulta.photo %>" class="staff-pic">
 	        </center>
 	        <br>
-	        <h3> Nombre Nombre Apellido </h3>
-	        <p> <i> Puesto en Trasce</i></p>
+	        <h3> <%= consulta.name %> </h3>
+	        <p> <i> <%= consulta.position %> <%= consulta.team %> </i></p>
 	        <hr>
-	        <p> Carrera, 2do Semestre </p>
-	        <p> Talla M </p>
-	        <p id="telephone"> (686) 123 45 67  <button onClick="location.href='tel:6861234567'">llamar</button></p>
-	        <p> email@correo.com </p>
+	        <p> <%= consulta.major %>, <%= consulta.semester %> Semestre </p>
+	        <p> Talla: <%= consulta.shirt_size %> </p>
+	        <p id="telephone"> <%= consulta.phone %>  <button onClick="location.href='tel:<%= consulta.phone %>'">llamar</button></p>
+	        <p> <%= consulta.email %> </p>
 	        <h3 class='black'> Activo en Puesto de Venta 3 </h3>
-	        <button onClick="location.href='https://www.facebook.com'">Ver en Facebook</button>
+	        <button onClick="location.href='<%= consulta.facebook %>'">Ver en Facebook</button>
 	        <hr> 
-	        <button class="third votacion" id="votacion" onClick="votar(this);"> Votar para Próximo Coordinador General </button>
 	        <br>
         </div>
 

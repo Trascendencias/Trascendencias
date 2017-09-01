@@ -85,6 +85,7 @@ button{
 	font-size: 15;
 	padding: 5px 20px 5px 20px;
 	font-weight: bold;
+	margin: 5px;
 }
 button:hover {
 	cursor: pointer;
@@ -137,6 +138,11 @@ div.body, div.lista{
 	max-width: 700px;
     position: relative;
 }
+button.unactive {
+	color: #41C7F4;
+	border: 1px solid #41C7F4;
+	background-color: rgba(0,0,0,0);
+	}
 .spacer {
     width: 100vw;
     height: 20px;
@@ -249,9 +255,10 @@ button.codigo-grupo{
 }
 /* LISTAS */
 
-div.listabutton.nuevo {
+div.lista button.nuevo {
 	position: absolute;
 	right: 0px;
+	
 }
 button.enlistado {
 	background-color: rgba(0,0,0,0);

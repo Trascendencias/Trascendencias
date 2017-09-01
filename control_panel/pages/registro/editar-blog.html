@@ -1,0 +1,81 @@
+<html> 
+
+	<head>		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title> Editar Blog </title>
+		<% include menu.html %>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+		
+        <div class="body">
+		<br>
+		<center><h6><b> Editar Blog </b></h6> </center>
+			
+			<form class="registro" id="forma-registro" method="post" action="registro "> <br><br>
+               
+                <!--- TIPO DE REGISTRO --> 
+                <input type="hidden" name="registrado" value="blog">
+                
+				<!-- NOMBRE/TITULO TODOS-->
+				<input maxlength="50" type="text" placeholder="Nombre" name="title" value="Nombre del Blog" required>
+				
+                <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
+                <p class="title"> Agregar Fotos (1920x1080px) </p>
+                <div id="fotos">
+                <input accept="image/*" type="file" width="150px" name="photo" value="fileupload" id="image" style="display: inline;" multiple required>
+                </div>
+
+                <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
+                <div id="videos">
+                <p class="title"> Agregar Videos de Youtube </p>
+                <input maxlength="50" type="text" placeholder="URL Video 1" name="video1" class="video" required>
+                
+                </div>
+                <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
+                
+                <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
+                <textarea name="resumen" id="resumen" placeholder="Resumen..." required>Resumen mega largo del blog</textarea>
+                
+                <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
+                <textarea name="descripcion" class="large-text" required placeholder="Descripción...">Contenido Mega Largo del Blog</textarea>
+                
+                <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
+                <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="teaser">Incluir en Teaser Banner </p>
+                <input type=number name="teaser-index" class="numero goright" value="5">
+                <div class="spacer"></div>
+                <hr>
+				<button type="submit" class="submit"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+			
+			</form>
+		</div>
+
+</body>
+		
+		<script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+            var videocount = 2;
+            function validate(){
+                document.getElementById("forma-registro").submit();
+            }
+            function masvideo(){
+                var videoinput = "<input maxlength='50' name='video"+ videocount +"' class='video' placeholder='URL Video "+videocount+"'required><p class='error'> *Debe llenar esta información </p>"
+                document.getElementById('videos').innerHTML += videoinput;
+                videocount++;
+            }
+            function isNumberKey(evt){
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+                return true;
+            }
+		</script>
+</html>
