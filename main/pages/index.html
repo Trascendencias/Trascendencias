@@ -30,12 +30,22 @@
 	
 		<script src="https://www.w3schools.com/lib/w3.js"></script>
 		<div w3-include-html="menu"></div>
+		<%
+		var number_of_slides = 0;
+		var slider = [];
 
+		conferencias.forEach(function(element) {
+			if(element.include_teaser > 0) {
+				slider.splice(element.include_teaser, 0, element);
+			}
+			number_of_slides++;
+		});
+
+		%>
 		<div class="slider main" style="margin-top: -10px;">
-					
-			<div class="slides main" id="slides" style="width: calc(100vw * 5);">
-			<!-- PUES AQUI SE PONE EL WHILE PA QUE AGREGUE TODAS LAS IMAGENES -->
-				<div class="slide main" style="background: url('resources/slider1.jpg') center center; left: calc(100vw * 0);">
+			<div class="slides main" id="slides" style="width: calc(100vw * <%= number_of_slides %>);">
+				<% for(let i = 0; i < slider.length; i++) { %>
+				<div class="slide main" style="background: url('<%= slider[i].photos[0] %>') center center; left: calc(100vw * <%= i %>);">
 					<div class="slide-textholder">
 						<h1 class="cwhite"> MEJOR SIMPOSIO DEL NOROESTE </h1> 
 						<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. 
@@ -43,38 +53,16 @@
 						</p>
 					</div>
 				</div>
-			<!-- PUES AQUI SE ACABA LO DEL WHILE -->
-				<div class="slide main" style="background: url('resources/slider2.jpg') center center; left: calc(100vw * 1);">
-						<div class="slide-textholder">							
-                        <h1 class="cwhite"> PUESTO DE VENTA EN ECATEPEC</h1> <!-- Titulo del Teaser Banner -->
-							<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. <!-- Descripción del Teaser Banner -->
-								<button> ¿Cuándo? </button> <!-- BOTON DE ACCION -->
-							</p>
-						</div>
-				</div>
-					
-				<div class="slide main" style="background: url('resources/slider3.jpg') center center; left: calc(100vw * 2);">
-						<div class="slide-textholder">							
-						<h1 class="cwhite"> TITULO TEASER </h1> <!-- Titulo del Teaser Banner -->
-							<p class="cwhite"> Resumen del teaser <!-- Descripción del Teaser Banner -->
-								<button> Action </button> <!-- BOTON DE ACCION -->
-							</p>
-						</div>
-				</div>
-				<div class="slide main" style="background: url('resources/slider4.jpg') center center; left: calc(100vw * 3);">
-						<div class="slide-textholder">							
-						<h1 class="cwhite"> TITULO TEASER</h1> <!-- Titulo del Teaser Banner -->
-							<p class="cwhite"> Resumen del teaser <!-- Descripción del Teaser Banner -->
-								<button> Action </button> <!-- BOTON DE ACCION -->
-							</p>
-						</div>
-				</div>
-				<div class="slide main" style="background: url('resources/slider5.jpg') center center; left: calc(100vw * 4);"></div>
+				<% } %>
 			</div>
 
+			<script type="text/javascript">
+				var number_of_slides = <%= number_of_slides %>;
+			</script>
 
-			<button class="left-arrow main-btn" onClick="leftSlider()"> ➜ </button>
-			<button class="right-arrow main-btn" onClick="rightSlider()"> ➜ </button>			
+
+			<button class="left-arrow main-btn" onClick="slide_left()"> ➜ </button>
+			<button class="right-arrow main-btn" onClick="slide_right()"> ➜ </button>			
 		</div>
         
         <br><br><br><br>
@@ -145,31 +133,31 @@
 	<script>
 		alert("Bienvenido! Ésta página está en construcción, disculpe las molestias!"); 
 
-		//SLIDER
-		var currentSlide = 0; //El slide en el que está menos 1
 		var slides = document.getElementById("slides");
-		var beforeSlide = 4;
-		var afterSlide = 1;
-		function rightSlider(){
-			if(currentSlide == 4){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
-				currentSlide = 0; 
+		var current_slide = 0;
+
+		slide_right = function() {
+			console.log(number_of_slides);
+			if(current_slide == number_of_slides) {
+				current_slide = 0; 
 				slides.style.left = "0px"; 
 			}
 			else {
-				currentSlide++; 
-				slides.style.left = "calc(-100vw * " + currentSlide + ")";
+				current_slide++; 
+				slides.style.left = "calc(-100vw * " + current_slide + ")";
 			}
-				}
-		function leftSlider(){
-			if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
-				slides.style.left = "calc(-100vw * 4)"; 
-				currentSlide = 4;}
-			else { 
-				currentSlide--; 
-				slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
-			}
-				}
+		}
 
+		slide_left = function() {
+			if(current_slide == 0) {
+				slides.style.left = "calc(-100vw * 4)"; 
+				current_slide = number_of_slides;
+			}
+			else { 
+				current_slide--; 
+				slides.style.left = "calc(-100vw * " + current_slide + ")"; 
+			}
+		}
 
 		function activate(elem){ // ES PARA APARECER / DESAPARECER COSAS (COMO EL MENU)
 			if(elem.classList.contains('active')) elem.classList.remove('active'); 

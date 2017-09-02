@@ -57,7 +57,7 @@
 
 
 		<div class="card-holder">
-			<% packages.forEach(function(element) { %>
+			<% paquetes.forEach(function(element) { %>
 				<div class="card" onClick="location.href='apartar-paquete?paquete=<%= element._id %>'">
 					<img src="<%= element.photos[0] %>">
 					<h3> <%= element.name %> </h3>
@@ -72,21 +72,24 @@
 		<button class="btn" onClick="activate(this)"> + </button>
 		<div class="droppedContent">
 							
-							<!--- AQUI VA EL WHILE --> 
+							<% puntos_de_venta.forEach(function(element) { %>
 							<div class="staff2">		
-								<h3> Punto de Venta UABC </h3>
-								<p> 13/SEP de 8:30 - 13:00hrs </p>
+								<h3> <%= element.name %> </h3>
+								<p> <%
+					var options = {  
+					    year: "numeric", month: "short",  
+					    day: "numeric", hour: "2-digit" 
+					};
+
+					var hour_options = {
+						hour: "2-digit"
+					};
+				%>
+				<%= element.start.toLocaleTimeString("es-mx", options); %>
+				-
+				<%= element.end.toLocaleTimeString("es-mx", hour_options); %> </p>
 							</div>
-							<!--- AQUI SE ACABA EL WHILE -->
-							<!--- EJEMPLOS -->
-							<div class="staff2">		
-								<h3> Punto de Venta UABC </h3>
-								<p> 13/SEP de 8:30 - 13:00hrs </p>
-							</div>
-							<div class="staff2">		
-								<h3> Punto de Venta UABC </h3>
-								<p> 13/SEP de 8:30 - 13:00hrs </p>
-							</div>
+							<% }); %>
 		</div>
 	</div>
 

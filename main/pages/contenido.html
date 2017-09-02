@@ -94,7 +94,7 @@
 		<div class="droppedContent">
 			<br><br>
 		
-						<% conferences.forEach(function(element) { %> 
+						<% conferencias.forEach(function(element) { %> 
 						<div class="cardconf">
 							<div class="staff2">
 								<br>
@@ -110,51 +110,7 @@
 							</div>
 						</div>
 						<% }); %>
-
-						<!--- EJEMPLOS -->
-						<div class="cardconf">
-							<div class="staff2">
-								<br>
-								<img src="resources/user_example.png" class="persona2">
-								<h3> Nombre de Conferencista </h3>
-								<p><i> Por qué es este wey tan vergas </i></p>
-							</div><br>
-								
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-						</div>
-						<div class="cardconf">
-							<div class="staff2">
-								<br>
-								<img src="resources/user_example.png" class="persona2">
-								<h3> Nombre de Conferencista </h3>
-								<p><i> Por qué es este wey tan vergas </i></p>
-							</div><br>
-								
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-						</div>
-						<div class="cardconf">
-							<div class="staff2">
-								<br>
-								<img src="resources/user_example.png" class="persona2">
-								<h3> Nombre de Conferencista </h3>
-								<p><i> Por qué es este wey tan vergas </i></p>
-							</div><br>
-								
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-						</div>
-						<!--- </EJEMPLOS> -->
+                        
 		
 		</div>
 	</div>
@@ -167,34 +123,13 @@
 		<div class="droppedContent">
 					<br><br>
 						
-						<!--- AQUI VA EL WHILE --> 
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
+						<% talleres.forEach(function(element) { %>
+							<div class="card" onClick="location.href='consulta?code=<% element._id %>'">
+								<img src="<%= element.photos[0] %>">
+								<h3> <%= element.name %> </h3>
+								<p> <%= element.summary %> </p>
 							</div>
-						<!--- AQUI SE ACABA LO QUE VA EN WHILE --> 
-						<!--- EJEMPLOS -->
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
+						<% }); %>
 						
 		</div>
 	</div>
@@ -207,34 +142,14 @@
 		<div class="droppedContent">
 			<br><br>
 						
-						<!--- AQUI VA EL WHILE --> 
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
+						<% visitas.forEach(function(element) { %>
+							<div class="card" onClick="location.href='consulta?code=<% element._id %>'">
+								<img src="<%= element.photos[0] %>">
+								<h3> <%= element.name %> </h3>
+								<p> <%= element.summary %> </p>
 							</div>
-						<!--- AQUI SE ACABA LO QUE VA EN WHILE --> 
-						<!--- EJEMPLOS -->
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
+						<% }); %>
+						
 			
 		</div>
 	</div>
@@ -247,24 +162,13 @@
 		<div class="droppedContent">
 			<br><br>
 						
-						<!--- AQUI VA EL WHILE --> 
-							<div class="card" onClick="location.href='evento-social'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
+						<% eventos_sociales.forEach(function(element) { %>
+							<div class="card" onClick="location.href='consulta?code=<% element._id %>'">
+								<img src="<%= element.event_poster %>">
+								<h3> <%= element.name %> </h3>
+								<p> <%= element.summary %> </p>
 							</div>
-						<!--- AQUI SE ACABA LO QUE VA EN WHILE --> 
-						<!--- EJEMPLOS -->
-							<div class="card" onClick="location.href='evento-social'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
-							<div class="card" onClick="location.href='evento-social'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
-							</div>
+						<% }); %> 
 		</div>
 	</div>
 

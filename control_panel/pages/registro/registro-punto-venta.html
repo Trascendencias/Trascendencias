@@ -23,7 +23,6 @@
 				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
 				
             
-                <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
                 <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
                 
@@ -63,11 +62,11 @@
 				<script>
 		var startTime;
 		var endTime;
-		 function timeFields(){
-                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-08:00";
-				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("end_time").value+":00-08:00";
-				document.getElementById("start").value = startTime;
-				document.getElementById("end").value = endTime;
+	function timeFields(){
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-00:00";
+                endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("end_time").value+":00-00:00";
+                document.getElementById("start").value = startTime;
+                document.getElementById("end").value = endTime;
             }
 			
 			

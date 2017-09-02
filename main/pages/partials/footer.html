@@ -11,16 +11,10 @@
 	<center>
 		<h5 style="color: white"> Muchas Gracias a: </h5>
 			<div class="patrocinadores">
-				<img src="resources/slider1.jpg">
-				<img src="resources/slider1.jpg">
-				<img src="resources/slider1.jpg">
-				<img src="resources/slider1.jpg">
-				<img src="resources/slider1.jpg">
-				<img src="resources/slider1.jpg">
-				<img src="resources/slider1.jpg">
-				<img src="resources/slider1.jpg">
-				<img src="resources/slider1.jpg">
-				<img src="resources/slider1.jpg">
+					<% patrocinadores.forEach(function(element) { %>
+								<img src="<%= element.company_logo %>">
+						<% }); %>
+                    
 			</div>
 	
 	</center>
@@ -31,6 +25,4 @@
 		<h5 style="color: white"> ¿Te gustaría ser parte de Trascendencias? </h5>
 		<button onclick="location.href='informacion#serpartedelstaff'"> ¡Se parte del Staff! </button>
 	<center>
-
-
 </footer>

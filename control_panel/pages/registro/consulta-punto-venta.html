@@ -16,19 +16,28 @@
 <button onClick="location.href='editar-punto-venta?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>			
 			   <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
-				<h3> Título: <p><i> Éste es un título muy campante </i></p> </h3><br>                
+				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>                
                 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
-				<h3> Fecha y Hora: <p><i> 11/OCT/17 • 11:00 - 12:00hrs </i></p> </h3><br>                
+				<h3> Fecha y Hora: <p><i> <%
+					var options = {  
+					    weekday: "long", year: "numeric", month: "long",  
+					    day: "numeric", hour: "2-digit", minute: "2-digit"  
+					};
+
+					var hour_options = {
+						hour: "2-digit", minute: "2-digit"
+					};
+				%>
+				<%= consulta.start.toLocaleTimeString("es-mx", options); %>
+				-
+				<%= consulta.end.toLocaleTimeString("es-mx", hour_options); %>
+                
+                </i></p> </h3><br>                
                 
                 <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
-				<h3> Dirección: <p><i> Av. Cibeles #123 Col. Beño </i></p> </h3><br>                
+				<h3> Dirección: <p><i> <%= consulta.location %> </i></p> </h3><br>                
                 
-                <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <h3> Resumen: <p><i> Este es un resumen considerablemente corto... </i></p> </h3><br>
-                
-                <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <h3> Contenido: <p><i> Esta es un contenido considerablemente corto.  </i></p> </h3><br>
                 
                 </div>
                 

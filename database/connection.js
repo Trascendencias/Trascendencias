@@ -341,7 +341,7 @@ database.list = function(collection, done) {
 		return done(new Error('Collection undefined'), null);
 	}
 
-	database.models[translate[collection]].find({}, function(err, collection) {
+	database.collection(translate[collection] + 's').find({}).toArray(function(err, collection) {
 		if(err) {
 			return done(err, null);
 		}

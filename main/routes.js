@@ -5,8 +5,8 @@ form.configure({
 });
 
 module.exports = function(http_app, app, fs, passport, database) {
-	http_app.get('*', function(request, response) {
-		response.redirect('https://trascendencias.org' + request.url);
+	http_app.get('*', function(request, res) {
+		res.redirect('https://trascendencias.org' + request.url);
 	});
 
 	app.get('/staff', function(req, res) {
@@ -53,25 +53,8 @@ module.exports = function(http_app, app, fs, passport, database) {
 		failureRedirect: '/'
 	}));
 
-	app.get('/ventas', function(req, res) {
-		database.list('paquetes', function(err, collection) {
-			if(err || !collection) {
-				return res.redirect('/registro/avisos?titulo=error');
-			}
-			
-			return res.render('ventas', {
-				user: req.user,
-				message: req.flash('message'),
-				packages: collection
-			});
-		});
-	});
-
-	app.get('/', function(request, response) {
-		response.render('index', {
-			user: request.user,
-			message: request.flash('message')
-		});
+	app.get('/', function(request, res) {
+		return res.redirect('/index');
 	});
 
 	app.get('/apartar-paquete', check_session, function(req, res) {
@@ -97,14 +80,45 @@ module.exports = function(http_app, app, fs, passport, database) {
 		});
 	})
 
-	app.get('/:name', function(request, response) {
+	app.get('/:name', function(request, res) {
 		if(fs.existsSync(__dirname + '/pages/' + request.params.name + '.html')) {
-			return response.render(request.params.name, {
-				user: request.user
-			});
+			database.list('paquetes', function(err, paquetes) {
+				database.list('taller', function(err, talleres) {
+					database.list('conferencia', function(err, conferencias) {
+						database.list('preguntas-frecuentes', function(err, preguntas_frecuentes) {
+							database.list('staff', function(err, staff) {
+								database.list('patrocinadores', function(err, patrocinadores) {
+									database.list('evento-social', function(err, eventos_sociales) {
+										database.list('blog', function(err, blogs) {
+											database.list('visita', function(err, visitas) {
+												database.list('punto-venta', function(err, puntos_de_venta) {
+													console.log("patrocinadores" + patrocinadores);
+													return res.render(request.params.name, {
+														user: request.user,
+														paquetes: paquetes,
+														conferencias: conferencias,
+														talleres: talleres,
+														visitas: visitas,
+														eventos_sociales: eventos_sociales,
+														patrocinadores: patrocinadores,
+														preguntas_frecuentes: preguntas_frecuentes,
+														blogs: blogs,
+														puntos_de_venta: puntos_de_venta
+													});
+												})
+											});
+										});
+									});
+								});
+							})
+						});
+					})
+				})
+			})
 		}
-
-		response.status(404).send('File not found.');
+		else {
+			res.status(404).send('File not found.');
+		}
 	});
 
 	app.post('/registro-paquete', form(), function(req, res) {

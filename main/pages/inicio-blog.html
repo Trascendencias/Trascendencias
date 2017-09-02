@@ -95,36 +95,16 @@
 		<br><br>
 
 		<div class="card-holder">
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-								</div>
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-								</div>
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-								</div>
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-								</div>
-								<div class="card" onClick="location.href='consulta'">
-									<img src="resources/image_example.png">
-									<h3> Nombre Conferencia </h3>
-									<p> De qué se trata éste bella conferencia </p>
-								</div>
+						<% blogs.forEach(function(element) { %>
+							<div class="card" onClick="location.href='consulta?code=<% element._id %>'">
+								<img src="<%= element.photos[0] %>">
+								<h3> <%= element.name %> </h3>
+								<p> <%= element.summary %> </p>
+							</div>
+						<% }); %>
+                        
+								
 		</div>
-
-
-
-
 
 		<% include partials/footer.html %>
 

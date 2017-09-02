@@ -2,16 +2,15 @@
 	<meta name=”description” content=”#!DESCRIPCION-BLOG”>
 	
 	<!---FACEBOOK OPTIMIZATION -->
-	<meta property="og:url" content="#!URL" />
+	<meta property="og:url" content="https://trascendencias.org/preguntas-frecuentes" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="#!TITLE" />
-	<meta property="og:image" content="#!IMG" />
+	<meta property="og:title" content="Preguntas Frecuentes Trascendencias" />
 	
 	<!---SEO OPTIMIZATION -->
-	<title> #!TITLE </title>
-	<meta name="description" content="#!DESCRIPTION">
-	<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
-	<meta name="author" content="#!AUTOR">
+	<title> Ayuda: Preguntas Frecuentes </title>
+	<meta name="description" content="Preguntas Frecuentes Trascendencias">
+	<meta name="keywords" content="preguntas, frecuentes, trascendencias, cetys, universidad" >
+	<meta name="author" content="Trascendencias">
 
 	<!--- INCLUIR MENU -->
 	<% include partials/menu.html %>
@@ -32,81 +31,27 @@
 	<div class="pageLocation cmen">
 		<h5 id="pageLocation"> Preguntas Frecuentes </h5>
 	</div> 
+    
+    
+    
+    <% preguntas_frecuentes.forEach(function(element) { %> 
 
 <div class="dropContent" id="p1"> <!-- Primera Pregunta -->
 	<div class="h4holder">
-		<h4> ¿Pregunta 1? </h4>
+		<h4> <%= element.name %> </h4>
 	</div>
-	<button class="btn" onclick="activate(this)"> + </button>
+	<button class="btn" onClick="activate(this)"> + </button>
 	<div class="droppedContent">
 		<p> 
-			1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio. 
+			<%= element.answer %>
 		</p>
 		
-		<h2> Primer Subtítulo </h2> <button class="btn" onclick="activate(this)"> + </button>
-			<div class="subContent" id="p1sub1">
-				<p> 
-					El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”.
-				</p>
-			</div>
-		<h2> Segundo Subtítulo </h2> <button class="btn" onclick="activate(this)"> + </button>
-			<div class="subContent" id="p1sub2">
-				<p> 
-					El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”.
-				</p>
 			</div>
 	</div>
 </div>
 
-<div class="dropContent" id="p2"> <!-- SEGUNDA Pregunta -->
-	<div class="h4holder">
-		<h4> ¿Pregunta 2? </h4>
-	</div>
-	<button class="btn" onclick="activate(this)"> + </button>
-	<div class="droppedContent">
-		<p> 
-			1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio. 
-		</p>
-		
-		<h2> Primer Subtítulo </h2> <button class="btn" onclick="activate(this)"> + </button>
-			<div class="subContent" id="p2sub1">
-				<p> 
-					El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”.
-				</p>
-			</div>
-		<h2> Segundo Subtítulo </h2> <button class="btn" onclick="activate(this)"> + </button>
-			<div class="subContent" id="p2sub2">
-				<p> 
-					El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”.
-				</p>
-			</div>
-	</div>
-</div>
+<% }); %>
 
-<div class="dropContent" id="p3"> <!-- TERCERA Pregunta -->
-	<div class="h4holder">
-		<h4> ¿Pregunta 3? </h4>
-	</div>
-	<button class="btn" onclick="activate(this)"> + </button>
-	<div class="droppedContent">
-		<p> 
-			1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio. 
-		</p>
-		
-		<h2> Primer Subtítulo </h2> <button class="btn" onclick="activate(this)"> + </button>
-			<div class="subContent" id="p3sub1">
-				<p> 
-					El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”.
-				</p>
-			</div>
-		<h2> Segundo Subtítulo </h2> <button class="btn" onclick="activate(this)"> + </button>
-			<div class="subContent" id="p3sub2">
-				<p> 
-					El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”.
-				</p>
-			</div>
-	</div>
-</div>
 
 
 
@@ -114,21 +59,21 @@
 	<div class="h4holder">
 		<h4> ¿Sigues con la duda? </h4>
 	</div>
-	<button class="btn" onclick="activate(this)"> + </button>
+	<button class="btn" onClick="activate(this)"> + </button>
 	<div class="droppedContent">
 		<p> Ponte en contacto con nosotros y te responderemos en seguida. </p>
 		<form class="registro"> <br><br>
 
 			<!-- NOMBRE -->
-			<input maxlength="50" onblur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="nombre" required>
+			<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="nombre" required>
 			<p class="error"> *Debe llenar esta información </p>
 
 			<!-- CORREO -->
-			<input maxlength="50" onblur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="correo" required>
+			<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="correo" required>
 			<p class="error"> *Debe llenar esta información </p>
 
 			<!-- INSTITUCION DE PROCEDENCIA -->
-			<input maxlength="50" onblur="if (this.value == '') { this.value = '¿Cuál es tu duda?'; }"  onfocus="if(this.value == '¿Cuál es tu duda?') { this.value = ''; }" type="text" value="¿Cuál es tu duda?" name="duda" required>
+			<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Cuál es tu duda?'; }"  onfocus="if(this.value == '¿Cuál es tu duda?') { this.value = ''; }" type="text" value="¿Cuál es tu duda?" name="duda" required>
 			<p class="error"> *Debe llenar esta información </p>
 			<br><br><br>
 			<button type="submit"> Enviar </button>
