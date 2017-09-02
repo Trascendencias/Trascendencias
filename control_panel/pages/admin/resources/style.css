@@ -5,6 +5,10 @@ body {
 	overflow-x: hidden;
 }
 /* TEXTOS */
+.hidden {
+	display: none;	
+	}
+
 h1 {
 	font-size: 46pt;
 	color: black;

@@ -94,22 +94,22 @@
 		<div class="droppedContent">
 			<br><br>
 		
-						<!--- AQUI VA EL WHILE --> 
+						<% conferences.forEach(function(element) { %> 
 						<div class="cardconf">
 							<div class="staff2">
 								<br>
-								<img src="resources/user_example.png" class="persona2">
-								<h3> Nombre de Conferencista </h3>
-								<p><i> Por qué es este wey tan vergas </i></p>
+								<img src="<%= element.speaker_photo %>" class="persona2">
+								<h3> <%= element.speaker_name %> </h3>
+								<p><i> <%= element.speaker_titles %></i></p>
 							</div><br>
 								
-							<div class="card" onClick="location.href='consulta'">
-								<img src="resources/image_example.png">
-								<h3> Nombre Conferencia </h3>
-								<p> De qué se trata éste bella conferencia </p>
+							<div class="card" onClick="location.href='consulta?code=<%= element._id %>'">
+								<img src="<%= element.photos[0] %>">
+								<h3> <%= element.name %> </h3>
+								<p> <%= element.summary %> </p>
 							</div>
 						</div>
-						<!--- AQUI SE ACABA LO QUE VA EN WHILE -->
+						<% }); %>
 
 						<!--- EJEMPLOS -->
 						<div class="cardconf">

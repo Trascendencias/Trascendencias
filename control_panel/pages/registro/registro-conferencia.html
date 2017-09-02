@@ -25,18 +25,16 @@
                 <p class="title"> Fecha: </p>
                 <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
                 
-                
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
                 <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
                 
-                
-                <input type="hidden" id="start" name="start"> 
-                <input type="hidden" id="end" name="end"> 
-                
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
                 <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
+                
+                <input type="text" id="start" name="start"> 
+                <input type="text" id="end" name="end"> 
                 
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->

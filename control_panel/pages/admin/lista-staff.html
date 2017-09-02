@@ -24,7 +24,7 @@
         <div class="lista">
         <br>
         <br>
-        <h3> <span id="titulo">  </span>:  <p id="contador">  </p><button class="nuevo" onclick="location.href='generar-claves'"> + Nuevo </button></h3>
+        <h3> <span id="titulo">  </span>:  <p id="contador">  </p><button class="nuevo" onClick="location.href='generar-claves'"> + Nuevo </button></h3>
 
         <form id="searchForm" action="javascript:buscarPalabras();">
             <input id="search" class="search" onBlur="if (this.value == '') { this.value = 'Buscar...'; showAll();}"  onfocus="if(this.value == 'Buscar...') { this.value = ''; } " type="text" value="Buscar..." > 
@@ -33,13 +33,28 @@
         </form>
         <hr>
                 
-        <form id="accion-lista">
+       <form id="accion-lista">
         
         <!--- AQUI ES EL WHILE -->
-        <button class='enlistado' name='codigo' value='xxx'> Francisco Arturo Peña </button>
-        <button class='enlistado' name='codigo' value='xxx'> Diana Laura Martinez Garcia </button>
-        <button class='enlistado' name='codigo' value='xxx'> Jesús Ismael Villegas </button>
-        <button class='enlistado' name='codigo' value='xxx'> Foráneo Alexis Córdova </button>
+        <div id="correos"> </div>
+        <div id="resultados">
+            <% for(var i = 0; i < staff.length; i++) { %>
+                <% if(staff[i].name != 'admin') { %>
+                    <button class='enlistado' name='codigo' value='<%= staff[i]._id %>'> 
+                    <p class="hidden">  
+                    		email:<%= staff[i].email %>,
+                            <%= staff[i].city %>,
+                            <%= staff[i].major %>,
+                            <%= staff[i].team %>,
+                            <%= staff[i].position %>,  
+                    </p> 
+                    
+                    <%= staff[i].name %>
+                    </button>
+                <% } %>
+            <% } %>
+        </div>
+        
 
         </form>
         </div>
@@ -62,7 +77,7 @@
 
               //INCLUIR DOCUMENTOS
 
-            document.getElementById("contador").innerHTML += 456;
+            document.getElementById("contador").innerHTML += (<%= staff.length %> - 1);
             document.getElementById("titulo").innerHTML += titulo;
             
             function buscarPalabras(){

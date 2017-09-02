@@ -17,7 +17,7 @@
 			<form class="registro" id="forma-contrasena" method="post" action="contrasena ">
 
 				<!-- CONTRASENA -->
-				<input id="value1" maxlength="50" password="text" placeholder="Nueva Contraseña" name="contrasena" required>
+				<input id="value1" maxlength="50" password="password" placeholder="Nueva Contraseña" name="contrasena" required>
 				
 
 				<!-- REPITE LA CONTRASENA -->
@@ -43,12 +43,12 @@
                 
 				<!-- NOMBRE/TITULO TODOS-->
 				<p class="title black"> Nombre: </p><br><br>
-				<input maxlength="50" placeholder="Nombre" type="text" value="<%= user.name %>" name="title" required>
+				<input maxlength="50" placeholder="Nombre" type="text" value="<%= user.name %>" name="title">
 				
 
                 <!-- TALLA s -->
                 
-                <select id="select" name="talla" required>
+                <select id="select" name="talla">
                   <option value="none" disabled> Talla... </option>
                   <option value="XS" <% if(user.shirt_size == "XS") { %> <%= 'selected' %> <% } %> > XS </option>
                   <option value="S" <% if(user.shirt_size == "S") { %> <%= 'selected' %> <% } %> > S </option>
@@ -60,23 +60,22 @@
                 
                 <!-- TELEFONO s, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
                 <p class="title black"> Teléfono: </p>
-				<input onKeyPress="return isNumberKey(event)" type="text" placeholder="Teléfono" value="<%= user.phone %>" name="telefono-contacto" required>
+				<input onKeyPress="return isNumberKey(event)" type="text" placeholder="Teléfono" value="<%= user.phone %>" name="telefono-contacto">
 				
                 
 				<!-- CORREO s, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
 				<p class="title black"> Correo: </p>
-				<input maxlength="50" placeholder='Correo' type="text" value="<%= user.email %>" name="correo" required>
+				<input maxlength="50" placeholder='Correo' type="text" value="<%= user.email %>" name="correo">
 				
 
 				<!-- FACEBOOK -->
 				<p class="title black"> Facebook: </p>
-                <input maxlength="50" placeholder='Facebook URL' type="text" value="<%= user.facebook %>" name="facebook" required>
+                <input maxlength="50" placeholder='Facebook URL' type="text" value="<%= user.facebook %>" name="facebook">
                 
 
 				<!-- INSTITUCION DE PROCEDENCIA -->
 				<p class="title black"> Carrera: </p>
-				<input maxlength="50" placeholder='Carrera' type="text" value="<%= user.major %>" name="carrera" required>
-				
+				<input maxlength="50" placeholder='Carrera' type="text" value="<%= user.major %>" name="carrera">	
 
 				<!-- SEMESTRE-->
                 <p class="title black"> Semestre: </p>
@@ -98,25 +97,23 @@
 
 				<!-- CIUDAD -->
 				<p class="title black"> Ciudad: </p>
-				<input maxlength="50" placeholder='Ciudad' type="text" value="<%= user.city %>" name="ciudad" required>
+				<input maxlength="50" placeholder='Ciudad' type="text" value="<%= user.city %>" name="ciudad">
 				
 
                 <!-- ALERGIAS -->
                 <p class="title black"> Alergias: </p>
-				<input maxlength="50" placeholder='Alergias' type="text" value="<%= user.alergies %>" name="alergias" required>
-				
+				<input maxlength="50" placeholder='Alergias' type="text" value="<%= user.alergies %>" name="alergias" >
                 
-
+                 <p class="title black"> Nueva Foto de Perfil: </p>
+                 <input type="file" width="150px" name="staff_photo" value="fileupload" id="image" style="display: inline;" >
 
                 <div class="spacer"></div>
                 <hr>
 				<button type="submit" class="submit"> Siguiente </button>
                 <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
-                <div class="spacer"></div>
-                <div class="spacer"></div>
-                <div class="spacer"></div>
-			
+
 			</form>
+
 
 
 		</div>

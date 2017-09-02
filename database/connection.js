@@ -101,7 +101,6 @@ database.register = {
 	},
 	paquetes: function(form, files, done) {
 		let new_package = new models.package();
-		//console.log("Form: " + JSON.stringify(form, null, 4));
 		database.form_to_model(form, new_package);
 		new_package.photos = get_files(files, 'photos');
 
@@ -137,6 +136,26 @@ database.register = {
 			}
 
 			return done(null, saved_participant);
+		});
+	},
+	staff: function(form, match, done) {
+		database.find('staff', match, function(err, searched) {
+			if(err) {
+				return done(err, null);
+			}
+
+			if(!searched) {
+				searched = new models.staff();
+			}
+
+			database.form_to_model(form, searched);
+			searched.save(function(err, saved) {
+				if(err) {
+					return done(err, null);
+				}
+
+				return done(null, saved);
+			});
 		});
 	}
 };
@@ -207,7 +226,6 @@ database.assign_package = function(user_id, package_id, form, done) {
 					return done(err, null);
 				}
 
-				console.log(JSON.stringify(saved_active_package, null, 4));
 				doc.selected_package = saved_active_package.id;
 				doc.package_information = {
 					debt: saved_active_package.package.cost,

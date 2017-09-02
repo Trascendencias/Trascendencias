@@ -22,11 +22,9 @@
 				<!-- NOMBRE/TITULO TODOS-->
 				<input maxlength="50" placeholder="Nombre" type="text" name="name" required>
 				
-            
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
                 <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
-                
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
@@ -51,11 +49,6 @@
                 <p class="title"> Icono del Evento (300x300px) </p>
                 <input type="file" width="150px" name="event_icon" value="fileupload" id="image" accept="image/*" style="display: inline;"  accept="image/*" required>
                 
-                
-                
-
-
-
                 <hr>
 				<button type="submit" class="submit"> Siguiente </button>
                 <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>

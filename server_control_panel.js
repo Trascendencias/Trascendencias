@@ -87,6 +87,15 @@ app.post('/registro-participante_por_staff', check_session, form(), function(req
 				return res.redirect('/registro/avisos?titulo=error&mensaje=Abono invalido');
 			}
 
+			transporter.sendMail({
+				from: '"Trascendencias" <trasce4eva@gmail.com>',
+				subject: 'Recibo de Trascendencias',
+				text: 'Gracias por formar parte de Trascendencias, acabas de abonar ' + req.form.abono + ' pesos',
+				to: req.form.email
+			}, (err, info) => {
+				
+			});
+
 			participant.package_information.debt -= req.form.abono;
 			participant.verified = true;
 			participant.save(function(err, saved_participant) {
@@ -101,6 +110,19 @@ app.get('/registro-staff', form(), valid_registration, function(req, res) {
 	res.render('registro-staff', {
 		message: req.flash('message'),
 		email: req.form.email
+	});
+});
+
+app.get('/admin/lista-staff', check_session, function(req, res) {
+	database.list('staff', function(err, collection) {
+		if(catch_errors(err, collection)) {
+			return res.redirect('/registro/avisos?titulo=error');
+		}
+		
+		return res.render('admin/lista-staff', {
+			staff: collection,
+			user: req.user
+		});
 	});
 });
 
@@ -130,6 +152,15 @@ app.post('/abonar-:id', check_session, form(), function(req, res) {
 				return res.redirect('/registro/avisos?titulo=error&mensaje=Abono invalido');
 			}
 
+			transporter.sendMail({
+				from: '"Trascendencias" <trasce4eva@gmail.com>',
+				subject: 'Recibo de Trascendencias',
+				text: 'Gracias por formar parte de Trascendencias, acabas de abonar ' + req.form.abono + ' pesos',
+				to: req.form.email
+			}, (err, info) => {
+				
+			});
+
 			doc.package_information.debt -= req.form.abono;
 			if(doc.package_information.debt <= 0) {
 				doc.package_information.debt = 0;
@@ -157,6 +188,19 @@ app.post('/abonar-:id', check_session, form(), function(req, res) {
 					return res.redirect('/');
 				});
 			});
+		});
+	});
+});
+
+app.get('/admin/consulta-staff', check_session, function(req, res) {
+	database.consult('staff', req.query.codigo, function(err, doc) {
+		if(catch_errors(err, doc)) {
+			return res.redirect('/registro/avisos?titulo=error&mensaje=Miembro no encontrado');
+		}
+
+		return res.render('admin/consulta-staff', {
+			user: req.user,
+			consulta: doc
 		});
 	});
 });
@@ -247,6 +291,12 @@ app.post('/generar-claves', form(
 		return res.redirect('/admin/menu');
 	});
 })
+
+app.post('/editar-usuario', check_session, form(), function(req, res) {
+	database.register['staff'](req.form, function(err) {
+		return res.redirect('/registro/avisos?titulo=editar');
+	});
+});
 
 app.post('/signup', form(), passport.authenticate('signup', {
 	failureFlash: true

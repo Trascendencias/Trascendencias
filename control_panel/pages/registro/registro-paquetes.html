@@ -25,13 +25,15 @@
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Inicio </p>
-                <input name="start" class="date" type="date" value="Usa otro navegador" required>
+                <input id="start_day" class="date" type="date" onBlur="timeFields();" value="Usa otro navegador" required>
                 
 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Fin </p>
-                <input name="end" class="date" type="date" value="Usa otro navegador" required>
-                
+                <input  id="end_day" class="date" type="date" onBlur="timeFields();" value="Usa otro navegador" required>
+                    
+                <input type="hidden" id="start" name="start"> 
+                <input type="hidden" id="end" name="end"> 
                 
                 <!-- Requisitos Visita, Taller, Oferta  -->
                 <textarea name="requisites" class="large-text" placeholder="Requisitos..." required></textarea>
@@ -61,17 +63,14 @@
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
                 <textarea name="description" class="large-text" placeholder="Descripción..." required></textarea>
                 
-                
                 <!-- GRUPO Paquetes-->
                 <p class="teaser"> Grupo de: </p>
                 <input type=number name="group_size" class="numero" style="margin-left:0px; width: 60px;" required>
                 <p class="teaser"> Personas </p>
                 
-                
                 <!-- CUPO Paquetes-->
                 <p class="title"> Cantidad de grupos maximo: </p>
-                <input type=number name="cap" class="numero" style="margin-left:0px; width: 100px;" required>
-                            
+                <input type=number name="cap" class="numero" style="margin-left:0px; width: 100px;" required>        
                 
                 <!-- COSTO Paquetes -->
                 <p class="title"> Costo: </p>

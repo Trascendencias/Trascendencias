@@ -22,14 +22,14 @@
         <img src="../img/user_example.png" class="staff-pic">
         </center>
         <br>
-        <h3> Nombre Nombre Apellido </h3>
-        <p> <i> Puesto en Trasce</i></p>
+        <h3> <%= consulta.name %> </h3>
+        <p> <i>  <%= consulta.position %> <%= consulta.team %></i></p>
         <hr>
-        <p> Carrera, 2do Semestre </p>
-         <p> (686) 123 45 67 <button style="margin-left: 20px;" onClick="location.href='tel:6861234567'"> Llamar </button></p>
-        <p> email@correo.com </p>
+        <p> <%= consulta.major %>, <%= consulta.semester %> Semestre </p>
+         <p> <%= consulta.phone %> <button style="margin-left: 20px;" onClick="location.href='tel:<%= consulta.phone %>'"> Llamar </button></p>
+        <p> <%= consulta.email %> </p>
         <p class="black"><b> Activo en puesto de venta 3</b></p>
-        <button onClick="location.href='https://www.facebook.com'">Ver en Facebook</button>
+        <button onClick="location.href='<%= consulta.facebook %>'">Ver en Facebook</button>
 
         <hr> 
         <h3> Historial de Acciones </h3>   
