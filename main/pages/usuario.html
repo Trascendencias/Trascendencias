@@ -1,0 +1,100 @@
+<html> 
+
+    <head>      
+        <!-- tag para hacerlo escalable -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        
+        <!--- Title --> 
+        <title> Información del Usuario </title>
+        
+        <!--- Incluir documeentos -->
+        <% include partials/menu.html %>
+
+            
+        <!--- Pa que agarren los acentos -->
+        <meta charset="UTF-8">
+
+        <!--- Pa que agarre el Styleshit los acentos -->
+        <link rel="stylesheet" type="text/css" href="resources/style.css">
+    
+    </head>
+
+<body>
+        
+        <div class="body">
+        <br>
+        <br><br>
+
+        
+        <center>
+        <br><br>
+        	<img src="resources/user_example.png" class="consultausuario">
+                    <h3 style="font-size: 20px"> <%= user.name %> </h3>
+
+        </center>
+        <br>
+        
+        <% if(user.verified) { %>
+								<% if(locals.user.selected_package) { %>
+									<b><p> Paquete Elegido: <%= user.selected_package.package.name %> </p>
+									<p> Restante: <span class="dineromenos"><%= user.package_information.debt %> pesos</span> </p></b>
+								<% } else { %>
+									<h2>No has elegido paquete.</h2>
+								<% } %>
+							<% } else { %>
+								<% if(user.local) { %>
+									<h3>Favor de verificar tu cuenta en el correo registrado.</h3>
+								<% } else { %>	
+									<h3 onclick="location.href='validacion-facebook'">Favor de verificar tu informacion dando click <u>aqui</u>.</h3>
+								<% } %>
+							<% } %>
+
+        <hr>
+        <p> <%= user.email %>  </p>
+        <p> <%= user.institution %>  </p>
+        <p> <%= user.major %>, <%= user.semester %> Semestre </p>
+        <p> Mexicali, Baja California. </p>
+        <p> (686) 123 45 67 </p>
+        <p> Alergias: Plástico </p>
+       
+<center> 
+            <button onClick="location.href='editar-usuario.html'"> Editar Info </button>
+        </center>        <hr>
+
+        
+
+
+
+        <h3> Historial de Acciones </h3>   
+        <div class="accion">
+            <h3> Registro </h3><p> 13/SEP/2017 22:45h</p> <br>
+            <p>Registrado por: <i> Interner </i> </p>
+        </div>
+        <div class="accion">
+            <h3 class="dineromas"> Abono </h3><p> 13/SEP/17 22:45h</p> <br>
+            <p> Cantidad de: <i> $450.00 </i> </p>
+        </div>
+        <div class="accion">
+            <h3 class="dineromas"> Abono </h3><p> 13/SEP/17 22:45h</p> <br>
+            <p> Cantidad de: <i> $450.00 </i> </p>
+        </div>
+        <div class="accion">
+            <h3> Liquidado </h3><p> 13/SEP/2017 22:45h</p> <br>
+        </div>
+
+
+        </div>
+
+</body>
+        
+        <script>
+        	w3.includeHTML(); //INCLUIR DOCUMENTOS
+			
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+        </script>
+</html>

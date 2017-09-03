@@ -227,6 +227,9 @@ img.persona2 {
 		margin: 15px;
 		width: auto;
 	}
+	.registrarse {
+		color: white;
+		}
 	.pageLocation {
 		display: block;
 		position: relative;
@@ -251,7 +254,6 @@ img.persona2 {
 		line-height: 1.5;
 	}
 /* CONSULTA USUARIO */
-
 	img.consultausuario {
 		width: 200px;
 		height: 200px;
@@ -347,17 +349,17 @@ img.persona2 {
 	}
 	.usuario-info h2{
 		color: #42C7F4;
-		font-size: 12px;
+		font-size: 15px;
 		font-style: italic;
 		border-bottom: 0px solid rgba(0,0,0,0);
-		line-height: .7;
+		line-height: 1;
 
 	}
 	.usuario-info h3{
 		color: #E64242;
-		font-size: 12px;
+		font-size: 15px;
 		font-style: italic;
-		line-height: .7;
+		line-height: 1;
 	}
 	.usuario:hover img{
 		height: 80px;
@@ -379,7 +381,6 @@ img.persona2 {
 	button.iniciar-sesion:hover div.iniciar-sesion{
 		display: none;
 	}
-
 	div.iniciar-sesion {
 		display: none;
 		width: 300px;
@@ -494,8 +495,6 @@ img.persona2 {
 		font-size: 15px;
 		padding: 10;
 		font-weight: normal;
-		border: 3px solid white;
-		border-radius: 100px;
 		width: 110px;
 		margin-top: 10px;
 		background-color: #41c7f4;
@@ -520,7 +519,6 @@ img.persona2 {
 	}
 	.usuario-info button{
 		float: right;
-		margin: auto auto;
 	}
 	.usuario-info h1{
 		margin: auto auto;
@@ -531,16 +529,16 @@ img.persona2 {
 	}
 	.usuario-info h2{
 		color: #42C7F4;
-		font-size: 12;
+		font-size: 15;
 		font-style: italic;
 		border-bottom: 0px solid rgba(0,0,0,0);
-		line-height: .5;
+		line-height: 1;
 	}
 	.usuario-info h3{
 		color: #E64242;
-		font-size: 12;
+		font-size: 15;
 		font-style: italic;
-		margin-top: 10px;
+		line-height: 1;
 	}
 	button.iniciar-sesion{
 		display: none;
@@ -568,6 +566,10 @@ img.persona2 {
 		float: right;
 		display: inline;
 	}
+	.registrarse {
+	position: relative;
+	top: -90px;		
+		}
 }
 @keyframes menu {
 		from{
@@ -976,16 +978,18 @@ div.contenido-inicio {
 
 /* HORARIO */
 @media only screen and (max-width: 1000px) {
-	.horario{
-		width: 100vw;
-		display: block;
-		justify-content: none;
+	div.horario {
+		width: 90vw;
+		margin-top: 40px;
+		margin-bottom: 40px;
+		margin-left: 5vw;
+		display: flex;
+		flex-wrap: wrap;
+	  	justify-content: space-between;
 	}
 	.dia{
 		float: none;
 		display: block;
-		margin-left: calc(50vw - 150px);
-
 	}
 }
 @media only screen and (min-width: 1001px) {
@@ -995,12 +999,20 @@ div.contenido-inicio {
 		margin-bottom: 40px;
 		margin-left: 5vw;
 		display: flex;
-	  	justify-content: space-between;
+		flex-wrap: wrap;
+	  	justify-content: space-evenly;
 	}
+	
 }
 .dia{
-	width: 300px;
+	margin: 10px;
+	width: 90vw;
+	max-width: 350px;
+	
 }
+.dia h3, .dia p {
+	top: -2px;
+	}
 
 /* REGISTRO */
 div.registro {

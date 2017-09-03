@@ -92,29 +92,31 @@ module.exports = function(http_app, app, fs, passport, database) {
 										database.list('blog', function(err, blogs) {
 											database.list('visita', function(err, visitas) {
 												database.list('punto-venta', function(err, puntos_de_venta) {
-													console.log("patrocinadores" + patrocinadores);
-													return res.render(request.params.name, {
-														user: request.user,
-														paquetes: paquetes,
-														conferencias: conferencias,
-														talleres: talleres,
-														visitas: visitas,
-														eventos_sociales: eventos_sociales,
-														patrocinadores: patrocinadores,
-														preguntas_frecuentes: preguntas_frecuentes,
-														blogs: blogs,
-														puntos_de_venta: puntos_de_venta
+													database.list('evento-extra', function(err, eventos_extra) {
+														return res.render(request.params.name, {
+															user: request.user,
+															paquetes: paquetes,
+															conferencias: conferencias,
+															talleres: talleres,
+															visitas: visitas,
+															eventos_sociales: eventos_sociales,
+															patrocinadores: patrocinadores,
+															preguntas_frecuentes: preguntas_frecuentes,
+															blogs: blogs,
+															puntos_de_venta: puntos_de_venta,
+															eventos_extra: eventos_extra
+														});
 													});
-												})
+												});
 											});
 										});
 									});
 								});
-							})
+							});
 						});
-					})
-				})
-			})
+					});
+				});
+			});
 		}
 		else {
 			res.status(404).send('File not found.');

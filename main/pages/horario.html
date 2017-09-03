@@ -12,17 +12,10 @@
 		<meta name="keywords" content="Horario, Trascendencias, Cetys, Universidad" >
 		<meta name="author" content="Trascendencias">
 
-		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-		<!--- INCLUIR MENU -->
 		<% include partials/menu.html %>
 		<div class="menuspacer"></div>
-
-		<!--- Pa que agarren los acentos -->
 		<meta charset="UTF-8">
-
-		<!--- Pa que agarre el Styleshit -->
 		<link rel="stylesheet" type="text/css" href="sresources/tyle.css">
 
 	</head>
@@ -33,150 +26,87 @@
 		<div class="pageLocation cmen">
 			<h5 id="pageLocation"> Horario </h5>
 		</div> 
-
 		<div class="horario">
-			
-			<div class="dia">
-						<center>
-							<h1> 11•Oct</h1>
-							<h6> Miercoles </h6>
-						</center>
-							<div class="staff2">
-								<img src="resources/ico_general.svg" class="persona2">
-								<h3 onClick="#"> 8am • Inauguración </h3>
-								<p><i> Preparate para aburrirte :D </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_conferencia.svg" class="persona2">
-								<h3> 9am • Nombre de la Conferencia</h3>
-								<p><i> Cosas sobre la conferencia </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_conferencia.svg" class="persona2">
-								<h3> 10am • Nombre de la Conferencia </h3>
-								<p><i> cosas sobre la conferencia </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_conferencia.svg" class="persona2">
-								<h3> 11am • Nombre de la Conferencia </h3>
-								<p><i> cosas sobre la conferencia </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_ambigu.svg" class="persona2">
-								<h3> 12pm • Rica comida por fin </h3>
-								<p><i> Esta muy buena </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_taller.svg" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_visita.svg" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_evento-social.svg" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
+        
+        
+		<% 
+        	var allEvents = conferencias.concat(talleres, visitas, eventos_sociales, eventos_extra);
+            var sorted = true;
+            
+            while(sorted){
+            	sorted = false;
+                var C = 0; var A = 1;
+                while(A < allEvents.length){
+                if(allEvents[A].start < allEvents[C].start){
+                    	var temp = allEvents[C];
+                        allEvents[C] = allEvents[A];
+                        allEvents[A] = temp; 
+                        sorted = true; 
+                    }
+                C++; A++;
+                } 
+            } 
+            
+           %>
+           
 
-			</div>
-				<div class="dia">
+           
+           <% 
+                var C =0; 
+                while(C<allEvents.length){
+                	%>
+                    <div class="dia">
 						<center>
-							<h1> 12•Oct</h1>
-							<h6> Jueves </h6>
+                        	<% var month = { month: "short"}; day = { weekday: "long"}; %>
+							<h1> 
+                            	<%= allEvents[C].start.getDate() %>•<%= new Date(allEvents[C].start).toLocaleString("es-ES", month); %>
+                            </h1>
+							<h6> <%= new Date(allEvents[C].start).toLocaleString("es-ES", day); %> </h6>
 						</center>
-							<div class="staff2">
-								<img src="resources/ico_general.svg" class="persona2">
-								<h3 onClick="#"> 8am • Inauguración </h3>
-								<p><i> Preparate para aburrirte :D </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_conferencia.svg" class="persona2">
-								<h3> 9am • Nombre de la Conferencia</h3>
-								<p><i> Cosas sobre la conferencia </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_conferencia.svg" class="persona2">
-								<h3> 10am • Nombre de la Conferencia </h3>
-								<p><i> cosas sobre la conferencia </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_conferencia.svg" class="persona2">
-								<h3> 11am • Nombre de la Conferencia </h3>
-								<p><i> cosas sobre la conferencia </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_ambigu.svg" class="persona2">
-								<h3> 12pm • Rica comida por fin </h3>
-								<p><i> Esta muy buena </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_taller.svg" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_visita.svg" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_evento-social.svg" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
-
-			</div>
-			<div class="dia">
-						<center>
-							<h1> 13•Oct</h1>
-							<h6> Viernes </h6>
-						</center>
-							<div class="staff2">
-								<img src="resources/ico_general.svg" class="persona2">
-								<h3 onClick="#"> 8am • Inauguración </h3>
-								<p><i> Preparate para aburrirte :D </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_conferencia.svg" class="persona2">
-								<h3> 9am • Nombre de la Conferencia</h3>
-								<p><i> Cosas sobre la conferencia </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_conferencia.svg" class="persona2">
-								<h3> 10am • Nombre de la Conferencia </h3>
-								<p><i> cosas sobre la conferencia </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_conferencia.svg" class="persona2">
-								<h3> 11am • Nombre de la Conferencia </h3>
-								<p><i> cosas sobre la conferencia </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_ambigu.svg" class="persona2">
-								<h3> 12pm • Rica comida por fin </h3>
-								<p><i> Esta muy buena </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_taller.svg" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_visita.svg" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
-							<div class="staff2">
-								<img src="resources/ico_evento-social.svg" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
-			</div>
+                    
+                    <%
+                    var currentDay = allEvents[C].start;
+                    var sameDay = true;
+                	while(sameDay && C < allEvents.length){
+                %>
+                	<div class="staff2" <% 
+                        if(allEvents[C].event_icon) {%><%= '#' %><%}
+                        else{ %> style="cursor:pointer" onClick="location.href='consulta?code=<%= allEvents[C]._id %>'<% } %>
+                        ">
+						<img src="
+                        <% if(allEvents[C].speaker_photo != null){ %> <%= allEvents[C].speaker_photo %> <% } %>
+                        <% if(allEvents[C].contact_name != null && allEvents[C].cap != null){ %>resources/ico_visita.svg<% } %>
+                        <% if(allEvents[C].instructor_name != null){ %>resources/ico_taller.svg<% } %>
+                        <% if(allEvents[C].event_poster){ %>resources/ico_evento-social.svg<% } %>
+                        <% if(allEvents[C].event_icon){ %><%= allEvents[C].event_icon %><% } %>
+                        " class="persona2">
+						<% var hour = { hour: "2-digit", minute: "2-digit" } %> 
+                        
+                        <h3>  
+                        	<%= new Date(allEvents[C].start).toLocaleString("en-us", hour); %> 
+                            • <%= allEvents[C].name %>  </h3>
+						<p><i> <%= allEvents[C].location %> </i></p>
+					</div><br>
+                
+                <% 
+                if(C<allEvents.length - 1){
+                	if(allEvents[C+1].start != null 
+                      && allEvents[C+1].start.getDate() == currentDay.getDate()
+                      && allEvents[C+1].start.getMonth() == currentDay.getMonth()
+                      && allEvents[C+1].start.getYear() == currentDay.getYear()
+                      ){ sameDay = true;} else {sameDay = false;}
+                    }
+                
+                
+                 C++;}
+                %> 
+                
+                </div>
+                <%
+                }
+        	%> 
 		
+        
 		</div> 
 
 		<hr style="width: 100vw; border-color: rgba(0,0,0,0);"> <!-- Esto es pa que no se corra el footer, no se por que pero con esto se arregla ja-->

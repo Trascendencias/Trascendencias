@@ -86,50 +86,45 @@
 		<% if(user == undefined) { %>
 		<button class="iniciar-sesion" onclick="activate(this)"> Iniciar Sesión </button>
 		<div class="usuario-info iniciar-sesion">
-			<% if(message != '') { %>
+			<% if(locals.login_message && login_message != '') { %>
 				<h3 style="color: red;">Error: <%= message %></h3>
 				<script>
 					document.getElementsByClassName("iniciar-sesion")[0].click();
 				</script>
 			<% } %>
 			<form action="/login" method="post" id="login">
-				<input maxlength="50" placeholder="Nombre" type="text" name="name" required><br>
+				<input maxlength="50" placeholder="Correo" type="text" name="email" required><br>
 				<input maxlength="50" placeholder="Contraseña" type="password" name="password" required>
 				<p class="error"> *Datos incorrectos </p>
             </form>
             <button type="submit" form="login">Iniciar Sesion</button>
             <br><br><br> 
 			
-			<u><a href="/signup"  style='color: white;'>Registrarse</a></u> <br />
-			<u><a href="/auth/facebook" style='color: white;'>Registrarse con Facebook</a></u>
+			<u><a href="/signup" class="registrarse">Registrarse</a></u> <br />
+			<u><a href="/auth/facebook" class="registrarse">Registrarse con Facebook</a></u>
 		</div>
 		<% } else { %>
 		<img src="resources/user_example.png" class="persona1">
 			<div class="usuario-info loggedIn">
 
-				<table>
-					<tr>
-						<td class="nombre-usuario">
-							<h1> <%= user.name %> </h1> 
-						</td>
-						<td>
-							<button onclick="location.href = '/logout'""> Salir </button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<% if(user.verified) { %>
-							<h2> Paquete Elegido: <%= user.package %> </h2>
-							<h3> Restante: <%= user.debt %> pesos </h3>
-							<% } else { %>
-								<h3>Favor de verificar tu cuenta en el correo registrado.</h3>
-							<% } %>
-						</td>
-						<td>
-							<button class="second"> Cambiar </button>
-						</td>
-					</tr>
-				</table>
+
+				<h1 class="nombre-usuario"> <%= user.name %> </h1> 
+
+				<button onclick="location.href = '/logout'"> Salir </button>
+				<% if(user.verified) { %>
+					<% if(locals.user.selected_package) { %>
+						<h2> Paquete Elegido: <%= user.selected_package.package.name %> </h2>
+						<h3> Restante: <%= user.package_information.debt %> pesos </h3>
+					<% } else { %>
+						<h2>No has elegido paquete.</h2>
+					<% } %>
+				<% } else { %>
+					<% if(!locals.user.facebook.id) { %>
+						<h3>Favor de verificar tu cuenta en el correo registrado.</h3>
+					<% } else { %>	
+						<h3 onclick="location.href='validacion-facebook'">Favor de verificar tu informacion dando click <u>aqui</u>.</h3>
+					<% } %>
+				<% } %>
 			</div>
 			<% } %>
 		</div>

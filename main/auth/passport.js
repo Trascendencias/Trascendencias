@@ -48,14 +48,10 @@ module.exports = function(passport, database) {
 				new_participant.name = req.form.name;
 				new_participant.email = email;
 				new_participant.local.password = database.generate_hash(password);
-				new_participant.debt = 0;
-				new_participant.package = 'Ninguno';
 				new_participant.verified = false;
 				new_participant.alergies = req.form.alergies;
 				new_participant.institution = req.form.institution;
 				new_participant.city = req.form.city;
-				new_participant.group_code = 'Ninguno';
-				new_participant.shirt_size = req.form.shirt_size;
 
 				let verification_hash = database.generate_hash(email);
 				mail_options.text = 'Da click al siguiente link para verificar tu cuenta: https://trascendencias.org/verify?email=' + email + '&key=' + verification_hash;
@@ -65,7 +61,6 @@ module.exports = function(passport, database) {
 						return console.log(error);
 					}
 				});
-
 
 				new_participant.save(function(err) {
 					if(err) {
@@ -79,17 +74,17 @@ module.exports = function(passport, database) {
 	}));
 
 	passport.use('login', new local_strategy({
-			usernameField: 'name',
+			usernameField: 'email',
 			passwordField: 'password',
 			passReqToCallback: true
 		},
-		function(req, name, password, done) {
-			participant.findOne({ 'name': name }, function(err, searched_participant) {
+		function(req, email, password, done) {
+			participant.findOne({ 'email': email }, function(err, searched_participant) {
 				if(err) {
 					return done(err);
 				}
 				else if(!searched_participant || !database.valid_hash(password, searched_participant.local.password)) {
-					return done(null, false, req.flash('message', 'Credenciales invalidas.'));
+					return done(null, false, req.flash('login_message', 'Credenciales invalidas.'));
 				}
 
 				return done(null, searched_participant);
@@ -104,32 +99,28 @@ module.exports = function(passport, database) {
 		profileFields: ['id', 'emails', 'name']
 	},
 	function(access_token, refresh_token, profile, done) {
-		process.nextTick(function() {
-			participant.findOne({ 'facebook.id': profile.id }, function(err, searched_participant) {
-				if(err) {
-					return done(err);
-				}
-				else if(searched_participant) {
-					return done(null, searched_participant);
-				}
-				else {
-					let new_participant = new participant();
-					new_participant.facebook.id = profile.id;
-					new_participant.name = profile.name.givenName + ' ' + profile.name.familyName;
-					new_participant.email = profile.emails[0].value;
-					new_participant.package = null;
-					new_participant.debt = 0;
-					new_participant.verified = false;
+		participant.findOne({ 'facebook.id': profile.id }, function(err, searched_participant) {
+			if(err) {
+				return done(err);
+			}
+			else if(searched_participant) {
+				return done(null, searched_participant);
+			}
+			else {
+				let new_participant = new participant();
+				new_participant.facebook.id = profile.id;
+				new_participant.name = profile.name.givenName + ' ' + profile.name.familyName;
+				new_participant.email = profile.emails[0].value;
+				new_participant.verified = false;
 
-					new_participant.save(function(err) {
-						if(err) {
-							throw err;
-						}
+				new_participant.save(function(err) {
+					if(err) {
+						throw err;
+					}
 
-						return done(null, new_participant);
-					});
-				}
-			});
+					return done(null, new_participant);
+				});
+			}
 		});
 	}));
 };
