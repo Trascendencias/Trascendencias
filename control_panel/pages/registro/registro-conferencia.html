@@ -33,8 +33,8 @@
                 <p class="title"> Fin: </p>
                 <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
                 
-                <input type="text" id="start" name="start"> 
-                <input type="text" id="end" name="end"> 
+                <input type="hidden" id="start" name="start"> 
+                <input type="hidden" id="end" name="end"> 
                 
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
@@ -88,7 +88,7 @@
 
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
                 <p class='teaser'><input type="checkbox" name="teaser_banner" value="TRUE"> Incluir en Teaser Banner </p>
-                <input type=number name="include_teaser" class="numero goright" value="none">
+                <input type=number name="include_teaser" max="20" onblur="if(this.value > 20){ this.value = 20}"class="numero goright" value="none">
                 <div class="spacer"></div>
                 <hr>
 				<button type="submit" class="submit"> Siguiente </button>

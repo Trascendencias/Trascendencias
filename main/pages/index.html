@@ -1,16 +1,15 @@
 <html>
 	<head>
 		<!---FACEBOOK OPTIMIZATION -->
-		<meta property="og:url" content="#!URL" />
+		<meta property="og:url" content="www.Trascendencias.org" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="#!TITLE" />
-		<meta property="og:image" content="#!IMG" />
+		<meta property="og:title" content="Página Oficial de Trascendencias" />
 		
 		<!---SEO OPTIMIZATION -->
 		<title> Trascendencias 2017 </title>
-		<meta name="description" content="#!DESCRIPTION">
-		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
-		<meta name="author" content="#!AUTOR">
+		<meta name="description" content="Página Oficial de Trascendencias Cetys Universidad">
+		<meta name="keywords" content="página, oficial, trascendencias, cetys, universidad" >
+		<meta name="author" content="Trascendencias">
 
 		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -28,28 +27,25 @@
 
 	<body>
 	
-		<script src="https://www.w3schools.com/lib/w3.js"></script>
-		<div w3-include-html="menu"></div>
+
 		<%
-		var number_of_slides = 0;
 		var slider = [];
 
 		conferencias.forEach(function(element) {
 			if(element.include_teaser > 0) {
 				slider.splice(element.include_teaser, 0, element);
 			}
-			number_of_slides++;
 		});
 
 		%>
 		<div class="slider main" style="margin-top: -10px;">
-			<div class="slides main" id="slides" style="width: calc(100vw * <%= number_of_slides %>);">
+			<div class="slides main" id="slides" style="width: calc(100vw * <%= slider.length %>);">
 				<% for(let i = 0; i < slider.length; i++) { %>
-				<div class="slide main" style="background: url('<%= slider[i].photos[0] %>') center center; left: calc(100vw * <%= i %>);">
+				<div class="slide main" style="background-image: url('<%= slider[i].photos[0] %>'); left: calc(100vw * <%= i %>);">
 					<div class="slide-textholder">
-						<h1 class="cwhite"> MEJOR SIMPOSIO DEL NOROESTE </h1> 
-						<p class="cwhite"> Trascendencias es el mejor simposio de ingeniería de todo el noroeste de México. 
-							<button> ¡QUIERO ASISTIR! </button> 
+						<h1 class="cwhite"> <%= slider[i].name %> </h1> 
+						<p class="cwhite"> <%= slider[i].summary %>
+							<button onClick="location.href='consulta?code=<%= slider[i]._id %>'"> Saber Más </button> 
 						</p>
 					</div>
 				</div>
@@ -57,7 +53,7 @@
 			</div>
 
 			<script type="text/javascript">
-				var number_of_slides = <%= number_of_slides %>;
+				var number_of_slides = <%= slider.length %>;
 			</script>
 
 
@@ -137,8 +133,7 @@
 		var current_slide = 0;
 
 		slide_right = function() {
-			console.log(number_of_slides);
-			if(current_slide == number_of_slides) {
+			if(current_slide == number_of_slides - 1) {
 				current_slide = 0; 
 				slides.style.left = "0px"; 
 			}
@@ -151,7 +146,7 @@
 		slide_left = function() {
 			if(current_slide == 0) {
 				slides.style.left = "calc(-100vw * 4)"; 
-				current_slide = number_of_slides;
+				current_slide = number_of_slides - 1;
 			}
 			else { 
 				current_slide--; 

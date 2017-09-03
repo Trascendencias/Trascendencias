@@ -610,12 +610,12 @@ img.persona2 {
 	position: absolute;
 	width: 100vw;
 	height: 480px;
-	background: url("#");
-	background-position: center center;
-	background-size: 100vw 480px;
+
+	background-position: center;
+	background-size: 100vw auto;
 	cursor: pointer;
 	z-index: 3;
-
+	background-repeat: no-repeat;
 }
 .left-arrow {
 	transform: rotate(180deg);

@@ -138,24 +138,12 @@ database.register = {
 			return done(null, saved_participant);
 		});
 	},
-	staff: function(form, match, done) {
-		database.find('staff', match, function(err, searched) {
-			if(err) {
-				return done(err, null);
-			}
+	'punto-venta': function(form, files, done) {
+		let new_sale_point = new models.sale_point();
+		database.form_to_model(form, new_sale_point);
 
-			if(!searched) {
-				searched = new models.staff();
-			}
-
-			database.form_to_model(form, searched);
-			searched.save(function(err, saved) {
-				if(err) {
-					return done(err, null);
-				}
-
-				return done(null, saved);
-			});
+		new_sale_point.save(function(err, saved) {
+			return done(null, saved);
 		});
 	}
 };
