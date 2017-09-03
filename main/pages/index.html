@@ -17,48 +17,55 @@
 		<!--- INCLUIR DOCUMENTOS -->
 		<% include partials/menu.html %>
 		<div class="menuspacer"></div>
-
-		<!--- Pa que agarren los acentos -->
 		<meta charset="UTF-8">
-
-		<!--- Pa que agarre el Styleshit -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 	</head>
 
 	<body>
-	
-
-		<%
-		var slider = [];
-
-		conferencias.forEach(function(element) {
-			if(element.include_teaser > 0) {
-				slider.splice(element.include_teaser, 0, element);
-			}
-		});
-
-		%>
-		<div class="slider main" style="margin-top: -10px;">
-			<div class="slides main" id="slides" style="width: calc(100vw * <%= slider.length %>);">
-				<% for(let i = 0; i < slider.length; i++) { %>
-				<div class="slide main" style="background-image: url('<%= slider[i].photos[0] %>'); left: calc(100vw * <%= i %>);">
+	<div class="slider main" style="margin-top: -10px;">
+			<% 
+                var teaser = new Array();
+            	var A = 1; var C = 0; 
+                while(A <= 20) {
+                	var B = 0;
+                    while(B<paquetes.length) {  
+                    	if(paquetes[B].teaser_position == A){ teaser[C] = paquetes[B]; C++; }
+                    B++; 
+                    }
+                    B = 0; 
+                    while(B<blogs.length) {  
+                    	if(blogs[B].teaser_position == A){ teaser[C] = blogs[B]; C++; }
+                    B++; 
+                    }
+                    B = 0; 
+                    while(B<conferencias.length) {  
+                    	if(conferencias[B].teaser_position == A){ teaser[C] = conferencias[B]; C++; }
+                    B++; 
+                    }
+                A++;}
+            %>
+            
+			<div class="slides main" id="slides">
+			
+            
+            <%= teaser.length %>  
+            <% C = 0; while(C < teaser.length) { %> 
+				<div class="slide main" style="background: url('<%= teaser[C].photos[0] %>') center center; left: calc(100vw * <%= C %> );">
 					<div class="slide-textholder">
-						<h1 class="cwhite"> <%= slider[i].name %> </h1> 
-						<p class="cwhite"> <%= slider[i].summary %>
-							<button onClick="location.href='consulta?code=<%= slider[i]._id %>'"> Saber Más </button> 
+						<h1 class="cwhite"> <%= teaser[C].name %> </h1> <!-- Titulo del Teaser Banner -->
+						<p class="cwhite"> <%= teaser[C].summary %> <!-- Descripción del Teaser Banner -->
+							<button onClick="location.href='consulta?code=<%= teaser[C]._id %>'"> ¡QUIERO ASISTIR! </button> <!-- BOTON DE ACCION -->
 						</p>
 					</div>
 				</div>
-				<% } %>
+			<% C++; } %> 
+				
 			</div>
-
-			<script type="text/javascript">
-				var number_of_slides = <%= slider.length %>;
-			</script>
+            
 
 
-			<button class="left-arrow main-btn" onClick="slide_left()"> ➜ </button>
-			<button class="right-arrow main-btn" onClick="slide_right()"> ➜ </button>			
+			<button class="left-arrow main-btn" onClick="leftSlider()"> ➜ </button>
+			<button class="right-arrow main-btn" onClick="rightSlider()"> ➜ </button>			
 		</div>
         
         <br><br><br><br>
@@ -127,32 +134,31 @@
 	</body>
 	
 	<script>
-		alert("Bienvenido! Ésta página está en construcción, disculpe las molestias!"); 
 
+	var currentSlide = 0; //El slide en el que está menos 1
 		var slides = document.getElementById("slides");
-		var current_slide = 0;
-
-		slide_right = function() {
-			if(current_slide == number_of_slides - 1) {
-				current_slide = 0; 
+		var totalSlides = document.getElementsByClassName("slide").length - 1 ;
+		var beforeSlide = totalSlides;
+		var afterSlide = 1;
+		function rightSlider(){
+			if(currentSlide == totalSlides){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
+				currentSlide = 0; 
 				slides.style.left = "0px"; 
 			}
 			else {
-				current_slide++; 
-				slides.style.left = "calc(-100vw * " + current_slide + ")";
+				currentSlide++; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")";
 			}
-		}
-
-		slide_left = function() {
-			if(current_slide == 0) {
-				slides.style.left = "calc(-100vw * 4)"; 
-				current_slide = number_of_slides - 1;
-			}
+				}
+		function leftSlider(){
+			if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
+				slides.style.left = "calc(-100vw *"+totalSlides+")"; 
+				currentSlide = totalSlides;}
 			else { 
-				current_slide--; 
-				slides.style.left = "calc(-100vw * " + current_slide + ")"; 
+				currentSlide--; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
 			}
-		}
+				}
 
 		function activate(elem){ // ES PARA APARECER / DESAPARECER COSAS (COMO EL MENU)
 			if(elem.classList.contains('active')) elem.classList.remove('active'); 

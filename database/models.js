@@ -125,7 +125,7 @@ var schemas = {
 		video_urls: [String],
 		summary: String,
 		description: String,
-		include_teaser: Number
+		teaser_position: Number
 	}),
 	faq: mongoose.Schema({
 		name: String,

@@ -86,7 +86,7 @@
 		<% if(user == undefined) { %>
 		<button class="iniciar-sesion" onclick="activate(this)"> Iniciar Sesión </button>
 		<div class="usuario-info iniciar-sesion">
-			<% if(locals.message && message != '') { %>
+			<% if(message != '') { %>
 				<h3 style="color: red;">Error: <%= message %></h3>
 				<script>
 					document.getElementsByClassName("iniciar-sesion")[0].click();
@@ -100,7 +100,7 @@
             <button type="submit" form="login">Iniciar Sesion</button>
             <br><br><br> 
 			
-			<u><a href="/signup" style='color: white;'>Registrarse</a></u> <br />
+			<u><a href="/signup"  style='color: white;'>Registrarse</a></u> <br />
 			<u><a href="/auth/facebook" style='color: white;'>Registrarse con Facebook</a></u>
 		</div>
 		<% } else { %>
@@ -119,14 +119,10 @@
 					<tr>
 						<td>
 							<% if(user.verified) { %>
-								<h2> Paquete Elegido: <%= user.package %> </h2>
-								<h3> Restante: <%= user.debt %> pesos </h3>
+							<h2> Paquete Elegido: <%= user.package %> </h2>
+							<h3> Restante: <%= user.debt %> pesos </h3>
 							<% } else { %>
-								<% if(user.facebook == undefined) { %>
-									<h3>Favor de verificar tu cuenta en el correo registrado.</h3>
-								<% } else { %>
-									<h3>Favor de verificar tu informacion.</h3>
-								<% } %>
+								<h3>Favor de verificar tu cuenta en el correo registrado.</h3>
 							<% } %>
 						</td>
 						<td>

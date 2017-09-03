@@ -258,7 +258,7 @@ img.persona2 {
 		border-radius: 1000px;
 	}
 
-@media only screen and (min-width: 1070px) {
+@media only screen and (min-width: 1100px) {
 	.menu-btn{
 		display: none;
 	}
@@ -432,7 +432,7 @@ img.persona2 {
 	   		}
 	}
 
-@media only screen and (max-width: 1069px) {
+@media only screen and (max-width: 1100px) {
 	.menu-btn {
 		display: block;
 		height: 100%;
@@ -547,23 +547,26 @@ img.persona2 {
 	}
 	div.iniciar-sesion {
 		display: block;
-		width: 100%;
+		width: 90vw;
 		margin: 0;
 		max-width: 450px;
 		width: 100%;
 		padding-left: -10;
-
+		position: relative;
+		top: 40px;
 	}
 	div.iniciar-sesion input{
-		width: 100%;
+		width: 90vw;
 		margin: 0px;
+		max-width: 500px;
 	}
 	div.iniciar-sesion input:focus{
 		color: white;
 	}
-	div.iniciar-sesion button.second{
+	div.iniciar-sesion button{
 		margin-top: -30px;
-		margin-right: 10px;
+		float: right;
+		display: inline;
 	}
 }
 @keyframes menu {

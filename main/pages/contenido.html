@@ -37,33 +37,41 @@
 			<!--- ESTE SLIDER MUESTRA LOS TEASER DE CONFERENCIAS, TALLERES, VISITAS Y EVENTOS SOCIALES -->
 			<div class="slider" style="margin-top: -10px;">
 			
-				<div class="slides" id="slides" style="width: calc(100vw * <%= conferencias.length %>);">
-				<% var C=0; while(C<conferencias.length){ %> 
-					<div class="slide" style="background-image: url('<%= conferencias[C].photos[0] %>'); left: calc(100vw * <%= C %>);">
-						<div class="slide-textholder">
-							<h1 class="cwhite"> <%= conferencias[C].name %></h1> <!-- Titulo del Teaser Banner -->
-							<p class="cwhite"> <%= conferencias[C].description %> <!-- Descripción del Teaser Banner -->
-								<button onClick="location.href='consulta?code=<%= conferencias[C]._id %>'"> Leer Más </button> <!-- BOTON DE ACCION -->
-							</p>
-						</div>
-					</div>
-				<% C++ } %>
-					
-                    
-                    
-                   
-					
-					
-					
-				</div>
+				<% 
+                var teaser = new Array();
+            	var A = 1; var C = 0; 
+                while(A <= 20) {
+                	var B = 0;
+                    while(B<conferencias.length) {  
+                    	if(conferencias[B].teaser_position == A){ teaser[C] = conferencias[B]; C++; }
+                    B++; 
+                    }
+                A++;}
+            %>
+            
+			<div class="slides main" id="slides">
+			
+            
 
-				<button class="left-arrow" onClick="leftSlider()"> ➜ </button>
-				<button class="right-arrow" onClick="rightSlider()"> ➜ </button>
+            <% C = 0; while(C < teaser.length) { %> 
+				<div class="slide" style="background: url('<%= teaser[C].photos[0] %>') center center; left: calc(100vw * <%= C %> );">
+					<div class="slide-textholder">
+						<h1 class="cwhite"> <%= teaser[C].name %> </h1> <!-- Titulo del Teaser Banner -->
+						<p class="cwhite"> <%= teaser[C].summary %> <!-- Descripción del Teaser Banner -->
+							<button onclick="location.href='consulta?code=<%= teaser[C]._id %>'"> Leer Más </button> <!-- BOTON DE ACCION -->
+						</p>
+					</div>
+				</div>
+			<% C++; } %> 
+				
 			</div>
-			<!-- SLIDER EN GRANDE -->
-			<div id="biggerImage" > 
-				<img src="resources/slider1.jpg" id="biggerImg">
-			</div>
+            
+
+
+			<button class="left-arrow main-btn" onClick="leftSlider()"> ➜ </button>
+			<button class="right-arrow main-btn" onClick="rightSlider()"> ➜ </button>			
+		</div>
+		
 
 
 
@@ -168,14 +176,13 @@
 		else elem.classList.add('active'); 
 		}
 
-
-
-		var currentSlide = 0; //El slide en el que está menos 1
+var currentSlide = 0; //El slide en el que está menos 1
 		var slides = document.getElementById("slides");
-		var beforeSlide = <%= conferencias.length - 1 %> ;
+		var totalSlides = document.getElementsByClassName("slide").length - 1 ;
+		var beforeSlide = totalSlides;
 		var afterSlide = 1;
 		function rightSlider(){
-			if(currentSlide == <%= conferencias.length - 1 %>){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
+			if(currentSlide == totalSlides){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
 				currentSlide = 0; 
 				slides.style.left = "0px"; 
 			}
@@ -183,24 +190,15 @@
 				currentSlide++; 
 				slides.style.left = "calc(-100vw * " + currentSlide + ")";
 			}
-		}
-		function leftSlider(){				
-				if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
-					slides.style.left = "calc(-100vw * <%= conferencias.length - 1 %> )"; 
-					currentSlide = <%= conferencias.length - 1 %> ;}
-				else { 
-					currentSlide--; 
-					slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
 				}
+		function leftSlider(){
+			if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
+				slides.style.left = "calc(-100vw *"+totalSlides+")"; 
+				currentSlide = totalSlides;}
+			else { 
+				currentSlide--; 
+				slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
 			}
-			
-		//SlideShow en Gigante
-		document.getElementById("slides").onclick = function(){  show(currentSlide) };
-		document.getElementById("biggerImage").onclick = function(){ document.getElementById("biggerImage").style.display = "none"; }
-		function show(slideNumber){
-			document.getElementById("biggerImg").src = "resources/slider" +  (slideNumber + 1) + ".jpg"; 
-			//aquí nomás se cambia a que sea la imagen de la base de datos que corresponda con el numero de la imagen y sha :D
-			document.getElementById("biggerImage").style.display = "block";
-		}
+				}
 	</script>
 </html>
