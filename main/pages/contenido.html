@@ -58,7 +58,7 @@
 					<div class="slide-textholder">
 						<h1 class="cwhite"> <%= teaser[C].name %> </h1> <!-- Titulo del Teaser Banner -->
 						<p class="cwhite"> <%= teaser[C].summary %> <!-- Descripción del Teaser Banner -->
-							<button onClick="location.href='consulta?codigo=<%= teaser[C]._id %>&collection=conferencia'"> Leer Más </button> <!-- BOTON DE ACCION -->
+							<button onClick="location.href='/consulta?codigo=<%= teaser[C]._id %>&collection=conferencia'"> Leer Más </button> <!-- BOTON DE ACCION -->
 						</p>
 					</div>
 				</div>
@@ -93,7 +93,7 @@
 								<p><i> <%= element.speaker_titles %></i></p>
 							</div><br>
 								
-							<div class="card" onClick="location.href='consulta?code=<%= element._id %>'">
+							<div class="card" onClick="location.href='consulta?codigo=<%= element._id %>&collection=conferencia'">
 								<img src="<%= element.photos[0] %>">
 								<h3> <%= element.name %> </h3>
 								<p> <%= element.summary %> </p>
@@ -114,7 +114,7 @@
 					<br><br>
 						
 						<% talleres.forEach(function(element) { %>
-							<div class="card" onClick="location.href='consulta?code=<% element._id %>'">
+							<div class="card" onClick="location.href='consulta?codigo=<% element._id %>&collection=taller'">
 								<img src="<%= element.photos[0] %>">
 								<h3> <%= element.name %> </h3>
 								<p> <%= element.summary %> </p>
@@ -133,7 +133,7 @@
 			<br><br>
 						
 						<% visitas.forEach(function(element) { %>
-							<div class="card" onClick="location.href='consulta?code=<% element._id %>'">
+							<div class="card" onClick="location.href='consulta?codigo=<% element._id %>&collection=visita'">
 								<img src="<%= element.photos[0] %>">
 								<h3> <%= element.name %> </h3>
 								<p> <%= element.summary %> </p>
@@ -153,7 +153,7 @@
 			<br><br>
 						
 						<% eventos_sociales.forEach(function(element) { %>
-							<div class="card" onClick="location.href='consulta?code=<% element._id %>'">
+							<div class="card" onClick="location.href='consulta?codigo=<% element._id %>&collection=evento_social'">
 								<img src="<%= element.event_poster %>">
 								<h3> <%= element.name %> </h3>
 								<p> <%= element.summary %> </p>

@@ -2,16 +2,16 @@
 
 <head>
 	<!---FACEBOOK OPTIMIZATION -->
-	<meta property="og:url" content="#!URL" />
+	<meta property="og:url" content="<%= url %>" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="#!TITLE" />
-	<meta property="og:image" content="#!IMG" />
+	<meta property="og:title" content="<%= consulta.name %>" />
+	<meta property="og:image" content="<%= consulta.photos[0] %>" />
 	
 	<!---SEO OPTIMIZATION -->
 	<title> <%= consulta.name %>  </title>
-	<meta name="description" content="#!DESCRIPTION">
-	<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
-	<meta name="author" content="#!AUTOR">
+	<meta name="description" content="<%= consulta.summary %> ">
+	<meta name="keywords" content="Trascendencias, Conferencias, Talleres, Visitas, Eventos Sociales" >
+	<meta name="author" content="Trascendencias">
 
 	<!-- tag para hacerlo escalable -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -29,17 +29,9 @@
 			
 <body>
 		<!-- Plugin de Facebook -->
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
 
 		<!--- INDICADOR DE PAGINA -->
-		<div class="pageLocation cmen"><h5 id="pageLocation"> #!Consulta </h5></div> 
+		<div class="pageLocation cmen"><h5 id="pageLocation"><%= collection %> > <%= consulta.name %></h5></div> 
 
 		
 		<!-- ESTE DIV ES SOLO PARA CONFERENCIAS Y TALLERES -->
@@ -59,35 +51,46 @@
 
 
 
-		<!-- ESTE ES EL PUTO SLIDER -->
-		<div class="slider">
-				
-				<div class="slides" id="slides" style="width: calc(100vw * 5);"><!-- El 5 es la cantidad total de slides -->
+		<div class="slider" style="margin-top: -10px;">
 
-					
-					<!-- PUES AQUI SE PONE EL WHILE PA QUE AGREGUE TODAS LAS IMAGENES -->
-					<div class="slide" style="background: url('resources/slider1.jpg') center center; left: calc(100vw * 0);"></div> 
-					<!-- El 0 es la posición del slide 1 menos 1, osea 0, igual con los demás -->
-					<div class="slide" style="background: url('resources/slider2.jpg') center center; left: calc(100vw * 1);">
-					<!-- NINGUN VIDEO VA EN NINGUN TEASER, ESTE ES UN EJEMPLO PARA LAS ENTRADAS DE BLOG, VISITAS, TALLERES Y EVENTOS -->
-						<iframe width=100% height="100%" src="https://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
-					</div>
-					<div class="slide" style="background: url('resources/slider3.jpg') center center; left: calc(100vw * 2);"></div>
-					<div class="slide" style="background: url('resources/slider4.jpg') center center; left: calc(100vw * 3);"></div>
-					<div class="slide" style="background: url('resources/slider5.jpg') center center; left: calc(100vw * 4);"></div>
-				
-				</div>
-
-				<button class="left-arrow" onClick="leftSlider()"> ➜ </button>
-				<button class="right-arrow" onClick="rightSlider()"> ➜ </button>
+            
+			<div class="slides main" id="slides">
 			
+            
+
+            <% var C = 0; while(C < consulta.photos.length) { %> 
+				<div class="slide" style="background: url('<%= consulta.photos[C] %>') center center; left: calc(100vw * <%= C %> );">
+				</div>
+			<% C++; } %> 
+            <% var A = 0; while(A < consulta.video_urls.length) { %> 
+				<div class="slide" style="left: calc(100vw * <%= C %> );">
+                <iframe width=100% height="100%" src="https://www.youtube.com/embed/<%= consulta.video_urls[A] %>"></iframe>
+				</div>
+			<% C++; A++;} %> 
+				
+			</div>
+            
+
+
+			<button class="left-arrow main-btn" onClick="leftSlider()"> ➜ </button>
+			<button class="right-arrow main-btn" onClick="rightSlider()"> ➜ </button>			
 		</div>
 
 		<!-- SLIDER EN GRANDE -->
 		<div id="biggerImage" > <img src="resources/slider1.jpg" id="biggerImg"> </div>
-
+		
+        <div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+        
+        
 			
-		<% if (consulta.cap){ %>
+		<% if (consulta.cap && consulta.cost == null){ %>
 		<div class="ingresar-visita-taller">
 			<h5> Cupo Abierto <b> 13/<%= consulta.cap %> </b> </h5>
 			<% if(user.debt <= 0) { %> <button class="second"> Ingresar </button> <% } %>
@@ -96,6 +99,7 @@
 
 		<div class="contenido">
 			<h1> <%= consulta.name %> </h1>
+            
 			<% if(consulta.location){ %><h6><i> 
              <%= consulta.location %>  </i></h6><% }%>
 
@@ -103,23 +107,27 @@
             
             var day = {  day: "numeric", weekday: "long", month: "short", hour: "2-digit", minute: "2-digit"  };
             var hour = { hour: "2-digit", minute: "2-digit"  };
+            var shortDay = {  day: "numeric", month: "short" };
             %>
 			<h6><b>
-            
+            <% if(consulta.cost) { %>
+            <%= new Date(consulta.start).toLocaleString("es-ES", shortDay); %> - <%= new Date(consulta.end).toLocaleString("es-ES", shortDay); %>
+            <% } else { %>
             <%= new Date(consulta.start).toLocaleString("es-ES", day); %> - <%= new Date(consulta.end).toLocaleString("es-ES", hour); %>
            
-            </b></h6> <% } %>
+            </b></h6> <% }  } %>
+            <br>
+            <div class="fb-like" data-href="<%= url %>" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 			<p> <%= consulta.summary %> </p>
 			<p> <%= consulta.description %> </p>
 			
 			<!--EL BOTON DE COMPRAR ES SOLO PARA PAQUETES-->
 			<br>
 			<% if(consulta.cost) { %>
-            <center><button onClick="location.href='apartar-paquete?paquete=<%= element._id %>'"> Apartar Paquete </button></center>
+            <h1>$<%= consulta.cost %>.00 </h1><br>
+            <center><button onClick="location.href='apartar-paquete?paquete=<%= consulta._id %>'"> Apartar Paquete </button></center>
             <% } %>
 			<br>
-
-			<div class="fb-like" data-href="#" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 
 			
 			
@@ -131,7 +139,7 @@
 
 		<div class="recomendaciones">
 			<div class="h4holder">
-				<h4> Blogs </h4>
+				<h4> Contenido Destacado </h4>
 			</div>
 
 			<h2 onClick="location.href='link'"> Puesto en UABC </h2>
@@ -143,25 +151,31 @@
 			<br>
 			
 			<center> 
-				<button onClick="#">Ver Todos </button>
+				<button onClick="location.href='contenido'">Ver Todos </button>
 			</center>
 		</div>
 
-		<div class="fb-comments" data-href="http://9gag.com" data-numposts="5" data-width=100%></div>
+		<div class="fb-comments" data-href="www.trascendencias.org<%= url %>" data-numposts="5" data-width=100% ></div>
 </body>
 		
 <hr style="width: 100vw; border-color: rgba(0,0,0,0);"> <!--- Sin esto se hace feo el pedo -->
 
 	
-	<script>
+	
+	<script >
+		
+		function activate(elem){	
+		if(elem.classList.contains('active')) elem.classList.remove('active'); 
+		else elem.classList.add('active'); 
+		}
 
-		//SLIDER
-		var currentSlide = 0; //El slide en el que está menos 1
+var currentSlide = 0; //El slide en el que está menos 1
 		var slides = document.getElementById("slides");
-		var beforeSlide = 4;
+		var totalSlides = document.getElementsByClassName("slide").length - 1 ;
+		var beforeSlide = totalSlides;
 		var afterSlide = 1;
 		function rightSlider(){
-			if(currentSlide == 4){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
+			if(currentSlide == totalSlides){ //Número total de slides menos 1, es para cuando lleguen al final de los slides
 				currentSlide = 0; 
 				slides.style.left = "0px"; 
 			}
@@ -169,32 +183,15 @@
 				currentSlide++; 
 				slides.style.left = "calc(-100vw * " + currentSlide + ")";
 			}
-		}
+				}
 		function leftSlider(){
 			if(currentSlide == 0){ //Es el principio de los slides, si le pican para irse atrás se irá al final de los slides
-				slides.style.left = "calc(-100vw * 4)"; 
-				currentSlide = 4;}
+				slides.style.left = "calc(-100vw *"+totalSlides+")"; 
+				currentSlide = totalSlides;}
 			else { 
 				currentSlide--; 
 				slides.style.left = "calc(-100vw * " + currentSlide + ")"; 
 			}
-		}
-		
-		function activate(elem){ //Activar / desactivar mierda
-			if(elem.classList.contains('active')) elem.classList.remove('active'); 
-			else elem.classList.add('active'); 
-			}
-
-		//SlideShow en Gigante
-		document.getElementById("slides").onclick = function(){  show(currentSlide) };
-		document.getElementById("biggerImage").onclick = function(){ document.getElementById("biggerImage").style.display = "none"; }
-		function show(slideNumber){
-			document.getElementById("biggerImg").src = "resources/slider" +  (slideNumber + 1) + ".jpg"; 
-			//aquí nomás se cambia a que sea la imagen de la base de datos que corresponda con el numero de la imagen y sha :D
-			document.getElementById("biggerImage").style.display = "block";
-		}
-
-
-
+				}
 	</script>
 </html>

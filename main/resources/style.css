@@ -244,10 +244,15 @@ img.persona2 {
 		padding-top: 10px;
 		z-index: 8;
 		box-shadow: 0px 0px 7px rgba(0,0,0,0.5);
+		overflow: hidden;
+		direction: rtl;
+		white-space:nowrap;
 	}
 	.pageLocation h5{
 		margin-left: 2vw;
+		margin-right: 2vw;
 		font-weight: normal;
+		text-transform: capitalize;
 
 	}
 	.menu ul li img { /* IMAGENES MENU*/

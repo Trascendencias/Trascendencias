@@ -24,27 +24,27 @@
 	<body>
 	<div class="slider main" style="margin-top: -10px;">
 			<% 
-                var teaser = new Array();
+                var teaser = new Array(); var collection = new Array();
             	var A = 1; var C = 0; 
                 while(A <= 20) {
                 	var B = 0;
                     while(B<paquetes.length) {  
-                    	if(paquetes[B].teaser_position == A){ teaser[C] = paquetes[B]; C++; }
+                    	if(paquetes[B].teaser_position == A){ teaser[C] = paquetes[B]; collection[C] = "paquetes"; C++;}
                     B++; 
                     }
                     B = 0; 
                     while(B<blogs.length) {  
-                    	if(blogs[B].teaser_position == A){ teaser[C] = blogs[B]; C++; }
+                    	if(blogs[B].teaser_position == A){ teaser[C] = blogs[B]; collection[C] = "blog"; C++; }
                     B++; 
                     }
                     B = 0; 
                     while(B<conferencias.length) {  
-                    	if(conferencias[B].teaser_position == A){ teaser[C] = conferencias[B]; C++; }
+                    	if(conferencias[B].teaser_position == A){ teaser[C] = conferencias[B]; collection[C] = "conferencia"; C++; }
                     B++; 
                     }
                 A++;}
             %>
-            
+             
 			<div class="slides main" id="slides">
 
             <% C = 0; while(C < teaser.length) { %> 
@@ -52,7 +52,7 @@
 					<div class="slide-textholder">
 						<h1 class="cwhite"> <%= teaser[C].name %> </h1> <!-- Titulo del Teaser Banner -->
 						<p class="cwhite"> <%= teaser[C].summary %> <!-- Descripción del Teaser Banner -->
-							<button onClick="location.href='consulta?code=<%= teaser[C]._id %>'"> Leer Más </button> <!-- BOTON DE ACCION -->
+							<button onClick="location.href='consulta?codigo=<%= teaser[C]._id %>&collection=<%= collection[C]%>'"> Leer Más </button> <!-- BOTON DE ACCION -->
 						</p>
 					</div>
 				</div>

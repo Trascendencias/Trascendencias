@@ -31,7 +31,9 @@ module.exports = function(http_app, app, fs, passport, database) {
 		}
 			 res.render('consulta', {
 				consulta: doc,
-				user: req.user
+				user: req.user,
+				url: req.originalUrl,
+				collection: req.query.collection
 		});
 	});
 });
