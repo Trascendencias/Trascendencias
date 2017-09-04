@@ -54,7 +54,7 @@ module.exports = function(passport, database) {
 			passReqToCallback: true,
 		},
 		function(req, username, password, done) {
-			staff_member.findOne({ 'name': username }, function(err, searched_staff_member) {
+			staff_member.findOne({ email: username }, function(err, searched_staff_member) {
 				if(err) {
 					return done(err);
 				}

@@ -83,18 +83,22 @@ app.post('/registro-participante_por_staff', check_session, form(), function(req
 		database.assign_package(participant.id, req.form.selected_package, req.form, function(err, participant) {
 			if(catch_errors(err, participant)) return res.redirect('/registro/avisos?titulo=error&mensaje=Error del servidor');
 
-			if(!(req.form.abono = parseInt(req.form.abono))) {
+			if((req.form.abono = parseInt(req.form.abono)) == null || req.form.abono < 0) {
 				return res.redirect('/registro/avisos?titulo=error&mensaje=Abono invalido');
 			}
 
-			transporter.sendMail({
-				from: '"Trascendencias" <trasce4eva@gmail.com>',
-				subject: 'Recibo de Trascendencias',
-				text: 'Gracias por formar parte de Trascendencias, acabas de abonar ' + req.form.abono + ' pesos',
-				to: req.form.email
-			}, (err, info) => {
-				
-			});
+			if(req.form.abono > 0) {
+				transporter.sendMail({
+					from: '"Trascendencias" <trasce4eva@gmail.com>',
+					subject: 'Recibo de Trascendencias',
+					text: 'Gracias por formar parte de Trascendencias, acabas de abonar $' + req.form.abono + ' pesos.',
+					to: req.form.email
+				}, (err, info) => {
+					if(err) {
+						console.log(err);
+					}
+				});
+			}
 
 			participant.package_information.debt -= req.form.abono;
 			participant.verified = true;
@@ -148,18 +152,22 @@ app.post('/abonar-:id', check_session, form(), function(req, res) {
 		database.consult('participante', req.params.id, function(err, doc) {
 			if(catch_errors(err, doc)) return res.redirect('/registro/avisos?titulo=error&mensaje=Error del servidor');
 
-			if(!(req.form.abono = parseInt(req.form.abono)) || req.form.abono < 0) {
+			if((req.form.abono = parseInt(req.form.abono)) == null || req.form.abono < 0) {
 				return res.redirect('/registro/avisos?titulo=error&mensaje=Abono invalido');
 			}
 
-			transporter.sendMail({
-				from: '"Trascendencias" <trasce4eva@gmail.com>',
-				subject: 'Recibo de Trascendencias',
-				text: 'Gracias por formar parte de Trascendencias, acabas de abonar ' + req.form.abono + ' pesos',
-				to: req.form.email
-			}, (err, info) => {
-				
-			});
+			if(req.form.abono > 0) {
+				transporter.sendMail({
+					from: '"Trascendencias" <trasce4eva@gmail.com>',
+					subject: 'Recibo de Trascendencias',
+					text: 'Gracias por formar parte de Trascendencias, acabas de abonar $' + req.form.abono + ' pesos.',
+					to: doc.email
+				}, (err, info) => {
+					if(err) {
+						console.log(err);
+					}
+				});
+			}
 
 			doc.package_information.debt -= req.form.abono;
 			if(doc.package_information.debt <= 0) {

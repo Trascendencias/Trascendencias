@@ -31,6 +31,9 @@ body {
 .cmenta{
 	color: #42C7F4;
 }
+.cblack {
+	color: #071D25;
+	}
 
 
 /* TEXTOS */
@@ -822,6 +825,7 @@ h1 {
 	margin-left: 15px;
 	margin-right: : 15px;
 	margin-top: -15px;
+	line-height: 1;
 }
 .cardconf{
 	display: inline-block;
@@ -1039,8 +1043,8 @@ input[type=text], input[type=password], input[type=email], input[type=number]{
 	width: 90vw;
 	max-width: 700px;
 	background-color: rgba(0,0,0,0);
-	margin-top: -25px;
-	margin-bottom:0px;
+	margin-top: 10px;
+	margin-bottom:10px;
 }
 input[type=text]:focus, input[type=password]:focus{
 	border-bottom: 2px solid black;
@@ -1060,7 +1064,7 @@ p.error{
 input.error + p.error{
 	visibility: visible;
 }
-#select {
+.select {
     border: none;
     background-color: white;
     font-size: 20px;
@@ -1069,12 +1073,13 @@ input.error + p.error{
     -webkit-appearance: none; 
     -moz-appearance: none;
     appearance: none;
-    color: #ccc;
+    color: #777;
     border-bottom: 2px solid #95989a;
     padding: 10px;
     border-radius: 0px;
-    margin-top: -25px;
     outline: none;
+	margin-top: 10px;
+	margin-bottom: 10px;
 
 }
 .registro button{

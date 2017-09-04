@@ -45,13 +45,9 @@ module.exports = function(passport, database) {
 			}
 			else {
 				let new_participant = new participant();
-				new_participant.name = req.form.name;
-				new_participant.email = email;
+				database.form_to_model(req.form, new_participant);
 				new_participant.local.password = database.generate_hash(password);
 				new_participant.verified = false;
-				new_participant.alergies = req.form.alergies;
-				new_participant.institution = req.form.institution;
-				new_participant.city = req.form.city;
 
 				let verification_hash = database.generate_hash(email);
 				mail_options.text = 'Da click al siguiente link para verificar tu cuenta: https://trascendencias.org/verify?email=' + email + '&key=' + verification_hash;

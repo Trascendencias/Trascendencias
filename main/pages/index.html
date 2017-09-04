@@ -46,15 +46,13 @@
             %>
             
 			<div class="slides main" id="slides">
-			
-            
-            <%= teaser.length %>  
+
             <% C = 0; while(C < teaser.length) { %> 
 				<div class="slide main" style="background: url('<%= teaser[C].photos[0] %>') center center; left: calc(100vw * <%= C %> );">
 					<div class="slide-textholder">
 						<h1 class="cwhite"> <%= teaser[C].name %> </h1> <!-- Titulo del Teaser Banner -->
 						<p class="cwhite"> <%= teaser[C].summary %> <!-- Descripción del Teaser Banner -->
-							<button onClick="location.href='consulta?code=<%= teaser[C]._id %>'"> ¡QUIERO ASISTIR! </button> <!-- BOTON DE ACCION -->
+							<button onClick="location.href='consulta?code=<%= teaser[C]._id %>'"> Leer Más </button> <!-- BOTON DE ACCION -->
 						</p>
 					</div>
 				</div>
@@ -70,7 +68,7 @@
         
         <br><br><br><br>
 		<center>
-		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/XGSy3_Czz8k" class="comercial"></iframe>
+		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/s1D3LlIrWBQ" class="comercial"></iframe>
 		</center>
 
 

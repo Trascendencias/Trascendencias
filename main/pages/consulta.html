@@ -8,7 +8,7 @@
 	<meta property="og:image" content="#!IMG" />
 	
 	<!---SEO OPTIMIZATION -->
-	<title> <%= consulta.name %> </title>
+	<title> <%= consulta.name %>  </title>
 	<meta name="description" content="#!DESCRIPTION">
 	<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
 	<meta name="author" content="#!AUTOR">
@@ -41,12 +41,21 @@
 		<!--- INDICADOR DE PAGINA -->
 		<div class="pageLocation cmen"><h5 id="pageLocation"> #!Consulta </h5></div> 
 
+		
 		<!-- ESTE DIV ES SOLO PARA CONFERENCIAS Y TALLERES -->
-		<div class="persona1">
-			<img src="resources/user_example.png" class="persona1">
-			<h3> Presenta: Nombre Apellido </h3>
-			<p><i> Por qué este wey es tan vergas </i></p>
+		<% if(consulta.speaker_name || consulta.instructor_name) { %>
+        <div class="persona1">
+			<img src="<% if(consulta.speaker_photo){ %> <%= consulta.speaker_photo %> <% }%>
+                <% if(consulta.instructor_photo){ %> <%= consulta.instructor_photo %> <% }%>" class="persona1">
+			<h3> Presenta: 
+            	<% if(consulta.speaker_name){ %> <%= consulta.speaker_name %> <% }%>
+                <% if(consulta.instructor_name){ %> <%= consulta.instructor_name %> <% }%>
+            </h3>
+			<p><i> 
+            	<% if(consulta.speaker_titles){ %> <%= consulta.speaker_titles %> <% }%>
+                <% if(consulta.instructor_titles){ %> <%= consulta.instructor_titles %> <% }%> </i></p>
 		</div>
+        <% } %>
 
 
 
@@ -78,51 +87,36 @@
 		<div id="biggerImage" > <img src="resources/slider1.jpg" id="biggerImg"> </div>
 
 			
-
+		<% if (consulta.cap){ %>
 		<div class="ingresar-visita-taller">
-			<h5> Cupo Abierto <b> 13/25 </b> </h5>
-			<button class="second"> Ingresar </button> <!---Si ya lo eligieron manda un dialog box y desaparece con la confirmación--> 
+			<h5> Cupo Abierto <b> 13/<%= consulta.cap %> </b> </h5>
+			<% if(user.debt <= 0) { %> <button class="second"> Ingresar </button> <% } %>
 		</div>
+        <% } %>
 
 		<div class="contenido">
-			<h1> Título del Blog </h1>
-			<!-- LOS BLOGS NO TIENEN SUBTITULOS AQUI -->
-			<h6><i> Lugar (si aplcia) </i></h6>
-			<h6><b> 10/Oct • 10am </b></h6>
-			<p> 1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio. El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”. </p>
-			
-			<h3> De 8am a 9pm </h3>
-			
-			<h2> Subtítulo </h2>
-			<p> 1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio. El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”. </p>
-			<h2> Ejemplo de Lista </h2>
-			<ul>
-				<li>
-					Item 1
-				</li>
-				<li>
-					Item 2
-				</li>
-				<li>
-					Item 3
-				</li>
-				<li>
-					Item 4
-				</li>
-				<li>
-					Item 5
-				</li>
-				<li>
-					Item 6
-				</li>
-				<li>
-					Item 7
-				</li>
+			<h1> <%= consulta.name %> </h1>
+			<% if(consulta.location){ %><h6><i> 
+             <%= consulta.location %>  </i></h6><% }%>
 
-			</ul>
+			<% if(consulta.start){ 
+            
+            var day = {  day: "numeric", weekday: "long", month: "short", hour: "2-digit", minute: "2-digit"  };
+            var hour = { hour: "2-digit", minute: "2-digit"  };
+            %>
+			<h6><b>
+            
+            <%= new Date(consulta.start).toLocaleString("es-ES", day); %> - <%= new Date(consulta.end).toLocaleString("es-ES", hour); %>
+           
+            </b></h6> <% } %>
+			<p> <%= consulta.summary %> </p>
+			<p> <%= consulta.description %> </p>
+			
 			<!--EL BOTON DE COMPRAR ES SOLO PARA PAQUETES-->
 			<br>
-			<center><button onClick="location.href='apartar-paquete'"> COMPRAR </button></center>
+			<% if(consulta.cost) { %>
+            <center><button onClick="location.href='apartar-paquete?paquete=<%= element._id %>'"> Apartar Paquete </button></center>
+            <% } %>
 			<br>
 
 			<div class="fb-like" data-href="#" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
@@ -131,13 +125,7 @@
 			
 			<!--LOS UNICOS QUE PRESENTAN LOS AUTORES SON LOS BLOGS-->
 			<br><br>
-			<div class="staff2">
-				
-				<img src="resources/user_example.png" class="persona2">
-				<h3> Por: Nombre Nombre Apellido </h3>
-				<p><i> Puesto en Trasce • 13/Sep </i> </p>
 
-			</div>
 
 		</div>
 
@@ -164,8 +152,6 @@
 		
 <hr style="width: 100vw; border-color: rgba(0,0,0,0);"> <!--- Sin esto se hace feo el pedo -->
 
-<% include partials/footer.html %>
-	
 	
 	<script>
 

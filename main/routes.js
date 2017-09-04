@@ -5,14 +5,51 @@ form.configure({
 });
 
 module.exports = function(http_app, app, fs, passport, database) {
-	http_app.get('*', function(request, res) {
-		res.redirect('https://trascendencias.org' + request.url);
+	http_app.get('*', function(req, res) {
+		res.redirect('https://trascendencias.org' + req.url);
 	});
 
 	app.get('/staff', function(req, res) {
 		res.redirect('https://trascendencias.org:8443');
 	});
 
+
+
+
+
+
+
+
+	
+	
+	
+	
+	app.get('/consulta', check_session, function(req, res) {
+	database.consult(req.query.collection, req.query.codigo, function(err, doc) {
+		if(catch_errors(err, doc)) {
+			return res.redirect('/err404');
+		}
+			 res.render('consulta', {
+				consulta: doc,
+				user: req.user
+		});
+	});
+});
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	app.get('/signup', function(req, res) {
 		res.render('registro-participante', {
 			user: req.user,
@@ -53,7 +90,7 @@ module.exports = function(http_app, app, fs, passport, database) {
 		failureRedirect: '/'
 	}));
 
-	app.get('/', function(request, res) {
+	app.get('/', function(req, res) {
 		return res.redirect('/index');
 	});
 
@@ -80,8 +117,8 @@ module.exports = function(http_app, app, fs, passport, database) {
 		});
 	})
 
-	app.get('/:name', function(request, res) {
-		if(fs.existsSync(__dirname + '/pages/' + request.params.name + '.html')) {
+	app.get('/:name', function(req, res) {
+		if(fs.existsSync(__dirname + '/pages/' + req.params.name + '.html')) {
 			database.list('paquetes', function(err, paquetes) {
 				database.list('taller', function(err, talleres) {
 					database.list('conferencia', function(err, conferencias) {
@@ -93,8 +130,8 @@ module.exports = function(http_app, app, fs, passport, database) {
 											database.list('visita', function(err, visitas) {
 												database.list('punto-venta', function(err, puntos_de_venta) {
 													database.list('evento-extra', function(err, eventos_extra) {
-														return res.render(request.params.name, {
-															user: request.user,
+														return res.render(req.params.name, {
+															user: req.user,
 															paquetes: paquetes,
 															conferencias: conferencias,
 															talleres: talleres,
@@ -104,7 +141,8 @@ module.exports = function(http_app, app, fs, passport, database) {
 															preguntas_frecuentes: preguntas_frecuentes,
 															blogs: blogs,
 															puntos_de_venta: puntos_de_venta,
-															eventos_extra: eventos_extra
+															eventos_extra: eventos_extra,
+															login_message: req.flash('login_message')
 														});
 													});
 												});

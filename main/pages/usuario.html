@@ -29,6 +29,10 @@
         
         <center>
         <br><br>
+        <center> 
+            <button onClick="location.href='editar-usuario.html'"> Editar Info </button>
+        </center>
+        <br>
         	<img src="resources/user_example.png" class="consultausuario">
                     <h3 style="font-size: 20px"> <%= user.name %> </h3>
 
@@ -46,21 +50,21 @@
 								<% if(user.local) { %>
 									<h3>Favor de verificar tu cuenta en el correo registrado.</h3>
 								<% } else { %>	
-									<h3 onclick="location.href='validacion-facebook'">Favor de verificar tu informacion dando click <u>aqui</u>.</h3>
+									<h3 onClick="location.href='validacion-facebook'">Favor de verificar tu informacion dando click <u>aqui</u>.</h3>
 								<% } %>
 							<% } %>
 
         <hr>
         <p> <%= user.email %>  </p>
         <p> <%= user.institution %>  </p>
-        <p> <%= user.major %>, <%= user.semester %> Semestre </p>
-        <p> Mexicali, Baja California. </p>
-        <p> (686) 123 45 67 </p>
-        <p> Alergias: Plástico </p>
-       
-<center> 
-            <button onClick="location.href='editar-usuario.html'"> Editar Info </button>
-        </center>        <hr>
+        <p> <%= user.academic_level %>, <%= user.semester %> Semestre </p>
+        <p> <%= user.city %> </p>
+        <p> <%= user.phone %> </p>
+        <p> Alergias: <%= user.alergies %> </p>
+  
+        <img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=trascendencias.org:8443/registro/abono?id=<%= user._id %>" class="qr">
+  
+        <hr>
 
         
 

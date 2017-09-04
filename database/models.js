@@ -8,6 +8,8 @@ var schemas = {
 		alergies: String,
 		city: String,
 		institution: String,
+		semester: String,
+		academic_level: String,
 		phone: String,
 		package_information: {
 			debt: Number,
@@ -160,6 +162,15 @@ var schemas = {
 		company_logo: String,
 		payment: Number
 	}),
+	action: mongoose.Schema({
+		actor: String,
+		recipient: String,
+		content: {
+			type: String,
+			message: String
+		},
+		date: String
+	})
 }
 
 let populate_selected_package = function(next) {
@@ -188,5 +199,6 @@ module.exports = {
 	sale_point: mongoose.model('sale_points', schemas.sale_point),
 	package: mongoose.model('packages', schemas.package),
 	sponsor: mongoose.model('sponsors', schemas.sponsor),
-	active_package: mongoose.model('active_packages', schemas.active_package)
+	active_package: mongoose.model('active_packages', schemas.active_package),
+	action: mongoose.model('actions', schemas.action)
 };

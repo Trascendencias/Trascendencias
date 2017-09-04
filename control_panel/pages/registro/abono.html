@@ -24,23 +24,22 @@
         <form action="/abonar-<%= consulta.id %>" method="post" id="forma-registro">
             <input type="hidden" value="<%= consulta.name %>" name="assign_name">
             <% if(!consulta.verified) { %>
-                <% if(consulta.facebook) { %>
-            <input maxlength="50" type="text" placeholder="Institución de procedencia" name="institution" required>
-            
+                <% if(consulta.facebook.id) { %>
+                <input maxlength="50" type="text" placeholder="Institución de procedencia" name="institution" required>
+                
 
-            <input maxlength="50"  type="text" placeholder="Ciudad" name="city" required>
-            
+                <input maxlength="50"  type="text" placeholder="Ciudad" name="city" required>
+                
 
-            <input maxlength="50" type="number" placeholder="Teléfono" name="phone" required>
-            
+                <input maxlength="50" type="number" placeholder="Teléfono" name="phone" required>
+                
 
-            <input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
+                <input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
             
                 <% } %>
             <% } %>
            
-            <% if(!consulta.selected_package) { %>
-            
+           <% if(!consulta.package_information.shirt_size) { %>
             <select class="select" name="shirt_size">
             <option value="none" selected disabled> Talla... </option>
               <option value="XS"> XS </option>
@@ -49,6 +48,9 @@
               <option value="L"> L </option>
               <option value="XL"> XL </option>
             </select><br><br><br>
+            <% } %>
+
+            <% if(!consulta.selected_package) { %>
              <button class="selectorLeft" id="selectorLeft" type="button" onClick="codigoGrupo(this);"> Código Grupo </button>
              <button class="selectorRight" id="selectorRight" type="button" onClick="escogerPaquete(this);"> Paquete </button>
             
@@ -57,7 +59,7 @@
             <select class="select" id="paquete" name="selected_package">
             <option value="none" selected disabled>Paquete</option>
             <% packages.forEach(function(package) { %>
-                <option value="<%= package.id %>"><%= package.name %></option>
+                <option value="<%= package._id %>"><%= package.name %></option>
             <% }); %>
             
             </select>

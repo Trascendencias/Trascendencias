@@ -75,7 +75,7 @@
 			<% paquetes.forEach(function(element) { %>
 				<div class="card" onClick="location.href='apartar-paquete?paquete=<%= element._id %>'">
 					<img src="<%= element.photos[0] %>">
-					<h3> <%= element.name %> </h3>
+					<h3> $<%= element.cost %>: <%= element.name %> </h3>
 					<p> <%= element.summary %> </p>
 				</div>
 			<% }); %>

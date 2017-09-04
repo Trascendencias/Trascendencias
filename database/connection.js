@@ -145,6 +145,16 @@ database.register = {
 		new_sale_point.save(function(err, saved) {
 			return done(null, saved);
 		});
+	},
+	action: function(actor, recipient, content, done) {
+		let new_action = new models.action();
+		new_action.actor = actor;
+		new_action.recipient = recipient;
+		new_action.content = content;
+
+		new_action.save(function() {
+			return done();
+		})
 	}
 };
 
@@ -388,6 +398,11 @@ database.remove = function(collection, id, done) {
 		return done(null);
 	});
 };
+
+database.list_actions = function(actor, recipient, done) {
+	database.collection('actions').find({actor: actor})
+
+}
 
 var translate = {
 	'participante': 'participant',

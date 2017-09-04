@@ -33,7 +33,7 @@
         
         <div class="lista">
         <br>
-        <h3> <span id="titulo"> </span>:  <p id="contador"> <%= lista.length %> </p><button id="nuevo" class="nuevo" onClick="nuevo()"> + Nuevo </button></h3>
+        <h3> <span id="titulo"> </span>:  <p id="contador"></p><button id="nuevo" class="nuevo" onClick="nuevo()"> + Nuevo </button></h3>
         <form id="searchForm" action="javascript:buscarPalabras();">
             <input id="search" class="search" onBlur="if (this.value == '') { this.value = 'Buscar...'; showAll();}"  onfocus="if(this.value == 'Buscar...') { this.value = ''; } " type="text" value="Buscar..." > 
             <button class="third search" type="button" onClick="buscarPalabras();"> 🔎 </button>
@@ -56,7 +56,7 @@
                 <% if(lista[i].name != 'admin') { %>
                     <button class='enlistado' name='codigo' value='<%= lista[i]._id %>'> 
                     <p class="hidden">  
-                    		email:<%= lista[i].email %>,
+                    		email:<%= lista[i].email %>
                             <%= lista[i].city %>,
                             <% if(lista[i].workshop) { %> <%= lista[i].workshop %> <%= ',' %> <% } %>
                             <% if(lista[i].visit) { %> <%= lista[i].visit %> <%= ',' %> <% } %>
@@ -74,6 +74,7 @@
 
 </body>
         <script>
+		contar();
 		function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 			if(elem.classList.contains('active')) elem.classList.remove('active'); 
 			else elem.classList.add('active'); 
@@ -155,6 +156,7 @@
                         C++;;
                     }
                     }
+					contar();
                 }
 
 
@@ -165,6 +167,7 @@
                     enlistados[C].style.display = "block";
                     C++;
                 }
+				contar();
             }
             function sinAcento(str){
                 str = str.replace("á", "a");
@@ -221,6 +224,17 @@
                 document.getElementById("resultados").style.display = "block";
                 correosActive = false;
             }
+			
+			function contar(){
+				var C = 0;
+				var contador = 0;
+				var todos = document.getElementsByClassName("enlistado"); 
+				while(C<todos.length){
+					if(todos[C].style.display != "none") contador++;
+					C++;
+					}
+				document.getElementById("contador").innerHTML = contador;
+				}
 
 
         </script>

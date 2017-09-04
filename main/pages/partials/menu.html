@@ -87,7 +87,7 @@
 		<button class="iniciar-sesion" onclick="activate(this)"> Iniciar Sesión </button>
 		<div class="usuario-info iniciar-sesion">
 			<% if(locals.login_message && login_message != '') { %>
-				<h3 style="color: red;">Error: <%= message %></h3>
+				<h3 style="color: red;">Error: <%= login_message %></h3>
 				<script>
 					document.getElementsByClassName("iniciar-sesion")[0].click();
 				</script>
@@ -104,10 +104,8 @@
 			<u><a href="/auth/facebook" class="registrarse">Registrarse con Facebook</a></u>
 		</div>
 		<% } else { %>
-		<img src="resources/user_example.png" class="persona1">
-			<div class="usuario-info loggedIn">
-
-
+		<img src="resources/user_example.png" class="persona1" onclick="location.href='usuario'">
+			<div class="usuario-info loggedIn" onclick="location.href='usuario'" style="cursor:pointer;">
 				<h1 class="nombre-usuario"> <%= user.name %> </h1> 
 
 				<button onclick="location.href = '/logout'"> Salir </button>
@@ -120,7 +118,7 @@
 					<% } %>
 				<% } else { %>
 					<% if(!locals.user.facebook.id) { %>
-						<h3>Favor de verificar tu cuenta en el correo registrado.</h3>
+						<h3 onclick="window.location.replace('https://<%= user.email.split('@').pop()%>')" onmouseover="this.style='color: #ADD8E6'" onmouseout="this.style=''">Favor de verificar tu correo dando click aqui.</h3>
 					<% } else { %>	
 						<h3 onclick="location.href='validacion-facebook'">Favor de verificar tu informacion dando click <u>aqui</u>.</h3>
 					<% } %>

@@ -35,35 +35,58 @@
 			<form class="registro" action="signup" method="post"> <br><br>
 				<!-- NOMBRE -->
 				<input maxlength="50" placeholder="Nombre" type="text" name="name" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- CORREO -->
 				<input maxlength="50" type="email" placeholder="Correo" name="email" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- INSTITUCION DE PROCEDENCIA -->
 				<input maxlength="50" type="text" placeholder="Institución de procedencia" name="institution" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
+
+				<select class="select" name="academic_level" required>
+                  <option disabled selected> Nivel Académico... </option>
+                  <option value="Primaria"> Primaria </option>
+                  <option value="Secundaria"> Secundaria </option>
+                  <option value="Preparatoria"> Preparatoria </option>
+                  <option value="Universidad"> Universidad </option>
+                  <option value="Otro"> Otro </option>
+                </select>
+                
+                <select class="select" name="semester" required>
+                  <option disabled selected> Semestre...</option>
+                  <option value="1er"> 1er </option>
+                  <option value="2do"> 2do </option>
+                  <option value="3er"> 3er </option>
+                  <option value="4to"> 4to </option>
+                  <option value="5to"> 5to </option>
+                  <option value="6to"> 6to </option>
+                  <option value="7mo"> 7mo </option>
+                  <option value="8vo"> 8vo </option>
+                  <option value="9no"> 9no </option>
+                  <option value="Otro"> Otro... </option>
+                </select>
 
 				<!-- CIUDAD -->
 				<input maxlength="50"  type="text" placeholder="Ciudad" name="city" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- TELEFONO -->
 				<input maxlength="50" type="number" placeholder="Teléfono" name="phone" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- CONTRASENA -->
 				<input maxlength="50"  type="password" placeholder="Contraseña" name="password" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- REPITE LA CONTRASENA -->
 				<input maxlength="50" type="password" placeholder="Repita la contraseña" name="password_repeat" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- ALERGIAS -->
 				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
-				<p class="error"> *Debe llenar esta información </p>
+				
 
 				<!-- TERMINOS Y CONDICIONES -->
 				<p> <input type="checkbox" required> Acepto los <span class="cmenta" onClick="location.href='terminosycondiciones'"> términos y condiciones </span> </p>
