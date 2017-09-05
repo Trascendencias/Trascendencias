@@ -13,7 +13,7 @@
         <div class="body">
         <center><h6><b> Consulta Participante </b></h6> </center>
 		<br>
-		<button onClick="location.href='editar-participante'"> Editar </button>
+		<button onClick="location.href='editar-participante?id=<%= consulta._id %>'"> Editar </button>
 		<button onClick="eliminar();"> Eliminar </button>
 		<button onClick="location.href='abono?id=<%= consulta.id %>'">Abono</button>
 		<button class="unactive"onClick="asistio(this);"><span id="asistioIcon">☐</span> Asistió</button>
@@ -23,12 +23,14 @@
 				<h3> Nombre: <p><i> <%= consulta.name %> </i></p> </h3><br>
 
 				<% if(consulta.selected_package) { %>
-				<%= // JSON.stringify(consulta.selected_package, null, 4) %>
 				<h3> Paquete Elegido: <p><i> <%= consulta.selected_package.package.name %> </i></p> </h3><br>
 				<% if(consulta.selected_package.group_code) { %>
 					<h3> Codigo de grupo: <p><i> <%= consulta.selected_package.group_code %> </i></p> </h3><br>
-					<h3> Miembros: <p><i> <%= consulta.selected_package.members %> </i></p> </h3><br>
-				<% } %>
+					<h3> Cupo: <p><i><%= consulta.selected_package.members.length %> de <%= consulta.selected_package.package.cap %></i></p></h3><br>
+					<h3> Miembros: <p><i> <% consulta.selected_package.members.forEach(function(element) { %>
+						<%= element %><br><br>
+					<% }) %> </i></p> </h3><br>
+					<% } %>
 				<h3> Deuda: <i><p id="saldo">$<%= consulta.package_information.debt %></p> </i></h3>
 				<% if(consulta.package_information.liquidation_date) { %>
 				<h3> Fecha de liquidacion: <i><p><%= consulta.package_information.liquidation_date %></p></i></h3>
@@ -73,29 +75,43 @@
  
                 <h3> Historial de Acciones </h3><div class="spacer"></div>
                 
-                
-                <div class="accion">
-	           		 <h3> Registro </h3><p> 13/SEP/17 22:45h</p> <br>
-	           		 <p> Registrado por: <i> Internet </i> </p>
-        		</div>
-                <div class="accion">
-	           		 <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
-	           		 <p> Recibido por: <i> Miembro Staff </i> </p>
-        		</div>
-
-        		<div class="accion">
-	           		 <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
-	           		 <p> Recibido por: <i> Miembro Staff </i> </p>
-        		</div>
-
-        		<div class="accion">
-	           		 <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
-	           		 <p> Recibido por: <i> Miembro Staff </i> </p>
-        		</div>
-        		<div class="accion">
-	           		 <h3> Liquidado </h3><p> 13/SEP/17 22:45h</p> <br>
-	           		 <p> Recibido por: <i> Miembro Staff </i> </p>
-        		</div>
+               	<%
+					var options = {  
+					    weekday: "long", year: "numeric", month: "long",  
+					    day: "numeric", hour: "2-digit", minute: "2-digit",
+					    timeZone: 'America/Tijuana'
+					};
+				%>
+                <% actions.forEach(function(element) { %>
+	                <div class="accion">
+		           		
+                        <% if(element.content_type == "dinero+") { %>
+                         
+                        <h3 class="dineromas" > +$<%= element.content_message %> 
+                        </h3><p> <%= new Date(element.date).toLocaleString("en-us", options); %></p> <br>
+		           		 <p> Abonado por: <i> <%= element.actor_name %> </i> </p
+                        
+                         ><% }%>
+                         
+                         <% if(element.content_type == "registro") { %>
+                         
+                        <h3> Registro por <%= element.content_message %>
+                        </h3><p> <%= new Date(element.date).toLocaleString("en-us", options); %></p> <br>
+	                       	<% if(element.actor_name) { %>
+			           		 <p> Registrado por: <i> <%= element.actor_name %> </i> </p>
+	                        <% } %>
+	                       <% } %>
+                         
+                         <% if(element.content_type == "liquidado") { %>
+                        <h3> Liquidado
+                        </h3><p> <%= new Date(element.date).toLocaleString("en-us", options); %></p> <br>
+		           		 <p> Abonado por: <i> <%= element.actor_name %> </i> </p
+                        
+                         ><% }%>
+                         
+                         
+	        		</div>
+                <% }); %>
 
 
         </div>

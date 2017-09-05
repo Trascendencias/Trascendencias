@@ -168,7 +168,7 @@ var schemas = {
 		recipient_name: String,
 		recipient_id: String,
 		content_type: String,
-		content_messaje: String,
+		content_message: String,
 		date: Date
 	})
 }

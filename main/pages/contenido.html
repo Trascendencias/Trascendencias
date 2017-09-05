@@ -76,10 +76,10 @@
 
 
 	<div class="dropContent" >
-		<div class="h4holder" id="#conferencias">
+		<div class="h4holder">
 			<h4> Conferencias </h4>
 		</div>
-			<button class="btn" onClick="activate(this)"> + </button>
+			<button class="btn" id="conferencias" onClick="activate(this)"> + </button>
 
 		<div class="droppedContent">
 			<br><br>
@@ -107,14 +107,14 @@
 
 	<div class="dropContent" >
 		<div class="h4holder">
-			<h4 id="#talleres"> Talleres </h4>
+			<h4> Talleres </h4>
 		</div>
-		<button class="btn" onClick="activate(this)"> + </button>
+		<button class="btn" id="talleres" onClick="activate(this)"> + </button>
 		<div class="droppedContent">
 					<br><br>
 						
 						<% talleres.forEach(function(element) { %>
-							<div class="card" onClick="location.href='consulta?codigo=<% element._id %>&collection=taller'">
+							<div class="card" onClick="location.href='consulta?codigo=<%= element._id %>&collection=taller'">
 								<img src="<%= element.photos[0] %>">
 								<h3> <%= element.name %> </h3>
 								<p> <%= element.summary %> </p>
@@ -126,14 +126,14 @@
 
 	<div class="dropContent">
 		<div class="h4holder">
-			<h4 id="#visitas"> Visitas </h4>
+			<h4 > Visitas </h4>
 		</div>
-		<button class="btn" onClick="activate(this)"> + </button>
+		<button class="btn" id="visitas" onClick="activate(this)"> + </button>
 		<div class="droppedContent">
 			<br><br>
 						
 						<% visitas.forEach(function(element) { %>
-							<div class="card" onClick="location.href='consulta?codigo=<% element._id %>&collection=visita'">
+							<div class="card" onClick="location.href='consulta?codigo=<%= element._id %>&collection=visita'">
 								<img src="<%= element.photos[0] %>">
 								<h3> <%= element.name %> </h3>
 								<p> <%= element.summary %> </p>
@@ -146,14 +146,14 @@
 
 	<div class="dropContent" >
 		<div class="h4holder">
-			<h4 id="#eventsSociales"> Eventos Sociales </h4>
+			<h4> Eventos Sociales </h4>
 		</div>
-		<button class="btn" onClick="activate(this)"> + </button>
+		<button class="btn" id="eventosSociales" onClick="activate(this)"> + </button>
 		<div class="droppedContent">
 			<br><br>
 						
 						<% eventos_sociales.forEach(function(element) { %>
-							<div class="card" onClick="location.href='consulta?codigo=<% element._id %>&collection=evento_social'">
+							<div class="card" onClick="location.href='consulta?codigo=<%= element._id %>&collection=evento_social'">
 								<img src="<%= element.event_poster %>">
 								<h3> <%= element.name %> </h3>
 								<p> <%= element.summary %> </p>
@@ -170,6 +170,10 @@
 
 
 	<script >
+		var q = window.location.href;
+        q = q.split('#')[1];
+		 activate(document.getElementById(q)) 
+		
 		
 		function activate(elem){	
 		if(elem.classList.contains('active')) elem.classList.remove('active'); 

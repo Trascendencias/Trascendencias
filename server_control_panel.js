@@ -77,17 +77,58 @@ app.get('/registro/registro-participante', check_session, form(), function(req, 
 });
 
 app.post('/registro-participante_por_staff', check_session, form(), function(req, res) {
-	database.register["participante_por_staff"](req.form, function(err, participant) {
-		if(catch_errors(err, participant)) return res.redirect('/registro/avisos?titulo=error&mensaje=Error del servidor');
+	database.register["participante_por_staff"](req.form, function(err, new_participant, message) {
+		if(catch_errors(err, new_participant)) {
+			return res.redirect('/registro/avisos?titulo=error&mensaje=' + message);
+		}
 
-		database.assign_package(participant.id, req.form.selected_package, req.form, function(err, participant) {
-			if(catch_errors(err, participant)) return res.redirect('/registro/avisos?titulo=error&mensaje=Error del servidor');
+		database.assign_package(new_participant.id, req.form.selected_package, req.form, function(err, participant, message) {
+			if(catch_errors(err, participant)) {
+				new_participant.remove({_id:new_participant.id});
+				return res.redirect('/registro/avisos?titulo=error&mensaje=' + message);
+			}
 
 			if((req.form.abono = parseInt(req.form.abono)) == null || req.form.abono < 0) {
 				return res.redirect('/registro/avisos?titulo=error&mensaje=Abono invalido');
 			}
 
+			participant.verified = true;
+
 			if(req.form.abono > 0) {
+				participant.package_information.debt -= req.form.abono;
+
+				database.register_action({
+					actor_name: req.user.name,
+					actor_id: req.user.id,
+					recipient_name: participant.name,
+					recipient_id: participant.id,
+					content_type: 'registro',
+					content_message: 'Miembro del Staff',
+					date: new Date().toISOString()
+				});
+
+				database.register_action({
+					actor_name: req.user.name,
+					actor_id: req.user.id,
+					recipient_name: participant.name,
+					recipient_id: participant.id,
+					content_type: 'dinero+',
+					content_message: req.form.abono.toString(),
+					date: new Date().toISOString()
+				});
+
+				if(participant.package_information.debt <= 0) {
+					participant.package_information.debt = 0;
+					database.register_action({
+						actor_name: req.user.name,
+						actor_id: req.user.id,
+						recipient_name: participant.name,
+						recipient_id: participant.id,
+						content_type: 'liquidado',
+						date: new Date().toISOString()
+					})
+				}
+
 				transporter.sendMail({
 					from: '"Trascendencias" <trasce4eva@gmail.com>',
 					subject: 'Recibo de Trascendencias',
@@ -100,10 +141,11 @@ app.post('/registro-participante_por_staff', check_session, form(), function(req
 				});
 			}
 
-			participant.package_information.debt -= req.form.abono;
-			participant.verified = true;
 			participant.save(function(err, saved_participant) {
-				if(catch_errors(err, participant)) return res.redirect('/registro/avisos?titulo=error');
+				if(catch_errors(err, participant)) {
+					return res.redirect('/registro/avisos?titulo=error');
+				}
+
 				return res.redirect('/');
 			});
 		});
@@ -156,18 +198,51 @@ app.post('/abonar-:id', check_session, form(), function(req, res) {
 				return res.redirect('/registro/avisos?titulo=error&mensaje=Abono invalido');
 			}
 
-			doc.package_information.debt -= req.form.abono;
-			if(doc.package_information.debt <= 0) {
-				doc.package_information.debt = 0;
-				doc.package_information.liquidation_date = Date.now();
-			}
-
 			if(!doc.verified) {
 				doc.institution = req.form.institution;
 				doc.phone = req.form.phone;
 				doc.city = req.form.city;
 				doc.alergies = req.form.alergies;
 				doc.verified = true;
+			}
+
+			if(req.form.abono > 0) {
+				doc.package_information.debt -= req.form.abono;
+
+				database.register_action({
+					actor_name: req.user.name,
+					actor_id: req.user.id,
+					recipient_name: doc.name,
+					recipient_id: doc.id,
+					content_type: 'dinero+',
+					content_message: req.form.abono.toString(),
+					date: new Date().toISOString()
+				});
+
+				if(doc.package_information.debt <= 0) {
+					doc.package_information.debt = 0;
+
+					database.register_action({
+						actor_name: req.user.name,
+						actor_id: req.user.id,
+						recipient_name: doc.name,
+						recipient_id: doc.id,
+						content_type: 'liquidado',
+						content_message: 'Liquidacion',
+						date: new Date().toISOString()
+					});
+				}
+
+				transporter.sendMail({
+					from: '"Trascendencias" <trasce4eva@gmail.com>',
+					subject: 'Recibo de Trascendencias',
+					text: 'Gracias por formar parte de Trascendencias, acabas de abonar $' + req.form.abono + ' pesos.',
+					to: doc.email
+				}, (err, info) => {
+					if(err) {
+						console.log(err);
+					}
+				});
 			}
 
 			doc.save(function(err) {
@@ -178,29 +253,6 @@ app.post('/abonar-:id', check_session, form(), function(req, res) {
 				doc.selected_package.save(function(err, saved) {
 					if(catch_errors(err)) {
 						return res.redirect('/registro/avisos?titulo=error');
-					}
-
-					if(req.form.abono > 0) {
-						transporter.sendMail({
-							from: '"Trascendencias" <trasce4eva@gmail.com>',
-							subject: 'Recibo de Trascendencias',
-							text: 'Gracias por formar parte de Trascendencias, acabas de abonar $' + req.form.abono + ' pesos.',
-							to: doc.email
-						}, (err, info) => {
-							if(err) {
-								console.log(err);
-							}
-						});
-
-						database.register_action({
-							actor_name: req.user.name,
-							actor_id: req.user.id,
-							recipient_name: doc.name,
-							recipient_id: doc.id,
-							content_type: 'dinero+',
-							content_messaje: req.form.abono.toString(),
-							date: new Date().toISOString()
-						});
 					}
 
 					return res.redirect('/');
@@ -257,11 +309,24 @@ app.get('/registro/consulta-:collection', check_session, function(req, res) {
 			return res.redirect('/registro/avisos?titulo=error');
 		}
 
-		//database.get_actions();
+		database.get_actions(doc, false, function(err, actions) {
+			return res.render('registro/consulta-' + req.params.collection, {
+				consulta: doc,
+				user: req.user,
+				actions: actions
+			});
+		});
+	});
+});
 
-		return res.render('registro/consulta-' + req.params.collection, {
-			consulta: doc,
-			user: req.user
+app.get('/registro/editar-participante', check_session, function(req, res) {
+	database.consult('participante', req.query.id, function(err, consulta) {
+		database.list('paquetes', function(err, paquetes) {
+			return res.render('registro/editar-participante', {
+				user: req.user,
+				packages: paquetes,
+				consulta: consulta
+			});
 		});
 	});
 });
@@ -269,7 +334,7 @@ app.get('/registro/consulta-:collection', check_session, function(req, res) {
 app.get('/:module/:page?', check_session, protect, function(req, res) {
 	return res.render((req.baseUrl + req.path).substring(1), { user: req.user }, function(err, html) {
 		if(err) {
-			return res.redirect('registro/avisos?titulo=error');
+			return res.redirect('/registro/avisos?titulo=error');
 		}
 		else {
 			return res.send(html);
@@ -296,6 +361,10 @@ app.post('/login', form(), passport.authenticate('login', {
 	
 	return res.redirect('/registro/menu');
 });
+
+app.post('/editar-:group', check_session, function(req, res) {
+	
+})
 
 app.post('/generar-claves', form(
 	form.field('email').trim()

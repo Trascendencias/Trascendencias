@@ -13,7 +13,7 @@
         <div class="body">
         <center><h6><b> Consulta Paquete </b></h6> </center>
 		<br>
-<button onClick="location.href='editar-paquetes?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>			
+<button onClick="location.href='editar-paquetes?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-paquetes?id=<%= consulta._id %>"> </form>			
 		       <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>                
@@ -85,11 +85,11 @@
         </div>
 
 </body>	<script>
-			function eliminar(){
-					if(confirm("Ésta a punto de eliminar éste contenido. Ésta acción no puede revertirse. ¿Desea continuar?")){ location.href="eliminar-";
-						
+				function eliminar(){
+					if(confirm("Está a punto de eliminar este contenido. Esta acción no puede revertirse. ¿Desea continuar?")){ 	
+					document.getElementById("eliminar").submit();
+	
 						}
-					else { };
 				}
 				
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL

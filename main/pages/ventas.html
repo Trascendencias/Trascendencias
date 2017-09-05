@@ -48,11 +48,11 @@
             
 
             <% C = 0; while(C < teaser.length) { %> 
-				<div class="slide" style="background: url('<%= teaser[C].photos[0] %>') center center; left: calc(100vw * <%= C %> );">
+				<div class="slide" style="background-image: url('<%= teaser[C].photos[0] %>'); left: calc(100vw * <%= C %> );">
 					<div class="slide-textholder">
 						<h1 class="cwhite"> <%= teaser[C].name %> </h1> <!-- Titulo del Teaser Banner -->
 						<p class="cwhite"> <%= teaser[C].summary %> <!-- Descripción del Teaser Banner -->
-							<button onClick="location.href='consulta?code=<%= teaser[C]._id %>'"> Leer Más </button> <!-- BOTON DE ACCION -->
+							<button onClick="location.href='consulta?codigo=<%= teaser[C]._id %>&collection=paquetes'"> Leer Más </button> <!-- BOTON DE ACCION -->
 						</p>
 					</div>
 				</div>
@@ -69,11 +69,13 @@
 <br><br>
 
 
-
+		<% today = new Date(); %>
+       
 
 		<div class="card-holder">
 			<% paquetes.forEach(function(element) { %>
-				<div class="card" onClick="location.href='consulta?codigo=<%= element._id %>&collection=paquetes'">
+                <div class="card <% startDay = new Date(element.start); endDay = new Date(element.end); %><% if(+startDay < +today && +endDay > +today){} else { %>dim<% } %>"
+                	onClick="location.href='consulta?codigo=<%= element._id %>&collection=paquetes'">
 					<img src="<%= element.photos[0] %>">
 					<h3> $<%= element.cost %>: <%= element.name %> </h3>
 					<p> <%= element.summary %> </p>
@@ -87,24 +89,30 @@
 		<button class="btn" onClick="activate(this)"> + </button>
 		<div class="droppedContent">
 							
-							<% puntos_de_venta.forEach(function(element) { %>
-							<div class="staff2">		
-								<h3> <%= element.name %>: <%= element.location %>   </h3>
-								<p> <%
-					var options = {  
-					    year: "numeric", month: "short",  
-					    day: "numeric", hour: "2-digit", minute: "2-digit" 
-					};
-
-					var hour_options = {
-						hour: "2-digit", minute: "2-digit"
-					};
-				%>
-				<%= element.start.toLocaleTimeString("en-us", options); %>
-				-
-				<%= element.end.toLocaleTimeString("en-us", hour_options); %> </p>
-							</div>
-							<% }); %>
+		<% puntos_de_venta.forEach(function(element) { %>
+        
+            <% startDay = new Date(element.start); endDay = new Date(element.end); %>
+            <% if(+startDay < +today && +endDay > +today){ %>
+		
+            	<div class="staff2">		
+                    <h3> <%= element.name %>: <%= element.location %>   </h3>
+                    <p> <%
+                        var options = {  
+                            year: "numeric", month: "short",  
+                            day: "numeric", hour: "2-digit", minute: "2-digit" 
+                        };
+    
+                        var hour_options = {
+                            hour: "2-digit", minute: "2-digit"
+                        };
+                    %>
+                    <%= element.start.toLocaleTimeString("en-us", options); %>
+                    -
+                    <%= element.end.toLocaleTimeString("en-us", hour_options); %> </p>
+				</div>
+            <% } %>
+		<% }); %>
+                          
 		</div>
 	</div>
 

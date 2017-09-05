@@ -11,7 +11,7 @@
 		
         <div class="body">
 		<br>
-		<center><h6><b> Registro de Participante </b></h6> </center>
+		<center><h6><b> Editar Participante </b></h6> </center>
 			
 			<form class="registro" id="forma-registro" method="post" action="/registro-participante_por_staff"> <br><br>
                
@@ -19,7 +19,7 @@
                 <input type="hidden" name="registrado" value="participante">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre y Apellido" id="nombre" onchange= "up_pass(this)" name="name" maxlength="35" required>
+				<input maxlength="50" type="text" placeholder="Nombre y Apellido" id="nombre" onchange= "up_pass(this)" name="name" maxlength="35" value="<%= participant.name %>" required>
 
                 <p class="title"> Contrasena: </p>
                 <input readonly name="password" id = "pass" style="font-weight: bold;color:black"></p>

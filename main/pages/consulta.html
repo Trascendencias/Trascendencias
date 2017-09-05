@@ -6,6 +6,7 @@
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="<%= consulta.name %>" />
 	<meta property="og:image" content="<%= consulta.photos[0] %>" />
+    <meta property="og:description" content="<%= consulta.summary %>" />
 	
 	<!---SEO OPTIMIZATION -->
 	<title> <%= consulta.name %>  </title>
@@ -57,16 +58,19 @@
 			<div class="slides main" id="slides">
 			
             
-
+			<!-- FOTOS -->
             <% var C = 0; while(C < consulta.photos.length) { %> 
-				<div class="slide" style="background: url('<%= consulta.photos[C] %>') center center; left: calc(100vw * <%= C %> );">
+				<div class="slide" style="background-image: url('<%= consulta.photos[C] %>'); left: calc(100vw * <%= C %> );">
 				</div>
 			<% C++; } %> 
+            
+            <!-- FOTOS -->
             <% var A = 0; while(A < consulta.video_urls.length) { %> 
-				<div class="slide" style="left: calc(100vw * <%= C %> );">
+				<% if(consulta.video_urls[A] != "") { %>
+                <div class="slide" style="left: calc(100vw * <%= C %> );">
                 <iframe width=100% height="100%" src="https://www.youtube.com/embed/<%= consulta.video_urls[A] %>"></iframe>
 				</div>
-			<% C++; A++;} %> 
+			<%} C++; A++;} %> 
 				
 			</div>
             
@@ -93,7 +97,7 @@
 		<% if (consulta.cap && consulta.cost == null){ %>
 		<div class="ingresar-visita-taller">
 			<h5> Cupo Abierto <b> 13/<%= consulta.cap %> </b> </h5>
-			<% if(user.debt <= 0) { %> <button class="second"> Ingresar </button> <% } %>
+			<% if(user && user.debt <= 0) { %> <button class="second"> Ingresar </button> <% } %>
 		</div>
         <% } %>
 
@@ -111,49 +115,66 @@
             %>
 			<h6><b>
             <% if(consulta.cost) { %>
-            <%= new Date(consulta.start).toLocaleString("es-ES", shortDay); %> - <%= new Date(consulta.end).toLocaleString("es-ES", shortDay); %>
+            <%= new Date(consulta.start).toLocaleString("es-ES", shortDay); %> - <%= new Date(consulta.end).toLocaleString("es-ES", shortDay); %><br>
             <% } else { %>
             <%= new Date(consulta.start).toLocaleString("es-ES", day); %> - <%= new Date(consulta.end).toLocaleString("es-ES", hour); %>
            
             </b></h6> <% }  } %>
             <br>
             <div class="fb-like" data-href="<%= url %>" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
-			<p> <%= consulta.summary %> </p>
-			<p> <%= consulta.description %> </p>
 			
+            
+            
+            <p> <%= consulta.summary %> </p>
+			
+            
+            <% if(consulta.requisites){ %>
+            <h2> Requisitos: </h2> 
+<p style="white-space: pre-wrap"><b><%= consulta.requisites %></b></p><% }%>
+            
+            <h2> Descripción: </h2> 
+            <p style="white-space: pre-wrap"> <%= consulta.description %> </p>
+			
+            
+            <% var today = new Date(); %>
+            
+            
+            
 			<!--EL BOTON DE COMPRAR ES SOLO PARA PAQUETES-->
-			<br>
+		
 			<% if(consulta.cost) { %>
-            <h1>$<%= consulta.cost %>.00 </h1><br>
-            <center><button onClick="location.href='apartar-paquete?paquete=<%= consulta._id %>'"> Apartar Paquete </button></center>
-            <% } %>
+            <h1>$<%= consulta.cost %>.00</h1>
+            <% startDay = new Date(consulta.start); endDay = new Date(consulta.end); %>
+            <% if(locals.user && !locals.user.selected_package && +startDay <= +today && +endDay >= +today ) { %>
+            <button class="emphasis" onClick="location.href='apartar-paquete?paquete=<%= consulta._id %>'"> Apartar Paquete </button> 
+            <% }  }%>
 			<br>
 
 			
 			
 			<!--LOS UNICOS QUE PRESENTAN LOS AUTORES SON LOS BLOGS-->
-			<br><br>
+		
 
 
 		</div>
-
+	<!--
 		<div class="recomendaciones">
 			<div class="h4holder">
 				<h4> Contenido Destacado </h4>
 			</div>
 
-			<h2 onClick="location.href='link'"> Puesto en UABC </h2>
-			<h2> Chanclazos maternos </h2>
-			<h2> Arrivederchi </h2>
-			<h2> HOLA COMO TAS </h2>
-			<h2> muy bieni tu? </h2>
+			<h2 onClick="location.href='link'"> Titulo </h2>
+			<h2> Titulo </h2>
+			<h2> Titulo </h2>
+			<h2> Titulo </h2>
+			<h2> Titulo </h2>
 			
 			<br>
 			
 			<center> 
 				<button onClick="location.href='contenido'">Ver Todos </button>
 			</center>
-		</div>
+		</div> -->
 
 		<div class="fb-comments" data-href="www.trascendencias.org<%= url %>" data-numposts="5" data-width=100% ></div>
 </body>

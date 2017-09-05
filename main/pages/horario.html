@@ -70,9 +70,8 @@
                 	while(sameDay && C < allEvents.length){
                 %>
                 	<div class="staff2" <% 
-                        if(allEvents[C].event_icon) {%><%= '#' %><%}
-                        else{ %> style="cursor:pointer" onClick="location.href='consulta?code=<%= allEvents[C]._id %>'<% } %>
-                        ">
+                        if(allEvents[C].event_icon) {%><%}
+                        else{ %> style="cursor:pointer" onClick="location.href='consulta?codigo=<%= allEvents[C]._id %>&collection=<% if(allEvents[C].speaker_photo != null){ %>conferencia<% } %><% if(allEvents[C].contact_name != null && allEvents[C].cap != null){ %>visita<% } %><% if(allEvents[C].instructor_name != null){ %>taller<% } %><% if(allEvents[C].event_poster){ %>evento-social<% } %>'<% } %>">
 						<img src="
                         <% if(allEvents[C].speaker_photo != null){ %> <%= allEvents[C].speaker_photo %> <% } %>
                         <% if(allEvents[C].contact_name != null && allEvents[C].cap != null){ %>resources/ico_visita.svg<% } %>

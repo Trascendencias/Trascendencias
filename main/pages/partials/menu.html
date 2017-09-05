@@ -95,18 +95,15 @@
 			<form action="/login" method="post" id="login">
 				<input maxlength="50" placeholder="Correo" type="text" name="email" required><br>
 				<input maxlength="50" placeholder="Contraseña" type="password" name="password" required>
-				<p class="error"> *Datos incorrectos </p>
             </form>
-            <button type="submit" form="login">Iniciar Sesion</button>
-            <br><br><br> 
-			
+            <button type="submit" form="login">Entrar</button>			
 			<u><a href="/signup" class="registrarse">Registrarse</a></u> <br />
 			<u><a href="/auth/facebook" class="registrarse">Registrarse con Facebook</a></u>
 		</div>
 		<% } else { %>
-		<img src="resources/user_example.png" class="persona1" onclick="location.href='usuario'">
-			<div class="usuario-info loggedIn" onclick="location.href='usuario'" style="cursor:pointer;">
-				<h1 class="nombre-usuario"> <%= user.name %> </h1> 
+		<img src="resources/user_example.png" onclick="location.href='usuario'" class="persona1" onclick="location.href='usuario'">
+			<div class="usuario-info loggedIn" style="cursor:pointer;">
+				<h1 class="nombre-usuario" onclick="location.href='usuario'"> <%= user.name %> </h1> 
 
 				<button onclick="location.href = '/logout'"> Salir </button>
 				<% if(user.verified) { %>

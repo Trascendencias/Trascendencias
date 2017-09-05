@@ -63,6 +63,15 @@ module.exports = function(passport, database) {
 						throw err;
 					}
 
+					database.register_action({
+						recipient_name: new_participant.name,
+						recipient_id: new_participant.id,
+						content_type: 'registro',
+						content_message: 'Internet',
+						date: new Date().toISOString()
+					});
+
+
 					return done(null, new_participant);
 				});
 			}
@@ -113,6 +122,14 @@ module.exports = function(passport, database) {
 					if(err) {
 						throw err;
 					}
+
+					database.register_action({
+						recipient_name: new_participant.name,
+						recipient_id: new_participant.id,
+						content_type: 'registro',
+						content_message: 'Internet',
+						date: new Date().toISOString()
+					});
 
 					return done(null, new_participant);
 				});

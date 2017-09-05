@@ -62,19 +62,16 @@
 	<button class="btn" onClick="activate(this)"> + </button>
 	<div class="droppedContent">
 		<p> Ponte en contacto con nosotros y te responderemos en seguida. </p>
-		<form class="registro"> <br><br>
+		<form class="registro">
 
 			<!-- NOMBRE -->
 			<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Nombre'; }"  onfocus="if(this.value == 'Nombre') { this.value = ''; }" type="text" value="Nombre" name="nombre" required>
-			<p class="error"> *Debe llenar esta información </p>
 
 			<!-- CORREO -->
 			<input maxlength="50" onBlur="if (this.value == '') { this.value = 'Correo'; }"  onfocus="if(this.value == 'Correo') { this.value = ''; }" type="text" value="Correo" name="correo" required>
-			<p class="error"> *Debe llenar esta información </p>
 
 			<!-- INSTITUCION DE PROCEDENCIA -->
 			<input maxlength="50" onBlur="if (this.value == '') { this.value = '¿Cuál es tu duda?'; }"  onfocus="if(this.value == '¿Cuál es tu duda?') { this.value = ''; }" type="text" value="¿Cuál es tu duda?" name="duda" required>
-			<p class="error"> *Debe llenar esta información </p>
 			<br><br><br>
 			<button type="submit"> Enviar </button>
 		</form>

@@ -13,7 +13,7 @@ module.exports = function(http_app, app, fs, passport, database) {
 		res.redirect('https://trascendencias.org:8443');
 	});
 	
-	app.get('/consulta', check_session, function(req, res) {
+	app.get('/consulta', function(req, res) {
 		database.consult(req.query.collection, req.query.codigo, function(err, doc) {
 			if(catch_errors(err, doc)) {
 				return res.redirect('/err404');
@@ -107,20 +107,45 @@ module.exports = function(http_app, app, fs, passport, database) {
 										database.list('blog', function(err, blogs) {
 											database.list('visita', function(err, visitas) {
 												database.list('punto-venta', function(err, puntos_de_venta) {
-													database.list('evento-extra', function(err, eventos_extra) {
-														return res.render(req.params.name, {
-															user: req.user,
-															paquetes: paquetes,
-															conferencias: conferencias,
-															talleres: talleres,
-															visitas: visitas,
-															eventos_sociales: eventos_sociales,
-															patrocinadores: patrocinadores,
-															preguntas_frecuentes: preguntas_frecuentes,
-															blogs: blogs,
-															puntos_de_venta: puntos_de_venta,
-															eventos_extra: eventos_extra,
-															login_message: req.flash('login_message')
+													database.list('participante', function(err, participantes) {
+														database.list('evento-extra', function(err, eventos_extra) {
+															if(req.user.name) {
+																database.get_actions(req.user.name, false, function(actions) {
+																	return res.render(req.params.name, {
+																		user: req.user,
+																		paquetes: paquetes,
+																		conferencias: conferencias,
+																		talleres: talleres,
+																		visitas: visitas,
+																		eventos_sociales: eventos_sociales,
+																		patrocinadores: patrocinadores,
+																		preguntas_frecuentes: preguntas_frecuentes,
+																		blogs: blogs,
+																		puntos_de_venta: puntos_de_venta,
+																		eventos_extra: eventos_extra,
+																		acciones: actions,
+																		participantes: participantes,
+																		login_message: req.flash('login_message')
+																	});
+																});
+															}
+															else {
+																return res.render(req.params.name, {
+																	user: req.user,
+																	paquetes: paquetes,
+																	conferencias: conferencias,
+																	talleres: talleres,
+																	visitas: visitas,
+																	participantes: participantes,
+																	eventos_sociales: eventos_sociales,
+																	patrocinadores: patrocinadores,
+																	preguntas_frecuentes: preguntas_frecuentes,
+																	blogs: blogs,
+																	puntos_de_venta: puntos_de_venta,
+																	eventos_extra: eventos_extra,
+																	login_message: req.flash('login_message')
+																});
+															}
 														});
 													});
 												});

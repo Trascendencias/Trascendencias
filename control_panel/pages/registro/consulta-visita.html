@@ -13,7 +13,11 @@
         		<center><h6><b> Consulta Visita </b></h6> </center>
 
         <br>
-<button onClick="location.href='editar-visita?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>            
+<button onClick="location.href='editar-visitas?code='"> Editar </button> 
+<button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-visita?id=<%= consulta._id %>">
+    
+
+        
                <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Título: <p><i> Éste es un título muy campante </i></p> </h3><br>                
@@ -92,10 +96,10 @@
 
 </body>	<script>
 			function eliminar(){
-					if(confirm("Ésta a punto de eliminar éste contenido. Ésta acción no puede revertirse. ¿Desea continuar?")){ location.href ="/eliminar-visita";
-						
+					if(confirm("Está a punto de eliminar este contenido. Esta acción no puede revertirse. ¿Desea continuar?")){ 	
+					document.getElementById("eliminar").submit();
+	
 						}
-					else { };
 				}
 				
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL

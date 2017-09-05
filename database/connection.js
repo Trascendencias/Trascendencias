@@ -130,12 +130,23 @@ database.register = {
 		database.form_to_model(form, new_participant);
 		new_participant.local.password = database.generate_hash(form.password);
 
-		new_participant.save(function(err, saved_participant) {
+		models.participant.find({ email: new_participant.email }, function(err, search) {
 			if(err) {
 				return done(err, null);
 			}
 
-			return done(null, saved_participant);
+			if(search)	 {
+				new_participant.save(function(err, saved_participant) {
+					if(err) {
+						return done(err, null);
+					}
+
+					return done(null, saved_participant);
+				});
+			}
+			else {
+				return done(true, null, 'Correo ya registrado.');
+			}
 		});
 	},
 	'punto-venta': function(form, files, done) {
@@ -208,6 +219,38 @@ database.register_action = function(action) {
 	new_action.save();
 }
 
+database.get_actions = function(person, search_actor, done) {
+	let pattern = null;
+
+	if(search_actor) {
+		pattern = {
+		    "$or": [{
+		        "actor_id": person.id
+		    }, {
+		    	"actor_id": person.id
+		    }]
+		};
+	}
+	else {
+		pattern = {
+		    "$or": [{
+		        "recipient_id": person.id
+		    }, {
+		    	"recipient_id": person.id
+		    }]
+		};
+	}
+
+
+	database.collection('actions').find(pattern).toArray(function(err, array) {
+		if(err) {
+			return done(err);
+		}
+
+		return done(null, array);
+	});
+}
+
 database.assign_package = function(user_id, package_id, form, done) {
 	database.consult('participante', user_id, function(err, doc) {
 		if(err) {
@@ -227,8 +270,12 @@ database.assign_package = function(user_id, package_id, form, done) {
 				}
 			},
 			function(err, saved_active_package) {
-				if(err || !doc) {
-					return done(err, null);
+				if(err) {
+					return done(err);
+				}
+
+				if(!saved_active_package) {
+					return done(true, null, 'Codigo de grupo no encontrado.')
 				}
 
 				doc.selected_package = saved_active_package.id;
@@ -405,11 +452,6 @@ database.remove = function(collection, id, done) {
 		return done(null);
 	});
 };
-
-database.list_actions = function(actor, recipient, done) {
-	database.collection('actions').find({actor: actor})
-
-}
 
 var translate = {
 	'participante': 'participant',

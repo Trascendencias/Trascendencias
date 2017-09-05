@@ -13,7 +13,7 @@
         <div class="body">
         <center><h6><b> Consulta Blog </b></h6> </center>
 		<br>
-		<button onClick="location.href='editar-blog?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button>
+		<button onClick="location.href='editar-blog?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-blogs?id=<%= consulta._id %>"> </form>
                <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
                 <h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>
