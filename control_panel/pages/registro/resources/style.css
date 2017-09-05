@@ -384,9 +384,10 @@ div.consulta img.foto {
         background-color: #42C7F4;
         padding-top: 60px;
     }
-    .dropper:hover + div.drop{
-    	display: block;
-    }
+
+	.active + div.drop{
+		display: block;
+		}
 	div.drop:hover {
 		display: block;
 	}

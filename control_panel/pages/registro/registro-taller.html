@@ -20,7 +20,7 @@
                 <input type="hidden" name="registrado" value="taller">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" maxlength="35" required>
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
@@ -39,12 +39,12 @@
                 <p class="title"> Fin: </p>
                 <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
                 
-
+			
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50" type="text" placeholder="Nombre de Tallerista" name="instructor_name" required>
+                <input maxlength="50" type="text" placeholder="Nombre de Tallerista" maxlength="25" name="instructor_name" required>
                 
                 <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
-                <input maxlength="50" type="text" placeholder="Titulos del Tallerista" name="instructor_titles" required>
+                <input maxlength="50" type="text" placeholder="Titulos del Tallerista" maxlength="25" name="instructor_titles" required>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
 				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono del Tallerista" name="instructor_phone" required>
@@ -89,7 +89,7 @@
                <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="summary" id="resumen" placeholder="Resumen..." required></textarea>
+                <textarea name="summary" maxlength="35" id="resumen" placeholder="Resumen..." required></textarea>
                 
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->

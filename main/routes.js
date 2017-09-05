@@ -12,45 +12,21 @@ module.exports = function(http_app, app, fs, passport, database) {
 	app.get('/staff', function(req, res) {
 		res.redirect('https://trascendencias.org:8443');
 	});
-
-
-
-
-
-
-
-
-	
-	
-	
 	
 	app.get('/consulta', check_session, function(req, res) {
-	database.consult(req.query.collection, req.query.codigo, function(err, doc) {
-		if(catch_errors(err, doc)) {
-			return res.redirect('/err404');
-		}
-			 res.render('consulta', {
+		database.consult(req.query.collection, req.query.codigo, function(err, doc) {
+			if(catch_errors(err, doc)) {
+				return res.redirect('/err404');
+			}
+
+			res.render('consulta', {
 				consulta: doc,
 				user: req.user,
 				url: req.originalUrl,
 				collection: req.query.collection
+			});
 		});
 	});
-});
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	app.get('/signup', function(req, res) {
 		res.render('registro-participante', {
@@ -184,9 +160,12 @@ module.exports = function(http_app, app, fs, passport, database) {
 				phone: req.form.phone,
 				alergies: req.form.alergies,
 				city: req.form.city,
-				verified: true
+				verified: true,
+				academic_level: req.form.academic_level,
+				semester: req.form.semester
 			}
-		},function(err, participant) {
+		},
+		function(err, participant) {
 			if (catch_errors(err, participant)) {
 				res.redirect('/err404');
 			}

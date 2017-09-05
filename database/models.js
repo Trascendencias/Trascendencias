@@ -163,13 +163,13 @@ var schemas = {
 		payment: Number
 	}),
 	action: mongoose.Schema({
-		actor: String,
-		recipient: String,
-		content: {
-			type: String,
-			message: String
-		},
-		date: String
+		actor_name: String,
+		actor_id: String,
+		recipient_name: String,
+		recipient_id: String,
+		content_type: String,
+		content_messaje: String,
+		date: Date
 	})
 }
 

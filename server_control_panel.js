@@ -156,19 +156,6 @@ app.post('/abonar-:id', check_session, form(), function(req, res) {
 				return res.redirect('/registro/avisos?titulo=error&mensaje=Abono invalido');
 			}
 
-			if(req.form.abono > 0) {
-				transporter.sendMail({
-					from: '"Trascendencias" <trasce4eva@gmail.com>',
-					subject: 'Recibo de Trascendencias',
-					text: 'Gracias por formar parte de Trascendencias, acabas de abonar $' + req.form.abono + ' pesos.',
-					to: doc.email
-				}, (err, info) => {
-					if(err) {
-						console.log(err);
-					}
-				});
-			}
-
 			doc.package_information.debt -= req.form.abono;
 			if(doc.package_information.debt <= 0) {
 				doc.package_information.debt = 0;
@@ -191,6 +178,29 @@ app.post('/abonar-:id', check_session, form(), function(req, res) {
 				doc.selected_package.save(function(err, saved) {
 					if(catch_errors(err)) {
 						return res.redirect('/registro/avisos?titulo=error');
+					}
+
+					if(req.form.abono > 0) {
+						transporter.sendMail({
+							from: '"Trascendencias" <trasce4eva@gmail.com>',
+							subject: 'Recibo de Trascendencias',
+							text: 'Gracias por formar parte de Trascendencias, acabas de abonar $' + req.form.abono + ' pesos.',
+							to: doc.email
+						}, (err, info) => {
+							if(err) {
+								console.log(err);
+							}
+						});
+
+						database.register_action({
+							actor_name: req.user.name,
+							actor_id: req.user.id,
+							recipient_name: doc.name,
+							recipient_id: doc.id,
+							content_type: 'dinero+',
+							content_messaje: req.form.abono.toString(),
+							date: new Date().toISOString()
+						});
 					}
 
 					return res.redirect('/');
@@ -246,6 +256,8 @@ app.get('/registro/consulta-:collection', check_session, function(req, res) {
 		if(catch_errors(err, doc)) {
 			return res.redirect('/registro/avisos?titulo=error');
 		}
+
+		//database.get_actions();
 
 		return res.render('registro/consulta-' + req.params.collection, {
 			consulta: doc,

@@ -17,15 +17,22 @@
     	
     <title> Desarrolladores </title>
 	<% include partials/menu.html  %>
+    <div class="menuspacer"> </div>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="resources/style.css">
 
 </head>
 	<style>
+		div.developsers {
+			width: 100%;
+			display: flex; 
+			flex-wrap: wrap;
+			justify-content: space-evenly;
+		}
 		img.developer {
 			width: 150px;
 			border-radius: 1000px;
-			display: block;
+			display: inline-block;
 			margin: 0px 20px;
 		}
 		.developer h3, .developer p{
@@ -39,12 +46,9 @@
 		}
 		div.developer {
 			padding: 10px;
-			min-width: 280px;
 			width: 280px;
-			max-width: 600px;
-			display: block;
+			display: inline-block;
 			margin: 10px;
-			flex-grow: 1;
 		}
 		a{
 			color: #42C7F4;
@@ -56,18 +60,7 @@
 			width: 100%;
 			height: 20vh;
 		}
-@media only screen and (max-width: 540px) {
-	
-	img.developer {
-		display: block;
-		margin: 30px;
-		width: 150px;
-		}
-	div.developer. div.info {
-		width: 280px;
-		}
-	
-	}
+
 	</style> 
 
 			
@@ -77,21 +70,27 @@
 		<!--- INDICADOR DE PAGINA -->
 		<div class="pageLocation cmen"><h5 id="pageLocation"> Desarrolladores </h5></div> 
 		<div class="spacer"> </div>
-        <center>
+<center>
+	<div class="developers">
+        
         <div class="developer">
 			<img src="resources/ismael-01.png" class="developer">
 			<h3 onClick="location.href='https://www.facebook.com/jesismaelv/'"> Ismael Villegas </h3>
 			<p><i> Diseño Web y desarrollo front-end de Trascendencias.org y su sistema de registro. </i></p>
 			<a href ="http://ismaelvillegas.com"><i> IsmaelVillegas.com </i></a> 
 		</div>
-        <div class="spacer"> </div>
-		<div class="developer">
+        
+        
+               
+        <div class="developer">
 			<img src="resources/edgar.jpg" class="developer">
 			<h3> Edgar Magdaleno </h3>
 			<p><i> Seguridad y desarrollo back-end de Trascendencias.org y su sistema de registro. </i></p>
 			<a href ="http://edgarmagdaleno.me"><i> EdgarMagdaleno.me </i></a> 
         </div>
-        </center>
+	
+    </div>
+
 		<div class="spacer"> </div>
 		<div class="spacer"> </div>
 
@@ -99,6 +98,7 @@
 
 		
 </body>
+</center>
 		
 <hr style="width: 100vw; border-color: rgba(0,0,0,0);"> <!--- Sin esto se hace feo el pedo -->
 

@@ -47,6 +47,14 @@
 				<h3> Institucion: <p><i> <%= consulta.institution %> </i></p> </h3><br>
 				<% } %>
 
+				<% if(consulta.academic_level) { %>
+				<h3> Nivel academico: <p><i> <%= consulta.academic_level %> </i></p> </h3><br>
+				<% } %>
+
+				<% if(consulta.semester) { %>
+				<h3> Semestre: <p><i> <%= consulta.semester %> </i></p> </h3><br>
+				<% } %>
+
 				<% if(consulta.city) { %>
 				<h3> Ciudad: <p><i> <%= consulta.city %> </i></p> </h3><br>
 				<% } %>
@@ -64,6 +72,7 @@
                 <hr> 
  
                 <h3> Historial de Acciones </h3><div class="spacer"></div>
+                
                 
                 <div class="accion">
 	           		 <h3> Registro </h3><p> 13/SEP/17 22:45h</p> <br>

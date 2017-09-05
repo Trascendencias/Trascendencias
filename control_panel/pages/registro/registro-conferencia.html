@@ -19,7 +19,7 @@
                 <input type="hidden" name="registrado" value="Conferencia">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" placeholder="Nombre" type="text" name="name" required>
+				<input maxlength="50" placeholder="Nombre" type="text" name="name" maxlength="35" required>
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
@@ -38,10 +38,10 @@
                 
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50" placeholder="Nombre del Conferencista" type="text" name="speaker_name" required>
+                <input maxlength="50" placeholder="Nombre del Conferencista"  maxlength="25" type="text" name="speaker_name" required>
                 
                 <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
-                <input maxlength="50" type="text" placeholder="Titulos del Conferencista" name="speaker_titles" required>
+                <input maxlength="50" type="text" placeholder="Titulos del Conferencista" maxlength="25" name="speaker_titles" required>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
 				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono del Conferencista" name="speaker_phone" required>
@@ -79,7 +79,7 @@
                 
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="summary" id="resumen" placeholder="Resumen... " required></textarea>
+                <textarea name="summary" maxlength="35" id="resumen" placeholder="Resumen... " required></textarea>
                 
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->

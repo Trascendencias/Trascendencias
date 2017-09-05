@@ -199,6 +199,13 @@ database.form_to_model = function(form, model) {
 			}
 		}
 	}
+};
+
+database.register_action = function(action) {
+	let new_action = new models.action();
+	database.form_to_model(action, new_action);
+
+	new_action.save();
 }
 
 database.assign_package = function(user_id, package_id, form, done) {
