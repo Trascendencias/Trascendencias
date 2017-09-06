@@ -12,15 +12,15 @@
 		
         <div class="body">
 		<br>
-		<center><h6><b> Registro Punto de Venta </b></h6> </center>
+		<center><h6><b> Editar Punto de Venta </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="/registro-punto-venta"> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/editar-punto-venta"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="punto-venta">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" value="<%= consulta.name %>"required>
 				
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->

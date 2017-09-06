@@ -91,8 +91,8 @@
 							
 		<% puntos_de_venta.forEach(function(element) { %>
         
-            <% startDay = new Date(element.start); endDay = new Date(element.end); %>
-            <% if(+startDay < +today && +endDay > +today){ %>
+            <% startDate = new Date(element.start); endDate = new Date(element.end); %>
+            <% if(+startDate > +today || +endDate > +today){ %>
 		
             	<div class="staff2">		
                     <h3> <%= element.name %>: <%= element.location %>   </h3>

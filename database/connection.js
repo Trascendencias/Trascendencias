@@ -453,6 +453,23 @@ database.remove = function(collection, id, done) {
 	});
 };
 
+database.translate = {
+        'participante': 'participant',
+        'conferencia': 'conference',
+        'paquetes': 'package',
+        'staff': 'staff_member',
+        'taller': 'workshop',
+        'testimonios': 'testimonie',
+        'visita': 'visit',
+        'preguntas-frecuentes': 'faq',
+        'evento-extra': 'extra_event',
+        'patrocinadores': 'sponsor',
+        'evento-social': 'social_event',
+        'punto-venta': 'sale_point',
+        'blog': 'blog',
+	'participante_por_staf': 'participant'
+}
+
 var translate = {
 	'participante': 'participant',
 	'conferencia': 'conference',

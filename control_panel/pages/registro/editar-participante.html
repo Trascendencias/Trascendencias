@@ -13,79 +13,64 @@
 		<br>
 		<center><h6><b> Editar Participante </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="/registro-participante_por_staff"> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/editar-participante_por_staf"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="participante">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre y Apellido" id="nombre" onchange= "up_pass(this)" name="name" maxlength="35" value="<%= participant.name %>" required>
+				<input maxlength="50" type="text" placeholder="Nombre y Apellido" id="nombre" onchange= "up_pass(this)" name="name" maxlength="35" value="<%= consulta.name %>" required>
 
-                <p class="title"> Contrasena: </p>
-                <input readonly name="password" id = "pass" style="font-weight: bold;color:black"></p>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono" name="phone" required>
+				<input onKeyPress="return isNumberKey(event)" value="<%= consulta.phone %>" maxlength="10" type="text" placeholder="Teléfono" name="phone" required>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" type="email" placeholder="Correo" name="email" required>
+				<input maxlength="50" value="<%= consulta.email %>" type="email" placeholder="Correo" name="email" required>
 
 				<!-- INSTITUCION DE PROCEDENCIA Participante-->
-				<input maxlength="50" type="text" placeholder="Institución de procedencia" name="institution" required>
+				<input maxlength="50" type="text" placeholder="Institución de procedencia" value="<%= consulta.institution %>" name="institution" required>
                 
                 <select id="select" name="academic_level" required>
-                  <option value="none" disabled selected> Nivel Académico </option>
-                  <option value="Primaria"> Primaria </option>
-                  <option value="Secundaria"> Secundaria </option>
-                  <option value="Preparatoria"> Preparatoria </option>
-                  <option value="Universidad"> Universidad </option>
-                  <option value="Otro"> Otro </option>
+                  <option  disabled > Nivel Académico </option>
+                  <option value="Primaria" <% if(consulta.academic_level == "Primaria") { %> selected <% } %> > Primaria </option>
+                  <option value="Secundaria" <% if(consulta.academic_level == "Secundaria") { %> selected <% } %> > Secundaria </option>
+                  <option value="Preparatoria" <% if(consulta.academic_level == "Preparatoria") { %> selected <% } %>> Preparatoria </option>
+                  <option value="Universidad" <% if(consulta.academic_level == "Universidad") { %> selected <% } %>> Universidad </option>
+                  <option value="Otro" <% if(consulta.academic_level == "Otro") { %> selected <% } %>> Otro </option>
                 </select>
                 
                 <select id="select" name="semester" required>
-                  <option value="none" disabled selected> Semestre</option>
-                  <option value="1er"> 1er </option>
-                  <option value="2do"> 2do </option>
-                  <option value="3er"> 3er </option>
-                  <option value="4to"> 4to </option>
-                  <option value="5to"> 5to </option>
-                  <option value="6to"> 6to </option>
-                  <option value="7mo"> 7mo </option>
-                  <option value="8vo"> 8vo </option>
-                  <option value="9no"> 9no </option>
-                  <option value="Otro"> Otro... </option>
+                  <option disabled> Semestre</option>
+                  <option value="1er" <% if(consulta.semester == "1er") { %> selected <% } %> > 1er </option>
+                  <option value="2do" <% if(consulta.semester == "2do") { %> selected <% } %>> 2do </option>
+                  <option value="3er" <% if(consulta.semester == "3er") { %> selected <% } %>> 3er </option>
+                  <option value="4to" <% if(consulta.semester == "4to") { %> selected <% } %>> 4to </option>
+                  <option value="5to" <% if(consulta.semester == "5to") { %> selected <% } %>> 5to </option>
+                  <option value="6to" <% if(consulta.semester == "6to") { %> selected <% } %>> 6to </option>
+                  <option value="7mo" <% if(consulta.semester == "7mo") { %> selected <% } %>> 7mo </option>
+                  <option value="8vo" <% if(consulta.semester == "8vo") { %> selected <% } %>> 8vo </option>
+                  <option value="9no" <% if(consulta.semester == "9no") { %> selected <% } %> > 9no </option>
+                  <option value="Otro" <% if(consulta.semester == "otro") { %> selected <% } %>> Otro... </option>
                 </select>
 
 				<!-- CIUDAD Participante-->
-				<input maxlength="50" type="text" placeholder="Ciudad" name="city" required>
+				<input maxlength="50" type="text" placeholder="Ciudad" name="city" value="<%= consulta.city %>" required>
 
                 <!-- ALERGIAS Participante-->
-				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
+				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" value="<%= consulta.alergies %>" required>
 
-                                <!-- TALLA Participantes -->
+                <!-- TALLA Participantes -->
                 <select class="select" name="shirt_size">
-                <option value="none" selected disabled> Talla... </option>
-                  <option value="XS"> XS </option>
-                  <option value="S"> S </option>
-                  <option value="M"> M </option>
-                  <option value="L"> L </option>
-                  <option value="XL"> XL </option>
+                <option value="none"  disabled> Talla... </option>
+                  <option value="XS" <% if(consulta.shirt_size == "XS") { %> selected <% } %> > XS </option>
+                  <option value="S"  <% if(consulta.shirt_size == "S") { %> selected <% } %> > S </option>
+                  <option value="M"  <% if(consulta.shirt_size == "M") { %> selected <% } %> > M </option>
+                  <option value="L"  <% if(consulta.shirt_size == "L") { %> selected <% } %> > L </option>
+                  <option value="XL"  <% if(consulta.shirt_size == "XL") { %> selected <% } %> > XL </option>
                 </select><br><br><br>
-                 <button class="selectorLeft" id="selectorLeft" type="button" onClick="codigoGrupo(this);"> Código Grupo </button>
-                 <button class="selectorRight" id="selectorRight" type="button" onClick="escogerPaquete(this);"> Paquete </button>
-                
-                <input type="text" placeholder="Código de Grupo" id="codigo-grupo" name="group-code" required>
-                
-                <select class="select" id="paquete" name="selected_package">
-                <% packages.forEach(function(package) { %>
-                    <option value="<%= package._id %>"><%= package.name %></option>
-                <% }); %>
-                
-                </select>
-                <!-- ABONO Participante, Patrocinadores-->
-                <p class="title"> Abono: </p>
-                <input type=number name="abono" class="numero" placeholder="$$$" required>
-                <p class="error"> *Debe llenar esta información </p>
+
+
                 
                
                 <div class="spacer"></div>
@@ -113,7 +98,7 @@
                 return true;
             }
 
-                        codigoGrupo(document.getElementById("selectorLeft"));
+           codigoGrupo(document.getElementById("selectorLeft"));
             function validate(){
                 var alert = confirm('Estás a punto de registrar un abono. Ésta acción no puede eliminarse, ¿Seguro que desea proseguir?');
                 if (alert) {
@@ -125,7 +110,7 @@
             function codigoGrupo(elem) {
                 activeSelector(elem); 
                 document.getElementById("codigo-grupo").style.display = "block";
-                document.getElementById("codigo-grupo").value = "";
+                document.getElementById("codigo-grupo").value = "<%= consulta.selected_package.group_code %>";
                 document.getElementById("paquete").style.display = "none";
                 }
             function escogerPaquete(elem) {

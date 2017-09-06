@@ -13,7 +13,7 @@
         <div class="body">
         	<center><h6><b> Consulta Punto de Venta </b></h6> </center>
 		<br>
-<button onClick="location.href='editar-punto-venta?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-puntos-de-venta?id=<%= consulta._id %>"> </form>			
+<button onClick="location.href='editar-punto-venta?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-punto-venta" method="get"><input type="hidden" name="codigo" value="<%= consulta._id %>"> </form>			
 			   <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>                
@@ -50,7 +50,7 @@
 
                 <div class="accion">
                     <h3> Editado </h3><p> 13/SEP/17 22:46h</p> <br>
-                    <p>Por: <i> ONombre Miembro Staff </i> </p>
+                    <p>Por: <i> Nombre Miembro Staff </i> </p>
                 </div>
                 <div class="accion">
                     <h3> Eliminado </h3><p> 13/SEP/2017 22:47h</p> <br>

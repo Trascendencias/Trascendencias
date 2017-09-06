@@ -109,7 +109,7 @@ module.exports = function(http_app, app, fs, passport, database) {
 												database.list('punto-venta', function(err, puntos_de_venta) {
 													database.list('participante', function(err, participantes) {
 														database.list('evento-extra', function(err, eventos_extra) {
-															if(req.user.name) {
+															if(req.user) {
 																database.get_actions(req.user.name, false, function(actions) {
 																	return res.render(req.params.name, {
 																		user: req.user,

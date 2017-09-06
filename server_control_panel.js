@@ -362,8 +362,17 @@ app.post('/login', form(), passport.authenticate('login', {
 	return res.redirect('/registro/menu');
 });
 
-app.post('/editar-:group', check_session, function(req, res) {
-	
+app.post('/editar-:group', check_session, form(), function(req, res) {
+	console.log(database.translate[req.params.group]);
+	database.models[database.translate[req.params.group]].findOne({ email:  req.form.email }, function(err, doc) {
+		if(err || !doc) {
+			return res.redirect('/registro/avisos?titutlo=error');
+		}
+
+		database.form_to_model(req.form, doc);
+		doc.save();
+		return res.redirect('/registro/avisos?titutlo=editar');
+	})
 })
 
 app.post('/generar-claves', form(
@@ -406,7 +415,7 @@ app.post('/registro-:group', check_session, form(), function(req, res) {
 app.post('/eliminar-:collection', check_session, function(req, res) {
 	database.remove(req.params.collection, req.query.codigo, function(err) {
 		if(catch_errors(err)) {
-			return res.redirect('/registro/avisos?titulo=error');
+			return res.redirect('/registro/avisos?titulo=error&mensaje=' + req.params.collection +'%20'+req.query.codigo);
 		}
 
 		return res.redirect('registro/avisos?titulo=eliminar');

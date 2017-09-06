@@ -17,7 +17,9 @@
 		<button onClick="eliminar();"> Eliminar </button>
 		<button onClick="location.href='abono?id=<%= consulta.id %>'">Abono</button>
 		<button class="unactive"onClick="asistio(this);"><span id="asistioIcon">☐</span> Asistió</button>
-				<div class="consulta">	
+        <form id="eliminar" action="/eliminar-participantes" method="get"><input type="hidden" name="codigo" value="<%= consulta._id %>"></form>
+				
+                <div class="consulta">	
 		        <br><br>
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Nombre: <p><i> <%= consulta.name %> </i></p> </h3><br>
@@ -119,6 +121,11 @@
 </body>
 		
 		<script>
+			function eliminar(){
+				if(confirm("Está a punto de eliminar este contenido. Esta acción no puede revertirse. ¿Desea continuar?")){ 	
+				document.getElementById("eliminar").submit();
+					}
+				}
 			function asistio(elem){
 				if(elem.classList.contains('unactive')){ 
 				elem.classList.remove('unactive'); 
