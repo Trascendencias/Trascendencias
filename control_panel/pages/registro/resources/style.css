@@ -487,6 +487,12 @@ button.votacion {
 	width: 100%;
 	height: 50px;
 	}
+	
+.imgPreview {
+	height: 80px; 
+	width: auto;
+	
+	}
 
 /*EXTRAS*/
 .blue {
@@ -507,3 +513,5 @@ button.votacion {
 .pointer {
 	cursor: pointer;
 }
+button.liquidado { color: #069; }
+button.Deuda{ color: black; }

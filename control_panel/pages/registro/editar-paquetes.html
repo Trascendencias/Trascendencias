@@ -12,74 +12,77 @@
 		
         <div class="body">
 		<br>
-		<center><h6><b> Registro Paquetes </b></h6> </center>
+		<center><h6><b> Editar Paquetes </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="/registro-paquetes" encType="multipart/form-data"> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/editar-paquetes" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="Paquetes">
+                <input type="hidden" name="id" value="<%= consulta._id %>">
+
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" value="<%= consulta.name %>" required>
+
 				
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Inicio </p>
-                <input name="start" class="date" type="date" value="Usa otro navegador" required>
+                <input name="start" class="date" type="date" value='<%= consulta.start.getFullYear() %>-<% if(consulta.start.getMonth()+1 < 10){ %>0<% } %><%= consulta.start.getMonth()+1 %>-<% if(consulta.start.getDate() < 10){ %>0<% } %><%= consulta.start.getDate() %>' required>
                 
 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha Fin </p>
-                <input name="end" class="date" type="date" value="Usa otro navegador" required>
+                <input name="end" class="date" type="date" value='<%= consulta.end.getFullYear() %>-<% if(consulta.end.getMonth()+1 < 10){ %>0<% } %><%= consulta.end.getMonth()+1 %>-<% if(consulta.end.getDate() < 10){ %>0<% } %><%= consulta.end.getDate() %>' required>
                 
                 
                 <!-- Requisitos Visita, Taller, Oferta  -->
-                <textarea name="requisites" class="large-text" placeholder="Requisitos..." required></textarea>
+                <textarea name="requisites" class="large-text" placeholder="Requisitos..." required><%= consulta.requisites %></textarea>
                 
                 
                 <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
-                <div id="fotos">
+                <!-- NO SIRVEEE <div id="fotos">
                 <p class="title"> Fotos (1920x1080px) </p>
                 <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;"  accept="image/*" required multiple>
                 
-                </div>
+                </div> -->
                 
                 
                 <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
-                <p class="title"> URL en Youtube de videos </p>
+                <!-- <p class="title"> URL en Youtube de videos </p>
                                 <div id="videos">
                 <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video">
                 
                 </div>
-                <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
+                <button class="third" onClick="masvideo()" type="button"> Agregar Video </button> -->
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="summary" id="resumen" placeholder="Resumen..." required></textarea>
+                <textarea name="summary" id="resumen" placeholder="Resumen..." required><%= consulta.summary %></textarea>
                 
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <textarea name="description" class="large-text" placeholder="Descripción..." required></textarea>
+                <textarea name="description" class="large-text" placeholder="Descripción..." required><%= consulta.description %></textarea>
                 
                 
-                <!-- GRUPO Paquetes-->
+                <!-- GRUPO Paquetes
                 <p class="teaser"> Grupo de: </p>
-                <input type=number name="group_size" class="numero" style="margin-left:0px; width: 60px;" required>
-                <p class="teaser"> Personas </p>
+                <input type=number name="group_size" class="numero" style="margin-left:0px; width: 60px;" value='<%= consulta.group_size %>' required>
+                <p class="teaser"> Personas </p>-->
                 
                 
                 <!-- CUPO Paquetes-->
                 <p class="title"> Cantidad de grupos maximo: </p>
-                <input type=number name="cap" class="numero" style="margin-left:0px; width: 100px;" required>
+                <input type=number name="cap" class="numero" style="margin-left:0px; width: 100px;" value='<%= consulta.cap %>' required>
                             
                 
-                <!-- COSTO Paquetes -->
+                <!-- COSTO Paquetes 
                 <p class="title"> Costo: </p>
-                <input type=number name="cost" placeholder="$$$"class="numero" required><br>
+                <input type=number name="cost" placeholder="$$$"class="numero" value='<%= consulta.cost %>'required><br>-->
                 
-               
+               <br>
                 <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
-                <input type="checkbox" name="teaser-banner" value="TRUE"> <p class="teaser">Incluir en Teaser Banner </p>
-                <input type=number name="teaser_position" class="numero goright" value="0">
+                <p class="teaser">Incluir en Teaser Banner </p>
+                <input type=number name="teaser_position" class="numero goright" value='<%= consulta.teaser_position %>'>
                 <div class="spacer"></div>
                 <hr>
 				<button type="submit" class="submit"> Siguiente </button>
@@ -94,11 +97,12 @@
 </body>
 		
 				<script>
+
 		var startTime;
 		var endTime;
 		 function timeFields(){
-                startTime = document.getElementById("start_day").value.toString()+"T00:00:00-08:00";
-				endTime = document.getElementById("end_day").value.toString()+"T00:00:00-08:00";
+                startTime = document.getElementById("start_day").value.toString()+"T00:00:00-00:00";
+				endTime = document.getElementById("end_day").value.toString()+"T00:00:00-00:00";
 				document.getElementById("start").value = startTime;
 				document.getElementById("end").value = endTime;
             }

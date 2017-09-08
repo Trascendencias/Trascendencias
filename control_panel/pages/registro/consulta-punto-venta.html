@@ -13,49 +13,32 @@
         <div class="body">
         	<center><h6><b> Consulta Punto de Venta </b></h6> </center>
 		<br>
-<button onClick="location.href='editar-punto-venta?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-punto-venta" method="get"><input type="hidden" name="codigo" value="<%= consulta._id %>"> </form>			
+<button onClick="location.href='https://trascendencias.org:8443/registro/editar-punto-venta?id=<%= consulta.id %>'"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" method="post" action="/eliminar-punto-venta"><input type="hidden" name="codigo" value="<%= consulta._id %>"> </form>			
 			   <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
-				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>                
+				<h3> Lugar: <p><i> <%= consulta.name %> </i></p> </h3><br>                
                 
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
-				<h3> Fecha y Hora: <p><i> <%
-					var options = {  
-					    weekday: "long", year: "numeric", month: "long",  
-					    day: "numeric", hour: "2-digit", minute: "2-digit"  
-					};
-
-					var hour_options = {
-						hour: "2-digit", minute: "2-digit"
-					};
-				%>
-				<%= consulta.start.toLocaleTimeString("en-us", options); %>
-				-
-				<%= consulta.end.toLocaleTimeString("en-us", hour_options); %>
-                
+				<h3> Fecha de inicio: <p><i>
+                <%
+                    var options = {  
+                        weekday: "long", year: "numeric", month: "long",  
+                        day: "numeric", hour: "2-digit", minute: "2-digit"  
+                    };
+                %>
+                <%= consulta.start.toLocaleTimeString("en-us", options); %>
+                </i></p> </h3><br>
+                <h3> Fecha de cerrado: <p><i>
+                <%= consulta.end.toLocaleTimeString("en-us", options); %>
                 </i></p> </h3><br>                
                 
                 <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
-				<h3> Dirección: <p><i> <%= consulta.location %> </i></p> </h3><br>                
+				<h3> Horario: <p><i> <%= consulta.location %> </i></p> </h3><br>                
                 
                 
                 </div>
                 
-                <hr>
-                <h3> Historial de Cambios </h3>
-                 <div class="accion">
-                    <h3> Creado </h3><p> 13/SEP/2017 22:45h</p> <br>
-                    <p>Por: <i> Nombre Miembro Staff </i> </p>
-                </div>
-
-                <div class="accion">
-                    <h3> Editado </h3><p> 13/SEP/17 22:46h</p> <br>
-                    <p>Por: <i> Nombre Miembro Staff </i> </p>
-                </div>
-                <div class="accion">
-                    <h3> Eliminado </h3><p> 13/SEP/2017 22:47h</p> <br>
-                    <p>Por: <i> Nombre Miembro Staff </i> </p>
-                </div>
+                
 
             </div>
 

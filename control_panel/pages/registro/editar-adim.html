@@ -1,0 +1,68 @@
+<html> 
+
+	<head>		
+		<title> Editar Usuario Admin </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	    <% include menu.html %>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="resources/style.css">
+	
+    </head>
+<body>
+		
+        <div class="body">
+		<br>
+		<center><h6> Cambiar Contraseña </h6> </center>
+			
+			<form class="registro" id="forma-contrasena" method="post" action="/editar-staff"> <br><br>
+
+				<!-- CONTRASENA -->
+				<input type="hidden" value="59a60656f3d7934da2e21f5d" name="id">
+                <input id="value1" maxlength="50" placeholder="Nueva Contraseña" type="password" name="password" required>
+				<p class="error"> *Debe llenar esta información </p>
+
+				<!-- REPITE LA CONTRASENA -->
+				<input id="value2" maxlength="50" placeholder="Repita la Contraseña" type="password" name="password2" required>
+				<p class="error"> *Debe llenar esta información </p>
+                
+               
+                <div class="spacer"></div>
+                <hr>
+				<button type="button" class="submit" onClick="validateContrasena()"> Siguiente </button>
+                <button type="button" class="third" onClick="window.history.back();"> Cancelar </button>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+			</form>
+			
+
+
+		</div>
+
+</body>
+		
+		<script>
+			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
+				if(elem.classList.contains('active')) elem.classList.remove('active'); 
+				else elem.classList.add('active'); 
+			}
+
+              //INCLUIR DOCUMENTOS
+            var send = true;
+            function validateContrasena(){
+            	var value1 = document.getElementById('value1');
+            	var value2 = document.getElementById('value2');
+            	if(value1.value == value2.value) send = true;
+            	if(!value1.value){ value1.classList.add('error'); send = false; }
+				if(!value2.value){ value2.classList.add('error'); send = false; }
+            	if(value1.value != value2.value) { send=false; alert("Las contraseñas no coinciden."); }
+				
+
+            	if(send) { document.getElementById("forma-contrasena").submit(); }
+            }
+            function validateEditar(){
+            	 document.getElementById("forma-editar").submit(); 
+            }
+
+		</script>
+</html>

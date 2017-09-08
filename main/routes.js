@@ -108,44 +108,49 @@ module.exports = function(http_app, app, fs, passport, database) {
 											database.list('visita', function(err, visitas) {
 												database.list('punto-venta', function(err, puntos_de_venta) {
 													database.list('participante', function(err, participantes) {
-														database.list('evento-extra', function(err, eventos_extra) {
-															if(req.user) {
-																database.get_actions(req.user.name, false, function(actions) {
+														database.list('staff', function(err, participantes) {
+															database.list('evento-extra', function(err, eventos_extra) {
+																if(req.user) {
+																	database.get_actions(req.user, false, function(err, actions) {
+																		return res.render(req.params.name, {
+																			user: req.user,
+																			paquetes: paquetes,
+																			conferencias: conferencias,
+																			talleres: talleres,
+																			visitas: visitas,
+																			eventos_sociales: eventos_sociales,
+																			patrocinadores: patrocinadores,
+																			preguntas_frecuentes: preguntas_frecuentes,
+																			blogs: blogs,
+																			puntos_de_venta: puntos_de_venta,
+																			eventos_extra: eventos_extra,
+																			acciones: actions,
+																			participantes: participantes,
+																			staff: staff,
+																			facebook: "https://graph.facebook.com/" + req.user.facebook + "/picture" + "?type=large",
+																			login_message: req.flash('login_message')
+																		});
+																	});
+																}
+																else {
 																	return res.render(req.params.name, {
 																		user: req.user,
 																		paquetes: paquetes,
 																		conferencias: conferencias,
 																		talleres: talleres,
 																		visitas: visitas,
+																		participantes: participantes,
 																		eventos_sociales: eventos_sociales,
 																		patrocinadores: patrocinadores,
 																		preguntas_frecuentes: preguntas_frecuentes,
 																		blogs: blogs,
+																		staff: staff,
 																		puntos_de_venta: puntos_de_venta,
 																		eventos_extra: eventos_extra,
-																		acciones: actions,
-																		participantes: participantes,
 																		login_message: req.flash('login_message')
 																	});
-																});
-															}
-															else {
-																return res.render(req.params.name, {
-																	user: req.user,
-																	paquetes: paquetes,
-																	conferencias: conferencias,
-																	talleres: talleres,
-																	visitas: visitas,
-																	participantes: participantes,
-																	eventos_sociales: eventos_sociales,
-																	patrocinadores: patrocinadores,
-																	preguntas_frecuentes: preguntas_frecuentes,
-																	blogs: blogs,
-																	puntos_de_venta: puntos_de_venta,
-																	eventos_extra: eventos_extra,
-																	login_message: req.flash('login_message')
-																});
-															}
+																}
+															});
 														});
 													});
 												});

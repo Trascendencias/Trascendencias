@@ -13,7 +13,7 @@
         <div class="body">
         <center><h6><b> Consulta Patrocinadores </b></h6> </center>
 		<br>
-<button onClick="location.href='editar-patrocinadores?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-patrocinadores?id=<%= consulta._id %>"> </form>			
+<button onClick="location.href='editar-patrocinadores?id=<%= consulta._id %>'"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" method="post" action="/eliminar-patrocinadores"><input type="hidden" name="codigo" value="<%= consulta._id %>"> </form>			
 			   <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Empresa: <p><i> <%= consulta.name %>  </i></p> </h3><br>                
@@ -29,31 +29,15 @@
                 
                 <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
 				<h3> Logo de la Empresa:</h3><br>
-                <img src="<%= consulta.company_logo %>" width="300px" height="100px">
+                <div class="logoPreview" style="background:black;color:white">
+                |<img src="<%= consulta.company_logo %>" class="imgPreview">|
+                </div>
                 
                 <!-- ABONO Participante, Patrocinadores-->
                 <h3> Patrocinio: <p><i> <%= consulta.payment %> </i></p> </h3><br>
                 </div>
                 
-                <hr>
-                <h3> Historial de Cambios </h3>
-                 <div class="accion">
-                    <h3> Creado </h3><p> 13/SEP/2017 22:45h</p> <br>
-                    <p>Por: <i> Nombre Miembro Staff </i> </p>
-                </div>
-
-                <div class="accion">
-                    <h3> Editado </h3><p> 13/SEP/17 22:46h</p> <br>
-                    <p>Por: <i> ONombre Miembro Staff </i> </p>
-                </div>
-                <div class="accion">
-                    <h3> Eliminado </h3><p> 13/SEP/2017 22:47h</p> <br>
-                    <p>Por: <i> Nombre Miembro Staff </i> </p>
-                </div>
-                <div class="accion">
-                     <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
-                     <p> Recibido por: <i> Miembro Staff </i> </p>
-                </div>
+               
 
             
 			</form>

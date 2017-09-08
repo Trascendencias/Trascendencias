@@ -2,13 +2,11 @@
 
 	<head>		
 		<!---FACEBOOK OPTIMIZATION -->
-		<meta property="og:url" content="#!URL" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="#!TITLE" />
-		<meta property="og:image" content="#!IMG" />
+		<meta property="og:title" content="No se ha encontrado la página que desea" />
 		
 		<!---SEO OPTIMIZATION -->
-		<title> #!TITLE </title>
+		<title> Error #404 </title>
 		<meta name="description" content="#!DESCRIPTION">
 		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
 		<meta name="author" content="#!AUTOR">
@@ -25,7 +23,6 @@
 		<!--- Pa que agarren los acentos -->
 		<meta charset="UTF-8">
 
-		<!--- Pa que agarre el Styleshit -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 
 	</head>
@@ -41,12 +38,14 @@
 		<h3 class="error404" id="mensaje"></h3> 
 		</div>
 
-		<hr style="width: 100vw; border-color: rgba(0,0,0,0);"> <!-- Esto es pa que no se corra el footer, no se por que pero con esto se arregla ja-->
+		<hr style="width: 100vw; border-color: rgba(0,0,0,0);"> 
 		
 		 <!-- INCLUIR FOOTER-->
 		<% include partials/footer.html %>
 		
-		<script>  
+		
+
+<script>  
 			function getParameterByName(name, url) {
 			    if (!url) url = window.location.href;
 			    name = name.replace(/[\[\]]/g, "\\$&");

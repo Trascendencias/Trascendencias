@@ -4,25 +4,22 @@
 		<!---FACEBOOK OPTIMIZATION -->
 		<meta property="og:url" content="www.trascendencias.org/signup" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="#!TITLE" />
+		<meta property="og:title" content="Registro de Participante" />
 		
 		<!---SEO OPTIMIZATION -->
 		<title> Registrarse </title>
 		<meta name="description" content="#!DESCRIPTION">
-		<meta name="keywords" content="#!KEY, #!WORDS, #!COMA, #!SEPARATED" >
-		<meta name="author" content="#!AUTOR">
+		<meta name="keywords" content="Crear Usuario, Usuario Nuevo, Trascendencias" >
+		<meta name="author" content="Trascendencias">
 
 		<!-- tag para hacerlo escalable -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-		<!--- INCLUIR DOCUMENTOS -->
 		<% include partials/menu.html %>
 		<div class="menuspacer"></div>
 
-		<!--- Pa que agarren los acentos -->
 		<meta charset="UTF-8">
 
-		<!--- Pa que agarre el Styleshit los acentos -->
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 	</head>
 
@@ -30,6 +27,7 @@
 	<body>
 		<div class="registro">
 		<br><br><br>
+        <center><button onclick="location.href='/auth/facebook'" style="float:none"> Registrarse con Facebook </button> <br><br><br> <center>
 		<center><h6> <b>Registrarse </b></h6> </center>
 			<p style="color: red;"> <%= message %> </p>
 			<form class="registro" action="signup" method="post"> <br><br>
@@ -77,19 +75,18 @@
 				
 
 				<!-- CONTRASENA -->
-				<input maxlength="50"  type="password" placeholder="Contraseña" name="password" required>
+				<input maxlength="50"  id="pass1" type="password" placeholder="Contraseña" name="password" required>
 				
 
 				<!-- REPITE LA CONTRASENA -->
-				<input maxlength="50" type="password" placeholder="Repita la contraseña" name="password_repeat" required>
-				
+				<input maxlength="50" id="pass2" onBlur="passCheck()" type="password" placeholder="Repita la contraseña" name="password_repeat" required>
+				<p id="err" style="color: red; display:none;"> Las contraseñas no coinciden </p> 
 
 				<!-- ALERGIAS -->
 				<input maxlength="50" type="text" placeholder="¿Tienes alergias?" name="alergies" required>
 				
-
 				<!-- TERMINOS Y CONDICIONES -->
-				<p> <input type="checkbox" required> Acepto los <span class="cmenta" onClick="location.href='terminosycondiciones'"> términos y condiciones </span> </p>
+				<p> <input type="checkbox" required> Acepto los <span class="cmenta pointer" onClick="location.href='terminosycondiciones'" required> términos y condiciones </span> </p>
 
 				<button type="submit" onClick="location.href='registro-terminado"> Siguiente </button>
                 <br><br><br>
@@ -106,7 +103,19 @@
 
 </body>
 		
-		<script>
+		
+
+<script>
+		function passCheck(){
+			if(document.getElementById("pass1").value == document.getElementById("pass2").value){
+				document.getElementById("err").style.display = "none";
+				}
+				
+			else{ 				
+				document.getElementById("err").style.display = "block";
+			 }
+			
+			}
 
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 

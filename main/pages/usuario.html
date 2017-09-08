@@ -5,17 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
         
-        <!--- Title --> 
         <title> Información del Usuario </title>
-        
-        <!--- Incluir documeentos -->
         <% include partials/menu.html %>
-
-            
-        <!--- Pa que agarren los acentos -->
         <meta charset="UTF-8">
-
-        <!--- Pa que agarre el Styleshit los acentos -->
         <link rel="stylesheet" type="text/css" href="resources/style.css">
     
     </head>
@@ -29,11 +21,13 @@
         
         <center>
         <br><br>
-        <center> 
-           <!-- <button onClick="location.href='editar-usuario.html'"> Editar Info </button> -->
-        </center>
+        
         <br>
-        	<img src="resources/user_example.png" class="consultausuario">
+        	<img src="
+        <% if(user.facebook.id) {%>
+        https://graph.facebook.com/<%= user.facebook.id %>/picture?type=large
+        <% } else { %> resources/user_example.png<% } %>
+        " class="consultausuario">
                     <h3 style="font-size: 20px"> <%= user.name %> </h3>
 
         </center>
@@ -47,9 +41,9 @@
 									<h2>No has elegido paquete.</h2>
 								<% } %>
 							<% } else { %>
-								<% if(user.local) { %>
+								<% if(user.local && !user.facebook) { %>
 									<h3>Favor de verificar tu cuenta en el correo registrado.</h3>
-								<% } else { %>	
+								<% } if(user.facebook) { %>	
 									<h3 onClick="location.href='validacion-facebook'">Favor de verificar tu informacion dando click <u>aqui</u>.</h3>
 								<% } %>
 							<% } %>
@@ -70,29 +64,54 @@
 
 
 
-       <!-- <h3> Historial de Acciones </h3>   
-        <div class="accion">
-            <h3> Registro </h3><p> 13/SEP/2017 22:45h</p> <br>
-            <p>Registrado por: <i> Interner </i> </p>
-        </div>
-        <div class="accion">
-            <h3 class="dineromas"> Abono </h3><p> 13/SEP/17 22:45h</p> <br>
-            <p> Cantidad de: <i> $450.00 </i> </p>
-        </div>
-        <div class="accion">
-            <h3 class="dineromas"> Abono </h3><p> 13/SEP/17 22:45h</p> <br>
-            <p> Cantidad de: <i> $450.00 </i> </p>
-        </div>
-        <div class="accion">
-            <h3> Liquidado </h3><p> 13/SEP/2017 22:45h</p> <br>
-        </div> -->
+        <h3> Abonos: </h3>   
+        
+        <%
+					var options = {  
+					    weekday: "long", year: "numeric", month: "long",  
+					    day: "numeric", hour: "2-digit", minute: "2-digit",
+					    timeZone: 'America/Tijuana'
+					};
+				%>
+        <% acciones.forEach(function(element) { %>
+	                <div class="accion">
+		           		
+                        <% if(element.content_type == "dinero+") { %>
+                         
+                        <h3 class="dineromas" > +$<%= element.content_message %> 
+                        </h3><p> <%= new Date(element.date).toLocaleString("en-us", options); %></p> <br>
+		           		 <p> Abonado por: <i> <%= element.actor_name %> </i> </p
+                        
+                         ><% }%>
+                         
+                         <% if(element.content_type == "registro") { %>
+                         
+                        <h3> Registro por <%= element.content_message %>
+                        </h3><p> <%= new Date(element.date).toLocaleString("en-us", options); %></p> <br>
+	                       	<% if(element.actor_name) { %>
+			           		 <p> Registrado por: <i> <%= element.actor_name %> </i> </p>
+	                        <% } %>
+	                       <% } %>
+                         
+                         <% if(element.content_type == "liquidado") { %>
+                        <h3> Liquidado
+                        </h3><p> <%= new Date(element.date).toLocaleString("en-us", options); %></p> <br>
+		           		 <p> Abonado por: <i> <%= element.actor_name %> </i> </p
+                        
+                         ><% }%>
+                         
+                         
+	        		</div>
+                <% }); %>
 
 
         </div>
 
 </body>
         
-        <script>
+        
+
+<script>
         	w3.includeHTML(); //INCLUIR DOCUMENTOS
 			
 			function activate(elem){ //ACTIVE, PARA EL MENU MOVIL

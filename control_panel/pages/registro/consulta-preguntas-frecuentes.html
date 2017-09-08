@@ -13,34 +13,19 @@
         <div class="body">
         <center><h6><b> Consulta Preguntas Frecuentes </b></h6> </center>
 		<br>
-<button onClick="location.href='editar-preguntas-frecuentes?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-preguntas-frecuentes?id=<%= consulta._id %>"> </form>			
+<button onClick="location.href='editar-preguntas-frecuentes?id=<%= consulta._id %>'"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" method="post" action="/eliminar-preguntas-frecuentes"><input type="hidden" name="codigo" value="<%= consulta._id %>"> </form>				
 			   <div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Pregunta: <p><i> <%= consulta.name %> </i></p> </h3><br>
                 
-                <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <h3> Respuesta: <p><i> <%= consulta.answer %>  </i></p> </h3><br>
+				<h3> Respuesta:</h3> <p style="white-space: pre-wrap"><i> <%= consulta.answer %> </i></p><br>
                 
                 <!-- POSICION Preguntas Frecuentes -->
                 <h3> Posición: <p><i> <%= consulta.position %>  </i></p> </h3><br>                
 
                 </div>
                 
-                <hr>
-                <h3> Historial de Cambios </h3>
-                 <div class="accion">
-                    <h3> Creado </h3><p> 13/SEP/2017 22:45h</p> <br>
-                    <p>Por: <i> Nombre Miembro Staff </i> </p>
-                </div>
-
-                <div class="accion">
-                    <h3> Editado </h3><p> 13/SEP/17 22:46h</p> <br>
-                    <p>Por: <i> ONombre Miembro Staff </i> </p>
-                </div>
-                <div class="accion">
-                    <h3> Eliminado </h3><p> 13/SEP/2017 22:47h</p> <br>
-                    <p>Por: <i> Nombre Miembro Staff </i> </p>
-                </div>
+               
             </div>
 
 </body>	<script>

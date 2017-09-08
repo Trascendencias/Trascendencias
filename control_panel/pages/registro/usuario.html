@@ -22,7 +22,7 @@
         <div class="spacer"></div>
         
         <center>
-        	<img src="resources/user_example.png" class="staff-pic">
+        	<img src="<% if(user.photo){ %><%= user.photo %><% } else { %>resources/user_example.png<% } %>" class="staff-pic">
         </center>
         <br>
         
@@ -33,7 +33,6 @@
         <p> Talla <%= user.shirt_size %> </p>
         <p> <%= user.phone %> </p>
         <p> <%= user.email %> </p>
-        <h3 class='black'> Activo en Puesto de Venta 3 </h3>
         <hr>
 
         
@@ -42,29 +41,44 @@
 
         <h3> Historial de Acciones </h3>   
         <!-- RECIBIO DINERO -->
-        <div class="accion">
-            <h3 class="dineromas"> +$450 </h3><p> 13/SEP/17 22:45h</p> <br>
-            <p> De patrocinador <i> Zapatos Lujosos </i> </p>
-        </div>
-        <!-- REGRESO DINERO -->     
-        <div class="accion">
-            <h3 class="dineromenos"> -$450 </h3><p> 13/SEP/17 22:45h</p> <br>
-            <p> A participante <i> Emiliano Zapata </i> </p>
-        </div>
-        <!-- CREO -->
-        <div class="accion">
-            <h3> Creó </h3><p> 13/SEP/2017 22:45h</p> <br>
-            <p>Blog: <i> 10 maneras de suprimir la cruda </i> </p>
-        </div>
-
-        <div class="accion">
-            <h3> Eliminó </h3><p> 13/SEP/17 22:46h</p> <br>
-            <p>Conferencia: <i> Odio al mundo, a ti también </i> </p>
-        </div>
-        <div class="accion">
-            <h3> Editó </h3><p> 13/SEP/2017 22:47h</p> <br>
-            <p>Participante <i> Pito Parado </i> </p>
-        </div>
+                       	<%
+					var options = {  
+					    weekday: "long", year: "numeric", month: "long",  
+					    day: "numeric", hour: "2-digit", minute: "2-digit",
+					    timeZone: 'America/Tijuana'
+					};
+				%>
+        
+        <% actions.forEach(function(element) { %>
+	                <div class="accion">
+		           		
+                        <% if(element.content_type == "dinero+") { %>
+                         
+                        <h3 class="dineromas" > +$<%= element.content_message %> 
+                        </h3><p> <%= new Date(element.date).toLocaleString("en-us", options); %></p> <br>
+		           		 <p> Abonaste a: <i> <%= element.recipient_name %> </i> </p
+                        
+                         ><% }%>
+                         
+                         <% if(element.content_type == "registro") { %>
+                         
+                        <h3> Registro <%= element.content_message %>
+                        </h3><p> <%= new Date(element.date).toLocaleString("en-us", options); %></p> <br>
+	                       	<% if(element.actor_name) { %>
+			           		 <p> Registraste a: <i> <%= element.recipient_name %> </i> </p>
+	                        <% } %>
+	                       <% } %>
+                         
+                         <% if(element.content_type == "liquidado") { %>
+                        <h3> Liquidación
+                        </h3><p> <%= new Date(element.date).toLocaleString("en-us", options); %></p> <br>
+		           		 <p> Liquidaste a: <i> <%= element.recipient_name %> </i> </p
+                        
+                         ><% }%>
+                         
+                         
+	        		</div>
+                <% }); %>
 
         </div>
 

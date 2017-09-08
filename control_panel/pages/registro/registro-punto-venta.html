@@ -20,28 +20,23 @@
                 <input type="hidden" name="registrado" value="punto-venta">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre" name="name" maxlength="35" required>
+				<input maxlength="50" type="text" placeholder="Lugar" name="name" maxlength="35" required>
 				
             
-                <p class="title"> Fecha: </p>
-                <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
                 
+                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
+                <p class="title"> Fecha Inicio </p>
+                <input id="start_day" class="date" type="date" onBlur="timeFields();" value="Usa otro navegador" required>
                 
-                <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
-                <p class="title"> Inicio: </p>
-                <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
-                
-                
+
+                <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
+                <p class="title"> Fecha Fin </p>
+                <input  id="end_day" class="date" type="date" onBlur="timeFields();" value="Usa otro navegador" required>
+                    
                 <input type="hidden" id="start" name="start"> 
                 <input type="hidden" id="end" name="end"> 
-                
-                <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
-                <p class="title"> Fin: </p>
-                <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
-                
-                
                 <!-- DIRECCION Conferencia, Taller, Evento Extra, Visita, Punto de Venta -->
-                <input maxlength="50" type="text" placeholder="Dirección" name="location" required>
+                <input maxlength="50" type="text" placeholder="Horario" name="location" required>
                 
                 
 
@@ -64,10 +59,10 @@
 		var startTime;
 		var endTime;
 	function timeFields(){
-                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-00:00";
-                endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("end_time").value+":00-00:00";
-                document.getElementById("start").value = startTime;
-                document.getElementById("end").value = endTime;
+                startTime = document.getElementById("start_day").value.toString()+"T00:00:00-00:00";
+				endTime = document.getElementById("end_day").value.toString()+"T23:59:00-00:00";
+				document.getElementById("start").value = startTime;
+				document.getElementById("end").value = endTime;
             }
 			
 			

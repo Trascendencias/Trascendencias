@@ -36,10 +36,10 @@
 		<div class="h4holder">
 			<h4> ¿Qué es Trascendencias? </h4>
 		</div>
-			<button class="btn" onClick="activate(this)"> + </button>
+			<button class="btn active" onClick="activate(this)"> + </button>
 			<div class="droppedContent">
 				<p> 
-					1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio. El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”. </p>
+					En 1981, Cetys Universidad contaba con dos ingenierías; ciencias computacionales e industrial. En ese entonces había que viajar a ciudades más grandes para asistir a un simposio. El maestro Guillermo Cheang organizó, en ese año, el primer “Simposio de Ingeniería” en campus Mexicali, donde el objetivo era traer a conferencistas de primer nivel. Con el paso de los años, el simposio de ingeniería iba ganando experiencia y se decidió que los alumnos comenzaran a organizarlo. En 2001 surgió la idea de crear un concepto que durara por siempre, así nació “Trascendencias”. </p>
 					<p>
 					Está dirigido a estudiantes y profesionistas interesados en temas actuales tecnológicos, industriales, sociales y laborales; brindando, además, a estos públicos la oportunidad de vincularse con personalidades de carácter nacional e internacional; así como compañías de alta calidad y prestigio en la región. 
 				</p>
@@ -52,16 +52,16 @@
 		<div class="h4holder">
 			<h4> Misión y Visión </h4>
 		</div>
-			<button class="btn" onClick="activate(this)"> + </button>
+			<button class="btn active" onClick="activate(this)"> + </button>
 			<div class="droppedContent">
 			
-				<h2> Misión </h2> <button class="btn" onClick="activate(this)"> + </button>
+				<h2> Misión </h2> <button class="btn active" onClick="activate(this)"> + </button>
 					<div class="subContent" >
 						<p> 
 							Enriquecer el conocimiento y cultura de los participantes en temas de ingeniería con el fin de dejar a cada uno de los asistentes con un espectro más amplio de visión y análisis tanto para su vida laboral como para su papel de ser social.
 						</p>
 					</div>
-				<h2> Visión </h2> <button class="btn" onClick="activate(this)"> + </button>
+				<h2> Visión </h2> <button class="btn active" onClick="activate(this)"> + </button>
 					<div class="subContent" >
 						<p> 
 							Llevar a cabo un evento de alta calidad que sea sinónimo de las atracciones culturales más destacadas de la ciudad para gente de nuestro país y de ciudades fronterizas.
@@ -78,157 +78,118 @@
 				<div class="droppedContent">
 					<br>
 					<!-- COORDINADOR -->
-					<div class="staff2">
+                    
+                    <% staff.forEach(function(element) { %>
+                    <% if( element.position == "Coordinador" && element.team == "General") { %>
+                    <div class="staff2">
 						<img src="resources/user_example.png" class="persona2">
-						<h3> Nombre Nombre Apellido </h3>
-						<p><i> Coordinador Trasce </i></p>
-					</div><br>
+						<h3> <%= element.name %> </h3>
+						<p><i> <%= element.position %> <%= element.team %> </i></p>
+					</div>
+                    <% } }); %>
 
 					<!-- SUBCOORDINADOR -->
-					<div class="staff2">
-						<img src="resources/user_example.png" class="persona2">
-						<h3> Nombre Nombre Apellido </h3>
-						<p><i> Subcoordinador Trasce </i></p>
-					</div><br>
+					                    
+                    <% staff.forEach(function(element) { %>
+                    <% if( element.position == "Subcoordinador" && element.team == "General") { %>
+                    <div class="staff2">
+						<img src="<% if(element.photo){ %><%= element.photo %><% } else { %>resources/user_example.png<% } %>" class="persona2">
+						<h3> <%= element.name %> </h3>
+						<p><i> <%= element.position %> <%= element.team %> </i></p>
+					</div>
+                    <% } }); %>
 
-					<!-- POR DEPARTAMENTOS -->
-					<h2> Logística </h2> <button class="btn" onClick="activate(this)"> + </button>
-						<div class="subContent" >
-							
-							<div class="staff2">
-								<img src="resources/user_example.png" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
-
-						</div>
+	
 					
 					<h2> Estrategia </h2> <button class="btn" onClick="activate(this)"> + </button>
 						<div class="subContent" >
 							
-							<div class="staff2">
-								<img src="resources/user_example.png" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
+					<% staff.forEach(function(element) { %>
+                    <% if( element.team == "Estrategia") { %>
+                    <div class="staff2">
+						<img src="<% if(element.photo){ %><%= element.photo %><% } else { %>resources/user_example.png<% } %>" class="persona2">
+						<h3> <%= element.name %> </h3>
+						<p><i> <%= element.position %>  </i></p>
+					</div>
+                    <% } }); %>
 
 						</div>
 					
 					<h2> Contenido </h2> <button class="btn" onClick="activate(this)"> + </button>
 						<div class="subContent" >
 
-							<div class="staff2">
-								<img src="resources/user_example.png" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
+					<% staff.forEach(function(element) { %>
+                    <% if( element.team == "Contenido") { %>
+                    <div class="staff2">
+						<img src="<% if(element.photo){ %><%= element.photo %><% } else { %>resources/user_example.png<% } %>" class="persona2">
+						<h3> <%= element.name %> </h3>
+						<p><i> <%= element.position %>  </i></p>
+					</div>
+                    <% } }); %>
 
 						</div>
 					
-					<h2> Imágen </h2> <button class="btn" onClick="activate(this)"> + </button>
+					<h2> Imagen </h2> <button class="btn" onClick="activate(this)"> + </button>
 						<div class="subContent">
 
-							<div class="staff2">
-								<img src="resources/user_example.png" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
+							<% staff.forEach(function(element) { %>
+                    <% if( element.team == "Imagen") { %>
+                    <div class="staff2">
+						<img src="<% if(element.photo){ %><%= element.photo %><% } else { %>resources/user_example.png<% } %>" class="persona2">
+						<h3> <%= element.name %> </h3>
+						<p><i> <%= element.position %> </i></p>
+					</div>
+                    <% } }); %>
 
 						</div>
 					
 					<h2> Marketing y Ventas </h2> <button class="btn" onClick="activate(this)"> + </button>
 						<div class="subContent" >
 							
-							<div class="staff2">
-								<img src="resources/user_example.png" class="persona2">
-								<h3> Nombre Nombre Apellido </h3>
-								<p><i> Puesto en Trasce </i></p>
-							</div><br>
+					<% staff.forEach(function(element) { %>
+                    <% if( element.team == "Marketing y Ventas") { %>
+                    <div class="staff2">
+						<img src="<% if(element.photo){ %><%= element.photo %><% } else { %>resources/user_example.png<% } %>" class="persona2">
+						<h3> <%= element.name %> </h3>
+						<p><i> <%= element.position %>  </i></p>
+					</div>
+                    <% } }); %>
 						
 						</div>
+                        
+                        <h2> Eventos Sociales </h2> <button class="btn" onClick="activate(this)"> + </button>
+						<div class="subContent" >
+							
+					<% staff.forEach(function(element) { %>
+                    <% if( element.team == "Eventos Sociales") { %>
+                    <div class="staff2">
+						<img src="<% if(element.photo){ %><%= element.photo %><% } else { %>resources/user_example.png<% } %>" class="persona2">
+						<h3> <%= element.name %> </h3>
+						<p><i> <%= element.position %>  </i></p>
+					</div>
+                    <% } }); %>
+						
+						</div>
+                        
+                        <h2> Logística </h2> <button class="btn" onClick="activate(this)"> + </button>
+						<div class="subContent" >
+							
+					<% staff.forEach(function(element) { %>
+                    <% if( element.team == "Logística") { %>
+                    <div class="staff2">
+						<img src="<% if(element.photo){ %><%= element.photo %><% } else { %>resources/user_example.png<% } %>" class="persona2">
+						<h3> <%= element.name %> </h3>
+						<p><i> <%= element.position %>  </i></p>
+					</div>
+                    <% } }); %>
+
+						</div>
+                        
+                        
 				</div>
 	</div>
 
-	<div class="dropContent" > 
-		<div class="h4holder">
-			<h4> Staff Pasados </h4>
-		</div>
-			<button class="btn" onClick="activate(this)"> + </button>
-			<div class="droppedContent">
-				
-				<h2> 2016 </h2> <button class="btn" onClick="activate(this)"> + </button>
-				<div class="subContent level3 ">
-						<!-- COORDINADOR --> 
-						<div class="staff2">
-							<img src="resources/user_example.png" class="persona2">
-							<h3> Nombre Nombre Apellido </h3>
-							<p><i> Coordinador Trasce </i></p>
-						</div><br>
-						<!-- SUBCOORDINADOR --> 
-						<div class="staff2">
-							<img src="resources/user_example.png" class="persona2">
-							<h3> Nombre Nombre Apellido </h3>
-							<p><i> Subcoordinador Trasce </i></p>
-						</div><br>
-
-						<!-- POR DEPARTAMENTOS --> 
-						<h2> Logística </h2> <button class="btn" onClick="activate(this)"> + </button>
-							<div class="subContent" >
-								
-								<div class="staff2">
-									<img src="resources/user_example.png" class="persona2">
-									<h3> Nombre Nombre Apellido </h3>
-									<p><i> Puesto en Trasce </i></p>
-								</div><br>
-
-							</div>
-						
-						<h2> Estrategia </h2> <button class="btn" onClick="activate(this)"> + </button>
-							<div class="subContent">
-								
-								<div class="staff2">
-									<img src="resources/user_example.png" class="persona2">
-									<h3> Nombre Nombre Apellido </h3>
-									<p><i> Puesto en Trasce </i></p>
-								</div><br>
-
-							</div>
-						
-						<h2> Contenido </h2> <button class="btn" onClick="activate(this)"> + </button>
-							<div class="subContent">
-								
-								<div class="staff2">
-									<img src="resources/user_example.png" class="persona2">
-									<h3> Nombre Nombre Apellido </h3>
-									<p><i> Puesto en Trasce </i></p>
-								</div><br>
-
-							</div>
-						
-						<h2> Imágen </h2> <button class="btn" onClick="activate(this)"> + </button>
-							<div class="subContent">
-								
-								<div class="staff2">
-									<img src="resources/user_example.png" class="persona2">
-									<h3> Nombre Nombre Apellido </h3>
-									<p><i> Puesto en Trasce </i></p>
-								</div><br>
-
-							</div>
-						
-						<h2> Marketing y Ventas </h2> <button class="btn" onClick="activate(this)"> + </button>
-							<div class="subContent">
-								
-								<div class="staff2">
-									<img src="resources/user_example.png" class="persona2">
-									<h3> Nombre Nombre Apellido </h3>
-									<p><i> Puesto en Trasce </i></p>
-								</div><br>
-
-							</div>
-				</div>
-		</div>
-	</div>
+	
 
 	<div class="dropContent">
 		<div class="h4holder">
@@ -259,6 +220,7 @@
 
 </body>
 <% include partials/footer.html %>
+
 
 <script >	
 	function activate(elem){	

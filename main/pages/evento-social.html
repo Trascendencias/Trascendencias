@@ -22,7 +22,6 @@
 	<!--- Pa que agarren los acentos -->
 	<meta charset="UTF-8">
 
-	<!--- Pa que agarre el Styleshit los acentos -->
 	<link rel="stylesheet" type="text/css" href="resources/style.css">
 </head>
 
@@ -30,7 +29,9 @@
 <body>
 	<!-- Plugin de Facebook (PARA LIKES Y COMENTARIOS -->
 		<div id="fb-root"></div>
-			<script>(function(d, s, id) {
+			
+
+<script>(function(d, s, id) {
 			  var js, fjs = d.getElementsByTagName(s)[0];
 			  if (d.getElementById(id)) return;
 			  js = d.createElement(s); js.id = id;
@@ -79,9 +80,9 @@
 				<div class="fb-like" data-href="#" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 
 				<!-- Links a todos los eventos sociales -->
-				<h2 onclick="location.href='link'"> Rompe Hielos </h2>
-				<h2 onclick="location.href='link'"> Noche Bohemia </h2>
-				<h2 onclick="location.href='link'"> Fiesta de Clausura </h2>
+				<h2 onClick="location.href='link'"> Rompe Hielos </h2>
+				<h2 onClick="location.href='link'"> Noche Bohemia </h2>
+				<h2 onClick="location.href='link'"> Fiesta de Clausura </h2>
 
 			</div>
 		<!--- Comentarios de Facebook --> 
@@ -94,7 +95,9 @@
 	<% include partials/footer.html %>
 
 	
-	<script>
+	
+
+<script>
 			function activate(elem){
 			if(elem.classList.contains('active')) elem.classList.remove('active'); 
 			else elem.classList.add('active'); 

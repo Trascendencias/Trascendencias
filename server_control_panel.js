@@ -319,6 +319,17 @@ app.get('/registro/consulta-:collection', check_session, function(req, res) {
 	});
 });
 
+app.get('/registro/usuario', check_session, function(req, res) {
+
+		database.get_actions(req.user, true, function(err, actions) {
+			return res.render('registro/usuario', {
+				user: req.user,
+				actions: actions
+			
+		});
+	});
+});
+
 app.get('/registro/editar-participante', check_session, function(req, res) {
 	database.consult('participante', req.query.id, function(err, consulta) {
 		database.list('paquetes', function(err, paquetes) {
@@ -331,10 +342,57 @@ app.get('/registro/editar-participante', check_session, function(req, res) {
 	});
 });
 
-app.get('/:module/:page?', check_session, protect, function(req, res) {
+app.get('/registro/editar-:collection', check_session, function(req, res) {
+	database.consult(req.params.collection, req.query.id, function(err, consulta) {
+		return res.render('registro/editar-' + req.params.collection, {
+			user: req.user,
+			consulta: consulta
+		});
+	});
+});
+
+
+app.post('/eliminar-:collection', check_session, form(), function(req, res) {
+	database.remove(req.params.collection, req.form.codigo, function(err) {
+		if(catch_errors(err)) {
+			return res.redirect('/registro/avisos?titulo=error&mensaje=' + req.params.collection +'%20'+req.query.codigo);
+		}
+
+		return res.redirect('registro/avisos?titulo=eliminar');
+	});
+});
+
+app.post('/editar-:group', check_session, form(), function(req, res) {
+ 	database.models[database.translate[req.params.group]].findOne({ _id:  req.form.id }, function(err, doc) {
+ 		if(err || !doc) {
+ 			return res.redirect('/registro/avisos?titulo=error&mensaje=No%20se%20pudo%20completar%20la%20edición');
+ 		}
+ 		
+ 		if(req.files) {
+ 			database.get_photo_keys[req.params.group].forEach(function(key) {
+ 				if(req.files[key]) {
+ 					doc[key] = database.get_files(req.files, key);
+ 				}
+ 			});
+ 		}
+		
+		if(req.form.password){
+			req.form.password = database.generate_hash(req.form.password);
+			}
+
+ 		database.form_to_model(req.form, doc);
+ 		doc.save();
+		if(req.user.position == "Administrator"){return res.redirect('/admin/avisos?titulo=editar&mensaje=De%20'+req.params.group); } 
+		else {
+ 		return res.redirect('/registro/avisos?titulo=editar&mensaje=De%20'+req.params.group+'&redirect='+req.params.group); }
+ 	})
+  });
+  
+
+app.get('/:module/:page', check_session, protect, function(req, res) {
 	return res.render((req.baseUrl + req.path).substring(1), { user: req.user }, function(err, html) {
 		if(err) {
-			return res.redirect('/registro/avisos?titulo=error');
+			return res.redirect('/registro/avisos?titulo=error&mensaje=No%20se%20ha%20encontrado%20la%20página%20'+req.originalUrl);
 		}
 		else {
 			return res.send(html);
@@ -344,10 +402,10 @@ app.get('/:module/:page?', check_session, protect, function(req, res) {
 
 app.get('/', check_session, function(req, res) {
 	if(req.user.position == 'Administrator') {
-		return res.redirect('/admin/menu');
+		return res.redirect('/admin/reportes-generales');
 	}
 	else {
-		return res.redirect('/registro/menu');
+		return res.redirect('/registro/lista?q=participante');
 	}
 });
 
@@ -362,18 +420,6 @@ app.post('/login', form(), passport.authenticate('login', {
 	return res.redirect('/registro/menu');
 });
 
-app.post('/editar-:group', check_session, form(), function(req, res) {
-	console.log(database.translate[req.params.group]);
-	database.models[database.translate[req.params.group]].findOne({ email:  req.form.email }, function(err, doc) {
-		if(err || !doc) {
-			return res.redirect('/registro/avisos?titutlo=error');
-		}
-
-		database.form_to_model(req.form, doc);
-		doc.save();
-		return res.redirect('/registro/avisos?titutlo=editar');
-	})
-})
 
 app.post('/generar-claves', form(
 	form.field('email').trim()
@@ -405,20 +451,10 @@ app.post('/signup', form(), passport.authenticate('signup', {
 app.post('/registro-:group', check_session, form(), function(req, res) {
 	database.register[req.params.group](req.form, req.files, function(err) {
 		if(catch_errors(err)) {
-			return res.redirect('/registro/avisos?titulo=error');
+			return res.redirect('/registro/avisos?titulo=error&message=No%20se%20pudo%20completar%20el%20registro');
 		}
 
-		return res.redirect('registro/avisos?titulo=registro');
-	});
-});
-
-app.post('/eliminar-:collection', check_session, function(req, res) {
-	database.remove(req.params.collection, req.query.codigo, function(err) {
-		if(catch_errors(err)) {
-			return res.redirect('/registro/avisos?titulo=error&mensaje=' + req.params.collection +'%20'+req.query.codigo);
-		}
-
-		return res.redirect('registro/avisos?titulo=eliminar');
+		return res.redirect('registro/avisos?titulo=registro&mensaje=De%20'+req.params.group+'&redirect='+req.params.group);
 	});
 });
 

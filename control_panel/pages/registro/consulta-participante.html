@@ -17,10 +17,15 @@
 		<button onClick="eliminar();"> Eliminar </button>
 		<button onClick="location.href='abono?id=<%= consulta.id %>'">Abono</button>
 		<button class="unactive"onClick="asistio(this);"><span id="asistioIcon">☐</span> Asistió</button>
-        <form id="eliminar" action="/eliminar-participantes" method="get"><input type="hidden" name="codigo" value="<%= consulta._id %>"></form>
+        <form id="eliminar" method="post" action="/eliminar-participante" method="post"><input type="hidden" name="codigo" value="<%= consulta._id %>"></form>
 				
                 <div class="consulta">	
 		        <br><br>
+                <% if(consulta.facebook.id) {%>
+        <center>
+        <img src='https://graph.facebook.com/<%= consulta.facebook.id %>/picture?type=large' style='border-radius:50%;'>
+        </center>
+        <% } %>
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Nombre: <p><i> <%= consulta.name %> </i></p> </h3><br>
 

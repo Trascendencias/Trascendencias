@@ -8,11 +8,9 @@
         <% include menu.html %>
 
         <!--- Title --> 
-        <title id="titulo2"> listade </title>        
+        <title id="titulo2"> lista de </title>        
 
-        <!--- Incluir documeentos -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
-            
+                  
         <!--- Pa que agarren los acentos -->
         <meta charset="UTF-8">
 
@@ -54,12 +52,19 @@
         <div id="resultados">
             <% for(var i = 0; i < lista.length; i++) { %>
                 <% if(lista[i].name != 'admin') { %>
-                    <button class='enlistado' name='codigo' value='<%= lista[i]._id %>'> 
+                    <button class='enlistado
+                    <% if(lista[i].selected_package && lista[i].package_information.debt <= 0 ) { %> liquidado <% } %>
+                    <% if(lista[i].selected_package && lista[i].package_information.debt > 0 ) { %> Deuda <% } %>
+                    ' name='codigo' value='<%= lista[i]._id %>'> 
                     <p class="hidden">  
                     		email:<%= lista[i].email %>
                             <%= lista[i].city %>,
-                            <% if(lista[i].workshop) { %> taller:<%= lista[i].workshop %> <%= ',' %> <% } %>
-                            <% if(lista[i].visit) { %> visita:<%= lista[i].visit %> <%= ',' %> <% } %>
+                            <% if(lista[i].workshop) { %> taller:<%= lista[i].workshop %>, <% } %>
+                            <% if(lista[i].visit) { %> visita:<%= lista[i].visit %>,<% } %>
+                            <% if(lista[i].selected_package && lista[i].package_information.debt <= 0 ) { %> liquidado <% } %>,
+                            <% if(lista[i].selected_package && lista[i].package_information.debt > 0 ) { %> Deuda <% } %>
+                            <% if(lista[i].position) { %> puesto:<%= lista[i].position %>, <% } %>
+                            <% if(lista[i].position) { %> equipo:<%= lista[i].team %>, <% } %>
                     </p> 
                     
                     <%= lista[i].name %>

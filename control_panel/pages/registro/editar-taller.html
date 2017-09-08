@@ -14,22 +14,23 @@
 		<br>
 		<center><h6><b> Editar Taller </b></h6> </center>
 			
-			<form class="registro" id="forma-registro" method="post" action="/registro-taller" encType="multipart/form-data"> <br><br>
+			<form class="registro" id="forma-registro" method="post" action="/editar-taller" encType="multipart/form-data"> <br><br>
                
                 <!--- TIPO DE REGISTRO --> 
                 <input type="hidden" name="registrado" value="taller">
+                <input type="hidden" name="id" value="<%= consulta._id %>">
                 
 				<!-- NOMBRE/TITULO TODOS-->
-				<input maxlength="50" type="text" placeholder="Nombre" name="name" required>
+				<input maxlength="50" type="text" placeholder="Nombre" name="name" value="<%= consulta.name %>" required>
             
                 <!-- DIA/MES/ANO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fecha: </p>
-                <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value="Usa otro navegador" required>
+                <input name="day" onBlur="timeFields();" class="date" id="day" type="date" value='<%= consulta.start.getFullYear() %>-<% if(consulta.start.getMonth()+1 < 10){ %>0<% } %><%= consulta.start.getMonth()+1 %>-<% if(consulta.start.getDate() < 10){ %>0<% } %><%= consulta.start.getDate() %>' required>
                 
                 
                 <!-- HORA INICIO Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Inicio: </p>
-                <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="Usa otro navegador" class="time" required>
+                <input type="time" name="start_time" onBlur="timeFields();" id="start_time" value="<% if(consulta.start.getHours() < 10){ %>0<% } %><%= consulta.start.getHours() %>:<% if(consulta.start.getMinutes() < 10){ %>0<% } %><%= consulta.start.getMinutes() %>" class="time" required>
                 
                 
                 <input type="hidden" id="start" name="start"> 
@@ -37,23 +38,23 @@
                 
                 <!-- HORA FIN Punto de Venta, Conferencia, Visitas, Taller, Evento Extra-->
                 <p class="title"> Fin: </p>
-                <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="Usa otro navegador" class="time" required>
-                
+                <input type="time" name="end_time" onBlur="timeFields();" id="end_time" value="<% if(consulta.end.getHours() < 10){ %>0<% } %><%= consulta.end.getHours() %>:<% if(consulta.end.getMinutes() < 10){ %>0<% } %><%= consulta.end.getMinutes() %>" class="time" required>
 
                 <!-- NOMBRE DE CONTACTO Conferencia, Visita, Taller, Evento Social, Patrocinadores -->
-                <input maxlength="50" type="text" placeholder="Nombre de Tallerista" name="instructor_name" required>
+                <input maxlength="50" type="text" placeholder="Nombre de Tallerista" name="instructor_name" value='<%= consulta.instructor_name %>' required>
                 
                 <!-- TITULOS DEL PRESENTADR  Conferencia, Taller -->
-                <input maxlength="50" type="text" placeholder="Titulos del Tallerista" name="instructor_titles" required>
+                <input maxlength="50" type="text" placeholder="Titulos del Tallerista" name="instructor_titles" value='<%= consulta.instructor_titles %>' required>
                 
                 <!-- TELEFONO Participantes, Conferencias, Visita,Taller, Evento Social, Patrocinadores -->
-				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono del Tallerista" name="instructor_phone" required>
+				<input onKeyPress="return isNumberKey(event)" maxlength="10" type="text" placeholder="Teléfono del Tallerista" name="instructor_phone" value='<%= consulta.instructor_phone %>' required>
                 
 				<!-- CORREO Participantes, Conferencias, Visita, Taller, Evento Social, Patrocinadores -->
-				<input maxlength="50" type="email" placeholder="Correo del Tallerista" name="instructor_email" required>
+				<input maxlength="50" type="email" placeholder="Correo del Tallerista" name="instructor_email" value='<%= consulta.instructor_email %>' required>
 
                 <!-- LUGAR EN CETYS Conferencia, Taller, Evento Extra -->
-                 <select id="select" name="location" required>
+                <select id="select" name="location" value="<%= consulta.location %>" required>
+				<option value="<%= consulta.location %>" selected> >> <%= consulta.location %> </option>
 				<% include lugares-cetys.html %>
                 </select>
                 
@@ -61,37 +62,38 @@
                 
                 <!-- CUPO Visita, Taller, Paquete -->
                 <p class="title"> Cupo: </p>
-                <input type=number name="cap" class="numero" required>
+                <input type=number name="cap" class="numero" value='<%= consulta.cap %>'required>
                 
                 
                 <!-- Requisitos Visita, Taller, Oferta  -->
-                <textarea name="requisites" class="large-text" placeholder="Requisitos... Separados por * Ejemplo: Llevar Laptop * Traer instaldos: Maya, Photoshop e Illustrator * Conocimientos básicos en Repostería " required></textarea>
+                <textarea name="requisites" class="large-text" placeholder="Requisitos..." required><%= consulta.requisites %></textarea>
                 
-                
-                <!-- Foto del ____ Conferencista, Tallerista, Evento Social, Patrocinadores  -->
+                <!-- NO FUNCIONA 
+
                 <p class="title"> Foto del Tallerista (300x300px)</p>
                 <input required type="file" width="150px" name="instructor_photo" value="fileupload" id="image" style="display: inline;" required>
                 
                 
-                <!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
+
                 <p class="title"> Fotos </p>
                 <input type="file" width="150px" name="photos" value="fileupload" id="image" style="display: inline;" multiple required>
                 
                 
-                <!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
                 <div id="videos">
                 <p class="title"> URL en Youtube de videos </p>
                 <input maxlength="50" type="text" placeholder="URL Video 1" name="video_urls" class="video">
                 
                 </div>
                <button class="third" onClick="masvideo()" type="button"> Agregar Video </button>
+                -->
+                
                 
                 <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-                <textarea name="summary" id="resumen" placeholder="Resumen..." required></textarea>
+                <textarea name="summary" id="resumen" placeholder="Resumen..." required><%= consulta.summary %></textarea>
                 
                 
                 <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-                <textarea name="description" class="large-text" placeholder="Descripción..." required></textarea>
+                <textarea name="description" class="large-text" placeholder="Descripción..." required><%= consulta.description %></textarea>
                 
  
                 <hr>
@@ -109,9 +111,10 @@
 				<script>
 		var startTime;
 		var endTime;
+		timeFields();
 		 function timeFields(){
-                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-08:00";
-				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-08:00";
+                startTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-00:00";
+				endTime = document.getElementById("day").value.toString()+"T"+document.getElementById("start_time").value+":00-00:00";
 				document.getElementById("start").value = startTime;
 				document.getElementById("end").value = endTime;
             }

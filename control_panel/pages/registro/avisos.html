@@ -35,7 +35,7 @@
                
                 <div class="spacer"></div>
                 <hr>
-				<button type="button" class="submit" onClick="location.href='lista?q=participante'"> Aceptar </button> 
+				<button type="button" class="submit" onClick="rediRect()"> Aceptar </button> 
 
 
 
@@ -65,6 +65,7 @@
         if(titulo == "error"){ titulo = "Ha ocurrido un problema..."; content = "Error #404: No se ha encontrado nada en ésta dirección."; }
 
         var mensaje = getParameterByName('mensaje');
+		var redirect = getParameterByName('redirect');
 
 		document.getElementById("titulo").innerHTML = titulo;
         document.getElementById("content").innerHTML = mensaje;
@@ -74,6 +75,16 @@
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 
 			}
+			
+			function rediRect(){
+				if(redirect!=null) {
+					window.location.href='lista?q='+redirect;
+					}
+				else {
+					window.location.href='lista?q=participante';
+					}
+				
+				}
 
               //INCLUIR DOCUMENTOS
 

@@ -1,7 +1,7 @@
 <html> 
 
 	<head>
-		<meta name=”description” content=”#!DESCRIPCION-BLOG”>
+		<meta name=”description” content=”Inicio Blog”>
 		
 		<!---FACEBOOK OPTIMIZATION -->
 		<meta property="og:url" content="https://trascendencias.org/inicio-blog" />
@@ -59,7 +59,7 @@
 					<div class="slide-textholder">
 						<h1 class="cwhite"> <%= teaser[C].name %> </h1> <!-- Titulo del Teaser Banner -->
 						<p class="cwhite"> <%= teaser[C].summary %> <!-- Descripción del Teaser Banner -->
-							<button onclick="location.href='consulta?code=<%= teaser[C]._id %>'"> Leer Más </button> <!-- BOTON DE ACCION -->
+							<button onClick="location.href='consulta?codigo=<%= teaser[C]._id %>&collection=blog'"> Leer Más </button> <!-- BOTON DE ACCION -->
 						</p>
 					</div>
 				</div>
@@ -78,7 +78,7 @@
 
 		<div class="card-holder">
 						<% blogs.forEach(function(element) { %>
-							<div class="card" onClick="location.href='consulta?code=<% element._id %>'">
+							<div class="card" onClick="location.href='consulta?codigo=<%= element._id %>&collection=blog'">
 								<img src="<%= element.photos[0] %>">
 								<h3> <%= element.name %> </h3>
 								<p> <%= element.summary %> </p>
@@ -90,7 +90,9 @@
 
 		<% include partials/footer.html %>
 
-		<script>
+		
+
+<script>
 
 				
 			//ACTIVAR/DESACTIVAR

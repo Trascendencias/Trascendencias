@@ -13,8 +13,8 @@
         <div class="body">
         <center><h6><b> Consulta Evento Extra </b></h6> </center>
 		<br>
- 		<button onClick="location.href='editar-evento-extra?code='"> Editar </button> 
-        <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-eventos-extra?id=<%= consulta._id %>"> </form>
+ 		<button onClick="location.href='editar-evento-extra?id=<%= consulta._id %>'"> Editar </button> 
+        <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" method="post" action="/eliminar-evento-extra"><input type="hidden" name="codigo" value="<%= consulta._id %>"> </form>
 			<div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>                
@@ -43,23 +43,6 @@
                 <!-- ICONO Evento Extra -->
                 <h3> Ícono </h3><br>
 				<img src="<%= consulta.event_icon %>" class="foto"> </div>
-
-                
-                <hr>
-                <h3> Historial de Cambios </h3>
-		         <div class="accion">
-		            <h3> Creado </h3><p> 13/SEP/2017 22:45h</p> <br>
-		            <p>Por: <i> Nombre Miembro Staff </i> </p>
-		        </div>
-
-		        <div class="accion">
-		            <h3> Editado </h3><p> 13/SEP/17 22:46h</p> <br>
-		            <p>Por: <i> ONombre Miembro Staff </i> </p>
-		        </div>
-		        <div class="accion">
-		            <h3> Eliminado </h3><p> 13/SEP/2017 22:47h</p> <br>
-		            <p>Por: <i> Nombre Miembro Staff </i> </p>
-		        </div>
 
 
 		</div>

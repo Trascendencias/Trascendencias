@@ -11,32 +11,11 @@
 
 
 <div class="menu">
-        <img src="resources/user_example.png" class="user dropper" onClick="activate(this)">
+        <img src="<% if(user.photo){ %><%= user.photo %><% } else { %>resources/user_example.png<% } %>" class="user dropper" onClick="activate(this)">
             <div class="drop" id="user">
                 <center>
                 <p class="blue pointer" onclick="location.href='usuario'"><b> <%= user.name %><br> </b></p>
                 <p class="white"> <%= user.position %> de <%= user.team %> </p>
-                <hr class="white">
-                <p class="white"> Puesto de Venta: </p>
-                <% var enPuesto = false; if(enPuesto == false) { %> 
-                <select>
-                  <option value="none">Seleccionar Puesto de Venta...</option>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-                <button class="second" type="submit"> Entrar </button>
-                <% } else { %> 
-                   <p class="white">
-                    	<i> 
-                   		Cetys Universidad Campus Mexicali A lado de los Vichis 
-                   	  	</i>
-                   
-                    <button class="second" style="margin-left: +10px;"> Salir </button></p>
-                <% } %> 
-                
-                <hr class="white"> 
                 <button class="second" onclick="location.href='/logout'"> Cerrar Sesión </button>
                     <br> <br>
                 </center>
@@ -102,6 +81,7 @@
 <br> <br><br> <br>  <br>
     
     <script>
+	
 			function activate(elem){
 				if(elem.classList.contains('active')) elem.classList.remove('active'); 
 				else elem.classList.add('active'); 

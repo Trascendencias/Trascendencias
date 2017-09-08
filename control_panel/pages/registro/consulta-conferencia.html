@@ -13,7 +13,7 @@
 		<div class="body">
 		<center><h6><b> Consulta Conferencia </b></h6> </center>
 		<br>
-		<button onClick="location.href='editar-conferencia?code='"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" action="/eliminar-conferencias?id=<%= consulta._id %>"> </form>
+		<button onClick="location.href='editar-conferencia?id=<%= consulta._id %>'"> Editar </button> <button onClick="eliminar();"> Eliminar </button> <form id="eliminar" method="post" action="/eliminar-conferencia"><input type="hidden" name="codigo" value="<%= consulta._id %>"> </form>	
 			<div class="consulta">
 				<!-- NOMBRE/TITULO TODOS-->
 				<h3> Título: <p><i> <%= consulta.name %> </i></p> </h3><br>               
@@ -58,37 +58,28 @@
 				<!-- Fotos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
 				<h3> Fotos: </h3><br>
 				<% consulta.photos.forEach(function(element) { %>
-					<div class="foto" style="background-image: url('<%= element %>')"> </div>
-				<% }); %>
+					<img src='<%= element %>' class="imgPreview">
+                  <% }); %>
 
 				<!-- Videos (index, agregar) Conferencia, Visita, Taller, Blog, Punto de Venta -->
 				<h3> Videos: </h3><br>
 				<% consulta.video_urls.forEach(function(element) { %>
-					
+					<% if(element!="") { %>
 					<iframe width="260px" height="100px" src="https://www.youtube.com/embed/<%= element %>" frameborder="0"></iframe>
+                    <% } %>
 				<% }); %>  
-                        <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
-				<h3> Resumen: <p><i> <%= consulta.summary %> </i></p> </h3><br><!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
-				<h3> Contenido: <p><i> <%= consulta.description %> </i></p> </h3><br>                <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
-				<h3> Teaser Banner: <p><i> <%= consulta.include_teaser %> </i></p> </h3><br>
+                
+                <!-- Resuemn Conferencia, Taller, Evento Social, Blog, Punto de Venta -->
+				<h3> Resumen:</h3> <p style="white-space: pre-wrap"><i> <%= consulta.summary %> </i></p><br>
+                
+                <!-- Descripción Conferencia, Taller, Evento Social, Blog, Punto de Venta, Preguntas Frecuentes -->
+				<h3> Contenido: </h3><p style="white-space: pre-wrap"><i> <%= consulta.description %> </i></p><br> 
+                
+               <!-- INCLUIR EN TEASER BANNER Conferencia, Visita, Taller, Evento Social, Blog, Punto de Venta, Paquete -->
+				<h3> Teaser Banner: <p><i> <%= consulta.teaser_position %> </i></p> </h3><br>
 				</div>
 
 				
-				<hr>
-				<h3> Historial de Cambios </h3>
-				 <div class="accion">
-					<h3> Creado </h3><p> 13/SEP/2017 22:45h</p> <br>
-					<p>Por: <i> Nombre Miembro Staff </i> </p>
-				</div>
-
-				<div class="accion">
-					<h3> Editado </h3><p> 13/SEP/17 22:46h</p> <br>
-					<p>Por: <i> ONombre Miembro Staff </i> </p>
-				</div>
-				<div class="accion">
-					<h3> Eliminado </h3><p> 13/SEP/2017 22:47h</p> <br>
-					<p>Por: <i> Nombre Miembro Staff </i> </p>
-				</div>
 			   
 		</div>
 

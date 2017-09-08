@@ -10,8 +10,8 @@ database.register = {
 	conferencia: function(form, files, done) {
 		let new_conference = new models.conference();
 		database.form_to_model(form, new_conference);
-		new_conference.speaker_photo = get_files(files, 'speaker_photo');
-		new_conference.photos = get_files(files, 'photos');
+		new_conference.speaker_photo = database.get_files(files, 'speaker_photo');
+		new_conference.photos = database.get_files(files, 'photos');
 
 		new_conference.save(function(err) {
 			if(err) {
@@ -24,8 +24,8 @@ database.register = {
 	taller: function(form, files, done) {
 		let new_workshop = new models.workshop();
 		database.form_to_model(form, new_workshop);
-		new_workshop.instructor_photo = get_files(files, 'instructor_photo');
-		new_workshop.photos = get_files(files, 'photos');
+		new_workshop.instructor_photo = database.get_files(files, 'instructor_photo');
+		new_workshop.photos = database.get_files(files, 'photos');
 
 		new_workshop.save(function(err) {
 			if(err) {
@@ -38,7 +38,7 @@ database.register = {
 	visita: function(form, files, done) {
 		let new_visit = new models.visit();
 		database.form_to_model(form, new_visit);
-		new_visit.photos = get_files(files, 'photos');
+		new_visit.photos = database.get_files(files, 'photos');
 
 		new_visit.save(function(err) {
 			if(err) {
@@ -51,7 +51,7 @@ database.register = {
 	'evento-social': function(form, files, done) {
 		let new_social_event = new models.social_event();
 		database.form_to_model(form, new_social_event);
-		new_social_event.event_poster = get_files(files, 'event_poster');
+		new_social_event.event_poster = database.get_files(files, 'event_poster');
 
 		new_social_event.save(function(err) {
 			if(err) {
@@ -64,7 +64,7 @@ database.register = {
 	'evento-extra': function(form, files, done) {
 		let new_extra_event = new models.extra_event();
 		database.form_to_model(form, new_extra_event);
-		new_extra_event.event_icon = get_files(files, 'event_icon');
+		new_extra_event.event_icon = database.get_files(files, 'event_icon');
 
 		new_extra_event.save(function(err) {
 			if(err) {
@@ -77,7 +77,7 @@ database.register = {
 	blog: function(form, files, done) {
 		let new_blog = new models.blog();
 		database.form_to_model(form, new_blog);
-		new_blog.photos = get_files(files, 'photos');
+		new_blog.photos = database.get_files(files, 'photos');
 
 		new_blog.save(function(err) {
 			if(err) {
@@ -102,7 +102,7 @@ database.register = {
 	paquetes: function(form, files, done) {
 		let new_package = new models.package();
 		database.form_to_model(form, new_package);
-		new_package.photos = get_files(files, 'photos');
+		new_package.photos = database.get_files(files, 'photos');
 
 		new_package.save(function(err) {
 			if(err) {
@@ -115,7 +115,7 @@ database.register = {
 	patrocinadores: function(form, files, done) {
 		let new_sponsor = new models.sponsor();
 		database.form_to_model(form, new_sponsor);
-		new_sponsor.company_logo = get_files(files, 'company_logo');
+		new_sponsor.company_logo = database.get_files(files, 'company_logo');
 
 		new_sponsor.save(function(err) {
 			if(err) {
@@ -169,10 +169,10 @@ database.register = {
 	}
 };
 
-get_files = function(files, filename) {
+database.get_files = function(files, filename) {
 	if(!files || !files[filename]) {
-		throw new Error('Undefined files');
-		return null;
+		console.log("Undefined files.");
+		return [];
 	}
 
 	if(!Array.isArray(files[filename])) {
@@ -211,6 +211,18 @@ database.form_to_model = function(form, model) {
 		}
 	}
 };
+
+database.get_photo_keys = {
+	'patrocinadores': ['company_logo'],
+	'conferencia': ['speaker_photo', 'photos'],
+	'taller': ['instructor_photo', 'photos'],
+	'visita': ['photos'],
+	'evento-social': ['event_poster'],
+	'evento-extra': ['event_icon'],
+	'blog': ['photos'],
+	'staff': ['photo'],
+	'paquetes': ['photos']
+}
 
 database.register_action = function(action) {
 	let new_action = new models.action();
@@ -444,7 +456,7 @@ database.remove = function(collection, id, done) {
 		return done(new Error('Invalid id'), null);
 	}
 
-	database.models[translate[collection]].removeOne({ '_id': mongoose.Types.ObjectId(id) }, function(err) {
+	database.models[translate[collection]].deleteOne({ '_id': mongoose.Types.ObjectId(id) }, function(err) {
 		if(err) {
 			return done(err);
 		}
@@ -454,19 +466,19 @@ database.remove = function(collection, id, done) {
 };
 
 database.translate = {
-        'participante': 'participant',
-        'conferencia': 'conference',
-        'paquetes': 'package',
-        'staff': 'staff_member',
-        'taller': 'workshop',
-        'testimonios': 'testimonie',
-        'visita': 'visit',
-        'preguntas-frecuentes': 'faq',
-        'evento-extra': 'extra_event',
-        'patrocinadores': 'sponsor',
-        'evento-social': 'social_event',
-        'punto-venta': 'sale_point',
-        'blog': 'blog',
+    'participante': 'participant',
+    'conferencia': 'conference',
+    'paquetes': 'package',
+    'staff': 'staff_member',
+    'taller': 'workshop',
+    'testimonios': 'testimonie',
+    'visita': 'visit',
+    'preguntas-frecuentes': 'faq',
+    'evento-extra': 'extra_event',
+    'patrocinadores': 'sponsor',
+    'evento-social': 'social_event',
+    'punto-venta': 'sale_point',
+    'blog': 'blog',
 	'participante_por_staf': 'participant'
 }
 

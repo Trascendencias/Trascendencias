@@ -34,6 +34,10 @@ body {
 .cblack {
 	color: #071D25;
 	}
+	
+.pointer {
+	cursor: pointer;
+	}
 
 
 /* TEXTOS */
@@ -180,7 +184,8 @@ div.body{
 div.persona1{
 	position: static;
 	display: block;
-	width: 310px;
+	min-width: 310px;
+	width: 40vw;
 	margin: 30px calc(50% - 150px);
 }
 div.persona1 h3{
@@ -207,6 +212,10 @@ img.persona2 {
 }
 .staff2{
 	margin-top: 10px;
+	display: inline-table;
+	width: 300px;
+	margin: 10px;
+	margin-left: auto;
 }
 .staff2 p{
 	margin: 0 auto ;
@@ -834,9 +843,16 @@ h1 {
 .cardconf{
 	display: inline-block;
 }
+.cardconf .staff2 {
+	margin-left: 15px;
+	}
 .card-holder{
 	margin: 0px;
 	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
 	justify-content: space-evenly;
 	flex-wrap: wrap;
 }
@@ -913,39 +929,40 @@ div.testimonios {
 }
 
 
-
-
-
-
-
 .contenido-inicio div{
 	width: 45vw; 
 	min-width: 288px;
-	margin-top: 30px;
 	max-width: 500px;
+	display:inline-block;
+	position:relative;
+	bottom: 7vw;
 }
-
-
 
 .contenido-inicio img{
 	width: 30vw; 
 	min-width: 288px;
 	height: auto;
 	max-width: 500px;
+	display:inline-block;
 }
 
 .contenido-inicio h4{
 	margin: 0;
 }
 div.contenido-inicio {
-	display: flex;
+	display: table;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	align-items: center;
+	align: center;
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
-
+@media only screen and (max-width: 576px) {
+	.contenido-inicio div{
+	bottom: -0px;
+}
+}
 
 
 
@@ -1125,11 +1142,9 @@ div.patrocinadores {
 	margin-bottom: 20px;
 }
 .patrocinadores img {
-	min-width: 120px;
 	min-height: 40px;
-	width: 12vw;
 	height: 4vw;
-	max-width: 280px;
+	width: auto;
 	max-height: 93px;
 	margin: 10px;
 }

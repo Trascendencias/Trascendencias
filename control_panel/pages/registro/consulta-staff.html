@@ -18,7 +18,7 @@
 	        <br>
 	        
 		        <div class="spacer"></div>
-		        <img src="<%= consulta.photo %>" class="staff-pic">
+		        <img src="<% if(consulta.photo){ %><%= consulta.photo %><% } else { %>resources/user_example.png<% } %>" class="staff-pic">
 	        </center>
 	        <br>
 	        <h3> <%= consulta.name %> </h3>
@@ -28,7 +28,6 @@
 	        <p> Talla: <%= consulta.shirt_size %> </p>
 	        <p id="telephone"> <%= consulta.phone %>  <button onClick="location.href='tel:<%= consulta.phone %>'">llamar</button></p>
 	        <p> <%= consulta.email %> </p>
-	        <h3 class='black'> Activo en Puesto de Venta 3 </h3>
 	        <button onClick="location.href='<%= consulta.facebook %>'">Ver en Facebook</button>
 	        <hr> 
 	        <br>
